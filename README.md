@@ -6,6 +6,8 @@ Repositorio dedicado y privado: https://github.com/fueradeciclo/juego-dante
 
 **Nuevo:** Pattha tiene **24 cuadros nuevos**: carrera de ocho poses, salto con preparación/impulso/subida/caída/aterrizaje y gestos propios. Deja polvo suave al despegar. En el menú, abrí **Ver los gestos de los personajes** para probar movimientos y mirar cada cuadro con Dante.
 
+**Amigos y rivales mejorados:** Otto y Rural siguen cerca a Pattha con aceleración y frenado suaves, incluso al llegar al puente o volver. Sus charlas son ocasionales y tienen globos discretos. Pequeñas avionetas cruzan el cielo de fondo. Gatos y perros patrullan más rápido, fruncen levemente las cejas y avisan con **!** antes de avanzar. Al superarlos, cierran los ojos y desaparecen suavemente entre nubecitas. Los movimientos de Pattha se conservan.
+
 ![Inicio de la demo](docs/capturas/01-inicio.png)
 
 ## Jugar en esta computadora
@@ -53,7 +55,7 @@ Tres tramos: aprender los saltos, abrir un puente con los amigos y llegar al ban
 
 ## Build y pruebas
 
-Juego publicado: https://juego-dante.pages.dev/pattha_game/ . Para preparar la publicación: `pnpm build:site`. La salida es `builds/site/`; la portada queda reservada para otros proyectos. Ver [configuración y estado de Cloudflare](docs/PUBLICACION_CLOUDFLARE.md). GitHub sigue siendo el lugar de trabajo; `sabad.com.ar/pattha_game/` espera la activación DNS y asociación del dominio personalizado.
+Juego publicado: https://sabad.com.ar/pattha_game/ . Para preparar la publicación: `pnpm build:site`. La salida es `builds/site/`; la portada queda reservada para otros proyectos. Ver [configuración y estado de Cloudflare](docs/PUBLICACION_CLOUDFLARE.md). GitHub sigue siendo el lugar de trabajo; `sabad.com.ar/pattha_game/` está conectado y verificado por HTTPS.
 
 ```sh
 pnpm typecheck
@@ -70,6 +72,8 @@ Para integración, dejá `pnpm dev` corriendo en otra terminal y ejecutá:
 pnpm test:browser
 pnpm test:animations
 pnpm test:pattha
+pnpm test:companions
+pnpm test:followers
 ```
 
 Usa un Chromium de pruebas instalado por Playwright, o una instalación existente de Chrome en una sesión aislada. Si ninguno existe: `pnpm exec playwright install chromium`. También admite `PATTHA_CHROMIUM_PATH` con una ruta al ejecutable. Nunca usa el perfil ni las cuentas del navegador personal.
@@ -99,9 +103,13 @@ builds/web/    entrega compilada de navegador
 
 **Propuesta implementada para jugar y decidir:** sendero, destellos, tuerca, diálogo, cooperación del puente, señal de símbolos y combate por salto con energía y reintentos. El faro y la Gran Chispa del kit siguen como argumento opcional y no se usan en esta demo.
 
+**Historia en desarrollo:** [línea argumental y progresión — PROPUESTA 01](docs/14_HISTORIA_Y_PROGRESION.md). Conecta el puente de la demo con una aventura para recuperar la Gran Chispa, propone un antagonista y seis niveles con rivales y cooperación progresivos. El adulto pidió desarrollar esa progresión; el argumento concreto, los nombres nuevos y las habilidades ampliadas siguen pendientes de conversación con Dante. Es un documento de diseño; no agrega niveles a la demo.
+
 Los PNG originales del kit siguen siendo **ilustraciones estáticas intactas**. Pattha usa ahora tres planchas nuevas generadas a partir de B: carrera con piernas flexionadas y fases de vuelo; preparación rápida de **64 ms activos**, extensión para despegar, subida con piernas recogidas, ápice, caída con pies preparados, compresión y recuperación al aterrizar. También frena, rebota al superar un rival, ayuda y festeja. Los puntos de apoyo y la escala se alinean sin alterar su cuerpo de colisión. La altura y velocidad del salto se conservan; el salto desde un borde arranca inmediatamente.
 
 Otto, Rural, gato y perro conservan su rig 2D por partes. Todos tienen reposo y parpadeos; tras unos **8 segundos** quietos aparece pensar, y cerca de **14 segundos**, aburrirse. Moverse cancela esos gestos. Pausa, pantalla vertical y pestaña oculta congelan las animaciones y el polvo; movimiento reducido desactiva polvo y gestos automáticos prolongados.
+
+Las charlas de los ratones usan globos pequeños y redondeados con fondo tenue y aparición gradual. Alternan interlocutores y dan 4,4 segundos para leer cada frase. La primera charla espera 20 segundos de juego activo, y hay 60 segundos de descanso entre intercambios; cambiar de zona no acelera la siguiente. Son propuestas de diálogo en `data/demo_plataformas.json`; no requieren apretar botones ni interrumpen los saltos o el acertijo. El avance de los rivales queda dentro de su patrulla, con aviso de 480 ms y descanso posterior. La desaparición dura 900 ms de juego activo y desactiva la colisión desde el primer instante. Movimiento reducido conserva el desvanecido y evita las nubecitas, saltitos y vuelos decorativos. Ver [detalle y pruebas](docs/AMIGOS_Y_RIVALES.md).
 
 El menú y los retratos de diálogo usan el mismo arte animado. [La galería](game/animaciones.html) se sirve como `http://localhost:5173/animaciones.html` en desarrollo o `http://localhost:4173/animaciones.html` en el build. Tiene un escenario grande para Pattha, salto completo, siete opciones de movimiento y un panel desplegable para seleccionar los 24 cuadros; debajo se comparan los cinco personajes.
 
@@ -113,6 +121,6 @@ Las planchas nuevas de Pattha sí contienen poses distintas; fueron creadas con 
 2. Validar escritura de Pattha, variante A/B y aspecto de gatos/perros.
 3. Elegir los gestos favoritos y ajustar la velocidad de la carrera, preparación del salto y apoyo de los pies. Revisar las poses derivadas de B con Dante.
 
-No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. Se agregó una maqueta musical instrumental original de heavy metal sintetizado. Arranca al jugar: usá ♫ Silenciar y Volumen en la barra superior. Baja durante diálogos y se suspende al pausar. La composición y el timbre quedan pendientes de aprobación familiar. El juego está publicado en Cloudflare Pages; las exportaciones instalables quedan para otra decisión.
+No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. La música de fondo es «Triumph in Steel», elegida y proporcionada por la familia. Arranca al jugar: usá ♫ Silenciar y Volumen en la barra superior. Baja durante diálogos y se suspende al pausar. El MP3 se conserva en assets/audio/triumph-in-steel.mp3 y se repite completo. El juego está publicado en Cloudflare Pages; las exportaciones instalables quedan para otra decisión.
 
 Los dibujos y personajes de Dante conservan sus derechos; este proyecto no les asigna una licencia abierta. Ver [procedencia](docs/13_CREDITOS_Y_PROCEDENCIA.md) y [licencias técnicas](docs/LICENCIAS_TECNICAS.md).

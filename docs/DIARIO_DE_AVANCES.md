@@ -78,3 +78,27 @@ Durante esta entrega se preservó la maqueta musical incorporada por el trabajo 
 1. Elegir con Dante ritmo de carrera y gestos; revisar continuidad y reconocimiento del personaje.
 2. Jugar en un celular físico horizontal y ajustar preparación/salto si hace falta.
 3. Validar grafía, variante B y título; luego ampliar escenarios o pulir arte según la partida familiar.
+
+## 2026-10-10 · Amigos y rivales más activos
+
+Pedido del adulto: mejorar a Otto, Rural, gatos y perros con menos variedad que Pattha, conservando los movimientos del protagonista. Los ratones quedan confirmados como amigos/aliados amistosos. Se usan los mismos dibujos y recortes: pasos y colas más expresivos, saltitos y gestos al conversar. Diálogos breves entre los ratones en globos de texto, alternando turnos sin detener la partida; frases editables y etiquetadas como PROPUESTA.
+
+Gatos/perros tienen expresión pícara con cejas superpuestas, patrulla más activa y avance corto precedido por un aviso. Al superarlos por salto dejan de colisionar y desaparecen lentamente entre nubecitas, con ojos cerrados y sin violencia explícita. La secuencia y los tiempos de conversación respetan pausa, orientación vertical y pestaña oculta. Movimiento reducido evita saltitos/nubecitas.
+
+Pruebas específicas y capturas 22–25 en PRUEBAS_AMIGOS_Y_RIVALES.json; detalles y comandos en AMIGOS_Y_RIVALES.md. Se conserva el trabajo musical y de publicación de la familia. Pendiente revisar gestos/ritmo con Dante y probar en un celular físico; esta iteración no realiza un despliegue público.
+
+## 2026-10-10 · Seguimiento ligero y fondo discreto
+
+El adulto observó tirones al llegar y volver, pidió ratones más rápidos pero ligeros, menos charlas y globos más sutiles. Se reemplazó el acercamiento del 20% por cuadro y los destinos fijos del puente por seguimiento continuo con velocidad/aceleración limitadas, frenado gradual y formación que cambia suavemente al invertir el rumbo. La demora de los saltos se acortó a 80/160 ms. Al volver al banderín, los amigos reaparecen cerca con un desvanecido suave, sin cruzar todo el mapa. Pasos y saltitos se redujeron ligeramente.
+
+Primera charla a los 20 segundos activos y 60 segundos de silencio entre intercambios; cambiar de zona no acelera la siguiente charla. Texto sin negrita, fondo claro translúcido, bordes redondeados y aparición gradual. Se agregaron pequeñas avionetas vectoriales originales que cruzan ocasionalmente detrás del paisaje, sin sonido ni colisiones. Son una PROPUESTA decorativa autorizada; no se agrega historia ni se cambia Pattha.
+
+26 pruebas unitarias y pruebas específicas por cuadro de cercanía, continuidad al llegar/volver, frenado, pausa, retorno, charlas y avionetas. Evidencia en PRUEBAS_SEGUIMIENTO_Y_FONDO.json y capturas 26–28. Revisión familiar de ritmo y celular real pendiente; build local preparado con los comandos habituales.
+
+## 2026-10-10 · Historia y progresión, propuesta 01
+
+Pedido del adulto: comenzar por la línea argumental, luego niveles y desafíos, con enemigos más elaborados y dificultad creciente que requiera ayuda de Otto y Rural.
+
+Se escribió `14_HISTORIA_Y_PROGRESION.md`: premisa, conflicto, tres actos y cierre; seis niveles conectados con el puente ya jugable; progresión desde patrullas hasta corredores, saltarines, duplas, compuertas y jefe; ayuda contextual de los dos amigos; diálogos de muestra y criterios para una futura adaptación del primer capítulo. Faro, Gran Chispa, Don Candado, sucesos y habilidades ampliadas están marcados como PROPUESTA, sin atribuirlos a Dante.
+
+Se revisó la coherencia con README, decisiones, manifiestos y mecánicas/datos activos. Se preservaron código, datos jugables, builds, imágenes y los borradores narrativos originales del kit. Se agregó una referencia en README y se registró el pedido real en el documento de decisiones. Esta entrega es escrita; no implementa ni prueba nuevos niveles. Pendiente conversar sobre argumento, antagonista y funciones de Otto/Rural antes de convertir el primer capítulo en contenido jugable.

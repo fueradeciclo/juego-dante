@@ -107,22 +107,24 @@ export function loadRig(kind:CharacterKind):Promise<PreparedRig> {
 }
 
 export function blinkFrame(frame:AnimationFrame):number {
+  if(frame.state==='vanish')return 2;
   const closure=frame.state==='bored'?Math.max(frame.blink,frame.gesture*.95):frame.blink;
   return closure>.78?2:closure>.24?1:0;
 }
 
-export function partPose(name:PartName, frame:AnimationFrame):PartPose {
+export function partPose(name:PartName, frame:AnimationFrame, kind:CharacterKind='pattha'):PartPose {
   const pose={x:0,y:0,angle:0,scaleX:1,scaleY:1};
   const breath=Math.sin(frame.elapsed/680)*frame.motion;
   const stride=Math.sin(frame.phase)*frame.motion;
-  if(frame.state==='walk') {
+  const travel=frame.state==='talk'?frame.travel??'idle':frame.state;
+  if(travel==='walk') {
     pose.y=-Math.abs(Math.sin(frame.phase))*13*frame.motion;
     if(name==='leftLeg') {pose.angle=stride*.13;pose.y-=Math.max(0,stride)*18;}
     if(name==='rightLeg') {pose.angle=-stride*.13;pose.y-=Math.max(0,-stride)*18;}
     if(name==='leftArm')pose.angle=-stride*.13;
     if(name==='rightArm')pose.angle=stride*.13;
     if(name==='head')pose.angle=stride*.015;
-  } else if(frame.state==='air') {
+  } else if(travel==='air') {
     if(name==='leftLeg')pose.angle=-.13*frame.motion;
     if(name==='rightLeg')pose.angle=.16*frame.motion;
     if(name==='leftArm')pose.angle=.17*frame.motion;
@@ -142,8 +144,62 @@ export function partPose(name:PartName, frame:AnimationFrame):PartPose {
       if(name==='torso')pose.scaleY-=frame.gesture*.008;
     }
   }
-  if(name==='tail')pose.angle+=Math.sin(frame.elapsed/360)*(.045+(frame.state==='walk'?.08:0))*frame.motion;
+  if(name==='tail')pose.angle+=Math.sin(frame.elapsed/360)*(.045+(travel==='walk'?.08:0))*frame.motion;
+  if(kind!=='pattha') {
+    const rival=kind==='gato'||kind==='perro';
+    if(travel==='walk') {
+      if(name.endsWith('Leg')){pose.angle*=rival?1.65:1.2;pose.x+=(name==='leftLeg'?stride:-stride)*(rival?10:6);}
+      if(name.endsWith('Arm'))pose.angle*=rival?1.8:1.25;
+      if(name==='head'){pose.angle+=rival?-.055*frame.motion:stride*.02;pose.y-=Math.abs(stride)*8;}
+      if(name==='tail')pose.angle+=Math.sin(frame.phase+.6)*(kind==='gato'?.12:.075)*frame.motion;
+    }
+    if(frame.state==='talk') {
+      if(name==='head') {pose.angle=Math.sin(frame.elapsed/170)*.04*frame.motion;pose.y-=frame.gesture*8*frame.motion;}
+      if(name==='leftArm')pose.angle+=(-.18-frame.gesture*.12)*frame.motion;
+      if(name==='tail')pose.angle+=Math.sin(frame.elapsed/250)*.07*frame.motion;
+    }
+    if(frame.state==='alert') {
+      if(name==='head'){pose.angle=-.085*frame.motion;pose.y+=7*frame.motion;}
+      if(name==='leftArm')pose.angle-=.23*frame.motion;
+      if(name==='rightArm')pose.angle+=.17*frame.motion;
+      if(name==='tail')pose.angle+=.19*frame.motion;
+    }
+    if(frame.state==='vanish') {
+      pose.angle=0;pose.y=0;
+      if(name.endsWith('Arm'))pose.angle=(name==='leftArm'?-.2:.2)*Math.sin(frame.gesture*Math.PI)*frame.motion;
+    }
+  }
   return pose;
+}
+
+export function rigPose(kind:CharacterKind,frame:AnimationFrame) {
+  const pose={y:0,angle:0,scaleX:1,scaleY:1,alpha:1};
+  if(kind==='pattha')return pose;
+  if(frame.state==='vanish') {
+    const t=frame.gesture;
+    pose.alpha=1-Math.max(0,(t-.18)/.82);
+    if(frame.motion===1){pose.y=-Math.sin(t*Math.PI)*.065;pose.angle=Math.sin(t*Math.PI)*.1;pose.scaleX=1-t*.28;pose.scaleY=1-t*.32;}
+  }else if((kind==='otto'||kind==='rural')&&frame.state==='idle'&&frame.motion===1) {
+    const age=(frame.elapsed+(kind==='rural'?1500:0))%6400;
+    if(age<640)pose.y=-Math.sin(age/640*Math.PI)*.045;
+  }
+  return pose;
+}
+
+export function vanishPuffs(frame:AnimationFrame,w:number,h:number) {
+  if(frame.state!=='vanish'||frame.motion!==1)return [];
+  const t=frame.gesture,alpha=Math.sin(t*Math.PI)*.7;
+  return Array.from({length:5},(_,i)=>{const a=i*Math.PI*2/5;return {x:Math.cos(a)*w*(.14+t*.28),y:-h*.5+Math.sin(a)*h*(.09+t*.14)-t*h*.1,r:h*(.018+Math.sin(t*Math.PI)*.022),alpha};});
+}
+
+/** Small removable brows add a mischievous expression; source eyes stay intact. */
+export function rivalBrows(definition:RigDefinition) {
+  const pivot=definition.parts.head!.pivot,h=definition.bounds[3];
+  return definition.eyes.map((eye,i)=>{
+    const x=eye.center[0]-pivot[0],y=eye.center[1]-pivot[1]-eye.radius[1]*.93;
+    const tilt=(i===0?1:-1)*h*.013;
+    return {x1:x-eye.radius[0]*.72,y1:y-tilt,x2:x+eye.radius[0]*.72,y2:y+tilt};
+  });
 }
 
 export function drawThought(ctx:CanvasRenderingContext2D, definition:RigDefinition, opacity:number) {
@@ -164,13 +220,20 @@ export function paintRig(ctx:CanvasRenderingContext2D, width:number, height:numb
   const [bx,by,bw,bh]=rig.definition.bounds;
   ctx.clearRect(0,0,width,height);
   const scale=Math.min(width/(bw*1.18),height/(bh*1.17));
-  ctx.save();ctx.translate(width/2,(height+bh*scale)/2+bh*scale*.025);ctx.scale(flip?-scale:scale,scale);
+  const body=rigPose(rig.kind,frame);
+  ctx.save();ctx.translate(width/2,(height+bh*scale)/2+bh*scale*.025+body.y*bh*scale);ctx.scale(flip?-scale:scale,scale);ctx.rotate(body.angle);ctx.scale(body.scaleX,body.scaleY);ctx.globalAlpha=body.alpha;
   for(const part of rig.parts) {
-    const pose=partPose(part.name,frame),[x,y,w,h]=part.box;
+    const pose=partPose(part.name,frame,rig.kind),[x,y,w,h]=part.box;
     ctx.save();ctx.translate(part.pivot[0]-bx-bw/2+pose.x,part.pivot[1]-by-bh+pose.y);ctx.rotate(pose.angle);ctx.scale(pose.scaleX,pose.scaleY);
     const source=part.blinkCanvases?.[blinkFrame(frame)]??part.canvas;
-    ctx.drawImage(source,x-part.pivot[0],y-part.pivot[1],w,h);ctx.restore();
+    ctx.drawImage(source,x-part.pivot[0],y-part.pivot[1],w,h);
+    if(part.name==='head'&&(rig.kind==='gato'||rig.kind==='perro')&&frame.state!=='vanish') {
+      ctx.strokeStyle='#4b352c';ctx.lineWidth=bh*.009;ctx.lineCap='round';
+      for(const brow of rivalBrows(rig.definition)){ctx.beginPath();ctx.moveTo(brow.x1,brow.y1);ctx.lineTo(brow.x2,brow.y2);ctx.stroke();}
+    }
+    ctx.restore();
   }
   if(frame.state==='think')drawThought(ctx,rig.definition,frame.gesture);
+  for(const puff of vanishPuffs(frame,bw,bh)){ctx.globalAlpha=puff.alpha;ctx.fillStyle='#fff6d7';ctx.beginPath();ctx.arc(puff.x,puff.y,puff.r,0,Math.PI*2);ctx.fill();}
   ctx.restore();
 }

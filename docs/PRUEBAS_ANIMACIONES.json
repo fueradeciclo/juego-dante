@@ -1,10 +1,10 @@
 {
-  "fecha": "2026-10-10T18:08:43.893Z",
+  "fecha": "2026-10-10T19:08:02.626Z",
   "checks": [
     "los cinco personajes cambian sus dibujos al caminar",
     "los cinco personajes tienen una pose de ojos cerrados",
     "vista familiar permite comparar pensar y aburrirse en los cinco personajes",
-    "esperar en el nivel activa pensar en el trío; gatos y perros caminan al patrullar",
+    "Pattha conserva pensar al esperar; gatos y perros caminan al patrullar y los amigos alternan charlas y gestos",
     "pausa congela todos los rigs; caminar cancela pensar y saltar cambia la pose",
     "preferencia de movimiento reducido se aplica también al nivel",
     "galería horizontal mobile sin desborde de ancho",

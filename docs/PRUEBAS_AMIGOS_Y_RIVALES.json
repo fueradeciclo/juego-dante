@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-10-10T19:07:29.302Z",
+  "checks": [
+    "Otto le habla a Rural y Rural responde; siguen caminando al hablar y la pausa congela la charla",
+    "los amigos tienen saltitos decorativos al esperar",
+    "gato: aviso visible, avance y patrulla dentro de sus límites",
+    "gato: salto real, desaparición suave, colisión desactivada de inmediato y pausa respetada",
+    "perro: aviso visible, avance y patrulla dentro de sus límites",
+    "perro: salto real, desaparición suave, colisión desactivada de inmediato y pausa respetada",
+    "movimiento reducido evita saltitos decorativos",
+    "galería permite revisar charlas, acecho y desaparición",
+    "sin errores JavaScript"
+  ],
+  "errors": [],
+  "metodo": "Chromium aislado, tiempo activo real, saltos con posicionamiento de desarrollo, sin modificar rivales ni progreso."
+}

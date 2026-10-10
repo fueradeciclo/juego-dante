@@ -1,8 +1,9 @@
-export type AnimationState = 'idle' | 'walk' | 'air' | 'think' | 'bored';
-export type AnimationInput = { speed: number; airborne?: boolean; suspended?: boolean; reducedMotion?: boolean };
+export type AnimationState = 'idle' | 'walk' | 'air' | 'think' | 'bored' | 'talk' | 'alert' | 'vanish';
+export type AnimationInput = { speed: number; airborne?: boolean; suspended?: boolean; reducedMotion?: boolean; talking?:boolean; alert?:boolean; defeated?:boolean };
 export type AnimationFrame = {
   state: AnimationState; elapsed: number; idleMs: number; phase: number;
   blink: number; gesture: number; motion: number;
+  travel?:'idle'|'walk'|'air';
 };
 
 /** Uses active time only. Pauses and background tabs never accumulate an idle gesture. */
@@ -14,6 +15,7 @@ export class AnimationClock {
   private nextBlink: number;
   private blinkCount = 0;
   private seed:number;
+  private vanishMs=0;
   private frame: AnimationFrame = { state:'idle', elapsed:0, idleMs:0, phase:0, blink:0, gesture:0, motion:1 };
   constructor(seed = 0) { this.seed=seed; this.nextBlink = 2200 + (seed % 7) * 310; }
 
@@ -22,7 +24,7 @@ export class AnimationClock {
     const dt = Math.max(0, Number.isFinite(delta) ? delta : 0);
     this.elapsed += dt;
     const moving = Math.abs(input.speed) > 9;
-    if (moving || input.airborne) this.idleMs = 0;
+    if (moving || input.airborne || input.talking || input.alert || input.defeated) this.idleMs = 0;
     else this.idleMs += dt;
     if (moving) this.phase += dt / 1000 * (6 + Math.min(Math.abs(input.speed), 300) / 28);
     if (this.elapsed >= this.nextBlink) {
@@ -33,6 +35,7 @@ export class AnimationClock {
     const blinkAge = this.elapsed - this.blinkStarted;
     const blink = blinkAge < 180 ? Math.sin(Math.PI * blinkAge / 180) : 0;
     let state: AnimationState = input.airborne ? 'air' : moving ? 'walk' : 'idle';
+    const travel=state;
     let gesture = 0;
     if (state === 'idle' && !input.reducedMotion) {
       const age = this.idleMs - 8000 - (this.seed % 3) * 350;
@@ -42,7 +45,10 @@ export class AnimationClock {
         else if (cycle >= 6000 && cycle < 8700) { state = 'bored'; gesture = Math.sin(Math.PI * (cycle - 6000) / 2700); }
       }
     }
-    this.frame = { state, elapsed:this.elapsed, idleMs:this.idleMs, phase:this.phase, blink, gesture, motion:input.reducedMotion ? 0.15 : 1 };
+    if(input.talking){state='talk';gesture=.5+.5*Math.sin(this.elapsed/170);}
+    if(input.alert){state='alert';gesture=.5+.5*Math.sin(this.elapsed/90);}
+    if(input.defeated){this.vanishMs+=dt;state='vanish';gesture=Math.min(1,this.vanishMs/900);}
+    this.frame = { state, elapsed:this.elapsed, idleMs:this.idleMs, phase:this.phase, blink, gesture, travel, motion:input.reducedMotion ? 0.15 : 1 };
     return this.frame;
   }
   snapshot(): AnimationFrame { return this.frame; }

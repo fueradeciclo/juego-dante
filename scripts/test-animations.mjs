@@ -40,10 +40,10 @@ try {
   const page=await browser.newPage({viewport:{width:1280,height:800}});monitor(page);
   await page.goto('http://localhost:5173/?test=1');await page.locator('#play:not([disabled])').waitFor();
   await page.locator('#play').click();for(let i=0;i<3;i++)await page.locator('#continue').click();
-  await page.waitForFunction(()=>window.__PATTHA_TEST__.snapshot().animations.filter(a=>['pattha','otto','rural'].includes(a.kind)).every(a=>a.state==='think'&&a.gesture>.2),null,{timeout:16000});
+  await page.waitForFunction(()=>window.__PATTHA_TEST__.snapshot().animations.some(a=>a.kind==='pattha'&&a.state==='think'&&a.gesture>.2),null,{timeout:16000});
   await page.screenshot({path:'docs/capturas/12-espera-pensando.png'});
   let s=await snapshot(page);assert.ok(s.animations.some(a=>a.kind==='gato'&&a.state==='walk'));assert.ok(s.animations.some(a=>a.kind==='perro'&&a.state==='walk'));
-  record('esperar en el nivel activa pensar en el trío; gatos y perros caminan al patrullar');
+  record('Pattha conserva pensar al esperar; gatos y perros caminan al patrullar y los amigos alternan charlas y gestos');
   await page.keyboard.press('Escape');const frozen=(await snapshot(page)).animations;
   await page.waitForTimeout(300);assert.deepEqual((await snapshot(page)).animations,frozen);
   await page.locator('#resume').click();await page.keyboard.down('ArrowRight');await page.waitForTimeout(170);

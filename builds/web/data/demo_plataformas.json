@@ -308,6 +308,20 @@
     5000,
     6410
   ],
+  "charlas_amigos": {
+    "camino": [
+      {"quien":"otto","texto":"Rural, ¿vamos con Pattha?"},
+      {"quien":"rural","texto":"¡Sí! Entre amigos nos ayudamos."}
+    ],
+    "puente": [
+      {"quien":"otto","texto":"Rural, yo me ocupo de la tuerca."},
+      {"quien":"rural","texto":"¡Dale! Yo miro la señal con Pattha."}
+    ],
+    "cruzado": [
+      {"quien":"rural","texto":"¡Otto, el puente quedó buenísimo!"},
+      {"quien":"otto","texto":"¡Lo hicimos entre los tres! Vamos con Pattha."}
+    ]
+  },
   "dialogos": {
     "intro": [
       {

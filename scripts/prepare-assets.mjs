@@ -11,6 +11,7 @@ for (const entry of manifest.imagenes) {
 const generated = JSON.parse(await readFile('assets/enemigos/MANIFEST.json', 'utf8'));
 for(const entry of generated.imagenes){const bytes=await readFile(entry.ruta);if(createHash('sha256').update(bytes).digest('hex')!==entry.sha256)throw new Error('El animal cambió: '+entry.ruta);}
 const assets = [
+ 'assets/audio/triumph-in-steel.mp3',
  'assets/personajes/transparentes/pattha_concepto_B_transparente.png',
  'assets/personajes/transparentes/raton_verde_concepto_transparente.png',
  'assets/personajes/transparentes/rural_concepto_transparente.png',

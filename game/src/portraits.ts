@@ -3,7 +3,7 @@ import { loadRig, paintRig, type CharacterKind, type PreparedRig } from './chara
 import { PatthaClock } from './pattha-state.ts';
 import { loadPatthaArt, paintPattha, type PatthaArt } from './pattha-art.ts';
 
-export type PreviewMode='auto'|'walk'|'blink'|'think'|'bored';
+export type PreviewMode='auto'|'walk'|'blink'|'think'|'bored'|'talk'|'alert'|'vanish';
 export function animatePortraits(mode:()=>PreviewMode=()=> 'auto') {
   const reduced=matchMedia('(prefers-reduced-motion: reduce)');
   const entries=[...document.querySelectorAll<HTMLCanvasElement>('canvas[data-character]')].map((canvas,i)=>({
@@ -28,7 +28,9 @@ export function animatePortraits(mode:()=>PreviewMode=()=> 'auto') {
       if(!width||!height)continue;
       if(entry.canvas.width!==width||entry.canvas.height!==height){entry.canvas.width=width;entry.canvas.height=height;}
       const choice=mode();
-      let frame:AnimationFrame=entry.clock.step(delta,{speed:choice==='walk'?150:0,suspended,reducedMotion:reduced.matches});
+      const friend=kind==='otto'||kind==='rural',rival=kind==='gato'||kind==='perro';
+      let frame:AnimationFrame=entry.clock.step(delta,{speed:choice==='walk'?150:0,suspended,reducedMotion:reduced.matches,talking:choice==='talk'&&friend,alert:choice==='alert'&&rival});
+      if(choice==='vanish'&&rival)frame={...frame,state:'vanish',gesture:Math.min(1,(frame.elapsed%1600)/900)};
       if(choice==='think'||choice==='bored')frame={...frame,state:choice,gesture:1};
       if(choice==='blink')frame={...frame,state:'idle',blink:1};
       if(kind==='pattha'&&entry.pattha) {

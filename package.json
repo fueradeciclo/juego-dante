@@ -1,6 +1,6 @@
 {
   "name": "juego-dante-demo",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.25.0",
@@ -12,12 +12,16 @@
     "dev": "pnpm prepare:assets && vite --host 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "test": "node --test game/tests/*.test.ts",
-    "build": "pnpm prepare:assets && pnpm typecheck && vite build",
+    "build": "pnpm validate:level && pnpm prepare:assets && pnpm typecheck && vite build",
     "preview": "vite preview --host 0.0.0.0",
     "build:site": "pnpm build && node scripts/prepare-site.mjs",
     "test:browser": "node scripts/test-browser.mjs",
     "test:animations": "node scripts/test-animations.mjs",
-    "test:pattha": "node scripts/test-pattha.mjs"
+    "test:pattha": "node scripts/test-pattha.mjs",
+    "test:companions": "node scripts/test-companions.mjs",
+    "test:followers": "node scripts/test-followers.mjs",
+    "validate:level": "node scripts/validate-level.mjs",
+    "test:scenarios": "node scripts/test-scenarios.mjs"
   },
   "dependencies": {
     "phaser": "3.90.0"

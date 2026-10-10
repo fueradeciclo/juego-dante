@@ -19,6 +19,12 @@ Las decisiones explícitas de la familia en esta sesión tienen prioridad sobre 
 | Todo el juego/build en un nuevo repositorio propio dedicado | Pedido explícito; repositorio privado fueradeciclo/juego-dante |
 | Animar movimiento, parpadeos y gestos después de esperar en todos los personajes | Pedido explícito del adulto en la siguiente iteración; incluye Pattha, Otto, Rural, gato y perro |
 | Priorizar un set más pulido de Pattha: carrera real, agacharse/estirarse para saltar, polvo y poses distintas al subir/caer | Pedido explícito del adulto para la demo 0.3 |
+| Mejorar los movimientos de todos salvo Pattha, con menos variedad que el protagonista | Pedido explícito del adulto en esta iteración |
+| Gatos y perros algo más malvados y activos; desaparición apropiada para niños al superarlos | Pedido explícito del adulto; sin violencia explícita |
+| Otto y Rural amistosos, amigos y aliados de Pattha, con más movimiento y conversación entre ellos | Confirmado explícitamente por el adulto |
+| Desarrollar primero la línea argumental y luego niveles y desafíos; elaborar enemigos y aumentar la dificultad con ayuda de Otto y Rural | Pedido explícito del adulto para la etapa narrativa; argumento y habilidades concretas pendientes |
+| Seguimiento de Otto/Rural más rápido y ligero, charlas menos frecuentes y recuadros más sutiles | Pedido de ajuste explícito del adulto |
+| Agregar animaciones de fondo muy sutiles, por ejemplo avionetas o gente saludando | Autorizado por el adulto; se implementan avionetas como PROPUESTA decorativa |
 | Sin publicidad, compras, cuentas ni servicios de juego externos | Requisito familiar |
 
 ## Tecnología y decisiones de implementación
@@ -38,6 +44,7 @@ Resolución de referencia 1280×720; cámara lateral; escalado FIT; pausa en cel
 - Gato naranja y perro marrón son propuestas ilustradas nuevas. Su color, nombre y personalidad no fueron elegidos por Dante.
 - Demo 0.2: animación por partes sobre el arte existente, con cabeza/brazos/patas/cola, ojos que cierran, gesto de pensar tras ~8 s y de aburrirse tras ~14 s. Esos gestos concretos son PROPUESTAS reversibles; no fijan personalidades oficiales. No hay nuevos PNG de poses ni spritesheets dibujados.
 - Demo 0.3: Pattha reemplaza su rig visual por 24 poses nuevas generadas con Imagegen desde B. Ocho cuadros de carrera, ocho de salto/aterrizaje/rebote y ocho de reposo/gestos/ayuda/festejo. Preparación de salto de 64 ms activos y polvo leve. No cambia el canon, las habilidades ni los originales; las interpretaciones de poses siguen pendientes de Dante. Amigos y rivales conservan el rig 0.2.
+- Mejora posterior de amigos/rivales: mismo rig y PNG, pasos/colas/brazos más expresivos; pequeños saltitos de Otto/Rural y conversaciones con turnos sin frenar la partida. Rivales con cejas temporales, aviso de 480 ms, avance breve dentro de su tramo y descanso. Desaparición de 900 ms con ojos cerrados, contracción leve y nubecitas; colisión desactivada de inmediato. Gestos, parámetros y frases son PROPUESTAS; no se atribuyen a Dante. Pattha conserva sus movimientos, arte y controles.
 
 ## Ideas del kit que siguen sin aprobar
 
@@ -65,8 +72,17 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 | 2026-10-10 | Repo privado dedicado juego-dante | Pedido de GitHub; nombre técnico provisional de Codex | Código, assets, documentación y build web juntos |
 | 2026-10-10 | Todos los personajes animados, incluyendo parpadeos y espera | Adulto, pedido de esta iteración | Rig 2D sin reemplazar originales; galería familiar; pausa del reloj y movimiento reducido |
 | 2026-10-10 | Pulir especialmente carrera y salto de Pattha | Adulto, siguiente pedido | Demo 0.3 con tres planchas generadas, atlas de 24 cuadros, salto anticipado y polvo; nuevas poses sujetas a Dante |
+| 2026-10-10 | Mejorar amigos y rivales sin modificar los movimientos de Pattha | Adulto, pedido actual | Animaciones por partes más expresivas, acecho con aviso, desaparición infantil y charlas entre Otto/Rural; misma tecnología y fuentes |
+| 2026-10-10 | Construir la historia antes de desarrollar niveles; progresión de enemigos y desafíos apoyada en Otto y Rural | Adulto, pedido de historia | Borrador separado en 14_HISTORIA_Y_PROGRESION.md; ningún argumento, villano o poder nuevo se registra como aprobado |
+| 2026-10-10 | Suavizar el seguimiento, espaciar charlas y animar el fondo | Adulto, ajuste posterior | Aceleración/frenado de aliados sin cortes en zonas, descanso de 60 s, globos tenues y pequeñas avionetas; mismos controles y movimiento de Pattha |
 
 Actualizar este registro al cambiar una decisión, conservando la anterior y el motivo. No usar los diálogos escritos por Codex como palabras originales de Dante.
+
+## Desarrollo de historia · 2026-10-10
+
+El adulto pidió: «Para comenzar vamos con la línea argumental, luego pensemos en los niveles y desafíos» y que los enemigos y desafíos sean cada vez más elaborados, con ayuda de Otto y Rural. Esto confirma el orden de trabajo y la dirección de progresión, no una trama concreta.
+
+Se preparó [14_HISTORIA_Y_PROGRESION.md](14_HISTORIA_Y_PROGRESION.md), **PROPUESTA 01**: recuperar la Gran Chispa, un perro antagonista llamado provisoriamente Don Candado, seis capítulos y un jefe que combina desafíos conocidos. Retoma motivos del kit y propone una alternativa al giro del circuito suelto del borrador anterior. El puente existente sirve como primer capítulo. Entrar por conductos, destrabar seguros e interpretar patrones amplían las funciones propuestas de Otto/Rural; permanecen sin aprobar. No cambia el canon visual, el control de Pattha ni la demo activa. Los documentos del kit se conservan.
 
 ## Publicación web · 2026-10-10
 
@@ -77,3 +93,15 @@ Actualización de publicación: juego desplegado en `https://juego-dante.pages.d
 ## Música · 2026-10-10
 
 El adulto eligió música instrumental heavy metal épica y melódica, con subida de energía, usando Crush 40 y Dragon Ball Z como referencias de emoción. No eligió una canción comercial para incorporarla. Primera PROPUESTA implementada: composición original sintetizada localmente, 150 BPM, ciclo de 64 compases (102,4 segundos), riff de acordes de quinta, bajo, batería y melodía heroica. Sin samples externos, voces ni melodías de las referencias. Es una maqueta electrónica, pendiente de escuchar y validar con la familia; no una grabación de instrumentos reales. Volumen inicial 22%, silencio y volumen accesibles; baja durante diálogo y acertijo, se suspende en pausa, menú, pestaña oculta y orientación vertical.
+
+### Revisión musical · 2026-10-10
+
+El adulto pidió mucho más energía desde el comienzo, con la canción original de Power Rangers como referencia emocional. PROPUESTA revisada: 168 BPM, banda completa desde el primer compás, riff galopado y sincopado de quintas, melodía heroica inmediata, platillos y redobles. Ciclo de 64 compases (~91,4 s). Compresión para controlar picos. Sigue siendo una maqueta sintetizada original, pendiente de validación auditiva familiar.
+
+### Música elegida · 2026-10-10
+
+El adulto entregó `Triumph in Steel.mp3` y pidió usarlo como música de fondo. Se conserva una copia sin modificar en `assets/audio/triumph-in-steel.mp3`; reemplaza la maqueta sintetizada. Repetición del archivo completo (sin edición para crear un loop musical continuo), volumen inicial 22%, reducción a 30% del volumen elegido en diálogos y puzzle, pausa al interrumpir la partida y regreso al inicio de la pista al volver al menú. Procedencia: archivo proporcionado por el adulto después de la conversación sobre Suno; servicio de origen y licencia no verificados. No se atribuye autoría ni licencia al archivo.
+
+## Dominio público conectado · 2026-10-10
+
+Juego disponible en `https://sabad.com.ar/pattha_game/`, verificado por HTTPS e inicio de partida. Cloudflare Pages continúa conectado a GitHub y la portada queda reservada para otros proyectos.

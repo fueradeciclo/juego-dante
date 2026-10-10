@@ -1,0 +1,14 @@
+{
+  "fecha": "2026-10-10T19:08:59.859Z",
+  "checks": [
+    "cruzar el antiguo corte del inicio no produce un salto de los ratones",
+    "llegar al puente, volver y frenar conserva cercanía con aceleración suave",
+    "avioneta tenue al fondo, sin charla temprana; pausa congela avioneta y seguimiento",
+    "charla tenue con aparición gradual; cambiar de zona no dispara otra inmediatamente",
+    "volver al banderín reúne a los aliados cerca, sin atravesar el mapa",
+    "movimiento reducido oculta las avionetas decorativas",
+    "sin errores JavaScript"
+  ],
+  "errors": [],
+  "metodo": "Chromium aislado; recorridos con teclado y trazas por cuadro. Posicionamiento de desarrollo para aislar puente, cambio de zona y retorno."
+}

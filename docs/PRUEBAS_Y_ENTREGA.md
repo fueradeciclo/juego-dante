@@ -9,7 +9,7 @@
 | Comprobación | Resultado / evidencia |
 | --- | --- |
 | pnpm typecheck | Sin errores |
-| pnpm test | 17/17: seis reglas de juego, cinco pruebas del reloj general y seis del set/preparación de Pattha |
+| pnpm test / runner directo de Node | 26/26: seis reglas, cinco del reloj general, seis de Pattha y nueve de aliados/rivales/fondo |
 | pnpm build | Build estático generado; aviso de tamaño de chunk del motor esperado |
 | Originales del kit | 9 checksums SHA-256 coinciden con MANIFEST.json |
 | Menú y diálogo | Correcto |
@@ -36,6 +36,7 @@
 | Polvo de salto | Presente al despegar; congela con pausa; ausente en movimiento reducido |
 | Toque corto | Se eleva al tocar y soltar; la preparación no pierde el pedido |
 | Galería horizontal mobile | Cinco personajes; sin desborde de ancho |
+| Amigos y rivales | Charlas con dos interlocutores, saltitos, aviso/avance limitado, desaparición de gatos/perros y pausa verificados en PRUEBAS_AMIGOS_Y_RIVALES.json |
 | Build final | Ambas páginas generadas; galería abierta y revisada en navegador integrado; adaptador de pruebas ausente del bundle |
 
 Datos del runner en PRUEBAS_BROWSER.json. El runner posiciona al personaje para aislar algunos escenarios; no modifica el progreso. No presentar esa cobertura como una partida manual familiar completa ni como una prueba física de iPhone/Android.
@@ -78,3 +79,5 @@ pnpm install --frozen-lockfile --ignore-scripts; pnpm typecheck; pnpm test; pnpm
 Para integración: servidor pnpm dev en una terminal, pnpm test:browser en otra. Ver README para las herramientas de navegador requeridas.
 Para animación: mismo servidor y pnpm test:animations.
 Para el nuevo set: pnpm test:pattha.
+Para amigos y rivales: pnpm test:companions. Ver AMIGOS_Y_RIVALES.md para los comandos directos usados con el runtime integrado de esta Mac.
+Para seguimiento suave, charlas discretas y avionetas: pnpm test:followers; evidencia en PRUEBAS_SEGUIMIENTO_Y_FONDO.json y capturas 26–28.

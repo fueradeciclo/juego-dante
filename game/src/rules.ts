@@ -24,3 +24,14 @@ export function canStomp(velocityY: number, playerBottom: number, enemyTop: numb
 export function canJump(now: number, lastGrounded: number, bufferedUntil: number): boolean {
  return now <= bufferedUntil && now - lastGrounded <= 120;
 }
+
+export type ScoreRules = { puntos_por_esfera: number; bonus_todas: number };
+export type LevelScore = { collected: number; available: number; base: number; bonus: number; total: number; complete: boolean };
+/** Derived from unique, valid collectible IDs: reattempts and repeated endings cannot add points. */
+export function scoreLevel(coins: ReadonlySet<number>, available: number, rules: ScoreRules): LevelScore {
+ const collected = [...coins].filter(id => Number.isInteger(id) && id >= 0 && id < available).length;
+ const complete = available > 0 && collected === available;
+ const base = collected * rules.puntos_por_esfera;
+ const bonus = complete ? rules.bonus_todas : 0;
+ return { collected, available, base, bonus, total: base + bonus, complete };
+}

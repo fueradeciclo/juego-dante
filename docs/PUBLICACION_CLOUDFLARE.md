@@ -43,3 +43,7 @@ Referencias oficiales:
 - https://developers.cloudflare.com/pages/get-started/git-integration/
 - https://developers.cloudflare.com/pages/configuration/custom-domains/
 - https://developers.cloudflare.com/pages/platform/limits/
+
+## Dominio conectado · 2026-10-10
+
+NIC publicó ambos servidores y Cloudflare activó la zona. Se asoció `sabad.com.ar` al proyecto Pages `juego-dante` y se confirmó el CNAME existente. Verificación: `https://sabad.com.ar/pattha_game/` carga por HTTPS, inicia la partida y muestra el diálogo de Rural; sin errores de consola observados. La portada permanece reservada. Revisión cada dos horas detenida al completar el objetivo.
