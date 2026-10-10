@@ -1,6 +1,16 @@
 # Publicación en sabad.com.ar
 
-Decisión del adulto, 2026-10-10: `/pattha_game/` se reserva para el juego; la portada queda para otros proyectos. Cloudflare es el destino solicitado. La publicación todavía requiere acceso a la cuenta y verificar el dominio.
+Decisión del adulto, 2026-10-10: `/pattha_game/` se reserva para el juego; la portada queda para otros proyectos. Cloudflare es el destino solicitado.
+
+## Estado verificado · 2026-10-10
+
+- Proyecto Pages `juego-dante`, plan gratuito, integrado con GitHub y despliegues automáticos desde `main`.
+- Primera publicación exitosa: commit `97a83364359fdb7fc8ccd2e594b616144ae5148c`, despliegue `9705e7b3-fc5e-42f6-a8d6-d39355d22beb`.
+- Juego público: https://juego-dante.pages.dev/pattha_game/ . Verificados carga de personajes, inicio y diálogo; sin errores de consola observados. La URL sin barra final redirige correctamente. Galería disponible. La raíz devuelve la página 404, sin mostrar el juego.
+- NIC Argentina: delegación aplicada con confirmación explícita del adulto; estado «Delegado: SI». Servidores: `rick.ns.cloudflare.com` y `rita.ns.cloudflare.com`.
+- Cloudflare: zona `sabad.com.ar` creada en Free y registro CNAME raíz a `juego-dante.pages.dev`, proxied, TTL Auto. Pendiente propagación y activación de zona.
+- Falta asociar el dominio personalizado en Pages una vez activa la zona, y probar HTTPS en https://sabad.com.ar/pattha_game/ . El CNAME por sí solo no completa la asociación.
+- `pnpm-workspace.yaml` declara `allowBuilds.esbuild: false`, para que pnpm 11 acepte instalar sin ejecutar ese script. La compilación local y en Cloudflare pasó con esta política.
 
 ## Preparar
 

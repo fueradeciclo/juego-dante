@@ -25,7 +25,7 @@ Las decisiones explícitas de la familia en esta sesión tienen prioridad sobre 
 
 **Phaser 3.90.0 + TypeScript 5.9.3 + Vite 7.1.12**, Node 24+, pnpm 11.25.0, lockfile fijado. Se eligió después de comparar Godot, Phaser y GDevelop y recibir destino/género/modo. La prioridad actual es jugar directamente en navegador con teclado y multitáctil. Se fija una versión estable de Phaser 3 para esta demo; no se migra a Phaser 4 sin necesidad y verificación.
 
-Resolución de referencia 1280×720; cámara lateral; escalado FIT; pausa en celular vertical y al perder foco. Assets y JSON desacoplados del código. Exportación actual: carpeta web estática servida por HTTP, con base relativa. No hay empaquetado móvil nativo ni hosting público.
+Resolución de referencia 1280×720; cámara lateral; escalado FIT; pausa en celular vertical y al perder foco. Assets y JSON desacoplados del código. Exportación actual: carpeta web estática servida por HTTP, con base relativa. No hay empaquetado móvil nativo. La publicación web se registra más abajo.
 
 ## Propuestas implementadas, sujetas a Dante
 
@@ -71,6 +71,8 @@ Actualizar este registro al cambiar una decisión, conservando la anterior y el 
 ## Publicación web · 2026-10-10
 
 El adulto compró `sabad.com.ar`, eligió Cloudflare y pidió comenzar la publicación. Confirmó que `/pattha_game/` será exclusivamente para el juego y la portada quedará para otros proyectos. Esto actualiza el pendiente anterior de hosting público. Se prepara `builds/site/pattha_game/` a partir del build web, sin publicar documentos ni originales. Se puede continuar iterando en GitHub. Conexión con la cuenta, configuración DNS y despliegue público todavía pendientes de verificar; no se registra una publicación como completada.
+
+Actualización de publicación: juego desplegado en `https://juego-dante.pages.dev/pattha_game/`, integrado con GitHub. El adulto autorizó explícitamente delegar `sabad.com.ar` a `rick.ns.cloudflare.com` y `rita.ns.cloudflare.com`; NIC confirmó «Delegado: SI». Cloudflare espera propagación. Asociación del dominio personalizado y verificación HTTPS pendientes. Ver `PUBLICACION_CLOUDFLARE.md`.
 
 ## Música · 2026-10-10
 

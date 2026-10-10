@@ -53,7 +53,7 @@ Tres tramos: aprender los saltos, abrir un puente con los amigos y llegar al ban
 
 ## Build y pruebas
 
-Para preparar la publicación del juego en `sabad.com.ar/pattha_game/`: `pnpm build:site`. La salida es `builds/site/`; la portada queda reservada para otros proyectos. Ver [configuración de Cloudflare](docs/PUBLICACION_CLOUDFLARE.md). GitHub sigue siendo el lugar de trabajo; publicación pública pendiente de conectar y verificar.
+Juego publicado: https://juego-dante.pages.dev/pattha_game/ . Para preparar la publicación: `pnpm build:site`. La salida es `builds/site/`; la portada queda reservada para otros proyectos. Ver [configuración y estado de Cloudflare](docs/PUBLICACION_CLOUDFLARE.md). GitHub sigue siendo el lugar de trabajo; `sabad.com.ar/pattha_game/` espera la activación DNS y asociación del dominio personalizado.
 
 ```sh
 pnpm typecheck
@@ -113,6 +113,6 @@ Las planchas nuevas de Pattha sí contienen poses distintas; fueron creadas con 
 2. Validar escritura de Pattha, variante A/B y aspecto de gatos/perros.
 3. Elegir los gestos favoritos y ajustar la velocidad de la carrera, preparación del salto y apoyo de los pies. Revisar las poses derivadas de B con Dante.
 
-No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. Se agregó una maqueta musical instrumental original de heavy metal sintetizado. Arranca al jugar: usá ♫ Silenciar y Volumen en la barra superior. Baja durante diálogos y se suspende al pausar. La composición y el timbre quedan pendientes de aprobación familiar. El hosting público y las exportaciones instalables quedan para otra decisión.
+No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. Se agregó una maqueta musical instrumental original de heavy metal sintetizado. Arranca al jugar: usá ♫ Silenciar y Volumen en la barra superior. Baja durante diálogos y se suspende al pausar. La composición y el timbre quedan pendientes de aprobación familiar. El juego está publicado en Cloudflare Pages; las exportaciones instalables quedan para otra decisión.
 
 Los dibujos y personajes de Dante conservan sus derechos; este proyecto no les asigna una licencia abierta. Ver [procedencia](docs/13_CREDITOS_Y_PROCEDENCIA.md) y [licencias técnicas](docs/LICENCIAS_TECNICAS.md).
