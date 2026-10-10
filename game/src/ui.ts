@@ -75,7 +75,7 @@ export class DemoUI {
   const portraits:Record<string,string>={pattha:'pattha_concepto_B',otto:'raton_verde_concepto',rural:'rural_concepto'};
   get('speaker').textContent=names[line.quien]??line.quien;
   get('line').textContent=line.texto;
-  get<HTMLImageElement>('portrait').src='./assets/personajes/transparentes/'+portraits[line.quien]+'_transparente.png';
+  get<HTMLCanvasElement>('portrait').dataset.character=portraits[line.quien]?line.quien:'pattha';
   get('continue').textContent=this.lineIndex===this.lines.length-1?'¡Vamos! →':'Seguir →';
  }
  nextLine() { if(this.mode!=='dialogue')return;if(++this.lineIndex<this.lines.length)this.drawLine();else {this.setMode('playing');this.afterDialogue();get('game').focus();} }

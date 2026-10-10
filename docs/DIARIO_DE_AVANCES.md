@@ -36,3 +36,21 @@ Abrir README; correr scripts/jugar.command o pnpm dev. No asumir que historias, 
 ### Pendientes explícitos
 
 Validación con Dante, dispositivos reales, duración, animaciones, sonido, hosting público y exportaciones nativas. Sin datos personales, cuentas ni anuncios en el juego.
+
+## 2026-10-10 · Demo 0.2: personajes animados
+
+Pedido del adulto: animar a todos al moverse y al esperar, con parpadeo y gestos de pensar/aburrirse. Se implementó un rig por partes sobre los cinco dibujos existentes; no se generaron nuevas ilustraciones ni spritesheets. Las máscaras/pivotes están en assets/animaciones/rigs.json. Los gestos concretos son PROPUESTAS para Dante.
+
+### Tareas de esta entrega
+
+1. Preservar el arte, separar animación visual de física y agregar caminar/salto/reposo/parpadeo/espera.
+2. Integrar menú/retratos, galería familiar, pausa del reloj y movimiento reducido.
+3. Verificar reglas y recorrido, revisar capturas, reconstruir build y publicar la actualización en el mismo GitHub privado.
+
+### Ajustes y evidencia
+
+Se cubrieron las articulaciones con píxeles de los originales y se muestrearon sus colores para los párpados. Se corrigió la orientación al avanzar a la derecha; cerca del comienzo los ratones quedan delante para evitar el corte/solapamiento contra el borde izquierdo. Pausar congela todos los rigs; moverse corta el gesto de pensar; saltar cambia la pose. Once pruebas unitarias (seis anteriores y cinco del reloj) y ocho escenarios nuevos de animación correctos; el recorrido anterior vuelve a comprobarse en esta entrega. Capturas 08–13 y PRUEBAS_ANIMACIONES.json.
+
+### Cómo continuar
+
+Abrir `/animaciones.html` o el enlace del menú y elegir gestos con Dante. Ajustar tiempos/amplitudes en animation-state.ts y character-art.ts; geometría del arte en rigs.json. Mantener la física fuera del rig. No presentar esta animación por recortes como un ciclo dibujado tradicional. Próximos pasos: selección familiar, prueba en celular real y luego decidir si hace falta producir cuadros adicionales.

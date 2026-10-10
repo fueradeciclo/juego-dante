@@ -17,6 +17,7 @@ Las decisiones explícitas de la familia en esta sesión tienen prioridad sobre 
 | Pattha salta y combate gatos/perros | Pedido actual; «asaltar» se interpretó como «saltar entre plataformas» |
 | Crear gatos/perros consistentes con el arte disponible | Autorizado por el adulto con las referencias del kit |
 | Todo el juego/build en un nuevo repositorio propio dedicado | Pedido explícito; repositorio privado fueradeciclo/juego-dante |
+| Animar movimiento, parpadeos y gestos después de esperar en todos los personajes | Pedido explícito del adulto en la siguiente iteración; incluye Pattha, Otto, Rural, gato y perro |
 | Sin publicidad, compras, cuentas ni servicios de juego externos | Requisito familiar |
 
 ## Tecnología y decisiones de implementación
@@ -34,6 +35,7 @@ Resolución de referencia 1280×720; cámara lateral; escalado FIT; pausa en cel
 - Diálogos, recorrido y estas funciones contextuales de los ratones son propuestas de demo.
 - Imagen B de Pattha seleccionada provisoriamente porque el kit ya la usaba en data/personajes.json.
 - Gato naranja y perro marrón son propuestas ilustradas nuevas. Su color, nombre y personalidad no fueron elegidos por Dante.
+- Demo 0.2: animación por partes sobre el arte existente, con cabeza/brazos/patas/cola, ojos que cierran, gesto de pensar tras ~8 s y de aburrirse tras ~14 s. Esos gestos concretos son PROPUESTAS reversibles; no fijan personalidades oficiales. No hay nuevos PNG de poses ni spritesheets dibujados.
 
 ## Ideas del kit que siguen sin aprobar
 
@@ -46,7 +48,7 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 - Historia y habilidades oficiales, anotando las palabras de Dante.
 - Dispositivos reales de prueba, edad/ayuda de lectura si la familia desea contarlo.
 - Duración 5–10 min y diversión: objetivo, todavía no medición familiar.
-- Animaciones por cuadros reales, escenarios y audio.
+- Ciclos dibujados cuadro a cuadro, escenarios y audio; la demo ya tiene animación por partes.
 - Hosting compartido o exportaciones instalables: decisión posterior.
 
 ## Registro de decisiones
@@ -59,5 +61,6 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 | 2026-10-10 | Combatir gatos y perros; generar ilustraciones consistentes | Adulto | Combate por salto como propuesta reversible; PNG nuevos |
 | 2026-10-10 | Phaser/TypeScript/Vite fijados para la demo | Codex a partir de la elección de destino/género | Implementación web reproducible |
 | 2026-10-10 | Repo privado dedicado juego-dante | Pedido de GitHub; nombre técnico provisional de Codex | Código, assets, documentación y build web juntos |
+| 2026-10-10 | Todos los personajes animados, incluyendo parpadeos y espera | Adulto, pedido de esta iteración | Rig 2D sin reemplazar originales; galería familiar; pausa del reloj y movimiento reducido |
 
 Actualizar este registro al cambiar una decisión, conservando la anterior y el motivo. No usar los diálogos escritos por Codex como palabras originales de Dante.

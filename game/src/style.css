@@ -17,3 +17,33 @@ footer{padding:17px 4px 0;color:#a0b7b2;font-size:10px;display:flex;justify-cont
 @media(max-width:900px),(max-height:650px){.app-shell{width:min(calc((100dvh - 55px)*16/9),calc(100vw - 12px));margin:3px auto}.topbar{height:40px;padding:0 4px 5px}.brand{font-size:14px;gap:8px}.brand-mark{width:25px;height:25px;border-radius:8px}.brand small{font-size:7px;padding:3px}.top-note{font-size:9px}.icon-button{height:28px;width:30px;font-size:18px}.stage{border-radius:13px}footer{display:none}.menu-panel{padding:4% 5%}.menu-copy h1{font-size:clamp(23px,4.2vw,43px);margin:12px 0;letter-spacing:-1px}.menu-copy p{font-size:11px;margin-bottom:12px;line-height:1.4}.pill{font-size:7px;padding:6px 8px;letter-spacing:1px}.menu-copy>.primary-button{min-width:170px;font-size:12px;padding:11px 18px}.menu-meta{font-size:8px;margin-top:9px}.menu-controls{margin-top:13px;font-size:8px;gap:8px}.touch-option{font-size:8px;margin-top:8px}.art-caption{font-size:7px}.friends-art{bottom:8%}.friends-art img{max-height:100px}.friends-art span{font-size:8px;padding:3px 9px}.hud{inset:9px 10px auto}.hud-left{padding:8px 10px;gap:2px}.eyebrow{font-size:6px}.hud-left strong{font-size:12px}.hud-left>span:last-child{font-size:8px}.hud-right{gap:6px}.hud-right>span{font-size:11px;padding:9px;border-radius:10px}#energy{font-size:10px;letter-spacing:1px}.touch-controls{inset:auto 10px 8px}.touch-controls button{width:53px;height:46px;font-size:18px;border-radius:14px}.touch-controls .jump-button{width:77px;font-size:20px}.touch-controls .help-button{width:55px;font-size:10px}.direction-controls,.action-controls{gap:8px}.interaction-hint{bottom:19%;font-size:9px;padding:7px 12px}.toast{font-size:9px;padding:8px 14px;max-width:80%;top:24%}.dialogue-panel{left:7%;right:7%;bottom:12px;padding:11px 14px;gap:12px;border-radius:14px}.dialogue-panel img{width:42px;height:57px}.dialogue-copy strong{font-size:9px}.dialogue-copy p{font-size:11px;margin-top:4px}.small{font-size:10px;padding:11px}.modal-card{padding:18px 24px;width:min(370px,82%);border-radius:18px}.modal-card h2{font-size:23px;margin:10px 0}.modal-card p{font-size:10px;margin:8px 0}.modal-card>.primary-button{padding:10px;margin-top:12px;font-size:11px}.secondary-button{padding:9px;margin-top:9px;font-size:10px}.text-button{font-size:10px;padding:9px}.pause-controls{font-size:8px;line-height:1.6;margin-top:7px}.puzzle-clue{font-size:26px;margin:12px 0}.symbol-buttons button{height:48px;width:54px;font-size:25px}.win-star{font-size:35px;margin:3px 0}.win-card strong{font-size:12px;margin:8px}.win-card small{font-size:8px;margin-top:5px}}
 @media(orientation:portrait) and (pointer:coarse){.app-shell{width:calc(100vw - 12px)}.stage{height:calc(100dvh - 52px);aspect-ratio:auto}.top-note{display:none}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important} .modal-scrim{backdrop-filter:none}}
+
+/* Shared canvas portraits use the same character layers as the level. */
+canvas.hero-art{width:68%;height:88%;left:11%;top:-4%;display:block}
+.friends-art canvas{display:block;width:100%;height:140px;filter:drop-shadow(0 6px 4px #1c3c2c26)}
+.dialogue-panel canvas{display:block;flex-shrink:0;width:65px;height:80px}
+.animation-link{display:inline-block;margin-top:12px;font-size:10px;color:#315d4d;text-underline-offset:3px}
+.animation-page{display:block}
+.animation-gallery{width:min(1160px,calc(100% - 48px));margin:36px auto;color:#edf6e9}
+.gallery-back{display:block;margin-bottom:30px;color:#bfdbca;font-size:13px;text-decoration:none}
+.animation-gallery h1{font-size:clamp(30px,4vw,49px);letter-spacing:-1.5px;margin:20px 0 12px}
+.animation-gallery>p{color:#b8cfc3;line-height:1.6;font-size:15px;max-width:650px}
+.gesture-controls{display:flex;flex-wrap:wrap;gap:10px;margin:25px 0}
+.gesture-controls button{padding:12px 18px;border-radius:14px;background:#29453f;color:#eff9e6;font-size:13px;font-weight:700}
+.gesture-controls button[aria-pressed=true]{background:#c5e896;color:#213c32;box-shadow:0 3px 0 #82ae67}
+.character-cards{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.character-cards article{border-radius:24px;background:linear-gradient(155deg,#fcfcef,#d5e9d3);border:2px solid #79978740;overflow:hidden;text-align:center;box-shadow:0 7px 0 #0002}
+.character-cards canvas{display:block;width:100%;height:280px}
+.character-cards h2{color:#274638;font-size:17px;margin:0 0 20px}
+.animation-gallery .gallery-note{margin-top:30px;color:#d7e6c5;font-size:15px}
+#gallery-status{font-size:11px;color:#9fb9ae}
+@media(max-width:900px),(max-height:650px){
+  .friends-art canvas{height:100px}.dialogue-panel canvas{width:42px;height:57px}
+  .animation-link{font-size:8px;margin-top:7px}
+  .animation-gallery{margin:18px auto;width:calc(100% - 32px)}.gallery-back{margin-bottom:18px}
+  .animation-gallery h1{font-size:28px;margin:12px 0}.animation-gallery>p{font-size:12px}
+  .gesture-controls{margin:16px 0;gap:7px}.gesture-controls button{font-size:11px;padding:10px 12px}
+  .character-cards{gap:8px}.character-cards article{border-radius:17px}.character-cards canvas{height:190px}
+  .character-cards h2{font-size:13px;margin-bottom:12px}
+}
+@media(max-width:600px) and (orientation:portrait){.character-cards{grid-template-columns:repeat(2,minmax(0,1fr))}.character-cards canvas{height:230px}}

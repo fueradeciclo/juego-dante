@@ -1,8 +1,10 @@
-# Demo de plataformas de Dante · 0.1
+# Demo de plataformas de Dante · 0.2
 
 Juego familiar 2D para navegador de computadora y celular **horizontal**. Solo controlás a **Pattha**; **Otto** (verde) y **Rural** (azul) te acompañan. Nombre definitivo del juego y escritura del robot pendientes.
 
 Repositorio dedicado y privado: https://github.com/fueradeciclo/juego-dante
+
+**Nuevo:** los cinco personajes caminan, parpadean y hacen gestos cuando esperan. En el menú, abrí **Ver los gestos de los personajes** para compararlos con Dante.
 
 ![Inicio de la demo](docs/capturas/01-inicio.png)
 
@@ -64,16 +66,18 @@ Para integración, dejá `pnpm dev` corriendo en otra terminal y ejecutá:
 
 ```sh
 pnpm test:browser
+pnpm test:animations
 ```
 
 Usa un Chromium de pruebas instalado por Playwright, o una instalación existente de Chrome en una sesión aislada. Si ninguno existe: `pnpm exec playwright install chromium`. También admite `PATTHA_CHROMIUM_PATH` con una ruta al ejecutable. Nunca usa el perfil ni las cuentas del navegador personal.
 
-Ver [pruebas y límites](docs/PRUEBAS_Y_ENTREGA.md) y [resultados de integración](docs/PRUEBAS_BROWSER.json). El adaptador para posicionar al jugador solo se habilita en **desarrollo** con `?test=1`; no se incluye en el build.
+Ver [pruebas y límites](docs/PRUEBAS_Y_ENTREGA.md), [resultados de integración](docs/PRUEBAS_BROWSER.json) y [pruebas de animación](docs/PRUEBAS_ANIMACIONES.json). El adaptador para posicionar al jugador e inspeccionar sus animaciones solo se habilita en **desarrollo** con `?test=1`; no se incluye en el build.
 
 ## Estructura
 
 ```text
 assets/        originales intactos, recortes y animales nuevos con procedencia
+               animaciones/ contiene máscaras, pivotes y procedencia del rig
 data/          contenido editable; demo_plataformas.json es la demo activa
 game/src/      runtime Phaser, controles, interfaz y reglas
 game/tests/    pruebas de reglas de jugabilidad
@@ -92,13 +96,17 @@ builds/web/    entrega compilada de navegador
 
 **Propuesta implementada para jugar y decidir:** sendero, destellos, tuerca, diálogo, cooperación del puente, señal de símbolos y combate por salto con energía y reintentos. El faro y la Gran Chispa del kit siguen como argumento opcional y no se usan en esta demo.
 
-Todos los personajes son **PNG estáticos**. El runtime los desplaza y espeja; no hay ciclos animados ni spritesheets. Para gato/perro se encuadra el PNG completo del personaje dentro de la textura sin deformarlo; no se generan poses adicionales. Los gatos y perros fueron creados con Imagegen a partir del estilo de los ratones, no dibujados por Dante. [Prompts exactos](assets/enemigos/PROMPTS.json).
+Las imágenes fuente siguen siendo **PNG estáticos**. Ahora el juego anima sus partes con un rig 2D: pasos de patas y brazos, pose de salto, respiración suave, movimiento de cola y parpadeos separados. Tras unos **8 segundos** quietos aparece un gesto de pensar; cerca de **14 segundos**, uno de aburrirse. Los tiempos varían un poco entre personajes. Moverse cancela esos gestos. Pausa, pantalla vertical y pestaña oculta congelan el reloj de animación; se respeta la preferencia de movimiento reducido del dispositivo.
+
+El menú y los retratos de diálogo usan el mismo arte animado. [La ronda de gestos](game/animaciones.html) se sirve como `http://localhost:5173/animaciones.html` en desarrollo o `http://localhost:4173/animaciones.html` en el build. Permite probar caminar, parpadear, pensar y aburrirse en los cinco personajes.
+
+Esto es **animación por partes**, no spritesheets dibujados cuadro a cuadro. Los originales se conservan; las capas y tres niveles de cierre de ojos se crean en memoria al cargar. Máscaras, pivotes y referencias están separados del código en [rigs.json](assets/animaciones/rigs.json); ver [detalles y límites](docs/ANIMACIONES_02.md). Los gatos y perros fueron creados con Imagegen a partir del estilo de los ratones, no dibujados por Dante. [Prompts exactos](assets/enemigos/PROMPTS.json).
 
 ## Próxima sesión con Dante
 
 1. Jugar en un celular real horizontal y en computadora; medir comodidad y duración.
 2. Validar escritura de Pattha, variante A/B y aspecto de gatos/perros.
-3. Ajustar saltos/combate y recién después producir animaciones.
+3. Elegir los gestos favoritos y ajustar su intensidad; ciclos dibujados cuadro a cuadro quedan para una etapa posterior.
 
 No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. No se agregó sonido. El hosting público y las exportaciones instalables quedan para otra decisión.
 

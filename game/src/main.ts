@@ -2,9 +2,11 @@ import Phaser from 'phaser';
 import { Adventure } from './adventure.ts';
 import { Controls } from './input.ts';
 import { DemoUI } from './ui.ts';
+import { animatePortraits } from './portraits.ts';
 import './style.css';
 
 const ui=new DemoUI();
+animatePortraits();
 const controls=new Controls(()=>ui.mode==='playing'&&!ui.portrait,e=>ui.shortcut(e));
 new Phaser.Game({
  type:Phaser.AUTO,parent:'game',width:1280,height:720,backgroundColor:'#dfeddd',

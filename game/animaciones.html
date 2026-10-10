@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#101f30" />
+  <title>Los gestos de los amigos · Pattha</title>
+</head>
+<body class="animation-page">
+  <main class="animation-gallery">
+    <a class="gallery-back" href="./">← Volver a jugar</a>
+    <span class="pill">PARA ELEGIR CON DANTE</span>
+    <h1>Una ronda de gestos.</h1>
+    <p>Así se mueven nuestros amigos. Si los dejás quietos, parpadean y se entretienen solos.</p>
+    <div class="gesture-controls" role="group" aria-label="Elegí una animación">
+      <button data-preview="auto" aria-pressed="true">Dejarlos quietos</button>
+      <button data-preview="walk" aria-pressed="false">Caminar</button>
+      <button data-preview="blink" aria-pressed="false">Parpadear</button>
+      <button data-preview="think" aria-pressed="false">Pensar</button>
+      <button data-preview="bored" aria-pressed="false">Aburrirse</button>
+    </div>
+    <div class="character-cards">
+      <article><canvas data-character="pattha" role="img" aria-label="Animación de Pattha"></canvas><h2>Pattha</h2></article>
+      <article><canvas data-character="otto" role="img" aria-label="Animación de Otto"></canvas><h2>Otto</h2></article>
+      <article><canvas data-character="rural" role="img" aria-label="Animación de Rural"></canvas><h2>Rural</h2></article>
+      <article><canvas data-character="gato" role="img" aria-label="Animación del gato"></canvas><h2>Gato</h2></article>
+      <article><canvas data-character="perro" role="img" aria-label="Animación del perro"></canvas><h2>Perro</h2></article>
+    </div>
+    <p class="gallery-note">Dante, ¿cuál gesto te gusta más? Podemos cambiarlos juntos.</p>
+    <span id="gallery-status" role="status">Cargando los personajes…</span>
+  </main>
+  <script type="module" src="/src/animation-preview.ts"></script>
+</body>
+</html>

@@ -1,5 +1,7 @@
 # 07 · Dirección artística, sprites y animaciones
 
+**Actualización demo 0.2:** se implementó animación por partes para Pattha, Otto, Rural, gato y perro. Ver [ANIMACIONES_02.md](ANIMACIONES_02.md). Las imágenes fuente de la tabla siguen siendo estáticas. El plan de producción por cuadros que sigue es una propuesta futura; no describirlo como assets ya disponibles.
+
 ## Regla máxima: no perder el dibujo de Dante
 
 Las imágenes en `assets/personajes/concepto` son interpretaciones digitales. Los bocetos de papel originales tienen prioridad cuando se sumen. Toda modificación importante de forma o personalidad se valida en familia.

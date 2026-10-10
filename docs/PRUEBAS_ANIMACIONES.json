@@ -1,0 +1,15 @@
+{
+  "fecha": "2026-10-10T17:18:36.611Z",
+  "checks": [
+    "los cinco personajes cambian sus dibujos al caminar",
+    "los cinco personajes tienen una pose de ojos cerrados",
+    "vista familiar permite comparar pensar y aburrirse en los cinco personajes",
+    "esperar en el nivel activa pensar en el trío; gatos y perros caminan al patrullar",
+    "pausa congela todos los rigs; caminar cancela pensar y saltar cambia la pose",
+    "preferencia de movimiento reducido se aplica también al nivel",
+    "galería horizontal mobile sin desborde de ancho",
+    "sin errores JavaScript de animación"
+  ],
+  "errors": [],
+  "metodo": "Reloj unitario, poses pintadas en Canvas, controles de teclado y espera real en Chromium; mobile horizontal emulado."
+}

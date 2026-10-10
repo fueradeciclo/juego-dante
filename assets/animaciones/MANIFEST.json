@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "metodo": "Animacion 2D por partes en runtime; no hay spritesheets nuevos",
+  "configuracion": "assets/animaciones/rigs.json",
+  "fuentes_sin_modificar": [
+    {
+      "personaje": "pattha",
+      "ruta": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
+      "sha256": "9b910703fcae1be0f7cc4d325084d27d93afe56ce7bba5c4995a9f690f224af0"
+    },
+    {
+      "personaje": "otto",
+      "ruta": "assets/personajes/transparentes/raton_verde_concepto_transparente.png",
+      "sha256": "879ae7c7b8e798f8e84f5e490e8fdb7ae87fc0767aaf67380430e1777610bdc6"
+    },
+    {
+      "personaje": "rural",
+      "ruta": "assets/personajes/transparentes/rural_concepto_transparente.png",
+      "sha256": "4574f79beeb139b64b46de10ca630701c13d95ad0103a18eb61495089d7b3751"
+    },
+    {
+      "personaje": "gato",
+      "ruta": "assets/enemigos/gato-v1.png",
+      "sha256": "b321bddb120d5043d417b8a0d24c0c1b807b775303763d5c68e398dbd4b28277"
+    },
+    {
+      "personaje": "perro",
+      "ruta": "assets/enemigos/perro-v1.png",
+      "sha256": "2f29b5f837b9c435b126d9e6249991f19e9ff8f6f2fcbd14c6a186f23ef26c6b"
+    }
+  ],
+  "gestos": "PROPUESTA para revisar con Dante",
+  "autor_de_geometria_y_codigo": "Codex"
+}

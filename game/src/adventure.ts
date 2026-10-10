@@ -2,6 +2,8 @@ import Phaser from 'phaser';
 import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto, type Progress } from './rules.ts';
 import type { Controls } from './input.ts';
 import type { DemoUI, Line } from './ui.ts';
+import { CharacterRig } from './character-rig.ts';
+import type { CharacterKind } from './character-art.ts';
 
 type Level = { personajes:Record<string,string>;mundo:{ancho:number;alto:number;piso:number};suelo:number[][];plataformas:number[][];monedas:number[][];enemigos:{tipo:string;x:number;min:number;max:number;velocidad:number}[];puestos_control:number[];dialogos:Record<string,Line[]> };
 type Enemy = Phaser.Physics.Arcade.Sprite;
@@ -24,6 +26,8 @@ export class Adventure extends Phaser.Scene {
  private ended=false;
  private bridgeBuilt=false;
  private panels!: Phaser.GameObjects.Graphics;
+ private visuals:CharacterRig[]=[];
+ private reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   private originalLoadFailed=false;
  constructor(private ui: DemoUI, private controls: Controls) { super('adventure'); }
  preload() {
@@ -38,7 +42,7 @@ export class Adventure extends Phaser.Scene {
   if(this.originalLoadFailed)return;
   this.level=this.cache.json.get('level') as Level;
   if(!this.level || ['pattha','otto','rural','gato','perro'].some(k=>!this.textures.exists(k))){this.ui.loadError();return;}
-  this.progress=createProgress();this.health=3;this.ended=false;this.bridgeBuilt=false;this.flags=[];this.allies=[];this.allyLabels=[];this.trail=[];this.hurtUntil=0;this.groundedAt=-Infinity;this.jumpUntil=-Infinity;this.lastSample=0;this.checkpoint={x:130,y:this.level.mundo.piso};
+  this.progress=createProgress();this.health=3;this.ended=false;this.bridgeBuilt=false;this.flags=[];this.allies=[];this.allyLabels=[];this.trail=[];this.visuals=[];this.hurtUntil=0;this.groundedAt=-Infinity;this.jumpUntil=-Infinity;this.lastSample=0;this.checkpoint={x:130,y:this.level.mundo.piso};
   this.physics.world.setBounds(0,-100,this.level.mundo.ancho,1000);
   this.paintBackground();
   this.solids=this.physics.add.staticGroup();
@@ -53,9 +57,11 @@ export class Adventure extends Phaser.Scene {
   this.player.body!.setOffset(raw.width*.28,raw.height*.22);
   this.player.setMaxVelocity(340,950).setCollideWorldBounds(false);
   this.physics.add.collider(this.player,this.solids);
+  this.visuals.push(new CharacterRig(this,this.player,'pattha',0));
   for(const [i,key]of ['otto','rural'].entries()){
-   const ally=this.add.image(60-i*60,this.level.mundo.piso,key).setOrigin(.5,1).setDisplaySize(61,82).setDepth(4);
+   const ally=this.add.image(220+i*90,this.level.mundo.piso,key).setOrigin(.5,1).setDisplaySize(61,82).setDepth(4);
    this.allies.push(ally);
+   this.visuals.push(new CharacterRig(this,ally,key as CharacterKind,i+1));
    this.allyLabels.push(this.add.text(ally.x,ally.y-95,key==='otto'?'Otto':'Rural',{fontFamily:'system-ui',fontSize:'12px',color:'#28513d',backgroundColor:'#f0f8df',padding:{x:8,y:4}}).setOrigin(.5).setDepth(7));
   }
   for(const [key,box]of Object.entries({gato:[25,159,985,1218],perro:[30,187,981,1190]})){const t=this.textures.get(key);if(!t.has('recorte'))t.add('recorte',0,...box as [number,number,number,number]);}
@@ -68,7 +74,7 @@ export class Adventure extends Phaser.Scene {
   if(data.autostart)this.ui.dialogue(this.level.dialogos.intro);
   if(import.meta.env.DEV && new URLSearchParams(location.search).has('test')) {
    (window as unknown as {__PATTHA_TEST__:unknown}).__PATTHA_TEST__={
-    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo};}),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
+    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo};}),animations:this.visuals.filter(v=>v.root.active).map(v=>v.snapshot()),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
     position:(x:number,y:number)=>{this.player.body!.reset(x,y);this.player.setVelocity(0,0);this.controls.reset();},
    };
   }
@@ -144,6 +150,7 @@ export class Adventure extends Phaser.Scene {
    enemy.setOrigin(.5,1).setScale(110/enemy.frame.height).setDepth(4).setData('patrol',{...info,dir:-1});
    const raw=enemy.frame;
    enemy.body!.setSize(raw.width*.52,raw.height*.87);enemy.body!.setOffset(raw.width*.24,raw.height*.13);
+   this.visuals.push(new CharacterRig(this,enemy,info.tipo as CharacterKind,this.visuals.length));
   }
   this.physics.add.collider(this.rivals,this.solids);
   this.physics.add.overlap(this.player,this.rivals,(_p,e)=>this.meetEnemy(e as Enemy));
@@ -186,7 +193,26 @@ export class Adventure extends Phaser.Scene {
    else this.ui.toast('La señal ya está encendida. ¡A cruzar!');
   }
  }
- update(now:number) {
+ update(now:number,delta:number) {
+  if(!this.player)return;
+  if(this.ui.mode==='playing'&&!this.ui.portrait&&!this.ended)this.updateGameplay(now);
+  this.updateVisuals(delta);
+ }
+ private updateVisuals(delta:number) {
+  const suspended=this.ui.mode==='paused'||this.ui.portrait||document.hidden;
+  for(const visual of this.visuals) {
+   if(!visual.root.active)continue;
+   const host=visual.host;
+   const lastX=host.getData('animationX')??host.x;
+   const body='body' in host?host.body as Phaser.Physics.Arcade.Body|null:null;
+   const playing=this.ui.mode==='playing'&&host.active;
+   const speed=playing?(body?body.velocity.x:(host.x-lastX)/Math.max(delta,1)*1000):0;
+   const airborne=playing?(body?(!body.blocked.down||Math.abs(body.velocity.y)>35):host.y<this.level.mundo.piso-8):false;
+   visual.update(Math.min(delta,50),{speed,airborne,suspended,reducedMotion:this.reducedMotion.matches});
+   host.setData('animationX',host.x);
+  }
+ }
+ private updateGameplay(now:number) {
   if(!this.player||this.ui.mode!=='playing'||this.ui.portrait||this.ended)return;
   const body=this.player.body as Phaser.Physics.Arcade.Body;
   if(this.controls.consumeInteract()){this.interaction();if(this.ui.mode!=='playing')return;}
@@ -195,7 +221,7 @@ export class Adventure extends Phaser.Scene {
   if(canJump(now,this.groundedAt,this.jumpUntil)){this.player.setVelocityY(-620);this.jumpUntil=-Infinity;this.groundedAt=-Infinity;}
   if(!this.controls.jumpHeld && body.velocity.y < -280)this.player.setVelocityY(-280);
   if(now>this.hurtUntil-1500)this.player.setVelocityX(this.controls.axis*285);
-  if(this.controls.axis)this.player.setFlipX(this.controls.axis<0);
+  if(this.controls.axis)this.player.setFlipX(this.controls.axis>0);
   this.player.setAlpha(now<this.hurtUntil?.55+Math.abs(Math.sin(now/85))*.45:1);
   this.player.x=Phaser.Math.Clamp(this.player.x,35,this.level.mundo.ancho-35);
   for(const child of this.rivals.getChildren()){
@@ -209,7 +235,8 @@ export class Adventure extends Phaser.Scene {
   for(let i=0;i<this.allies.length;i++){
    const point=this.trail[Math.max(0,this.trail.length-1-(i+1)*10)]??{x:this.player.x-80*(i+1),y:this.player.y};
    const followX=Math.abs(point.x-this.player.x)<90*(i+1)?this.player.x-90*(i+1):point.x;
-   const target=atMeeting?{x:i===0?2870:3020,y:this.level.mundo.piso}:{x:Math.max(20,followX),y:point.y};
+   const target=atMeeting?{x:i===0?2870:3020,y:this.level.mundo.piso}:{x:this.player.x<270?this.player.x+90*(i+1):Math.max(35,followX),y:point.y};
+   if(Math.abs(target.x-this.allies[i].x)>1)this.allies[i].setFlipX(target.x>this.allies[i].x);
    this.allies[i].setPosition(Phaser.Math.Linear(this.allies[i].x,target.x,.2),Phaser.Math.Linear(this.allies[i].y,target.y,.2));
    this.allyLabels[i].setPosition(this.allies[i].x,this.allies[i].y-95);
    this.allyLabels[i].setVisible(atMeeting||this.player.x<420);
