@@ -1,10 +1,10 @@
-# Demo de plataformas de Dante · 0.2
+# Demo de plataformas de Dante · 0.3
 
 Juego familiar 2D para navegador de computadora y celular **horizontal**. Solo controlás a **Pattha**; **Otto** (verde) y **Rural** (azul) te acompañan. Nombre definitivo del juego y escritura del robot pendientes.
 
 Repositorio dedicado y privado: https://github.com/fueradeciclo/juego-dante
 
-**Nuevo:** los cinco personajes caminan, parpadean y hacen gestos cuando esperan. En el menú, abrí **Ver los gestos de los personajes** para compararlos con Dante.
+**Nuevo:** Pattha tiene **24 cuadros nuevos**: carrera de ocho poses, salto con preparación/impulso/subida/caída/aterrizaje y gestos propios. Deja polvo suave al despegar. En el menú, abrí **Ver los gestos de los personajes** para probar movimientos y mirar cada cuadro con Dante.
 
 ![Inicio de la demo](docs/capturas/01-inicio.png)
 
@@ -67,17 +67,18 @@ Para integración, dejá `pnpm dev` corriendo en otra terminal y ejecutá:
 ```sh
 pnpm test:browser
 pnpm test:animations
+pnpm test:pattha
 ```
 
 Usa un Chromium de pruebas instalado por Playwright, o una instalación existente de Chrome en una sesión aislada. Si ninguno existe: `pnpm exec playwright install chromium`. También admite `PATTHA_CHROMIUM_PATH` con una ruta al ejecutable. Nunca usa el perfil ni las cuentas del navegador personal.
 
-Ver [pruebas y límites](docs/PRUEBAS_Y_ENTREGA.md), [resultados de integración](docs/PRUEBAS_BROWSER.json) y [pruebas de animación](docs/PRUEBAS_ANIMACIONES.json). El adaptador para posicionar al jugador e inspeccionar sus animaciones solo se habilita en **desarrollo** con `?test=1`; no se incluye en el build.
+Ver [pruebas y límites](docs/PRUEBAS_Y_ENTREGA.md), [resultados de integración](docs/PRUEBAS_BROWSER.json), [pruebas de animación](docs/PRUEBAS_ANIMACIONES.json) y [pruebas del nuevo Pattha](docs/PRUEBAS_PATTHA_03.json). El adaptador para posicionar al jugador e inspeccionar sus animaciones solo se habilita en **desarrollo** con `?test=1`; no se incluye en el build.
 
 ## Estructura
 
 ```text
 assets/        originales intactos, recortes y animales nuevos con procedencia
-               animaciones/ contiene máscaras, pivotes y procedencia del rig
+               animaciones/ contiene rigs y pattha/ las tres planchas y su atlas
 data/          contenido editable; demo_plataformas.json es la demo activa
 game/src/      runtime Phaser, controles, interfaz y reglas
 game/tests/    pruebas de reglas de jugabilidad
@@ -96,18 +97,20 @@ builds/web/    entrega compilada de navegador
 
 **Propuesta implementada para jugar y decidir:** sendero, destellos, tuerca, diálogo, cooperación del puente, señal de símbolos y combate por salto con energía y reintentos. El faro y la Gran Chispa del kit siguen como argumento opcional y no se usan en esta demo.
 
-Las imágenes fuente siguen siendo **PNG estáticos**. Ahora el juego anima sus partes con un rig 2D: pasos de patas y brazos, pose de salto, respiración suave, movimiento de cola y parpadeos separados. Tras unos **8 segundos** quietos aparece un gesto de pensar; cerca de **14 segundos**, uno de aburrirse. Los tiempos varían un poco entre personajes. Moverse cancela esos gestos. Pausa, pantalla vertical y pestaña oculta congelan el reloj de animación; se respeta la preferencia de movimiento reducido del dispositivo.
+Los PNG originales del kit siguen siendo **ilustraciones estáticas intactas**. Pattha usa ahora tres planchas nuevas generadas a partir de B: carrera con piernas flexionadas y fases de vuelo; preparación rápida de **64 ms activos**, extensión para despegar, subida con piernas recogidas, ápice, caída con pies preparados, compresión y recuperación al aterrizar. También frena, rebota al superar un rival, ayuda y festeja. Los puntos de apoyo y la escala se alinean sin alterar su cuerpo de colisión. La altura y velocidad del salto se conservan; el salto desde un borde arranca inmediatamente.
 
-El menú y los retratos de diálogo usan el mismo arte animado. [La ronda de gestos](game/animaciones.html) se sirve como `http://localhost:5173/animaciones.html` en desarrollo o `http://localhost:4173/animaciones.html` en el build. Permite probar caminar, parpadear, pensar y aburrirse en los cinco personajes.
+Otto, Rural, gato y perro conservan su rig 2D por partes. Todos tienen reposo y parpadeos; tras unos **8 segundos** quietos aparece pensar, y cerca de **14 segundos**, aburrirse. Moverse cancela esos gestos. Pausa, pantalla vertical y pestaña oculta congelan las animaciones y el polvo; movimiento reducido desactiva polvo y gestos automáticos prolongados.
 
-Esto es **animación por partes**, no spritesheets dibujados cuadro a cuadro. Los originales se conservan; las capas y tres niveles de cierre de ojos se crean en memoria al cargar. Máscaras, pivotes y referencias están separados del código en [rigs.json](assets/animaciones/rigs.json); ver [detalles y límites](docs/ANIMACIONES_02.md). Los gatos y perros fueron creados con Imagegen a partir del estilo de los ratones, no dibujados por Dante. [Prompts exactos](assets/enemigos/PROMPTS.json).
+El menú y los retratos de diálogo usan el mismo arte animado. [La galería](game/animaciones.html) se sirve como `http://localhost:5173/animaciones.html` en desarrollo o `http://localhost:4173/animaciones.html` en el build. Tiene un escenario grande para Pattha, salto completo, siete opciones de movimiento y un panel desplegable para seleccionar los 24 cuadros; debajo se comparan los cinco personajes.
+
+Las planchas nuevas de Pattha sí contienen poses distintas; fueron creadas con **Imagegen integrada**, no dibujadas por Dante. Fuentes en [assets/animaciones/pattha/](assets/animaciones/pattha/), [prompts exactos](assets/animaciones/pattha/PROMPTS.json), atlas y checksums separados del código. El espaciado generado se corrige con recortes y pivotes en memoria; la segunda fila de carrera se refleja para unificar orientación. No se reescriben las imágenes. Ver [set de Pattha y límites](docs/ANIMACIONES_PATTHA_03.md). Los demás usan [rigs.json](assets/animaciones/rigs.json) y el [sistema de la 0.2](docs/ANIMACIONES_02.md). Gatos/perros también son ilustraciones generadas: [prompts](assets/enemigos/PROMPTS.json).
 
 ## Próxima sesión con Dante
 
 1. Jugar en un celular real horizontal y en computadora; medir comodidad y duración.
 2. Validar escritura de Pattha, variante A/B y aspecto de gatos/perros.
-3. Elegir los gestos favoritos y ajustar su intensidad; ciclos dibujados cuadro a cuadro quedan para una etapa posterior.
+3. Elegir los gestos favoritos y ajustar la velocidad de la carrera, preparación del salto y apoyo de los pies. Revisar las poses derivadas de B con Dante.
 
-No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. No se agregó sonido. El hosting público y las exportaciones instalables quedan para otra decisión.
+No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. Se agregó una maqueta musical instrumental original de heavy metal sintetizado. Arranca al jugar: usá ♫ Silenciar y Volumen en la barra superior. Baja durante diálogos y se suspende al pausar. La composición y el timbre quedan pendientes de aprobación familiar. El hosting público y las exportaciones instalables quedan para otra decisión.
 
 Los dibujos y personajes de Dante conservan sus derechos; este proyecto no les asigna una licencia abierta. Ver [procedencia](docs/13_CREDITOS_Y_PROCEDENCIA.md) y [licencias técnicas](docs/LICENCIAS_TECNICAS.md).

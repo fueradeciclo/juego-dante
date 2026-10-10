@@ -14,6 +14,7 @@
 - Rural, ratón azul: un PNG generado en la conversación.
 - PNG transparentes: recortes automáticos derivados de esas cuatro ilustraciones.
 - Lámina de equipo: composición derivada de los recortes.
+- Demo 0.3: tres planchas de Pattha con 24 poses nuevas generadas con Imagegen integrada desde el concepto B. Son interpretaciones para animación, no dibujos originales de Dante. Prompts, atlas, fuentes RGBA y SHA-256 en assets/animaciones/pattha/; originales conservados.
 - Dibujos de papel: visibles en la conversación original, **fotografías no incorporadas** porque los bytes no estaban presentes en la carpeta de trabajo al empaquetar.
 
 ## Uso y licencias

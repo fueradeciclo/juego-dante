@@ -1,4 +1,4 @@
-# 08 · Tecnología y exportación · decisión de demo 0.1
+# 08 · Tecnología y exportación · demo 0.3
 
 ## Destino acordado
 
@@ -27,7 +27,7 @@ Curvas de aprendizaje: evaluación de Codex, no medición. Fuentes oficiales con
 
 Phaser **3.90.0**, TypeScript **5.9.3**, Vite **7.1.12**, Node **24+**, pnpm **11.25.0**; versiones exactas y pnpm-lock.yaml. Se usa Phaser 3 de forma deliberada para esta demo estable; la existencia de una versión mayor no obliga a migrar. Licencias técnicas incluidas en docs/licencias/; Phaser es MIT y no requiere cuota ni cuenta para ejecutar/exportar.
 
-Escena 1280×720 y escala FIT sin deformar personajes. Física Arcade, cámara lateral y UI DOM accesible. Los PNG y JSON permanecen fuera de game/src/. No hay secuencias animadas; se pueden agregar más adelante con frames, atlas y pivotes consistentes.
+Escena 1280×720 y escala FIT. Física Arcade, cámara lateral y UI DOM accesible. Los PNG y JSON permanecen fuera de game/src/. Pattha usa un atlas de 24 poses generadas; el resto, rigs por partes. Un reloj propio separa animación visual y colisiones y congela cuadros/polvo en pausa; Canvas comparte el arte entre Phaser, menú, retratos y galería.
 
 ## Ejecutar y compilar
 
@@ -39,6 +39,7 @@ Comandos desde la raíz:
 - pnpm build → builds/web/
 - pnpm preview → localhost:4173
 - pnpm test:browser, con dev activo en otra terminal
+- pnpm test:animations y pnpm test:pattha, con el mismo servidor
 
 ## Exportación vigente
 

@@ -1,0 +1,339 @@
+{
+  "version": "0.3",
+  "frameWidth": 384,
+  "frameHeight": 512,
+  "columns": 4,
+  "canvasWidth": 512,
+  "canvasHeight": 544,
+  "baseline": 520,
+  "referenceHeight": 500,
+  "sheets": {
+    "carrera": {
+      "path": "assets/animaciones/pattha/carrera-v3-pulida.png",
+      "anchors": [
+        [
+          220,
+          502
+        ],
+        [
+          217,
+          503
+        ],
+        [
+          231,
+          503
+        ],
+        [
+          202,
+          502
+        ],
+        [
+          172,
+          460
+        ],
+        [
+          179,
+          459
+        ],
+        [
+          158,
+          462
+        ],
+        [
+          174,
+          460
+        ]
+      ],
+      "flip": [
+        false,
+        false,
+        false,
+        false,
+        true,
+        true,
+        true,
+        true
+      ],
+      "names": [
+        "contacto_izquierdo",
+        "absorcion_izquierda",
+        "paso_izquierdo",
+        "vuelo_izquierdo",
+        "contacto_derecho",
+        "absorcion_derecha",
+        "paso_derecho",
+        "vuelo_derecho"
+      ],
+      "rects": [
+        [
+          36,
+          58,
+          365,
+          446
+        ],
+        [
+          445,
+          53,
+          321,
+          452
+        ],
+        [
+          805,
+          51,
+          289,
+          454
+        ],
+        [
+          1159,
+          49,
+          348,
+          431
+        ],
+        [
+          42,
+          540,
+          352,
+          434
+        ],
+        [
+          444,
+          535,
+          288,
+          438
+        ],
+        [
+          818,
+          533,
+          297,
+          443
+        ],
+        [
+          1139,
+          531,
+          360,
+          423
+        ]
+      ]
+    },
+    "salto": {
+      "path": "assets/animaciones/pattha/salto-v3.png",
+      "anchors": [
+        [
+          190,
+          494
+        ],
+        [
+          217,
+          500
+        ],
+        [
+          210,
+          500
+        ],
+        [
+          196,
+          500
+        ],
+        [
+          195,
+          459
+        ],
+        [
+          226,
+          445
+        ],
+        [
+          213,
+          455
+        ],
+        [
+          209,
+          473
+        ]
+      ],
+      "flip": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "names": [
+        "agacharse",
+        "impulsarse",
+        "subir",
+        "punto_alto",
+        "caer",
+        "aterrizar",
+        "recuperarse",
+        "rebotar"
+      ],
+      "rects": [
+        [
+          66,
+          170,
+          325,
+          326
+        ],
+        [
+          398,
+          18,
+          342,
+          484
+        ],
+        [
+          771,
+          75,
+          336,
+          360
+        ],
+        [
+          1163,
+          40,
+          342,
+          444
+        ],
+        [
+          41,
+          522,
+          361,
+          451
+        ],
+        [
+          401,
+          598,
+          355,
+          361
+        ],
+        [
+          799,
+          529,
+          308,
+          440
+        ],
+        [
+          1150,
+          510,
+          348,
+          477
+        ]
+      ]
+    },
+    "reposo": {
+      "path": "assets/animaciones/pattha/reposo-v3.png",
+      "anchors": [
+        [
+          197,
+          508
+        ],
+        [
+          197,
+          508
+        ],
+        [
+          209,
+          508
+        ],
+        [
+          220,
+          508
+        ],
+        [
+          196,
+          497
+        ],
+        [
+          182,
+          495
+        ],
+        [
+          196,
+          497
+        ],
+        [
+          191,
+          495
+        ]
+      ],
+      "flip": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "names": [
+        "reposo",
+        "parpadeo",
+        "respirar",
+        "pensar",
+        "pensar_parpadeo",
+        "aburrirse",
+        "ayudar",
+        "celebrar"
+      ],
+      "rects": [
+        [
+          62,
+          6,
+          313,
+          504
+        ],
+        [
+          445,
+          6,
+          311,
+          504
+        ],
+        [
+          827,
+          6,
+          304,
+          504
+        ],
+        [
+          1195,
+          9,
+          303,
+          501
+        ],
+        [
+          64,
+          521,
+          301,
+          490
+        ],
+        [
+          438,
+          521,
+          296,
+          488
+        ],
+        [
+          753,
+          521,
+          385,
+          490
+        ],
+        [
+          1164,
+          522,
+          361,
+          487
+        ]
+      ]
+    }
+  },
+  "notes": [
+    "Los PNG del kit siguen intactos. Estas tres planchas sí contienen poses nuevas generadas.",
+    "La segunda fila de carrera se refleja al renderizar para unificar orientación. No se reescribe el PNG.",
+    "Pivotes en cadera y línea de apoyo compartida; todas las poses usan la misma escala, incluido el agacharse.",
+    "Atlas de rectángulos revisado por componentes opacos: el espaciado del generador no es una cuadrícula perfecta. Se usan recortes exactos para evitar partes del cuadro vecino."
+  ]
+}

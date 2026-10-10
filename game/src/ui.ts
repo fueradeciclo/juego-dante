@@ -1,9 +1,11 @@
+import { AdventureMusic } from './music.ts';
 import type { SymbolId } from './rules.ts';
 export type Mode = 'menu'|'playing'|'dialogue'|'puzzle'|'paused'|'won';
 export type Line = { quien: string; texto: string };
 type Actions = { restart: (autostart: boolean) => void; setPaused: (paused: boolean) => void; resetInput: () => void };
 const get = <T extends HTMLElement=HTMLElement>(id: string) => document.getElementById(id) as T;
 export class DemoUI {
+ private music=new AdventureMusic();
  mode: Mode = 'menu';
  portrait = false;
  touch = matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0;
@@ -52,6 +54,7 @@ export class DemoUI {
  private orientation() { this.portrait=(matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints>0) && innerHeight>innerWidth;this.actions?.resetInput();this.render(); }
  setMode(mode: Mode) { this.mode=mode;this.actions?.resetInput();this.render(); }
  render() {
+  this.music.setState(this.mode,this.portrait||document.hidden);
   for(const id of ['menu','dialogue','puzzle','paused','won'])get(id).hidden=this.mode!==id;
   get('hud').hidden=this.mode==='menu'||this.mode==='won';
   get('pause').hidden=this.mode==='menu'||this.mode==='won';

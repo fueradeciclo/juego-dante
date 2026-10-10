@@ -1,6 +1,6 @@
 # 07 · Dirección artística, sprites y animaciones
 
-**Actualización demo 0.2:** se implementó animación por partes para Pattha, Otto, Rural, gato y perro. Ver [ANIMACIONES_02.md](ANIMACIONES_02.md). Las imágenes fuente de la tabla siguen siendo estáticas. El plan de producción por cuadros que sigue es una propuesta futura; no describirlo como assets ya disponibles.
+**Actualización demo 0.3:** Pattha tiene 24 poses nuevas en tres planchas generadas con Imagegen: carrera, salto y reposo/gestos. Atlas y prompts en `assets/animaciones/pattha/`; ver [ANIMACIONES_PATTHA_03.md](ANIMACIONES_PATTHA_03.md). Amigos y rivales conservan el [rig 0.2](ANIMACIONES_02.md). Los PNG del kit siguen siendo estáticos y se preservan. El plan que sigue es un borrador de preproducción, no un inventario del runtime actual.
 
 ## Regla máxima: no perder el dibujo de Dante
 
@@ -24,7 +24,7 @@ Las imágenes en `assets/personajes/concepto` son interpretaciones digitales. Lo
 - **Rural:** azul y detalles crema, según el concepto actual.
 - Al crear escenarios, usar fondos menos contrastados para destacar siluetas.
 
-## Plan de producción de animaciones (todo PENDIENTE)
+## Plan de preproducción original (propuesta, parcialmente reemplazada por 0.3)
 
 **Para Pattha:** `idle` (4–8 frames), `caminar` (6–10), `saltar_inicio` (2–3), `salto_aire` (1–2), `aterrizar` (2–3), `interactuar` (4–6), `festejar` (6–8). Si el diseño no requiere saltar, eliminar esos estados.
 

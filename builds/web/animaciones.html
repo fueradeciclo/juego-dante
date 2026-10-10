@@ -5,16 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#101f30" />
   <title>Los gestos de los amigos · Pattha</title>
-  <script type="module" crossorigin src="./assets/animaciones-CAtFH955.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/style-CVT2VNrk.js">
-  <link rel="stylesheet" crossorigin href="./assets/style-BN-Ok8CF.css">
+  <script type="module" crossorigin src="./assets/animaciones-X-g6bXEg.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/style-BQuQSEjX.js">
+  <link rel="stylesheet" crossorigin href="./assets/style-Cce9A0-R.css">
 </head>
 <body class="animation-page">
   <main class="animation-gallery">
     <a class="gallery-back" href="./">← Volver a jugar</a>
     <span class="pill">PARA ELEGIR CON DANTE</span>
-    <h1>Una ronda de gestos.</h1>
-    <p>Así se mueven nuestros amigos. Si los dejás quietos, parpadean y se entretienen solos.</p>
+    <h1>Pattha se pone en movimiento.</h1>
+    <p>Carrera con zancadas completas y un salto que se prepara, despega y aterriza. Versión 0.3 para probar juntos.</p>
+    <section class="pattha-showcase" aria-label="El nuevo set de Pattha">
+      <div class="pattha-canvas-wrap">
+        <canvas id="pattha-showcase" role="img" aria-label="Pattha con sus nuevas animaciones"></canvas>
+        <span id="pattha-pose-label">Corriendo</span>
+      </div>
+      <div class="pattha-moves">
+        <span class="pill">24 CUADROS NUEVOS</span>
+        <h2>Probá cada movimiento.</h2>
+        <p>Al saltar, mirá cómo dobla las rodillas, se estira para despegar y acomoda los pies al bajar.</p>
+        <div class="gesture-controls" role="group" aria-label="Movimientos de Pattha">
+          <button data-pattha-move="run" aria-pressed="true">Correr</button>
+          <button data-pattha-move="jump" aria-pressed="false">Saltar</button>
+          <button data-pattha-move="idle" aria-pressed="false">Esperar</button>
+          <button data-pattha-move="think" aria-pressed="false">Pensar</button>
+          <button data-pattha-move="bored" aria-pressed="false">Aburrirse</button>
+          <button data-pattha-move="help" aria-pressed="false">Ayudar</button>
+          <button data-pattha-move="celebrate" aria-pressed="false">Festejar</button>
+        </div>
+        <a class="primary-button showcase-play" href="./">¡A probarlo jugando! →</a>
+      </div>
+    </section>
+    <details class="pattha-frames">
+      <summary>Ver los 24 cuadros y elegir uno para mirarlo de cerca</summary>
+      <div id="pattha-frame-grid"></div>
+    </details>
+    <h2 class="friends-heading">Y sus amigos también se mueven.</h2>
+    <p>Si los dejás quietos, parpadean y se entretienen solos.</p>
     <div class="gesture-controls" role="group" aria-label="Elegí una animación">
       <button data-preview="auto" aria-pressed="true">Dejarlos quietos</button>
       <button data-preview="walk" aria-pressed="false">Caminar</button>

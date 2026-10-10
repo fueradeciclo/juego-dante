@@ -1,4 +1,4 @@
-# Pruebas y entrega · demo 0.2
+# Pruebas y entrega · demo 0.3
 
 ## Entorno
 
@@ -9,7 +9,7 @@
 | Comprobación | Resultado / evidencia |
 | --- | --- |
 | pnpm typecheck | Sin errores |
-| pnpm test | 11/11: seis reglas de juego y cinco pruebas de reloj/estados de animación |
+| pnpm test | 17/17: seis reglas de juego, cinco pruebas del reloj general y seis del set/preparación de Pattha |
 | pnpm build | Build estático generado; aviso de tamaño de chunk del motor esperado |
 | Originales del kit | 9 checksums SHA-256 coinciden con MANIFEST.json |
 | Menú y diálogo | Correcto |
@@ -30,12 +30,19 @@
 | Pensar y aburrirse | Poses de todos comparables; pensar aparece tras espera real en el nivel |
 | Animación y física | Pausa conserva todas las poses/relojes; mover cancela pensar y salto activa pose aérea |
 | Movimiento reducido | Preferencia emulada aplicada a todos los rigs |
+| Carrera de Pattha | Ocho cuadros distintos renderizados, pivotes y escala común; zancada según velocidad |
+| Atlas de Pattha | 24 cuadros diferentes con píxeles opacos; recortes individuales revisables en galería |
+| Salto de Pattha | Preparación breve, impulso, subida/ápice/caída por velocidad, aterrizaje y recuperación capturados en salto real |
+| Polvo de salto | Presente al despegar; congela con pausa; ausente en movimiento reducido |
+| Toque corto | Se eleva al tocar y soltar; la preparación no pierde el pedido |
 | Galería horizontal mobile | Cinco personajes; sin desborde de ancho |
 | Build final | Ambas páginas generadas; galería abierta y revisada en navegador integrado; adaptador de pruebas ausente del bundle |
 
 Datos del runner en PRUEBAS_BROWSER.json. El runner posiciona al personaje para aislar algunos escenarios; no modifica el progreso. No presentar esa cobertura como una partida manual familiar completa ni como una prueba física de iPhone/Android.
 
 Ocho escenarios de animación en PRUEBAS_ANIMACIONES.json, con espera real sin modificar el reloj. Las poses de parpadeo/pensar/aburrirse también se fuerzan por botones de la galería para su comparación visual. La máquina de estados prueba ambas esperas, cancelación, pausa y movimiento reducido.
+
+Diez escenarios específicos de Pattha en PRUEBAS_PATTHA_03.json. Incluye una traza de 1,1 s del salto con posición, velocidad, pose y cantidad de polvo. El preview permite seleccionar las poses estáticas para revisarlas; esas capturas no se presentan como un salto físico. Los tres nuevos PNG tienen checksums propios y se preservan junto a los originales.
 
 ## Capturas
 
@@ -49,6 +56,12 @@ Ocho escenarios de animación en PRUEBAS_ANIMACIONES.json, con espera real sin m
 - 12-espera-pensando.png: gesto tras espera real en el nivel.
 - 13-animaciones-mobile.png: galería horizontal emulada.
 - 14-build-animado.jpg: galería del build final en el navegador integrado.
+- 15-pattha-carrera.png: nuevo escenario de revisión de Pattha.
+- 16-pattha-crouch/takeoff/rise/fall/land.png: revisión individual de cinco poses del salto.
+- 17-pattha-mobile.png: nuevo preview en mobile horizontal emulado.
+- 18-pattha-24-cuadros.png: atlas pintado con las 24 poses.
+- 19-pattha-build.jpg: nuevo preview del build 0.3 en el navegador integrado.
+- 20-pattha-carrera-juego.png y 21-pattha-polvo-juego.png: carrera y salto con polvo en el juego real.
 
 ## Pendiente de aceptación familiar
 
@@ -64,3 +77,4 @@ Ocho escenarios de animación en PRUEBAS_ANIMACIONES.json, con espera real sin m
 pnpm install --frozen-lockfile --ignore-scripts; pnpm typecheck; pnpm test; pnpm build.
 Para integración: servidor pnpm dev en una terminal, pnpm test:browser en otra. Ver README para las herramientas de navegador requeridas.
 Para animación: mismo servidor y pnpm test:animations.
+Para el nuevo set: pnpm test:pattha.

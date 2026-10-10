@@ -1,0 +1,267 @@
+{
+  "version": "0.3",
+  "origen": "Imagegen integrada, derivado del concepto B; no son dibujos originales de Dante.",
+  "referencia": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
+  "original_preservado": true,
+  "imagenes": [
+    {
+      "ruta": "assets/animaciones/pattha/carrera-v3-pulida.png",
+      "dimensiones_px": [
+        1536,
+        1024
+      ],
+      "canales": "RGBA",
+      "sha256": "5b2b74306fcc34d044938381d49c9dc1d44d45640864c57ffdabbd4fe6b914b7",
+      "tipo": "spritesheet_generado_8_poses",
+      "frames": [
+        {
+          "index": 0,
+          "opaque_bounds_global": [
+            38,
+            60,
+            399,
+            502
+          ]
+        },
+        {
+          "index": 1,
+          "opaque_bounds_global": [
+            447,
+            55,
+            764,
+            503
+          ]
+        },
+        {
+          "index": 2,
+          "opaque_bounds_global": [
+            807,
+            53,
+            1092,
+            503
+          ]
+        },
+        {
+          "index": 3,
+          "opaque_bounds_global": [
+            1161,
+            51,
+            1505,
+            478
+          ]
+        },
+        {
+          "index": 4,
+          "opaque_bounds_global": [
+            44,
+            542,
+            392,
+            972
+          ]
+        },
+        {
+          "index": 5,
+          "opaque_bounds_global": [
+            446,
+            537,
+            730,
+            971
+          ]
+        },
+        {
+          "index": 6,
+          "opaque_bounds_global": [
+            820,
+            535,
+            1113,
+            974
+          ]
+        },
+        {
+          "index": 7,
+          "opaque_bounds_global": [
+            1141,
+            533,
+            1497,
+            952
+          ]
+        }
+      ]
+    },
+    {
+      "ruta": "assets/animaciones/pattha/salto-v3.png",
+      "dimensiones_px": [
+        1536,
+        1024
+      ],
+      "canales": "RGBA",
+      "sha256": "48622673da0c21434c4aef6b99aaedb1f1b085068707be14ae0b1d190260e881",
+      "tipo": "spritesheet_generado_8_poses",
+      "frames": [
+        {
+          "index": 0,
+          "opaque_bounds": [
+            68,
+            172,
+            384,
+            494
+          ]
+        },
+        {
+          "index": 1,
+          "opaque_bounds": [
+            0,
+            20,
+            354,
+            500
+          ]
+        },
+        {
+          "index": 2,
+          "opaque_bounds": [
+            5,
+            77,
+            337,
+            433
+          ]
+        },
+        {
+          "index": 3,
+          "opaque_bounds": [
+            13,
+            42,
+            350,
+            482
+          ]
+        },
+        {
+          "index": 4,
+          "opaque_bounds": [
+            43,
+            12,
+            384,
+            459
+          ]
+        },
+        {
+          "index": 5,
+          "opaque_bounds": [
+            0,
+            88,
+            370,
+            445
+          ]
+        },
+        {
+          "index": 6,
+          "opaque_bounds": [
+            33,
+            19,
+            337,
+            455
+          ]
+        },
+        {
+          "index": 7,
+          "opaque_bounds": [
+            0,
+            0,
+            344,
+            472
+          ]
+        }
+      ]
+    },
+    {
+      "ruta": "assets/animaciones/pattha/reposo-v3.png",
+      "dimensiones_px": [
+        1536,
+        1024
+      ],
+      "canales": "RGBA",
+      "sha256": "59137cf97d208ba76453fed61c31c686bb3005a7de625bde7c8ffcf325c5ffee",
+      "tipo": "spritesheet_generado_8_poses",
+      "frames": [
+        {
+          "index": 0,
+          "opaque_bounds": [
+            64,
+            8,
+            373,
+            508
+          ]
+        },
+        {
+          "index": 1,
+          "opaque_bounds": [
+            63,
+            8,
+            370,
+            508
+          ]
+        },
+        {
+          "index": 2,
+          "opaque_bounds": [
+            61,
+            8,
+            361,
+            508
+          ]
+        },
+        {
+          "index": 3,
+          "opaque_bounds": [
+            45,
+            11,
+            344,
+            508
+          ]
+        },
+        {
+          "index": 4,
+          "opaque_bounds": [
+            66,
+            11,
+            363,
+            497
+          ]
+        },
+        {
+          "index": 5,
+          "opaque_bounds": [
+            56,
+            11,
+            384,
+            495
+          ]
+        },
+        {
+          "index": 6,
+          "opaque_bounds": [
+            0,
+            12,
+            368,
+            497
+          ]
+        },
+        {
+          "index": 7,
+          "opaque_bounds": [
+            14,
+            12,
+            371,
+            495
+          ]
+        }
+      ]
+    }
+  ],
+  "proceso": [
+    {
+      "ruta": "assets/animaciones/pattha/carrera-v3.png",
+      "sha256": "7177fc55ddd86f3cef67b18ab621b8ebfb3e801ddc078c24f282db6bec241301",
+      "estado": "estudio inicial, referencia para la corrección de brazos; no usado por el runtime"
+    }
+  ]
+}

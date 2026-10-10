@@ -4,6 +4,10 @@ import type { Controls } from './input.ts';
 import type { DemoUI, Line } from './ui.ts';
 import { CharacterRig } from './character-rig.ts';
 import type { CharacterKind } from './character-art.ts';
+import { PatthaAnimator } from './pattha-animator.ts';
+import { patthaAtlas } from './pattha-art.ts';
+import { JumpPreparation } from './pattha-state.ts';
+import { JumpDust } from './jump-dust.ts';
 
 type Level = { personajes:Record<string,string>;mundo:{ancho:number;alto:number;piso:number};suelo:number[][];plataformas:number[][];monedas:number[][];enemigos:{tipo:string;x:number;min:number;max:number;velocidad:number}[];puestos_control:number[];dialogos:Record<string,Line[]> };
 type Enemy = Phaser.Physics.Arcade.Sprite;
@@ -27,6 +31,12 @@ export class Adventure extends Phaser.Scene {
  private bridgeBuilt=false;
  private panels!: Phaser.GameObjects.Graphics;
  private visuals:CharacterRig[]=[];
+ private pattha!:PatthaAnimator;
+ private dust!:JumpDust;
+ private preparation=new JumpPreparation();
+ private takeoffMs=0;
+ private reboundMs=0;
+ private helpMs=0;
  private reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   private originalLoadFailed=false;
  constructor(private ui: DemoUI, private controls: Controls) { super('adventure'); }
@@ -35,14 +45,16 @@ export class Adventure extends Phaser.Scene {
   this.load.json('level','./data/demo_plataformas.json');
   const paths={pattha:'personajes/transparentes/pattha_concepto_B_transparente.png',otto:'personajes/transparentes/raton_verde_concepto_transparente.png',rural:'personajes/transparentes/rural_concepto_transparente.png',gato:'enemigos/gato-v1.png',perro:'enemigos/perro-v1.png'};
   for(const [key,path]of Object.entries(paths))this.load.image(key,'./assets/'+path);
+  for(const [key,sheet]of Object.entries(patthaAtlas.sheets))this.load.image('pattha-'+key,'./'+sheet.path);
   this.load.on('progress',(p:number)=>this.ui.loading(p));
   this.load.on('loaderror',()=>{this.originalLoadFailed=true;this.ui.loadError();});
  }
  create(data:{autostart?:boolean}={}) {
   if(this.originalLoadFailed)return;
   this.level=this.cache.json.get('level') as Level;
-  if(!this.level || ['pattha','otto','rural','gato','perro'].some(k=>!this.textures.exists(k))){this.ui.loadError();return;}
+  if(!this.level || ['pattha','otto','rural','gato','perro','pattha-carrera','pattha-salto','pattha-reposo'].some(k=>!this.textures.exists(k))){this.ui.loadError();return;}
   this.progress=createProgress();this.health=3;this.ended=false;this.bridgeBuilt=false;this.flags=[];this.allies=[];this.allyLabels=[];this.trail=[];this.visuals=[];this.hurtUntil=0;this.groundedAt=-Infinity;this.jumpUntil=-Infinity;this.lastSample=0;this.checkpoint={x:130,y:this.level.mundo.piso};
+  this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;this.helpMs=0;
   this.physics.world.setBounds(0,-100,this.level.mundo.ancho,1000);
   this.paintBackground();
   this.solids=this.physics.add.staticGroup();
@@ -57,7 +69,7 @@ export class Adventure extends Phaser.Scene {
   this.player.body!.setOffset(raw.width*.28,raw.height*.22);
   this.player.setMaxVelocity(340,950).setCollideWorldBounds(false);
   this.physics.add.collider(this.player,this.solids);
-  this.visuals.push(new CharacterRig(this,this.player,'pattha',0));
+  this.pattha=new PatthaAnimator(this,this.player);this.dust=new JumpDust(this);
   for(const [i,key]of ['otto','rural'].entries()){
    const ally=this.add.image(220+i*90,this.level.mundo.piso,key).setOrigin(.5,1).setDisplaySize(61,82).setDepth(4);
    this.allies.push(ally);
@@ -74,8 +86,8 @@ export class Adventure extends Phaser.Scene {
   if(data.autostart)this.ui.dialogue(this.level.dialogos.intro);
   if(import.meta.env.DEV && new URLSearchParams(location.search).has('test')) {
    (window as unknown as {__PATTHA_TEST__:unknown}).__PATTHA_TEST__={
-    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo};}),animations:this.visuals.filter(v=>v.root.active).map(v=>v.snapshot()),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
-    position:(x:number,y:number)=>{this.player.body!.reset(x,y);this.player.setVelocity(0,0);this.controls.reset();},
+    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo};}),animations:[this.pattha.snapshot(),...this.visuals.filter(v=>v.root.active).map(v=>v.snapshot())],dust:this.dust.snapshot(),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
+    position:(x:number,y:number)=>{this.player.body!.reset(x,y);this.player.setVelocity(0,0);this.controls.reset();this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;},
    };
   }
  }
@@ -160,17 +172,20 @@ export class Adventure extends Phaser.Scene {
   const pb=this.player.body as Phaser.Physics.Arcade.Body,eb=enemy.body as Phaser.Physics.Arcade.Body;
   if(canStomp(pb.velocity.y,pb.bottom,eb.top)){
    enemy.disableBody(true,false);this.progress.defeated++;this.player.setVelocityY(-420);
+   this.preparation.cancel();this.reboundMs=120;this.takeoffMs=0;
    this.tweens.add({targets:enemy,alpha:0,y:enemy.y-25,duration:330,onComplete:()=>enemy.destroy()});
    const star=this.add.text(enemy.x,enemy.y-90,'✦',{fontSize:'28px',color:'#ffedaf'}).setOrigin(.5).setDepth(8);this.tweens.add({targets:star,y:star.y-40,alpha:0,duration:650,onComplete:()=>star.destroy()});
    if(this.progress.defeated===1)this.ui.toast('¡Buen salto! También podés pasar por arriba.');
   }else if(this.time.now>this.hurtUntil){
    this.health--;this.hurtUntil=this.time.now+1800;
+   this.preparation.cancel();this.takeoffMs=0;
    this.player.setVelocity(this.player.x<enemy.x?-200:200,-290);
    if(this.health<=0)this.respawn();else this.ui.toast('Un choque. Tenés un ratito para alejarte.');
   }
  }
  private respawn() {
   this.health=3;this.hurtUntil=this.time.now+2000;this.player.body!.reset(this.checkpoint.x,this.checkpoint.y);this.player.setVelocity(0,0);this.controls.reset();this.trail=[];this.groundedAt=-Infinity;this.jumpUntil=-Infinity;
+  this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;
   this.ui.toast('Volvés al banderín. ¡Probá de nuevo!');
  }
  private buildBridge() {
@@ -180,6 +195,7 @@ export class Adventure extends Phaser.Scene {
  }
  private interaction() {
   const x=this.player.x;
+  if(x>2760&&x<3150)this.helpMs=550;
   if(x>2760&&x<2950){
    if(!this.progress.otto){if(helpOtto(this.progress)){this.paintBridgeStatus();this.ui.dialogue(this.level.dialogos.otto);}else this.ui.dialogue(this.level.dialogos.otto_sin_tuerca);}
    else this.ui.toast('Otto ya ajustó su lado. ¡Buscá la señal de Rural!');
@@ -195,11 +211,17 @@ export class Adventure extends Phaser.Scene {
  }
  update(now:number,delta:number) {
   if(!this.player)return;
-  if(this.ui.mode==='playing'&&!this.ui.portrait&&!this.ended)this.updateGameplay(now);
+  if(this.ui.mode==='playing'&&!this.ui.portrait&&!this.ended)this.updateGameplay(now,Math.min(delta,50));
   this.updateVisuals(delta);
  }
  private updateVisuals(delta:number) {
   const suspended=this.ui.mode==='paused'||this.ui.portrait||document.hidden;
+  const dt=Math.min(delta,50),body=this.player.body as Phaser.Physics.Arcade.Body,playing=this.ui.mode==='playing';
+  const oldPose=this.pattha.clock.snapshot().pose;
+  if(!suspended)this.helpMs=Math.max(0,this.helpMs-dt);
+  this.pattha.update(dt,{speed:playing?body.velocity.x:0,vy:body.velocity.y,grounded:!playing||(body.blocked.down&&Math.abs(body.velocity.y)<30),crouching:playing&&this.preparation.crouching,takingOff:this.takeoffMs>0,rebounding:this.reboundMs>0,helping:this.helpMs>0,celebrating:this.ended,hurt:playing&&this.time.now<this.hurtUntil-1550,suspended,reducedMotion:this.reducedMotion.matches});
+  if(!suspended&&oldPose!=='land'&&this.pattha.clock.snapshot().pose==='land'&&!this.reducedMotion.matches)this.dust.emit(this.player.x,body.bottom,true);
+  this.dust.update(dt,suspended,this.reducedMotion.matches);
   for(const visual of this.visuals) {
    if(!visual.root.active)continue;
    const host=visual.host;
@@ -212,13 +234,18 @@ export class Adventure extends Phaser.Scene {
    host.setData('animationX',host.x);
   }
  }
- private updateGameplay(now:number) {
+ private updateGameplay(now:number,delta:number) {
   if(!this.player||this.ui.mode!=='playing'||this.ui.portrait||this.ended)return;
   const body=this.player.body as Phaser.Physics.Arcade.Body;
   if(this.controls.consumeInteract()){this.interaction();if(this.ui.mode!=='playing')return;}
-  if(body.blocked.down)this.groundedAt=now;
+  this.takeoffMs=Math.max(0,this.takeoffMs-delta);this.reboundMs=Math.max(0,this.reboundMs-delta);
+  if(body.blocked.down&&!this.preparation.crouching)this.groundedAt=now;
   if(this.controls.consumeJump())this.jumpUntil=now+140;
-  if(canJump(now,this.groundedAt,this.jumpUntil)){this.player.setVelocityY(-620);this.jumpUntil=-Infinity;this.groundedAt=-Infinity;}
+  if(!this.preparation.crouching&&canJump(now,this.groundedAt,this.jumpUntil)){this.preparation.begin(body.blocked.down);this.jumpUntil=-Infinity;this.groundedAt=-Infinity;}
+  if(this.preparation.step(delta)) {
+   this.player.setVelocityY(-620);this.takeoffMs=70;this.groundedAt=-Infinity;
+   if(!this.reducedMotion.matches)this.dust.emit(this.player.x,body.bottom);
+  }
   if(!this.controls.jumpHeld && body.velocity.y < -280)this.player.setVelocityY(-280);
   if(now>this.hurtUntil-1500)this.player.setVelocityX(this.controls.axis*285);
   if(this.controls.axis)this.player.setFlipX(this.controls.axis>0);

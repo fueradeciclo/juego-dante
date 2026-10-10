@@ -1,4 +1,4 @@
-import { mkdir, copyFile, readFile } from 'node:fs/promises';
+import { mkdir, copyFile, readFile, rm } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname } from 'node:path';
 
@@ -18,6 +18,13 @@ const assets = [
  'assets/enemigos/perro-v1.png',
  'data/demo_plataformas.json',
 ];
+const pattha=JSON.parse(await readFile('assets/animaciones/pattha/MANIFEST.json','utf8'));
+for(const entry of pattha.proceso??[])await rm('game/public/'+entry.ruta,{force:true});
+for(const entry of pattha.imagenes) {
+ const bytes=await readFile(entry.ruta);
+ if(createHash('sha256').update(bytes).digest('hex')!==entry.sha256)throw new Error('Cambió una plancha de Pattha: '+entry.ruta);
+ assets.push(entry.ruta);
+}
 for (const asset of assets) {
   const target = 'game/public/' + asset;
   await mkdir(dirname(target), { recursive: true });

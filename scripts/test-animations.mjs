@@ -47,7 +47,7 @@ try {
   await page.keyboard.press('Escape');const frozen=(await snapshot(page)).animations;
   await page.waitForTimeout(300);assert.deepEqual((await snapshot(page)).animations,frozen);
   await page.locator('#resume').click();await page.keyboard.down('ArrowRight');await page.waitForTimeout(170);
-  s=await snapshot(page);const player=s.animations.find(a=>a.kind==='pattha');assert.equal(player.state,'walk');assert.equal(player.idleMs,0);assert.ok(player.leftLeg*player.rightLeg<0);
+  s=await snapshot(page);const player=s.animations.find(a=>a.kind==='pattha');assert.equal(player.state,'walk');assert.equal(player.idleMs,0);assert.equal(player.pose,'run');assert.equal(player.sheet,'carrera');
   await page.keyboard.up('ArrowRight');await page.keyboard.down('Space');await page.waitForTimeout(130);
   assert.equal((await snapshot(page)).animations.find(a=>a.kind==='pattha').state,'air');await page.keyboard.up('Space');
   record('pausa congela todos los rigs; caminar cancela pensar y saltar cambia la pose');

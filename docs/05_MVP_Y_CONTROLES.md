@@ -1,4 +1,4 @@
-# 05 · Demo 0.1 de plataformas
+# 05 · Demo 0.3 de plataformas
 
 Destino confirmado: navegador en computadora y celular horizontal. Solo Pattha controlable. El mapa y la solución del puente son propuestas para probar con Dante.
 
@@ -6,7 +6,8 @@ Destino confirmado: navegador en computadora y celular horizontal. Solo Pattha c
 
 - Menú accesible, Jugar, pausa, pantalla completa opcional y reinicio.
 - Movimiento lateral, salto variable, coyote time 120 ms y buffer 140 ms.
-- Otto y Rural como PNG aliados con seguimiento visual; se ubican junto al puente para ayudar.
+- Pattha con ocho cuadros de carrera, preparación de salto de 64 ms activos, impulso/subida/ápice/caída/aterrizaje y polvo suave. Saltos desde borde sin preparación; tocar y soltar sigue dando un salto corto.
+- Otto y Rural animados por partes con seguimiento visual; se ubican junto al puente para ayudar.
 - Gatos y perros que patrullan. Salto encima: destello y retirada. Contacto lateral: energía, retroceso breve y protección temporal.
 - Checkpoints y reintentos ilimitados; conservar progreso en la partida.
 - Tuerca en plataforma alta; ayuda contextual de Otto y pista siempre visible de Rural.
@@ -33,7 +34,7 @@ Menú → introducción → saltos y animales → tuerca → Otto → señal de 
 
 ## Arte y contenido
 
-Recortes estáticos, no spritesheets. No se deforma el original. Los animales se encuadran con un frame estático de textura que retira padding; no crea animación. Originales en assets/, código en game/src/; mapa y diálogos en data/demo_plataformas.json.
+Originales estáticos preservados. Pattha usa 24 poses nuevas en tres PNG generados desde B, atlas y pivotes; amigos/animales usan rigs sobre los recortes. El cuerpo de colisión es independiente del arte. Originales y planchas en assets/, código en game/src/; mapa y diálogos en data/demo_plataformas.json. Procedencia en ANIMACIONES_PATTHA_03.md.
 
 ## Duración y prueba familiar
 

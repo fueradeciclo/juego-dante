@@ -54,3 +54,27 @@ Se cubrieron las articulaciones con píxeles de los originales y se muestrearon 
 ### Cómo continuar
 
 Abrir `/animaciones.html` o el enlace del menú y elegir gestos con Dante. Ajustar tiempos/amplitudes en animation-state.ts y character-art.ts; geometría del arte en rigs.json. Mantener la física fuera del rig. No presentar esta animación por recortes como un ciclo dibujado tradicional. Próximos pasos: selección familiar, prueba en celular real y luego decidir si hace falta producir cuadros adicionales.
+
+## 2026-10-10 · Demo 0.3: set propio de Pattha
+
+El adulto pidió una carrera más real y un salto que doble/estire las piernas, con polvo y poses distintas al subir/caer. Se generaron tres planchas RGBA con Imagegen integrada desde B: ocho poses de carrera, ocho de salto y ocho de reposo/gestos/ayuda/festejo. Fuentes y prompts en assets/animaciones/pattha/; originales intactos. Las poses son interpretaciones propuestas para revisar con Dante.
+
+### Tareas completadas
+
+1. Generación y revisión del arte; atlas con recortes, apoyos y orientación normalizados en memoria.
+2. Integración de Pattha en nivel, menú, diálogos y escenario grande de galería. Preparación de salto de 64 ms activos, estados por velocidad y polvo breve; física separada.
+3. Pruebas del set y regresión del juego, capturas, build web y documentación para continuar.
+
+### Ajustes y evidencia
+
+El espaciado de las planchas no era una cuadrícula perfecta: se identificaron los ocho dibujos separados de cada una y se guardaron sus rectángulos en atlas.json para evitar partes vecinas. La segunda fila de carrera se refleja al pintar. Puntos de apoyo ajustados por pose, con la misma escala para que agacharse reduzca la altura. La preparación congela en pausa, acepta tocar/soltar y se omite desde un borde. Polvo también congelado y desactivado en movimiento reducido.
+
+17 pruebas unitarias, 12 escenarios del recorrido, ocho de animación general y diez del nuevo set. La tuerca sigue alcanzándose con dos saltos reales y el multitáctil horizontal sigue funcionando. PRUEBAS_PATTHA_03.json contiene la traza física del salto. Capturas 15–19 y documentación ANIMACIONES_PATTHA_03.md.
+
+Durante esta entrega se preservó la maqueta musical incorporada por el trabajo paralelo de la familia en «Definir música de fondo». Su calidad sonora no se evaluó en esta tarea; el recorrido integrado sigue pasando con ella.
+
+### Próximas tres tareas
+
+1. Elegir con Dante ritmo de carrera y gestos; revisar continuidad y reconocimiento del personaje.
+2. Jugar en un celular físico horizontal y ajustar preparación/salto si hace falta.
+3. Validar grafía, variante B y título; luego ampliar escenarios o pulir arte según la partida familiar.
