@@ -68,6 +68,10 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 
 Actualizar este registro al cambiar una decisión, conservando la anterior y el motivo. No usar los diálogos escritos por Codex como palabras originales de Dante.
 
+## Publicación web · 2026-10-10
+
+El adulto compró `sabad.com.ar`, eligió Cloudflare y pidió comenzar la publicación. Confirmó que `/pattha_game/` será exclusivamente para el juego y la portada quedará para otros proyectos. Esto actualiza el pendiente anterior de hosting público. Se prepara `builds/site/pattha_game/` a partir del build web, sin publicar documentos ni originales. Se puede continuar iterando en GitHub. Conexión con la cuenta, configuración DNS y despliegue público todavía pendientes de verificar; no se registra una publicación como completada.
+
 ## Música · 2026-10-10
 
 El adulto eligió música instrumental heavy metal épica y melódica, con subida de energía, usando Crush 40 y Dragon Ball Z como referencias de emoción. No eligió una canción comercial para incorporarla. Primera PROPUESTA implementada: composición original sintetizada localmente, 150 BPM, ciclo de 64 compases (102,4 segundos), riff de acordes de quinta, bajo, batería y melodía heroica. Sin samples externos, voces ni melodías de las referencias. Es una maqueta electrónica, pendiente de escuchar y validar con la familia; no una grabación de instrumentos reales. Volumen inicial 22%, silencio y volumen accesibles; baja durante diálogo y acertijo, se suspende en pausa, menú, pestaña oculta y orientación vertical.

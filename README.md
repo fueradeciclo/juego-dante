@@ -53,6 +53,8 @@ Tres tramos: aprender los saltos, abrir un puente con los amigos y llegar al ban
 
 ## Build y pruebas
 
+Para preparar la publicación del juego en `sabad.com.ar/pattha_game/`: `pnpm build:site`. La salida es `builds/site/`; la portada queda reservada para otros proyectos. Ver [configuración de Cloudflare](docs/PUBLICACION_CLOUDFLARE.md). GitHub sigue siendo el lugar de trabajo; publicación pública pendiente de conectar y verificar.
+
 ```sh
 pnpm typecheck
 pnpm test

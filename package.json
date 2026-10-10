@@ -14,6 +14,7 @@
     "test": "node --test game/tests/*.test.ts",
     "build": "pnpm prepare:assets && pnpm typecheck && vite build",
     "preview": "vite preview --host 0.0.0.0",
+    "build:site": "pnpm build && node scripts/prepare-site.mjs",
     "test:browser": "node scripts/test-browser.mjs",
     "test:animations": "node scripts/test-animations.mjs",
     "test:pattha": "node scripts/test-pattha.mjs"
