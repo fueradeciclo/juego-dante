@@ -1,0 +1,10 @@
+node_modules/
+game/public/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+PATTHA_Kit_Completo_para_Codex.zip
+test-results/
+playwright-report/
