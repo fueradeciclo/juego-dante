@@ -1,0 +1,48 @@
+{
+  "aviso": "Ideas de niveles; validar estilo y generos con Dante.",
+  "niveles": [
+    {
+      "id": "tutorial_puerta",
+      "nombre": "La puerta que perdió su luz",
+      "estado": "MVP_sugerido",
+      "meta": "abrir puerta con una acción de cada amigo",
+      "mecanicas": [
+        "caminar",
+        "saltar opcional",
+        "interactuar",
+        "dialogo",
+        "seguir_personaje"
+      ]
+    },
+    {
+      "id": "bosque_antenas",
+      "nombre": "El Bosque de Antenas",
+      "estado": "idea",
+      "meta": "buscar una señal escondida",
+      "mecanicas": [
+        "exploracion",
+        "rutas ocultas"
+      ]
+    },
+    {
+      "id": "tuneles_tornillos",
+      "nombre": "Los Túneles de Tornillos",
+      "estado": "idea",
+      "meta": "reparar una máquina con ayuda del equipo",
+      "mecanicas": [
+        "puzzle_simple",
+        "cooperacion"
+      ]
+    },
+    {
+      "id": "faro_chispas",
+      "nombre": "El Faro de las Chispas",
+      "estado": "idea",
+      "meta": "volver a encender el faro",
+      "mecanicas": [
+        "puzzle_final",
+        "celebracion"
+      ]
+    }
+  ]
+}

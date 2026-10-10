@@ -1,0 +1,88 @@
+import type { SymbolId } from './rules.ts';
+export type Mode = 'menu'|'playing'|'dialogue'|'puzzle'|'paused'|'won';
+export type Line = { quien: string; texto: string };
+type Actions = { restart: (autostart: boolean) => void; setPaused: (paused: boolean) => void; resetInput: () => void };
+const get = <T extends HTMLElement=HTMLElement>(id: string) => document.getElementById(id) as T;
+export class DemoUI {
+ mode: Mode = 'menu';
+ portrait = false;
+ touch = matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0;
+ private pausedFrom: Mode = 'playing';
+ private actions?: Actions;
+ private lines: Line[] = [];
+ private lineIndex=0;
+ private afterDialogue=()=>{};
+ private symbolHandler?: (s: SymbolId)=>void;
+ private toastTimer?: ReturnType<typeof setTimeout>;
+ private previousFocus?: HTMLElement;
+ constructor() {
+  get('play').onclick=()=>this.actions?.restart(true);
+  get('restart').onclick=()=>this.actions?.restart(true);
+  get('replay').onclick=()=>this.actions?.restart(true);
+  get('back').onclick=()=>this.actions?.restart(false);
+  get('win-back').onclick=()=>this.actions?.restart(false);
+  get('pause').onclick=()=>this.pause();
+  get('resume').onclick=()=>this.resume();
+  get('continue').onclick=()=>this.nextLine();
+  get<HTMLInputElement>('touch-toggle').checked=this.touch;
+  get('touch-toggle').onchange=e=>{this.touch=(e.target as HTMLInputElement).checked;this.render();};
+  document.querySelectorAll<HTMLButtonElement>('[data-symbol]').forEach(b=>b.onclick=()=>this.symbolHandler?.(Number(b.dataset.symbol) as SymbolId));
+  get('fullscreen').onclick=async()=>{
+   const stage=get('stage');
+   try { if (document.fullscreenElement) await document.exitFullscreen(); else { await stage.requestFullscreen(); const o=screen.orientation as ScreenOrientation & {lock?:(s:string)=>Promise<void>}; await o.lock?.('landscape').catch(()=>{}); } } catch { this.toast('Si no se abre la pantalla completa, podés jugar igual.'); }
+  };
+  window.addEventListener('resize',()=>this.orientation());
+  window.addEventListener('blur',()=>{if(this.mode==='playing')this.pause();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden && this.mode!=='menu' && this.mode!=='won')this.pause();});
+  document.addEventListener('keydown', e=>{
+   if(e.code!=='Tab' || !['dialogue','puzzle','paused','won'].includes(this.mode))return;
+   const id={dialogue:'dialogue',puzzle:'puzzle',paused:'paused',won:'won'}[this.mode as 'dialogue'|'puzzle'|'paused'|'won'];
+   const buttons=[...get(id).querySelectorAll<HTMLButtonElement>('button:not(:disabled)')];
+   if(!buttons.length)return;
+   const first=buttons[0],last=buttons[buttons.length-1];
+   if(e.shiftKey && document.activeElement===first){last.focus();e.preventDefault();}
+   else if(!e.shiftKey && document.activeElement===last){first.focus();e.preventDefault();}
+  });
+  this.orientation();
+ }
+ bind(actions: Actions) { this.actions=actions;this.render(); }
+ ready() { get<HTMLButtonElement>('play').disabled=false;get('play').textContent='Jugar la demo →';get('loading-status').textContent='Primera partida: objetivo 5–10 min · Reintentos libres'; }
+ loading(progress: number) { get('loading-status').textContent='Preparando personajes · '+Math.round(progress*100)+'%'; }
+ loadError() { get('loading-status').textContent='No se pudo cargar un recurso. Recargá la página para volver a intentar.'; }
+ private orientation() { this.portrait=(matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints>0) && innerHeight>innerWidth;this.actions?.resetInput();this.render(); }
+ setMode(mode: Mode) { this.mode=mode;this.actions?.resetInput();this.render(); }
+ render() {
+  for(const id of ['menu','dialogue','puzzle','paused','won'])get(id).hidden=this.mode!==id;
+  get('hud').hidden=this.mode==='menu'||this.mode==='won';
+  get('pause').hidden=this.mode==='menu'||this.mode==='won';
+  get('touch-controls').hidden=!this.touch||this.mode!=='playing'||this.portrait;
+  get('rotate').hidden=!this.portrait;
+  if(this.mode!=='playing')get('interaction-hint').hidden=true;
+  this.actions?.setPaused(this.mode!=='playing'||this.portrait||document.hidden);
+ }
+ pause() { if(['paused','menu','won'].includes(this.mode))return;this.previousFocus=document.activeElement as HTMLElement;this.pausedFrom=this.mode;this.setMode('paused');get('resume').focus(); }
+ resume() { if(this.mode!=='paused')return;this.setMode(this.pausedFrom);this.previousFocus?.focus(); }
+ shortcut(e: KeyboardEvent): boolean {
+  if(e.code==='Escape') { e.preventDefault();if(this.mode==='paused')this.resume();else this.pause();return true; }
+  if(this.mode==='dialogue' && ['Space','Enter'].includes(e.code)) {e.preventDefault();if(!e.repeat)this.nextLine();return true;}
+  if(this.mode==='puzzle' && ['Digit1','Digit2','Digit3'].includes(e.code)){e.preventDefault();if(!e.repeat)this.symbolHandler?.((Number(e.code.slice(-1))-1) as SymbolId);return true;}
+  return false;
+ }
+ dialogue(lines: Line[], after=()=>{}) { this.lines=lines;this.lineIndex=0;this.afterDialogue=after;this.setMode('dialogue');this.drawLine();get('continue').focus(); }
+ private drawLine() {
+  const line=this.lines[this.lineIndex];
+  const names:Record<string,string>={pattha:'Pattha',otto:'Otto',rural:'Rural'};
+  const portraits:Record<string,string>={pattha:'pattha_concepto_B',otto:'raton_verde_concepto',rural:'rural_concepto'};
+  get('speaker').textContent=names[line.quien]??line.quien;
+  get('line').textContent=line.texto;
+  get<HTMLImageElement>('portrait').src='./assets/personajes/transparentes/'+portraits[line.quien]+'_transparente.png';
+  get('continue').textContent=this.lineIndex===this.lines.length-1?'¡Vamos! →':'Seguir →';
+ }
+ nextLine() { if(this.mode!=='dialogue')return;if(++this.lineIndex<this.lines.length)this.drawLine();else {this.setMode('playing');this.afterDialogue();get('game').focus();} }
+ openPuzzle(handler: (s:SymbolId)=>void) { this.symbolHandler=handler;this.puzzleFeedback('Podés probar todas las veces que quieras.',[]);this.setMode('puzzle');get('puzzle').querySelector<HTMLButtonElement>('button')?.focus(); }
+ puzzleFeedback(message: string, sequence: SymbolId[]) { get('puzzle-feedback').textContent=message;document.querySelectorAll<HTMLButtonElement>('[data-symbol]').forEach(b=>{b.classList.toggle('selected',sequence.includes(Number(b.dataset.symbol) as SymbolId));b.disabled=sequence.length===3;}); }
+ toast(message: string) { clearTimeout(this.toastTimer);get('toast').textContent=message;get('toast').hidden=false;this.toastTimer=setTimeout(()=>{get('toast').hidden=true;},3300); }
+ hint(message: string) { get('interaction-hint').hidden=!message;get('interaction-hint').textContent=message; }
+ hud(zone: string, objective: string, coins: number, energy: number) { get('zone').textContent=zone;get('objective').textContent=objective;get('coins').textContent=String(coins);get('energy').textContent='● '.repeat(energy)+'○ '.repeat(3-energy);get('energy').setAttribute('aria-label','Energía: '+energy+' de 3'); }
+ win(coins: number) { get('win-coins').textContent='Juntaste '+coins+' de 30 destellos ✦';this.setMode('won');get('replay').focus(); }
+}

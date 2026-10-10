@@ -1,0 +1,41 @@
+{
+  "aviso": "Guion propuesto. No es historia canonica aprobada por Dante.",
+  "escena": "tutorial_puerta",
+  "lineas": [
+    {
+      "id": "intro_01",
+      "personaje": "pattha",
+      "texto": "¡Qué raro! El sendero de luz se apagó."
+    },
+    {
+      "id": "intro_02",
+      "personaje": "raton_verde",
+      "texto": "¡Yo puedo mirar por ese agujerito!"
+    },
+    {
+      "id": "intro_03",
+      "personaje": "rural",
+      "texto": "Esperen... ¡el mapa dice que hacen falta tres amigos!"
+    },
+    {
+      "id": "intro_04",
+      "personaje": "pattha",
+      "texto": "Entonces lo hacemos juntos. ¡Equipo Pattha!"
+    },
+    {
+      "id": "puerta_01",
+      "personaje": "rural",
+      "texto": "Primero pisamos el botón, después giramos la rueda."
+    },
+    {
+      "id": "puerta_02",
+      "personaje": "raton_verde",
+      "texto": "¡Encontré el cable suelto!"
+    },
+    {
+      "id": "puerta_03",
+      "personaje": "pattha",
+      "texto": "¡Listo! ¡La puerta volvió a encenderse!"
+    }
+  ]
+}

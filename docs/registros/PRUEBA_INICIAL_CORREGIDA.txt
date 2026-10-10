@@ -1,0 +1,5 @@
+Registro histórico de una prueba inicial ya corregida. Ver PRUEBAS_BROWSER.json para el resultado vigente.
+
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert.ok((await snapshot(page)).health<3)

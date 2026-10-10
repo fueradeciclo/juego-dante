@@ -1,0 +1,19 @@
+{
+  "fecha": "2026-10-10",
+  "imagenes": [
+    {
+      "ruta": "assets/enemigos/gato-v1.png",
+      "sha256": "b321bddb120d5043d417b8a0d24c0c1b807b775303763d5c68e398dbd4b28277",
+      "estado": "ilustracion_estatica_placeholder",
+      "origen": "Imagegen incorporado; referencia estilistica del raton verde",
+      "autor_del_dibujo_original": false
+    },
+    {
+      "ruta": "assets/enemigos/perro-v1.png",
+      "sha256": "2f29b5f837b9c435b126d9e6249991f19e9ff8f6f2fcbd14c6a186f23ef26c6b",
+      "estado": "ilustracion_estatica_placeholder",
+      "origen": "Imagegen incorporado; referencia estilistica del raton verde",
+      "autor_del_dibujo_original": false
+    }
+  ]
+}

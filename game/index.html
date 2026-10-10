@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+ <meta name="theme-color" content="#101f30" />
+ <meta name="description" content="Una demo familiar de plataformas con Pattha, Otto y Rural." />
+ <title>Pattha · Demo de plataformas</title>
+</head>
+<body>
+<div class="app-shell">
+ <header class="topbar">
+  <a class="brand" href="./" aria-label="Inicio de la demo"><span class="brand-mark">P</span><span>PATTHA <small>DEMO 0.1</small></span></a>
+  <span class="top-note">Una aventura creada con Dante</span>
+  <nav><button id="fullscreen" class="icon-button" title="Pantalla completa" aria-label="Pantalla completa">⛶</button><button id="pause" class="icon-button" hidden aria-label="Pausar el juego">Ⅱ</button></nav>
+ </header>
+ <main>
+ <div id="stage" class="stage">
+  <div id="game" aria-label="Escenario de plataformas" role="img"></div>
+  <div id="hud" class="hud" hidden>
+   <div class="hud-left"><span class="eyebrow">EL SENDERO DE LOS AMIGOS</span><strong id="zone">Primeros saltos</strong><span id="objective">Probá moverte y saltar.</span></div>
+   <div class="hud-right"><span id="energy" aria-label="Energía completa">● ● ●</span><span class="coin-counter">✦ <span id="coins">0</span><small>/ 30</small></span></div>
+  </div>
+  <section id="menu" class="overlay menu-panel" aria-label="Pantalla inicial">
+   <div class="menu-copy"><span class="pill">PLATAFORMAS · PARA JUGAR EN FAMILIA</span><h1>Un salto.<br>Una aventura.<br><em>Tres amigos.</em></h1><p>Recorré el sendero con Pattha.<br>Otto y Rural te dan una mano.</p>
+    <button id="play" class="primary-button" disabled>Cargando la aventura…</button>
+    <span id="loading-status" class="menu-meta">Preparando personajes</span>
+    <div class="menu-controls"><span><kbd>←</kbd><kbd>→</kbd> Mover</span><span><kbd>Espacio</kbd> Saltar</span><span><kbd>E</kbd> Ayudar</span></div>
+    <label class="touch-option"><input id="touch-toggle" type="checkbox" /> Mostrar botones táctiles</label>
+   </div>
+   <div class="menu-art"><span class="art-ring ring-one"></span><span class="art-ring ring-two"></span><img class="hero-art" src="./assets/personajes/transparentes/pattha_concepto_B_transparente.png" alt="Pattha, robot verde con visor cian" /><div class="friends-art"><div><img src="./assets/personajes/transparentes/raton_verde_concepto_transparente.png" alt="Otto, ratón verde" /><span>Otto</span></div><div><img src="./assets/personajes/transparentes/rural_concepto_transparente.png" alt="Rural, ratón azul" /><span>Rural</span></div></div><span class="art-caption">TU EQUIPO ESTÁ LISTO</span></div>
+  </section>
+  <div id="toast" class="toast" role="status" hidden></div>
+  <div id="interaction-hint" class="interaction-hint" hidden></div>
+  <div id="touch-controls" class="touch-controls" hidden aria-label="Controles táctiles">
+   <div class="direction-controls"><button data-action="left" aria-label="Mover a la izquierda">◀</button><button data-action="right" aria-label="Mover a la derecha">▶</button></div>
+   <div class="action-controls"><button data-action="interact" class="help-button" aria-label="Interactuar">Ayudar</button><button data-action="jump" class="jump-button" aria-label="Saltar">↑ <span>Saltar</span></button></div>
+  </div>
+  <section id="dialogue" class="dialogue-panel" hidden role="dialog" aria-modal="true" aria-label="Diálogo con amigos"><img id="portrait" alt="" /><div class="dialogue-copy"><strong id="speaker"></strong><p id="line"></p></div><button id="continue" class="primary-button small">Seguir →</button></section>
+  <section id="puzzle" class="overlay modal-scrim" hidden role="dialog" aria-modal="true" aria-labelledby="puzzle-title">
+   <div class="modal-card puzzle-card"><span class="pill">RURAL TE AYUDA</span><h2 id="puzzle-title">Una señal entre amigos</h2><p>Rural encontró la pista. Tocá las formas en este orden:</p><div class="puzzle-clue" aria-label="Círculo, estrella, triángulo">● → ★ → ▲</div><div class="symbol-buttons"><button data-symbol="0" aria-label="Círculo">●</button><button data-symbol="1" aria-label="Estrella">★</button><button data-symbol="2" aria-label="Triángulo">▲</button></div><p id="puzzle-feedback" role="status">Podés probar todas las veces que quieras.</p></div>
+  </section>
+  <section id="paused" class="overlay modal-scrim" hidden role="dialog" aria-modal="true" aria-labelledby="pause-title"><div class="modal-card"><span class="pill">A TU RITMO</span><h2 id="pause-title">Hacemos una pausa</h2><p>Tu aventura te espera acá.</p><button id="resume" class="primary-button">Seguir jugando</button><button id="restart" class="secondary-button">Empezar de nuevo</button><button id="back" class="text-button">Volver al inicio</button><div class="pause-controls">Flechas o A/D: mover · Espacio, W o ↑: saltar<br>E o Enter: ayudar · Esc: pausa<br>Saltá sobre gatos y perros para superarlos.</div></div></section>
+  <section id="won" class="overlay modal-scrim" hidden role="dialog" aria-modal="true" aria-labelledby="win-title"><div class="modal-card win-card"><span class="pill">¡LO LOGRARON!</span><div class="win-star">✦</div><h2 id="win-title">Llegaron los tres.</h2><p>Saltaste, superaste obstáculos y abriste el camino con tus amigos.</p><strong id="win-coins"></strong><button id="replay" class="primary-button">Otra aventura</button><button id="win-back" class="text-button">Volver al inicio</button><small>Para Dante: ¿qué cambiarías en la próxima pantalla?</small></div></section>
+  <section id="rotate" class="overlay rotate-panel" hidden aria-label="Girá el dispositivo"><span>↻</span><h2>Giralo para jugar</h2><p>Esta aventura se juega en horizontal.<br>La partida queda en pausa mientras girás.</p></section>
+ </div>
+ </main>
+ <footer><span><i class="status-dot"></i> Solo vos, tus amigos y la aventura.</span><span>Ilustraciones estáticas · Historia de demo propuesta · Pattha: nombre a confirmar</span></footer>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body>
+</html>

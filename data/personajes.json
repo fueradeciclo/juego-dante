@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.0",
+  "personajes": [
+    {
+      "id": "pattha",
+      "nombre": "Pattha",
+      "nombre_estado": "provisional_a_confirmar",
+      "tipo": "robot",
+      "rol_confirmado": "protagonista",
+      "paleta_confirmada": [
+        "verde",
+        "negro",
+        "metalico"
+      ],
+      "estilo_confirmado": "cartoon moderno",
+      "base": "dibujos de Dante",
+      "conceptos": [
+        "assets/personajes/concepto/pattha_concepto_A.png",
+        "assets/personajes/concepto/pattha_concepto_B.png"
+      ],
+      "recorte": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
+      "habilidad_propuesta": "activar mecanismos y empujar objetos",
+      "habilidad_estado": "propuesta"
+    },
+    {
+      "id": "raton_verde",
+      "nombre": "Otto",
+      "nombre_estado": "confirmado_por_familia_2026-10-10",
+      "tipo": "raton",
+      "rol_confirmado": "amigo y aliado principal de Pattha",
+      "color_confirmado": "verde",
+      "base": "dibujo de Dante",
+      "conceptos": [
+        "assets/personajes/concepto/raton_verde_concepto.png"
+      ],
+      "recorte": "assets/personajes/transparentes/raton_verde_concepto_transparente.png",
+      "habilidad_propuesta": "entrar por pasadizos y detectar accesos secretos",
+      "habilidad_estado": "propuesta"
+    },
+    {
+      "id": "rural",
+      "nombre": "Rural",
+      "nombre_estado": "confirmado",
+      "tipo": "raton",
+      "rol_confirmado": "amigo y aliado de Pattha",
+      "color_confirmado": "azul",
+      "base": "dibujo de Dante",
+      "conceptos": [
+        "assets/personajes/concepto/rural_concepto.png"
+      ],
+      "recorte": "assets/personajes/transparentes/rural_concepto_transparente.png",
+      "habilidad_propuesta": "interpretar mapas y resolver acertijos",
+      "habilidad_estado": "propuesta"
+    }
+  ]
+}

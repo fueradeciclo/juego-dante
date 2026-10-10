@@ -1,0 +1,31 @@
+{
+  "estado": "PROPUESTA_NO_APROBADA",
+  "tipo_juego": "aventura 2D cartoon de exploracion y acertijos sencillos",
+  "publico_objetivo": "familias con chicos; valida con Dante",
+  "plataformas": [
+    "sin_definir"
+  ],
+  "motor": [
+    "sin_definir"
+  ],
+  "idioma_inicial": "es-AR",
+  "control_sugerido": [
+    "teclado",
+    "gamepad opcional",
+    "pantalla tactil a evaluar"
+  ],
+  "mvp": {
+    "escenas": [
+      "menu",
+      "nivel_tutorial",
+      "cierre_demo"
+    ],
+    "jugador": "Pattha",
+    "companeros": "ratones como acompañantes, al principio no controlables",
+    "objetivo": "resolver un mecanismo de puerta usando a cada amigo",
+    "duracion_minutos_estimados": [
+      5,
+      10
+    ]
+  }
+}

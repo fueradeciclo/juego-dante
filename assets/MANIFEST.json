@@ -1,0 +1,114 @@
+{
+  "version": "1.0",
+  "imagenes": [
+    {
+      "ruta": "assets/personajes/concepto/pattha_concepto_A.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        1024,
+        1536
+      ],
+      "canales": "RGB",
+      "sha256": "3d46845bf7bb005dfdbcaba13eb4583cdc8e05f410c9bcad23810ec18197c116",
+      "estado": "ilustracion_estatica"
+    },
+    {
+      "ruta": "assets/personajes/concepto/pattha_concepto_B.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        1024,
+        1536
+      ],
+      "canales": "RGB",
+      "sha256": "d855e38991dd961c9c352bd24751a1bc73001f3db29b9498890fa68855dc64ca",
+      "estado": "ilustracion_estatica"
+    },
+    {
+      "ruta": "assets/personajes/concepto/raton_verde_concepto.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        1024,
+        1536
+      ],
+      "canales": "RGB",
+      "sha256": "f184130f6a8ea22febc94a972ab91040c5a786f0d8582e8dc36903680df76e47",
+      "estado": "ilustracion_estatica"
+    },
+    {
+      "ruta": "assets/personajes/concepto/rural_concepto.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        1024,
+        1536
+      ],
+      "canales": "RGB",
+      "sha256": "4691fff3a34718397153dfd8b0b0120255bcc0e9d7f60b898c270f6d7a84b961",
+      "estado": "ilustracion_estatica"
+    },
+    {
+      "ruta": "assets/personajes/transparentes/pattha_concepto_A_transparente.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        956,
+        1196
+      ],
+      "canales": "RGBA",
+      "sha256": "ae4a8d05b92bd91a5934314f3cc0ee0a6ef1dcaa6af5db6ed8e360759ec122e8",
+      "estado": "recorte_estatico_revisar_bordes"
+    },
+    {
+      "ruta": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        967,
+        1225
+      ],
+      "canales": "RGBA",
+      "sha256": "9b910703fcae1be0f7cc4d325084d27d93afe56ce7bba5c4995a9f690f224af0",
+      "estado": "recorte_estatico_revisar_bordes"
+    },
+    {
+      "ruta": "assets/personajes/transparentes/raton_verde_concepto_transparente.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        880,
+        1180
+      ],
+      "canales": "RGBA",
+      "sha256": "879ae7c7b8e798f8e84f5e490e8fdb7ae87fc0767aaf67380430e1777610bdc6",
+      "estado": "recorte_estatico_revisar_bordes"
+    },
+    {
+      "ruta": "assets/personajes/transparentes/rural_concepto_transparente.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        849,
+        1118
+      ],
+      "canales": "RGBA",
+      "sha256": "4574f79beeb139b64b46de10ca630701c13d95ad0103a18eb61495089d7b3751",
+      "estado": "recorte_estatico_revisar_bordes"
+    },
+    {
+      "ruta": "assets/personajes/vistas/lineup_personajes.png",
+      "tipo": "imagen",
+      "formato": "PNG",
+      "dimensiones_px": [
+        1500,
+        720
+      ],
+      "canales": "RGB",
+      "sha256": "c55cc8db25d09505881ec9b1ace0c1e487a4ccb59cf40378a0b9edf5653caa58",
+      "estado": "vista_previa"
+    }
+  ],
+  "nota": "No hay frames animados, tilesets, sonidos ni fondos de niveles definitivos; estos recursos se producirán en iteraciones futuras."
+}

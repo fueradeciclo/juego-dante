@@ -1,0 +1,21 @@
+{
+  "fecha": "2026-10-10T16:05:00.456Z",
+  "entorno": "Chromium de escritorio; emulación táctil 844×390 y 390×844",
+  "metodo": "Escenarios integrados con teclado y multitáctil. El adaptador de posicionamiento existe solo en desarrollo con ?test=1; no equivale a un recorrido familiar completo.",
+  "checks": [
+    "menú e introducción alcanzan el juego",
+    "movimiento y salto reales por teclado",
+    "pausa congela la física y permite continuar",
+    "dos saltos alcanzan la tuerca de la plataforma alta",
+    "Otto y Rural abren el puente; error del puzzle permite reintentar",
+    "puente cruzable y caída con checkpoint y progreso conservado",
+    "saltar encima supera a un gato sin violencia explícita",
+    "contacto lateral consume energía sin bloquear la partida",
+    "cierre y reinicio limpian la partida",
+    "mobile horizontal con movimiento y salto multitáctil",
+    "girar a vertical pausa el juego y volver a horizontal lo recupera",
+    "sin errores JavaScript ni solicitudes externas del juego"
+  ],
+  "errors": [],
+  "external": []
+}
