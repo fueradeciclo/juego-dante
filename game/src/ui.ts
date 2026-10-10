@@ -1,5 +1,5 @@
 import { AdventureMusic } from './music.ts';
-import type { SymbolId } from './rules.ts';
+import type { SymbolId, LevelScore, ScoreRules } from './rules.ts';
 export type Mode = 'menu'|'playing'|'dialogue'|'puzzle'|'paused'|'won';
 export type Line = { quien: string; texto: string };
 type Actions = { restart: (autostart: boolean) => void; setPaused: (paused: boolean) => void; resetInput: () => void };
@@ -17,6 +17,8 @@ export class DemoUI {
  private symbolHandler?: (s: SymbolId)=>void;
  private toastTimer?: ReturnType<typeof setTimeout>;
  private previousFocus?: HTMLElement;
+ private sphereTotal=0;
+ private scoreRules!: ScoreRules;
  constructor() {
   get('play').onclick=()=>this.actions?.restart(true);
   get('restart').onclick=()=>this.actions?.restart(true);
@@ -86,6 +88,22 @@ export class DemoUI {
  puzzleFeedback(message: string, sequence: SymbolId[]) { get('puzzle-feedback').textContent=message;document.querySelectorAll<HTMLButtonElement>('[data-symbol]').forEach(b=>{b.classList.toggle('selected',sequence.includes(Number(b.dataset.symbol) as SymbolId));b.disabled=sequence.length===3;}); }
  toast(message: string) { clearTimeout(this.toastTimer);get('toast').textContent=message;get('toast').hidden=false;this.toastTimer=setTimeout(()=>{get('toast').hidden=true;},3300); }
  hint(message: string) { get('interaction-hint').hidden=!message;get('interaction-hint').textContent=message; }
- hud(zone: string, objective: string, coins: number, energy: number) { get('zone').textContent=zone;get('objective').textContent=objective;get('coins').textContent=String(coins);get('energy').textContent='● '.repeat(energy)+'○ '.repeat(3-energy);get('energy').setAttribute('aria-label','Energía: '+energy+' de 3'); }
- win(coins: number) { get('win-coins').textContent='Juntaste '+coins+' de 30 destellos ✦';this.setMode('won');get('replay').focus(); }
+ configureLevel(total: number, rules: ScoreRules) {
+  this.sphereTotal=total;this.scoreRules=rules;
+  get('coins').textContent='0';get('coins-total').textContent=String(total);
+  get('coin-counter').title=`${rules.puntos_por_esfera} puntos por esfera. Juntá todas para recibir ${rules.bonus_todas.toLocaleString('es-AR')} puntos extra al finalizar.`;
+  get('win-bonus').hidden=true;
+ }
+ hud(zone: string, objective: string, coins: number, energy: number) { get('zone').textContent=zone;get('objective').textContent=objective;get('coins').textContent=String(coins);get('coin-counter').setAttribute('aria-label',`${coins} de ${this.sphereTotal} esferas`);get('energy').textContent='● '.repeat(energy)+'○ '.repeat(3-energy);get('energy').setAttribute('aria-label','Energía: '+energy+' de 3'); }
+ win(score: LevelScore) {
+  const points=(value:number)=>value.toLocaleString('es-AR')+' puntos';
+  get('win-coins').textContent=`Juntaste ${score.collected} de ${score.available} esferas ✦`;
+  get('win-base').textContent=points(score.base);
+  get('win-score').textContent=points(score.total);
+  get('win-bonus').hidden=!score.complete;
+  get('win-bonus').textContent=score.complete?`¡Todas las esferas! Bonus: +${points(score.bonus)}`:'';
+  get('win-tip').hidden=score.complete;
+  get('win-tip').textContent=`Juntá las ${score.available} para ganar ${points(this.scoreRules.bonus_todas)} extra.`;
+  this.setMode('won');get('replay').focus();
+ }
 }

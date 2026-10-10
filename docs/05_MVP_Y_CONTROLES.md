@@ -1,4 +1,4 @@
-# 05 · Demo 0.3 de plataformas
+# 05 · Demo 0.4 de plataformas
 
 Destino confirmado: navegador en computadora y celular horizontal. Solo Pattha controlable. El mapa y la solución del puente son propuestas para probar con Dante.
 
@@ -13,7 +13,9 @@ Destino confirmado: navegador en computadora y celular horizontal. Solo Pattha c
 - Tuerca en plataforma alta; ayuda contextual de Otto y pista siempre visible de Rural.
 - Puente que aparece después de ambos aportes.
 - Banderín de llegada, diálogo final y replay.
-- 30 destellos opcionales; sin necesidad de recolectarlos todos para ganar.
+- 30 esferas opcionales fuera de las columnas de las plataformas; sin necesidad de recogerlas todas para ganar.
+- Checkpoints con espacio respecto de las plataformas, activados al pisar suelo firme.
+- Puntaje final: propuesta de 100 puntos por esfera y bonus de 1.000 por recoger todas; conteo único, sin penalización por caer.
 
 ## Controles
 

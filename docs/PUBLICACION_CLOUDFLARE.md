@@ -47,3 +47,7 @@ Referencias oficiales:
 ## Dominio conectado · 2026-10-10
 
 NIC publicó ambos servidores y Cloudflare activó la zona. Se asoció `sabad.com.ar` al proyecto Pages `juego-dante` y se confirmó el CNAME existente. Verificación: `https://sabad.com.ar/pattha_game/` carga por HTTPS, inicia la partida y muestra el diálogo de Rural; sin errores de consola observados. La portada permanece reservada. Revisión cada dos horas detenida al completar el objetivo.
+
+## Actualización de producción · 2026-10-10
+
+Versión fija aprobada de amigos, avionetas y música: commit `c6a1561e54f9540a8535a83b217da27d2b5754de`, despliegue Pages `cef7326f-70c1-4ef2-96e1-6efae4e11db8` exitoso. Copia aislada: 26 pruebas y build pasaron. Dominio sirve `juego-DHOS-0nK.js`; música responde HTTP 200. Los cambios simultáneos de gateo y puntuación quedan fuera de esta publicación por decisión del adulto.

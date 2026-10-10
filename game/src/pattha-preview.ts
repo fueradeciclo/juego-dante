@@ -1,16 +1,17 @@
 import { loadPatthaArt, paintPattha, patthaAtlas } from './pattha-art.ts';
 import { PatthaClock, type PatthaFrame, type PatthaSheet, type PatthaPose } from './pattha-state.ts';
+import type { CrouchFrame } from './crawl-state.ts';
 
-type Move='run'|'jump'|'idle'|'think'|'bored'|'help'|'celebrate';
-const labels:Record<string,string>={run:'Corriendo',crouch:'Se agacha',takeoff:'Se impulsa',rise:'Está subiendo',apex:'Llegó arriba',fall:'Está bajando',land:'Amortigua con las piernas',recover:'Se acomoda',idle:'Espera',blink:'Parpadea',think:'Piensa',bored:'Se aburre un poquito',help:'Ayuda',celebrate:'¡Festeja!',stop:'Frena'};
+type Move='run'|'jump'|'idle'|'think'|'bored'|'help'|'celebrate'|'duck'|'crawl'|'standup';
+const labels:Record<string,string>={run:'Corriendo',crouch:'Se agacha',takeoff:'Se impulsa',rise:'Está subiendo',apex:'Llegó arriba',fall:'Está bajando',land:'Amortigua con las piernas',recover:'Se acomoda',idle:'Espera',blink:'Parpadea',think:'Piensa',bored:'Se aburre un poquito',help:'Ayuda',celebrate:'¡Festeja!',stop:'Frena',duckDown:'Baja y apoya las manos',duckIdle:'Descansa agachado',duckBlink:'Parpadea agachado',crawl:'Gatea con manos y rodillas',crawlStop:'Frena el gateo',standUp:'Se levanta',duckBlocked:'Mira el techo bajo'};
 export async function animatePatthaPreview() {
   const canvas=document.getElementById('pattha-showcase') as HTMLCanvasElement;
   const art=await loadPatthaArt(),clock=new PatthaClock();
   let move:Move='run',elapsed=0,previous=performance.now();
   let selected:{sheet:PatthaSheet;index:number;pose:PatthaPose}|undefined;
-  const framePoses:Record<PatthaSheet,PatthaPose[]>={carrera:Array(8).fill('run'),salto:['crouch','takeoff','rise','apex','fall','land','recover','rebound'],reposo:['idle','blink','breathe','think','think','bored','help','celebrate']};
+  const framePoses:Record<PatthaSheet,PatthaPose[]>={carrera:Array(8).fill('run'),salto:['crouch','takeoff','rise','apex','fall','land','recover','rebound'],reposo:['idle','blink','breathe','think','think','bored','help','celebrate'],gateo:['duckDown','duckDown','duckDown','duckDown',...Array(8).fill('crawl'),'duckIdle','duckBlink','duckBlocked','crawlStop']};
   const grid=document.getElementById('pattha-frame-grid')!;
-  for(const sheet of ['carrera','salto','reposo'] as PatthaSheet[])for(let index=0;index<8;index++) {
+  for(const sheet of Object.keys(patthaAtlas.sheets) as PatthaSheet[])for(let index=0;index<patthaAtlas.sheets[sheet].anchors.length;index++) {
     const button=document.createElement('button'),thumbnail=document.createElement('canvas'),caption=document.createElement('span');
     button.dataset.sheet=sheet;button.dataset.frame=String(index);button.setAttribute('aria-pressed','false');
     thumbnail.width=144;thumbnail.height=156;
@@ -36,7 +37,11 @@ export async function animatePatthaPreview() {
     if(canvas.width!==w||canvas.height!==h){canvas.width=w;canvas.height=h;}
     const cycle=elapsed%1750,air=move==='jump'&&cycle>=414&&cycle<1189,crouch=move==='jump'&&cycle>=350&&cycle<414;
     const seconds=(cycle-414)/1000,vy=-620+1600*seconds;
-    let frame:PatthaFrame=clock.step(dt,{speed:move==='run'?285:0,grounded:!air,vy,crouching:crouch,takingOff:air&&cycle<484,suspended:document.hidden,reducedMotion:reduced.matches});
+    const lowCycle=elapsed%3000;
+    let posture:CrouchFrame|undefined;
+    if(move==='duck'||move==='crawl')posture=lowCycle<180?{phase:'lower',amount:lowCycle/180,blocked:false}:lowCycle<2350?{phase:'low',amount:1,blocked:false}:lowCycle<2530?{phase:'rise',amount:1-(lowCycle-2350)/180,blocked:false}:{phase:'stand',amount:0,blocked:false};
+    if(move==='standup')posture=lowCycle<500?{phase:'low',amount:1,blocked:false}:lowCycle<680?{phase:'rise',amount:1-(lowCycle-500)/180,blocked:false}:{phase:'stand',amount:0,blocked:false};
+    let frame:PatthaFrame=clock.step(dt,{speed:move==='run'?285:move==='crawl'&&lowCycle>=180&&lowCycle<2200?125:0,grounded:!air,vy,posture,crouching:crouch,takingOff:air&&cycle<484,suspended:document.hidden,reducedMotion:reduced.matches});
     if(['think','bored','help','celebrate'].includes(move))frame={...frame,pose:move as PatthaFrame['pose'],sheet:'reposo',index:move==='think'?3:move==='bored'?5:move==='help'?6:7,gesture:1};
     if(selected)frame={...frame,...selected,elapsed:0,footOffset:selected.pose==='rise'?-22:selected.pose==='apex'?-10:0};
     const lift=air&&!selected?Math.max(0,620*seconds-800*seconds*seconds)*h/730:0;

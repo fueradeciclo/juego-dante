@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
-import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto, type Progress } from './rules.ts';
+import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto, scoreLevel, type Progress, type ScoreRules } from './rules.ts';
+import { CHECKPOINT_REACH, validateLevelLayout } from './level-layout.ts';
 import type { Controls } from './input.ts';
 import type { DemoUI, Line } from './ui.ts';
 import { CharacterRig } from './character-rig.ts';
@@ -10,8 +11,9 @@ import { JumpPreparation } from './pattha-state.ts';
 import { JumpDust } from './jump-dust.ts';
 import { AllyFollower, allyTarget, FriendConversation, RivalPatrol, type FriendChats } from './companion-state.ts';
 import { AmbientSky } from './ambient-sky.ts';
+import { CrawlPosture, hasHeadroom } from './crawl-state.ts';
 
-type Level = { personajes:Record<string,string>;mundo:{ancho:number;alto:number;piso:number};suelo:number[][];plataformas:number[][];monedas:number[][];enemigos:{tipo:string;x:number;min:number;max:number;velocidad:number}[];puestos_control:number[];dialogos:Record<string,Line[]>;charlas_amigos:FriendChats };
+type Level = { personajes:Record<string,string>;mundo:{ancho:number;alto:number;piso:number};suelo:number[][];plataformas:number[][];pasajes_bajos?:number[][];monedas:number[][];puntaje:ScoreRules;enemigos:{tipo:string;x:number;min:number;max:number;velocidad:number}[];puestos_control:number[];dialogos:Record<string,Line[]>;charlas_amigos:FriendChats };
 type Enemy = Phaser.Physics.Arcade.Sprite;
 export class Adventure extends Phaser.Scene {
  progress: Progress=createProgress();
@@ -42,6 +44,8 @@ export class Adventure extends Phaser.Scene {
  private pattha!:PatthaAnimator;
  private dust!:JumpDust;
  private preparation=new JumpPreparation();
+ private posture=new CrawlPosture();
+ private standingHeight=132*.78;
  private takeoffMs=0;
  private reboundMs=0;
  private helpMs=0;
@@ -60,9 +64,12 @@ export class Adventure extends Phaser.Scene {
  create(data:{autostart?:boolean}={}) {
   if(this.originalLoadFailed)return;
   this.level=this.cache.json.get('level') as Level;
-  if(!this.level || ['pattha','otto','rural','gato','perro','pattha-carrera','pattha-salto','pattha-reposo'].some(k=>!this.textures.exists(k))){this.ui.loadError();return;}
+  if(!this.level || ['pattha','otto','rural','gato','perro',...Object.keys(patthaAtlas.sheets).map(s=>'pattha-'+s)].some(k=>!this.textures.exists(k))){this.ui.loadError();return;}
+  const layoutErrors=validateLevelLayout(this.level);
+  if(layoutErrors.length){console.error('Distribución del nivel inválida:',layoutErrors);this.ui.loadError();return;}
+  this.ui.configureLevel(this.level.monedas.length,this.level.puntaje);
   this.progress=createProgress();this.health=3;this.ended=false;this.bridgeBuilt=false;this.flags=[];this.allies=[];this.allyLabels=[];this.trail=[];this.visuals=[];this.hurtUntil=0;this.groundedAt=-Infinity;this.jumpUntil=-Infinity;this.lastSample=0;this.checkpoint={x:130,y:this.level.mundo.piso};
-  this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;this.helpMs=0;
+  this.preparation.cancel();this.posture.reset();this.takeoffMs=0;this.reboundMs=0;this.helpMs=0;
   this.friendConversation=new FriendConversation();
   this.followers=[];this.followDirection=1;
   this.friendPanel=this.add.graphics().setDepth(8);
@@ -73,6 +80,7 @@ export class Adventure extends Phaser.Scene {
   this.solids=this.physics.add.staticGroup();
   for(const [left,right]of this.level.suelo)this.platform((left+right)/2,this.level.mundo.piso,right-left,210);
   for(const [x,top,width]of this.level.plataformas)this.platform(x,top,width,26);
+  for(const [x,top,width,height]of this.level.pasajes_bajos??[])this.lowPassage(x,top,width,height);
   this.paintProps();
   this.makeTokens();
   this.player=this.physics.add.sprite(130,this.level.mundo.piso,'pattha').setOrigin(.5,1).setDepth(5);
@@ -101,8 +109,9 @@ export class Adventure extends Phaser.Scene {
   if(data.autostart)this.ui.dialogue(this.level.dialogos.intro);
   if(import.meta.env.DEV && new URLSearchParams(location.search).has('test')) {
    (window as unknown as {__PATTHA_TEST__:unknown}).__PATTHA_TEST__={
-    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo,min:r.getData('patrol').min,max:r.getData('patrol').max,...(r.getData('behavior') as RivalPatrol).snapshot()};}),followers:this.followers.map(f=>f.snapshot()),ambient:this.ambient.snapshot(),conversation:this.friendConversation.snapshot(),friendBubble:this.friendBubble.visible,friendBubbleAlpha:this.friendBubble.alpha,animations:[this.pattha.snapshot(),...this.visuals.filter(v=>v.root.active).map(v=>v.snapshot())],dust:this.dust.snapshot(),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
-    position:(x:number,y:number)=>{this.player.body!.reset(x,y);this.player.setVelocity(0,0);this.controls.reset();this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;this.cameras.main.centerOn(x,360);this.regroupAllies();},
+    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,collected:[...this.progress.coins],gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo,min:r.getData('patrol').min,max:r.getData('patrol').max,...(r.getData('behavior') as RivalPatrol).snapshot()};}),followers:this.followers.map(f=>f.snapshot()),ambient:this.ambient.snapshot(),conversation:this.friendConversation.snapshot(),friendBubble:this.friendBubble.visible,friendBubbleAlpha:this.friendBubble.alpha,animations:[this.pattha.snapshot(),...this.visuals.filter(v=>v.root.active).map(v=>v.snapshot())],dust:this.dust.snapshot(),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
+    position:(x:number,y:number)=>{this.posture.reset();this.setLowBody(false);this.player.body!.reset(x,y);this.player.setVelocity(0,0);this.controls.reset();this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;this.cameras.main.centerOn(x,360);this.regroupAllies();},
+    crawl:()=>({posture:this.posture.snapshot(),headroom:this.canStand(),body:{left:(this.player.body as Phaser.Physics.Arcade.Body).left,top:(this.player.body as Phaser.Physics.Arcade.Body).top,bottom:(this.player.body as Phaser.Physics.Arcade.Body).bottom,height:(this.player.body as Phaser.Physics.Arcade.Body).height},passages:this.level.pasajes_bajos}),
    };
   }
  }
@@ -129,6 +138,29 @@ export class Adventure extends Phaser.Scene {
   g.fillStyle(0xb5e68e).fillRoundedRect(x-width/2+4,top+2,width-8,5,3);
   for(let dx=25;dx<width-15;dx+=51){g.fillStyle(0x98704f,.6).fillCircle(x-width/2+dx,top+40+(dx%3)*20,3);}
  }
+ private lowPassage(x:number,top:number,width:number,height:number) {
+  const collision=this.add.rectangle(x,top+height/2,width,height,0,0);this.solids.add(collision);
+  const g=this.add.graphics().setDepth(2);
+  g.fillStyle(0xdbc79d).fillRoundedRect(x-width/2,top,width,height,7);
+  g.lineStyle(2,0x68816a).strokeRoundedRect(x-width/2,top,width,height,7);
+  g.fillStyle(0xa8c582).fillRoundedRect(x-width/2+2,top+2,width-4,5,3);
+  for(let dx=22;dx<width-10;dx+=30)g.lineStyle(1,0x947f61,.4).lineBetween(x-width/2+dx,top+9,x-width/2+dx-5,top+height-3);
+  this.add.text(x,top-14,'↓ / S · Gateá',{fontFamily:'system-ui',fontSize:'14px',color:'#42644e',backgroundColor:'#edf5dc',padding:{x:9,y:5}}).setOrigin(.5,1).setDepth(3);
+ }
+ private canStand() {
+  const b=this.player.body as Phaser.Physics.Arcade.Body;
+  const standing={left:b.center.x-42,right:b.center.x+42,top:b.bottom-this.standingHeight,bottom:b.bottom};
+  const solids=this.solids.getChildren().map(s=>s.body as Phaser.Physics.Arcade.StaticBody).filter(b=>b.enable);
+  return hasHeadroom(standing,solids);
+ }
+ private setLowBody(low:boolean) {
+  const b=this.player.body as Phaser.Physics.Arcade.Body,height=low?80:this.standingHeight;
+  if(Math.abs(b.height-height)<.01)return;
+  const raw=this.textures.get('pattha').getSourceImage() as HTMLImageElement,shift=b.height-height;
+  b.setSize(raw.width*.44,height/this.player.scaleY,false);b.setOffset(raw.width*.28,raw.height-height/this.player.scaleY);
+  // Resizing moves the top, never the feet or the physics displacement accumulated this frame.
+  b.position.y+=shift;b.prev.y+=shift;b.prevFrame.y+=shift;b.updateCenter();
+ }
  private paintProps() {
   const props=this.add.graphics().setDepth(1);
   for(const x of [100,1200,2050,2590,3700,4050,4600,5210,6140,6500,7290]){
@@ -138,12 +170,12 @@ export class Adventure extends Phaser.Scene {
   }
   const sign=(x:number,label:string)=>{
    props.fillStyle(0x977451).fillRect(x-4,475,8,65);props.fillStyle(0xf5ebbd).fillRoundedRect(x-75,443,150,41,8);props.lineStyle(2,0x49654a).strokeRoundedRect(x-75,443,150,41,8);
-   this.add.text(x,463,label,{fontFamily:'system-ui',fontSize:'12px',color:'#405844',fontStyle:'bold'}).setOrigin(.5);
+   this.add.text(x,463,label,{fontFamily:'system-ui',fontSize:'12px',color:'#405844',fontStyle:'bold'}).setOrigin(.5).setDepth(2);
   };
-  sign(180,'¡Vamos juntos!');sign(1500,'Saltá por arriba ↑');sign(2830,'Un puente entre tres');sign(6460,'¡Falta poquito! →');
+  sign(95,'¡Vamos juntos!');sign(1340,'Saltá por arriba ↑');sign(2800,'Un puente entre tres');sign(7070,'¡Falta poquito! →');
   this.panels=this.add.graphics().setDepth(2);this.paintBridgeStatus();
   props.fillStyle(0x496956).fillRect(3120,420,9,120).fillRect(3580,420,9,120);props.lineStyle(4,0x6e8960).lineBetween(3124,430,3584,430);
-  for(const x of this.level.puestos_control){const view=this.add.graphics().setDepth(2);view.fillStyle(0x58735a).fillRect(x,467,5,73);view.fillStyle(0xdacb96).fillTriangle(x+5,467,x+45,482,x+5,497);this.flags.push({x,view,active:false});}
+  for(const x of this.level.puestos_control){const view=this.add.graphics().setDepth(2),top=this.level.mundo.piso-73;view.fillStyle(0x58735a).fillRect(x,top,5,73);view.fillStyle(0xdacb96).fillTriangle(x+5,top,x+45,top+15,x+5,top+30);this.flags.push({x,view,active:false});}
   props.fillStyle(0x95764f).fillRect(7200,384,8,156);props.fillStyle(0x3b8d6c).fillTriangle(7208,384,7280,409,7208,437);
   this.add.text(7230,356,'LLEGADA',{fontFamily:'system-ui',fontSize:'13px',fontStyle:'bold',color:'#2d5944',backgroundColor:'#f3f6dc',padding:{x:10,y:5}}).setOrigin(.5);
  }
@@ -164,7 +196,7 @@ export class Adventure extends Phaser.Scene {
   // Overlaps are installed after the player exists, in the next scene tick.
   this.time.delayedCall(0,()=>{
    this.physics.add.overlap(this.player,coins,(_p,c)=>{
-    const coin=c as Phaser.Physics.Arcade.Image;if(collectCoin(this.progress,coin.getData('id')))coin.disableBody(true,true);
+    const coin=c as Phaser.Physics.Arcade.Image;if(collectCoin(this.progress,coin.getData('id'))){coin.disableBody(true,true);if(this.progress.coins.size===this.level.monedas.length)this.ui.toast('¡Juntaste todas las esferas! El bonus te espera en la llegada.');}
    });
    const gear=this.physics.add.staticImage(2740,315,'gear').setDepth(3);
    this.physics.add.overlap(this.player,gear,()=>{if(this.progress.gear)return;this.progress.gear=true;gear.disableBody(true,true);this.paintBridgeStatus();this.ui.toast('¡Encontraste la tuerca! Llevásela a Otto.');});
@@ -198,6 +230,7 @@ export class Adventure extends Phaser.Scene {
   }
  }
  private respawn() {
+  this.posture.reset();this.setLowBody(false);
   this.health=3;this.hurtUntil=this.time.now+2000;this.player.body!.reset(this.checkpoint.x,this.checkpoint.y);this.player.setVelocity(0,0);this.controls.reset();this.trail=[];this.groundedAt=-Infinity;this.jumpUntil=-Infinity;
   this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;
   this.regroupAllies(true);
@@ -241,7 +274,7 @@ export class Adventure extends Phaser.Scene {
   const dt=Math.min(delta,50),body=this.player.body as Phaser.Physics.Arcade.Body,playing=this.ui.mode==='playing';
   const oldPose=this.pattha.clock.snapshot().pose;
   if(!suspended)this.helpMs=Math.max(0,this.helpMs-dt);
-  this.pattha.update(dt,{speed:playing?body.velocity.x:0,vy:body.velocity.y,grounded:!playing||(body.blocked.down&&Math.abs(body.velocity.y)<30),crouching:playing&&this.preparation.crouching,takingOff:this.takeoffMs>0,rebounding:this.reboundMs>0,helping:this.helpMs>0,celebrating:this.ended,hurt:playing&&this.time.now<this.hurtUntil-1550,suspended,reducedMotion:this.reducedMotion.matches});
+  this.pattha.update(dt,{speed:playing?body.velocity.x:0,vy:body.velocity.y,grounded:!playing||(body.blocked.down&&Math.abs(body.velocity.y)<30),crouching:playing&&this.preparation.crouching,posture:this.posture.snapshot(),takingOff:this.takeoffMs>0,rebounding:this.reboundMs>0,helping:this.helpMs>0,celebrating:this.ended,hurt:playing&&this.time.now<this.hurtUntil-1550,suspended,reducedMotion:this.reducedMotion.matches});
   if(!suspended&&oldPose!=='land'&&this.pattha.clock.snapshot().pose==='land'&&!this.reducedMotion.matches)this.dust.emit(this.player.x,body.bottom,true);
   this.dust.update(dt,suspended,this.reducedMotion.matches);
   this.ambient.update(dt,suspended||!playing||this.ended,this.reducedMotion.matches);
@@ -285,15 +318,19 @@ export class Adventure extends Phaser.Scene {
   const body=this.player.body as Phaser.Physics.Arcade.Body;
   if(this.controls.consumeInteract()){this.interaction();if(this.ui.mode!=='playing')return;}
   this.takeoffMs=Math.max(0,this.takeoffMs-delta);this.reboundMs=Math.max(0,this.reboundMs-delta);
+  const posture=this.posture.step(delta,{held:this.controls.crouchHeld,grounded:body.blocked.down,headroom:this.canStand()});
+  this.setLowBody(posture.phase!=='stand');
+  if(posture.phase!=='stand')this.preparation.cancel();
   if(body.blocked.down&&!this.preparation.crouching)this.groundedAt=now;
-  if(this.controls.consumeJump())this.jumpUntil=now+140;
-  if(!this.preparation.crouching&&canJump(now,this.groundedAt,this.jumpUntil)){this.preparation.begin(body.blocked.down);this.jumpUntil=-Infinity;this.groundedAt=-Infinity;}
+  if(this.controls.consumeJump()&&!this.controls.crouchHeld&&!posture.blocked)this.jumpUntil=now+(posture.phase==='stand'?140:320);
+  if(this.controls.crouchHeld||posture.blocked)this.jumpUntil=-Infinity;
+  if(posture.phase==='stand'&&!this.preparation.crouching&&canJump(now,this.groundedAt,this.jumpUntil)){this.preparation.begin(body.blocked.down);this.jumpUntil=-Infinity;this.groundedAt=-Infinity;}
   if(this.preparation.step(delta)) {
    this.player.setVelocityY(-620);this.takeoffMs=70;this.groundedAt=-Infinity;
    if(!this.reducedMotion.matches)this.dust.emit(this.player.x,body.bottom);
   }
   if(!this.controls.jumpHeld && body.velocity.y < -280)this.player.setVelocityY(-280);
-  if(now>this.hurtUntil-1500)this.player.setVelocityX(this.controls.axis*285);
+  if(now>this.hurtUntil-1500)this.player.setVelocityX(this.controls.axis*(posture.phase==='lower'||posture.phase==='rise'?0:posture.phase==='low'?125:285));
   if(this.controls.axis)this.player.setFlipX(this.controls.axis>0);
   this.player.setAlpha(now<this.hurtUntil?.55+Math.abs(Math.sin(now/85))*.45:1);
   this.player.x=Phaser.Math.Clamp(this.player.x,35,this.level.mundo.ancho-35);
@@ -317,15 +354,16 @@ export class Adventure extends Phaser.Scene {
    this.allyLabels[i].setPosition(this.allies[i].x,this.allies[i].y-95);
    this.allyLabels[i].setVisible(atMeeting||this.player.x<420);
   }
-  for(const flag of this.flags){if(!flag.active && Math.abs(this.player.x-flag.x)<55&&body.blocked.down){flag.active=true;this.checkpoint={x:flag.x,y:this.player.y};flag.view.fillStyle(0xb9e68a).fillTriangle(flag.x+5,467,flag.x+45,482,flag.x+5,497);this.ui.toast('Banderín activado. Tus avances quedan a salvo.');}}
+  for(const flag of this.flags){if(!flag.active && Math.abs(this.player.x-flag.x)<CHECKPOINT_REACH&&body.blocked.down&&Math.abs(body.bottom-this.level.mundo.piso)<3){flag.active=true;this.checkpoint={x:flag.x,y:this.level.mundo.piso};const top=this.level.mundo.piso-73;flag.view.fillStyle(0xb9e68a).fillTriangle(flag.x+5,top,flag.x+45,top+15,flag.x+5,top+30);this.ui.toast('Banderín activado. Tus avances quedan a salvo.');}}
   const x=this.player.x;
   let hint='';
+  if((this.level.pasajes_bajos??[]).some(([center,,width])=>x>center-width/2-75&&x<center+width/2+75))hint='Mantené ↓ / S o Gatear y avanzá. Soltá al salir.';
   if(x>2760&&x<2950)hint=this.progress.otto?'Otto ya ayudó. Seguí hasta Rural →':'E / Ayudar: hablar con Otto';
   else if(x>=2950&&x<3150)hint=this.progress.rural?'¡El puente está listo! →':'E / Ayudar: escuchar a Rural';
   this.ui.hint(hint);
   const zone=x<2400?'Primeros saltos':x<3560?'El puente entre amigos':'El último tramo';
   const objective=x<2400?'Saltá sobre los animales o pasá por arriba.':!this.progress.gear?'Buscá la tuerca en la plataforma alta.':!this.progress.otto?'Llevale la tuerca a Otto.':!this.progress.rural?'Rural tiene la pista de la señal.':'Seguí los banderines hasta la llegada.';
   this.ui.hud(zone,objective,this.progress.coins.size,this.health);
-  if(x>7140&&this.progress.bridge){this.ended=true;this.player.setVelocity(0,0);this.ui.dialogue(this.level.dialogos.final,()=>this.ui.win(this.progress.coins.size));}
+  if(x>7140&&this.progress.bridge){this.ended=true;this.player.setVelocity(0,0);this.ui.dialogue(this.level.dialogos.final,()=>this.ui.win(scoreLevel(this.progress.coins,this.level.monedas.length,this.level.puntaje)));}
  }
 }

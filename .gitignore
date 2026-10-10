@@ -1,4 +1,5 @@
 node_modules/
+.pnpm-store/
 game/public/
 *.log
 .DS_Store

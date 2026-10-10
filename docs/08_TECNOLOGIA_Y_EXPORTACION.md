@@ -43,7 +43,7 @@ Comandos desde la raíz:
 
 ## Exportación vigente
 
-builds/web/ incluye HTML, JS, CSS, PNG y datos. Servir por HTTP. Base ./ permite alojarlo bajo una subcarpeta. El repositorio incluye ese build por requisito familiar. La entrega no está publicada como sitio público.
+builds/web/ incluye HTML, JS, CSS, PNG y datos. Servir por HTTP. Base ./ permite alojarlo bajo una subcarpeta. El repositorio incluye ese build por requisito familiar. Publicación actual: https://sabad.com.ar/pattha_game/ en Cloudflare Pages, conectado a GitHub; ver PUBLICACION_CLOUDFLARE.md.
 
 Un celular accede al servidor de la computadora por su IP en la misma Wi-Fi. En vertical la partida queda suspendida; el bloqueo automático depende de APIs disponibles, no se garantiza en Safari.
 
@@ -51,4 +51,8 @@ Futuro: empaquetar con herramientas nativas si se acuerda, verificando costos, f
 
 ## Límites actuales
 
-Runtime Phaser compilado de aproximadamente 1,5 MB sin comprimir; PNG fuente de alta resolución todavía pesados. No se optimizaron con pérdida para conservar el arte de la primera prueba. Sin audio, PWA/offline permanente, guardado entre recargas ni exportación instalable. Pruebas táctiles emuladas no reemplazan rendimiento o comodidad en un iPhone/Android real.
+Runtime Phaser compilado de aproximadamente 1,5 MB sin comprimir; PNG fuente de alta resolución todavía pesados. No se optimizaron con pérdida para conservar el arte de la primera prueba. Música MP3 proporcionada por la familia, reproducida localmente. Sin PWA/offline permanente, guardado entre recargas ni exportación instalable. Pruebas táctiles emuladas no reemplazan rendimiento o comodidad en un iPhone/Android real.
+
+## Distribución y puntos · 0.4
+
+`pnpm validate:level` se ejecuta antes del build y verifica que esferas/checkpoints no invadan la zona vertical de plataformas elevadas. El JSON del nivel define el puntaje; el total de esferas alimenta la interfaz y el cálculo de bonus. `pnpm test:scenarios` cubre las 30 recogidas y finales completo/parcial. Más detalles en ESCENARIOS_Y_PUNTAJE_04.md.

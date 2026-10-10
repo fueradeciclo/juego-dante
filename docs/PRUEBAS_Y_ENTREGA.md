@@ -1,4 +1,4 @@
-# Pruebas y entrega · demo 0.3
+# Pruebas y entrega · demo 0.4
 
 ## Entorno
 
@@ -9,7 +9,7 @@
 | Comprobación | Resultado / evidencia |
 | --- | --- |
 | pnpm typecheck | Sin errores |
-| pnpm test / runner directo de Node | 26/26: seis reglas, cinco del reloj general, seis de Pattha y nueve de aliados/rivales/fondo |
+| pnpm test / runner directo de Node | 39/39: nueve reglas/puntaje, cuatro del mapa, cinco del reloj general, seis de Pattha, nueve de aliados/rivales/fondo y seis de gateo |
 | pnpm build | Build estático generado; aviso de tamaño de chunk del motor esperado |
 | Originales del kit | 9 checksums SHA-256 coinciden con MANIFEST.json |
 | Menú y diálogo | Correcto |
@@ -31,7 +31,7 @@
 | Animación y física | Pausa conserva todas las poses/relojes; mover cancela pensar y salto activa pose aérea |
 | Movimiento reducido | Preferencia emulada aplicada a todos los rigs |
 | Carrera de Pattha | Ocho cuadros distintos renderizados, pivotes y escala común; zancada según velocidad |
-| Atlas de Pattha | 24 cuadros diferentes con píxeles opacos; recortes individuales revisables en galería |
+| Atlas de Pattha | 40 cuadros diferentes con píxeles opacos; recortes individuales revisables en galería |
 | Salto de Pattha | Preparación breve, impulso, subida/ápice/caída por velocidad, aterrizaje y recuperación capturados en salto real |
 | Polvo de salto | Presente al despegar; congela con pausa; ausente en movimiento reducido |
 | Toque corto | Se eleva al tocar y soltar; la preparación no pierde el pedido |
@@ -81,3 +81,21 @@ Para animación: mismo servidor y pnpm test:animations.
 Para el nuevo set: pnpm test:pattha.
 Para amigos y rivales: pnpm test:companions. Ver AMIGOS_Y_RIVALES.md para los comandos directos usados con el runtime integrado de esta Mac.
 Para seguimiento suave, charlas discretas y avionetas: pnpm test:followers; evidencia en PRUEBAS_SEGUIMIENTO_Y_FONDO.json y capturas 26–28.
+
+## Gateo de Pattha · 2026-10-10
+
+Set de 16 poses nuevas generado con Imagegen integrada; atlas completo de 40 cuadros. Tipos sin errores, checksums de originales y de las cuatro planchas verificados, build actualizado y ocho escenarios del navegador en `PRUEBAS_GATEO.json` sin errores JS. Se verificaron cuerpo más bajo sin desplazar pies, techo bloqueante de pie, bajada, ocho pasos, frenado, salida por ambos extremos, salto impedido bajo techo, tecla S, pausa y multitáctil. Se revisaron las capturas de galería, pasaje y móvil horizontal. El runner de Pattha también pasó sus diez escenarios anteriores con el atlas ampliado.
+
+Comandos directos usados con el Node incluido en Codex: `node scripts/prepare-assets.mjs`, `node node_modules/typescript/bin/tsc --noEmit`, `node --test game/tests/*.test.ts`, `node scripts/test-crawl.mjs`, `node scripts/test-pattha.mjs`, `node scripts/validate-level.mjs`, `node node_modules/vite/bin/vite.js build`, `node scripts/prepare-site.mjs`. La compilación informa el aviso conocido de tamaño del motor. No se publicó esta iteración; la salida local está en `builds/web/` y `builds/site/pattha_game/`.
+
+Capturas nuevas: `30-pattha-40-cuadros.png`, `31-pattha-gateo.png`, `32-pattha-pasaje-bajo.png`, `33-pattha-gateo-mobile.png`. Ver [set y controles](ANIMACIONES_GATEO.md). Prueba móvil emulada, pendiente dispositivo físico y revisión familiar de las poses.
+
+## Escenarios y puntaje · 0.4
+
+Ocho escenarios nuevos correctos en `PRUEBAS_ESCENARIOS_04.json`: geometría de las 30 esferas, cinco checkpoints, reaparición en suelo firme, acceso a cada esfera con colisiones y saltos, conservación tras caída, 30/30 con 4.000 puntos, resumen horizontal completo, replay limpio y final parcial sin bonus. Ningún error JS ni solicitud externa. El recorrido anterior de doce escenarios volvió a pasar, incluyendo tuerca, puente y multitáctil.
+
+Capturas 29-esferas-espacios-libres.png, 30-checkpoint-separado.png, 31-final-bonus-todas.png, 32-final-bonus-horizontal.png y 33-final-parcial-horizontal.png. `pnpm test:scenarios` reproduce esta cobertura con el servidor de desarrollo activo. `pnpm validate:level` verifica la distribución antes del build. Se adaptan posiciones iniciales para aislar escenarios; no se asignan esferas ni puntaje. Recorrido familiar continuo, comodidad en celular físico y valores del premio pendientes de jugar con Dante.
+
+En la instalación compartida de esta Mac se usó `pnpm_config_verify_deps_before_run=false` durante los comandos para utilizar las dependencias ya instaladas, evitando que pnpm intentara reinstalarlas al ejecutar scripts. Una copia nueva sigue el `pnpm install --frozen-lockfile --ignore-scripts` del README.
+
+Build 0.4 generado con `pnpm build:site`: mapa validado, originales y planchas comprobados por checksum, typecheck correcto y 21 archivos de publicación. Revisado en `http://localhost:4173/` en el navegador integrado; captura `34-escenarios-build.jpg`. El adaptador de pruebas no aparece en el JavaScript compilado. El aviso por tamaño del chunk de Phaser sigue siendo informativo.

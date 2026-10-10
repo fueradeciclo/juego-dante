@@ -1,10 +1,10 @@
-export type Action = 'left' | 'right' | 'jump' | 'interact';
+export type Action = 'left' | 'right' | 'jump' | 'interact' | 'crouch';
 export class Controls {
  private held = new Set<string>();
  private pointers = new Map<number, Action>();
  private jumpPending = false;
  private interactPending = false;
- private readonly mapping: Record<string, Action> = { ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'jump',KeyW:'jump',Space:'jump',KeyE:'interact',Enter:'interact' };
+ private readonly mapping: Record<string, Action> = { ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',ArrowUp:'jump',KeyW:'jump',Space:'jump',KeyE:'interact',Enter:'interact',ArrowDown:'crouch',KeyS:'crouch' };
  constructor(canPlay: () => boolean, shortcut: (event: KeyboardEvent) => boolean) {
   document.addEventListener('keydown', e => {
    if (shortcut(e) || !canPlay()) return;
@@ -35,6 +35,7 @@ export class Controls {
  private has(action: Action) { return [...this.held].some(k => this.mapping[k] === action) || [...this.pointers.values()].includes(action); }
  get axis() { return Number(this.has('right')) - Number(this.has('left')); }
  get jumpHeld() { return this.has('jump'); }
+ get crouchHeld() { return this.has('crouch'); }
  consumeJump() { const pending=this.jumpPending; this.jumpPending=false; return pending; }
  consumeInteract() { const pending=this.interactPending; this.interactPending=false; return pending; }
  reset() { this.held.clear(); this.pointers.clear(); this.jumpPending=false; this.interactPending=false; document.querySelectorAll('.pressed').forEach(b=>b.classList.remove('pressed')); }

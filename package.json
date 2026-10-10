@@ -21,7 +21,8 @@
     "test:companions": "node scripts/test-companions.mjs",
     "test:followers": "node scripts/test-followers.mjs",
     "validate:level": "node scripts/validate-level.mjs",
-    "test:scenarios": "node scripts/test-scenarios.mjs"
+    "test:scenarios": "node scripts/test-scenarios.mjs",
+    "test:crawl": "node scripts/test-crawl.mjs"
   },
   "dependencies": {
     "phaser": "3.90.0"

@@ -3,20 +3,21 @@ import type { PatthaFrame, PatthaSheet } from './pattha-state.ts';
 
 export const patthaAtlas=atlas;
 export type PatthaArt={frames:Record<PatthaSheet,HTMLCanvasElement[]>};
-const sheetNames:PatthaSheet[]=['carrera','salto','reposo'];
+const sheetNames=Object.keys(atlas.sheets) as PatthaSheet[];
+type SheetSpec={anchors:number[][];flip:boolean[];rects:number[][];absoluteAnchors?:boolean;scale?:number};
 let loaded:Promise<PatthaArt>|undefined;
 
 /** Slice and align at runtime, retaining the RGBA source sheets without resampling/editing them on disk. */
 export function preparePattha(images:Record<PatthaSheet,HTMLImageElement>):PatthaArt {
   const frames={} as PatthaArt['frames'];
   for(const sheet of sheetNames) {
-    const spec=atlas.sheets[sheet],source=images[sheet];
+    const spec:SheetSpec=atlas.sheets[sheet],source=images[sheet],scale=spec.scale??1;
     frames[sheet]=spec.anchors.map(([ax,ay],i)=>{
       const canvas=document.createElement('canvas');canvas.width=atlas.canvasWidth;canvas.height=atlas.canvasHeight;
       const ctx=canvas.getContext('2d')!;
-      ctx.translate(atlas.canvasWidth/2,atlas.baseline);ctx.scale(spec.flip[i]?-1:1,1);
+      ctx.translate(atlas.canvasWidth/2,atlas.baseline);ctx.scale(spec.flip[i]?-scale:scale,scale);
       const [sx,sy,w,h]=spec.rects[i];
-      const pivotX=(i%atlas.columns)*atlas.frameWidth+ax-sx,pivotY=Math.floor(i/atlas.columns)*atlas.frameHeight+ay-sy;
+      const pivotX=(spec.absoluteAnchors?0:(i%atlas.columns)*atlas.frameWidth)+ax-sx,pivotY=(spec.absoluteAnchors?0:Math.floor(i/atlas.columns)*atlas.frameHeight)+ay-sy;
       ctx.drawImage(source,sx,sy,w,h,-pivotX,-pivotY,w,h);
       return canvas;
     });

@@ -21,13 +21,13 @@ try {
  });assert.equal(run.length,8);record('carrera visible de ocho cuadros completos');
  await gallery.screenshot({path:'docs/capturas/15-pattha-carrera.png'});
  await gallery.locator('.pattha-frames summary').click();
- assert.equal(await gallery.locator('#pattha-frame-grid button').count(),24);
+ assert.equal(await gallery.locator('#pattha-frame-grid button').count(),40);
  const hashes=await gallery.locator('#pattha-frame-grid canvas').evaluateAll(canvases=>canvases.map(c=>{
   const data=c.getContext('2d').getImageData(0,0,c.width,c.height).data;
   return {nonzero:[...data].filter((_,i)=>i%4===3&&data[i]>80).length,image:c.toDataURL()};
- }));assert.ok(hashes.every(h=>h.nonzero>1000));assert.equal(new Set(hashes.map(h=>h.image)).size,24);
- record('24 poses distintas con píxeles opacos y atlas sin cuadros vacíos');
- await gallery.locator('#pattha-frame-grid').screenshot({path:'docs/capturas/18-pattha-24-cuadros.png'});
+ }));assert.ok(hashes.every(h=>h.nonzero>1000));assert.equal(new Set(hashes.map(h=>h.image)).size,40);
+ record('40 poses distintas con píxeles opacos y atlas sin cuadros vacíos');
+ await gallery.locator('#pattha-frame-grid').screenshot({path:'docs/capturas/30-pattha-40-cuadros.png'});
  for(const [index,pose]of [[0,'crouch'],[1,'takeoff'],[2,'rise'],[4,'fall'],[5,'land']]) {
   await gallery.locator(`#pattha-frame-grid [data-sheet="salto"][data-frame="${index}"]`).click();
   await gallery.waitForFunction(pose=>document.querySelector('#pattha-showcase').dataset.pose===pose,pose);

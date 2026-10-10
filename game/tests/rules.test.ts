@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto } from '../src/rules.ts';
+import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto, scoreLevel } from '../src/rules.ts';
 
 test('permite el salto justo después del borde y consume ventanas vencidas',()=>{
  assert.equal(canJump(1000,910,1080),true);
@@ -37,4 +37,22 @@ test('señal resuelta es idempotente',()=>{
 });
 test('destellos no se cuentan dos veces',()=>{
  const p=createProgress();assert.equal(collectCoin(p,7),true);assert.equal(collectCoin(p,7),false);assert.equal(p.coins.size,1);
+});
+
+const points={puntos_por_esfera:100,bonus_todas:1000};
+test('un recorrido parcial suma puntos sin otorgar el bonus',()=>{
+ assert.deepEqual(scoreLevel(new Set([0,1]),3,points),{collected:2,available:3,base:200,bonus:0,total:200,complete:false});
+});
+test('el bonus exige todas las esferas reales del nivel y se calcula una sola vez',()=>{
+ const p=createProgress();[0,1,2].forEach(id=>collectCoin(p,id));
+ const finished=scoreLevel(p.coins,3,points);
+ assert.equal(finished.total,1300);assert.equal(finished.bonus,1000);
+ collectCoin(p,1);assert.deepEqual(scoreLevel(p.coins,3,points),finished);
+ assert.equal(scoreLevel(new Set([0,1,9]),3,points).bonus,0);
+ assert.equal(scoreLevel(p.coins,4,points).bonus,0);
+});
+test('reiniciar limpia el puntaje y un nivel sin esferas no gana un bonus vacío',()=>{
+ assert.equal(scoreLevel(createProgress().coins,30,points).total,0);
+ assert.equal(scoreLevel(new Set(),0,points).complete,false);
+ assert.equal(scoreLevel(new Set(),0,points).bonus,0);
 });

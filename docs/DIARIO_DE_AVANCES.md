@@ -102,3 +102,19 @@ Pedido del adulto: comenzar por la línea argumental, luego niveles y desafíos,
 Se escribió `14_HISTORIA_Y_PROGRESION.md`: premisa, conflicto, tres actos y cierre; seis niveles conectados con el puente ya jugable; progresión desde patrullas hasta corredores, saltarines, duplas, compuertas y jefe; ayuda contextual de los dos amigos; diálogos de muestra y criterios para una futura adaptación del primer capítulo. Faro, Gran Chispa, Don Candado, sucesos y habilidades ampliadas están marcados como PROPUESTA, sin atribuirlos a Dante.
 
 Se revisó la coherencia con README, decisiones, manifiestos y mecánicas/datos activos. Se preservaron código, datos jugables, builds, imágenes y los borradores narrativos originales del kit. Se agregó una referencia en README y se registró el pedido real en el documento de decisiones. Esta entrega es escrita; no implementa ni prueba nuevos niveles. Pendiente conversar sobre argumento, antagonista y funciones de Otto/Rural antes de convertir el primer capítulo en contenido jugable.
+
+## 2026-10-10 · Pattha gatea
+
+Pedido del adulto: agacharse y caminar agachado para pasar por lugares bajos, con todo el set de movimientos. Se generó una plancha RGBA con Imagegen integrada y referencias de Pattha B: cuatro poses de bajada reversibles para levantarse, ocho pasos, descanso, parpadeo, mirada al techo y frenado. Originales y planchas anteriores conservados; atlas ampliado a 40 cuadros.
+
+Se implementaron ↓ / S y Gatear táctil, colisión baja con pies estables, transición reversible, postura segura bajo techo incluso al soltar o pedir salto, pausa y galería ampliada. El pasaje opcional después del puente y las poses concretas son PROPUESTAS para Dante. Ocho escenarios reales del navegador y pruebas previas de carrera/salto pasaron; capturas de galería, pasaje y móvil emulado revisadas. Se prepararon builds locales; no se publicó. Detalles y prompts en `ANIMACIONES_GATEO.md`.
+
+## 2026-10-10 · Escenarios separados y premio por todas las esferas
+
+Pedido del adulto: esferas nunca sobre/debajo de plataformas de salto, checkpoints separados y más puntos al finalizar al recoger todas. Se reubicaron las 30 esferas fuera de las columnas de plataformas, incluyendo el ancho de imagen y un margen. El puente también queda despejado. Los banderines segundo y cuarto se trasladaron, el primero se ajustó y todos tienen suelo seguro alrededor. Activación solo al pisar piso y reaparición a esa altura. Se despejaron carteles respecto de las esferas/banderines y se corrigió la capa de sus textos.
+
+Tareas completadas: distribución y validación automática; puntaje final/bonus y replay; pruebas, capturas y documentación. PROPUESTA configurable: 100 por esfera y 1.000 por colección completa; 30/30 da 4.000. Reintentar conserva IDs únicos y no duplica puntos; terminar con una colección parcial sigue permitido. Detalles y próximas tareas en ESCENARIOS_Y_PUNTAJE_04.md.
+
+Siete pruebas unitarias nuevas (cuatro del mapa y tres del puntaje), ocho escenarios nuevos de integración y doce del recorrido anterior correctos. Las 30 esferas se alcanzaron por colisión física con caminata o salto desde posiciones iniciales adaptadas, sin asignar progreso. Resumen completo y parcial revisados en horizontal; se compactó la tarjeta para evitar scroll en 844×390. Capturas 29–33 y PRUEBAS_ESCENARIOS_04.json. Se preservan la música, amigos/rivales, fondo y trabajo de gateo de la familia en el mismo repositorio.
+
+Próximas tres tareas: recorrido completo con Dante; elegir valor del bonus; prueba en un celular real horizontal. Canon visual, grafía y título siguen sujetos a la familia.

@@ -25,6 +25,8 @@ Las decisiones explícitas de la familia en esta sesión tienen prioridad sobre 
 | Desarrollar primero la línea argumental y luego niveles y desafíos; elaborar enemigos y aumentar la dificultad con ayuda de Otto y Rural | Pedido explícito del adulto para la etapa narrativa; argumento y habilidades concretas pendientes |
 | Seguimiento de Otto/Rural más rápido y ligero, charlas menos frecuentes y recuadros más sutiles | Pedido de ajuste explícito del adulto |
 | Agregar animaciones de fondo muy sutiles, por ejemplo avionetas o gente saludando | Autorizado por el adulto; se implementan avionetas como PROPUESTA decorativa |
+| Esferas fuera de la zona vertical de plataformas, checkpoints separados y premio por recoger todas | Pedido explícito del adulto para mejorar los escenarios |
+| Pattha puede agacharse, caminar agachado/gatear y pasar por lugares bajos; crear su set completo | Pedido explícito del adulto en esta sesión |
 | Sin publicidad, compras, cuentas ni servicios de juego externos | Requisito familiar |
 
 ## Tecnología y decisiones de implementación
@@ -57,7 +59,7 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 - Historia y habilidades oficiales, anotando las palabras de Dante.
 - Dispositivos reales de prueba, edad/ayuda de lectura si la familia desea contarlo.
 - Duración 5–10 min y diversión: objetivo, todavía no medición familiar.
-- Revisar las 24 poses nuevas de Pattha; pulido adicional, escenarios y audio según evaluación familiar.
+- Revisar las 40 poses de Pattha, incluido el nuevo gateo; pulido adicional, escenarios y audio según evaluación familiar.
 - Hosting compartido o exportaciones instalables: decisión posterior.
 
 ## Registro de decisiones
@@ -105,3 +107,13 @@ El adulto entregó `Triumph in Steel.mp3` y pidió usarlo como música de fondo.
 ## Dominio público conectado · 2026-10-10
 
 Juego disponible en `https://sabad.com.ar/pattha_game/`, verificado por HTTPS e inicio de partida. Cloudflare Pages continúa conectado a GitHub y la portada queda reservada para otros proyectos.
+
+## Escenarios y premio por colección completa · 2026-10-10
+
+Pedido confirmado del adulto: ninguna esfera encima ni debajo de las plataformas de salto, banderines separados de las plataformas y más puntos al finalizar si se juntan todas. Se reubicaron las 30 esferas y se ajustaron tres checkpoints, con márgenes que consideran todo el ancho de sus imágenes; todos los banderines se activan en suelo firme. El puente también queda libre de esferas.
+
+PROPUESTA de puntaje implementada: 100 por esfera y +1.000 al recoger todas (4.000 para 30/30). Los valores están en el JSON del nivel y pueden ajustarse con Dante; no se atribuyen a él. El bonus no es necesario para terminar y no se duplica durante reintentos. Ver ESCENARIOS_Y_PUNTAJE_04.md para criterios, pruebas y continuidad.
+
+### Gateo de Pattha · 2026-10-10
+
+Se implementa la habilidad pedida por el adulto: ↓ / S o botón Gatear, pasos en ambas direcciones, bajada y subida reversibles, postura baja al soltar bajo techo y colisión reducida sin desplazar los pies. Imagegen integrada produjo 16 dibujos nuevos derivados de B; el atlas contiene 40 cuadros. Las poses concretas, la velocidad de 125 px/s y el pasaje opcional después del puente son PROPUESTAS de demo para revisar con Dante. Ver [set, controles y procedencia](ANIMACIONES_GATEO.md). Los originales se conservan.

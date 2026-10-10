@@ -255,6 +255,178 @@
           ]
         }
       ]
+    },
+    {
+      "ruta": "assets/animaciones/pattha/gateo-v1.png",
+      "dimensiones_px": [
+        1254,
+        1254
+      ],
+      "canales": "RGBA",
+      "sha256": "22b797c0880e34884b852e25aed32361b630081c40862a3cf358fdd93e411cb4",
+      "tipo": "spritesheet_generado_16_poses",
+      "frames": [
+        {
+          "index": 0,
+          "nombre": "inicio_de_bajada",
+          "opaque_bounds_global": [
+            46,
+            14,
+            262,
+            368
+          ]
+        },
+        {
+          "index": 1,
+          "nombre": "flexionar_rodillas",
+          "opaque_bounds_global": [
+            357,
+            59,
+            578,
+            370
+          ]
+        },
+        {
+          "index": 2,
+          "nombre": "apoyar_manos",
+          "opaque_bounds_global": [
+            637,
+            112,
+            858,
+            374
+          ]
+        },
+        {
+          "index": 3,
+          "nombre": "apoyar_rodillas",
+          "opaque_bounds_global": [
+            936,
+            163,
+            1222,
+            374
+          ]
+        },
+        {
+          "index": 4,
+          "nombre": "gateo_paso_1",
+          "opaque_bounds_global": [
+            21,
+            437,
+            316,
+            671
+          ]
+        },
+        {
+          "index": 5,
+          "nombre": "gateo_paso_2",
+          "opaque_bounds_global": [
+            348,
+            430,
+            612,
+            670
+          ]
+        },
+        {
+          "index": 6,
+          "nombre": "gateo_paso_3",
+          "opaque_bounds_global": [
+            626,
+            447,
+            926,
+            659
+          ]
+        },
+        {
+          "index": 7,
+          "nombre": "gateo_paso_4",
+          "opaque_bounds_global": [
+            954,
+            436,
+            1233,
+            678
+          ]
+        },
+        {
+          "index": 8,
+          "nombre": "gateo_paso_5",
+          "opaque_bounds_global": [
+            18,
+            728,
+            315,
+            942
+          ]
+        },
+        {
+          "index": 9,
+          "nombre": "gateo_paso_6",
+          "opaque_bounds_global": [
+            348,
+            727,
+            619,
+            956
+          ]
+        },
+        {
+          "index": 10,
+          "nombre": "gateo_paso_7",
+          "opaque_bounds_global": [
+            645,
+            725,
+            950,
+            939
+          ]
+        },
+        {
+          "index": 11,
+          "nombre": "gateo_paso_8",
+          "opaque_bounds_global": [
+            966,
+            726,
+            1237,
+            965
+          ]
+        },
+        {
+          "index": 12,
+          "nombre": "descanso_bajo",
+          "opaque_bounds_global": [
+            30,
+            983,
+            301,
+            1236
+          ]
+        },
+        {
+          "index": 13,
+          "nombre": "parpadeo_bajo",
+          "opaque_bounds_global": [
+            335,
+            981,
+            607,
+            1237
+          ]
+        },
+        {
+          "index": 14,
+          "nombre": "mirar_el_techo",
+          "opaque_bounds_global": [
+            648,
+            1006,
+            915,
+            1238
+          ]
+        },
+        {
+          "index": 15,
+          "nombre": "frenar_gateo",
+          "opaque_bounds_global": [
+            946,
+            1020,
+            1237,
+            1231
+          ]
+        }
+      ]
     }
   ],
   "proceso": [

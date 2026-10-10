@@ -1,0 +1,245 @@
+{
+  "fecha": "2026-10-10T19:49:29.295Z",
+  "entorno": "Chromium aislado; escritorio 1280×800 y horizontal 844×390; emulación táctil para final parcial",
+  "metodo": "Se adapta la posición inicial para aislar cada escenario. Las esferas se recogen por física con caminata/saltos de teclado; se superan rivales por colisión desde arriba y el puente se abre jugando. No se modifican esferas, puntos ni progreso. No equivale a una partida familiar continua.",
+  "checks": [
+    "30 esferas sin alineación vertical con plataformas ni con el puente",
+    "cinco checkpoints separados, activación al pisar suelo y reaparición segura",
+    "todas las esferas alcanzables con caminata o salto; duplicados y caídas conservan el conteo",
+    "30 de 30: 3.000 puntos de esferas + 1.000 de bonus = 4.000 al finalizar",
+    "puntaje, bonus y replay visibles en pantalla horizontal 844×390",
+    "otra aventura limpia las esferas, checkpoints y bonus anterior",
+    "final parcial en mobile: solo puntos recogidos, sin bonus y con pista para otra partida",
+    "sin errores JavaScript ni solicitudes externas"
+  ],
+  "esferas": [
+    {
+      "esfera": 1,
+      "x": 200,
+      "y": 475,
+      "recogida": true,
+      "salto": false
+    },
+    {
+      "esfera": 2,
+      "x": 500,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 3,
+      "x": 810,
+      "y": 425,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 4,
+      "x": 975,
+      "y": 395,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 5,
+      "x": 1120,
+      "y": 475,
+      "recogida": true,
+      "salto": false
+    },
+    {
+      "esfera": 6,
+      "x": 1450,
+      "y": 365,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 7,
+      "x": 1995,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 8,
+      "x": 2110,
+      "y": 345,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 9,
+      "x": 2260,
+      "y": 420,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 10,
+      "x": 2420,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 11,
+      "x": 2880,
+      "y": 365,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 12,
+      "x": 2990,
+      "y": 475,
+      "recogida": true,
+      "salto": false
+    },
+    {
+      "esfera": 13,
+      "x": 3100,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 14,
+      "x": 3600,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 15,
+      "x": 3725,
+      "y": 365,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 16,
+      "x": 4020,
+      "y": 375,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 17,
+      "x": 4340,
+      "y": 360,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 18,
+      "x": 4680,
+      "y": 450,
+      "recogida": true,
+      "salto": false
+    },
+    {
+      "esfera": 19,
+      "x": 4820,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 20,
+      "x": 5275,
+      "y": 370,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 21,
+      "x": 5550,
+      "y": 350,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 22,
+      "x": 5595,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 23,
+      "x": 6100,
+      "y": 380,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 24,
+      "x": 6170,
+      "y": 475,
+      "recogida": true,
+      "salto": false
+    },
+    {
+      "esfera": 25,
+      "x": 6260,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 26,
+      "x": 6380,
+      "y": 375,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 27,
+      "x": 6460,
+      "y": 390,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 28,
+      "x": 7000,
+      "y": 350,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 29,
+      "x": 7055,
+      "y": 405,
+      "recogida": true,
+      "salto": true
+    },
+    {
+      "esfera": 30,
+      "x": 7100,
+      "y": 370,
+      "recogida": true,
+      "salto": true
+    }
+  ],
+  "puntaje_completo": {
+    "collected": 30,
+    "available": 30,
+    "base": 3000,
+    "bonus": 1000,
+    "total": 4000,
+    "complete": true
+  },
+  "puntaje_parcial": {
+    "collected": 2,
+    "available": 30,
+    "base": 200,
+    "bonus": 0,
+    "total": 200,
+    "complete": false
+  },
+  "errors": [],
+  "external": []
+}

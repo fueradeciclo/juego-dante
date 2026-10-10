@@ -9,7 +9,7 @@ export class PatthaAnimator {
   private sprite:Phaser.GameObjects.Image;
   constructor(scene:Phaser.Scene,readonly host:Phaser.Physics.Arcade.Sprite) {
     const sheets={} as Record<PatthaSheet,HTMLImageElement>;
-    for(const key of ['carrera','salto','reposo'] as PatthaSheet[])sheets[key]=scene.textures.get('pattha-'+key).getSourceImage() as HTMLImageElement;
+    for(const key of Object.keys(patthaAtlas.sheets) as PatthaSheet[])sheets[key]=scene.textures.get('pattha-'+key).getSourceImage() as HTMLImageElement;
     const art=preparePattha(sheets);
     for(const [sheet,frames]of Object.entries(art.frames))for(const [i,canvas]of frames.entries()) {
       const key=`pattha-v3-${sheet}-${i}`;if(!scene.textures.exists(key))scene.textures.addCanvas(key,canvas);
