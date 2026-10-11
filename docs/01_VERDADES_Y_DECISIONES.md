@@ -9,14 +9,14 @@ Las decisiones explícitas de la familia en esta sesión tienen prioridad sobre 
 | Dante creó los dibujos originales de los personajes | Confirmado en el kit familiar |
 | Robot protagonista verde, negro y metálico, estilo cartoon moderno | Confirmado |
 | Pattha es la escritura de referencia | Grafía final pendiente: el adulto también usa Pata |
-| Ratón verde amigo: **Otto** | Confirmado por el adulto en el primer pedido de esta sesión; el kit lo dejaba sin nombre |
-| Ratón azul amigo: **Rural** | Confirmado |
+| Amigo ratón **Otto**, cuerpo color hueso | Nombre confirmado anteriormente; el adulto reemplazó el verde por hueso el 2026-10-11. Originales verdes conservados |
+| Amigo ratón **Rural**, cuerpo gris muy oscuro | Nombre confirmado anteriormente; el adulto reemplazó el azul por gris muy oscuro el 2026-10-11. Originales azules conservados |
 | Género: plataformas 2D lateral | Elegido por el adulto en esta sesión |
 | Destino inicial: navegador en computadora y celular horizontal | Elegido por el adulto; exportaciones a otros destinos para después |
 | Solo Pattha controlable | Elegido; ratones aliados, otro modo para una etapa posterior |
 | Pattha salta y combate gatos/perros | Pedido actual; «asaltar» se interpretó como «saltar entre plataformas» |
 | Crear gatos/perros consistentes con el arte disponible | Autorizado por el adulto con las referencias del kit |
-| Todo el juego/build en un nuevo repositorio propio dedicado | Pedido explícito; repositorio privado fueradeciclo/juego-dante |
+| Todo el juego/build en un nuevo repositorio propio dedicado | Pedido explícito; repositorio fueradeciclo/juego-dante |
 | Animar movimiento, parpadeos y gestos después de esperar en todos los personajes | Pedido explícito del adulto en la siguiente iteración; incluye Pattha, Otto, Rural, gato y perro |
 | Priorizar un set más pulido de Pattha: carrera real, agacharse/estirarse para saltar, polvo y poses distintas al subir/caer | Pedido explícito del adulto para la demo 0.3 |
 | Mejorar los movimientos de todos salvo Pattha, con menos variedad que el protagonista | Pedido explícito del adulto en esta iteración |
@@ -118,10 +118,78 @@ PROPUESTA de puntaje implementada: 100 por esfera y +1.000 al recoger todas (4.0
 
 Se implementa la habilidad pedida por el adulto: ↓ / S o botón Gatear, pasos en ambas direcciones, bajada y subida reversibles, postura baja al soltar bajo techo y colisión reducida sin desplazar los pies. Imagegen integrada produjo 16 dibujos nuevos derivados de B; el atlas contiene 40 cuadros. Las poses concretas, la velocidad de 125 px/s y el pasaje opcional después del puente son PROPUESTAS de demo para revisar con Dante. Ver [set, controles y procedencia](ANIMACIONES_GATEO.md). Los originales se conservan.
 
+### Estado del repositorio de trabajo · 2026-10-10
+
+Al verificar la entrega 0.4, GitHub informa `private: false`: el repositorio dedicado actualmente es público. La creación inicial como privado queda en el registro histórico. Esta observación actualiza la descripción del README y de la publicación; no se atribuye a Dante como una decisión creativa.
+
+## Aventura de dos capítulos · 2026-10-11
+
+Decisiones explícitas del adulto durante planificación e implementación:
+
+- Primera versión: sendero + Bosque de Antenas; objetivo 15–20 minutos, sin duración certificada todavía.
+- Mantener Phaser y navegador de computadora/celular horizontal.
+- Usar la Gran Chispa, faro y Don Candado como base de trabajo provisional. No constituye aprobación de canon por Dante.
+- Guardado local con recuperación desde el último banderín y conservación de avances.
+- Escenarios nuevos: conceptos a revisar antes del arte final; personajes actuales preservados.
+- Dificultad suave y progresiva; tres puntos de energía y reintentos libres.
+- Antena: relacionar formas y orientaciones con pista visible, sin memoria ni límite de tiempo.
+- Narración por un adulto, para historia y acertijos; conversaciones ambientales sin voz.
+- Implementar el plan y entregar maqueta jugable, soporte de audio, guion y build local. Publicación para otra decisión.
+
+El mapa del bosque, las frases, los tiempos del corredor, el gesto de Otto y los valores de colección son propuestas de implementación revisables. No se registran como elecciones de Dante. Véase 15_AVENTURA_05.md y 16_GUION_GRABACION_05.md. Voces reales y arte final siguen pendientes de recepción/revisión familiar.
+
+### Visibilidad de avionetas · 2026-10-11
+
+El adulto informó que no veía las avionetas. Se agregó vista previa del cielo en la galería, primera pasada más temprana, mayor contraste y vuelos a altura que deja verlas sobre el bosque. Como reducir movimiento ocultaba los vuelos, se incorporó una elección explícita «Avionetas en el cielo» en inicio/pausa, guardada como preferencia local independiente de la aventura. La configuración del dispositivo se conserva; las otras animaciones siguen respetando reducir movimiento. Los vuelos manuales de la galería se activan al tocar su botón. La forma vectorial y los tiempos son PROPUESTA de implementación decorativa.
+
 ## Música oficial · 2026-10-11
 
-La familia eligió definitivamente Iron Teeth Against the Gear; su riff inicial es la identidad musical oficial de Pattha. Preservar exactamente la grabación, notas, silencios y ritmo. Sustituye Triumph in Steel como principal; esta se conserva como respaldo. Ver MUSICA_OFICIAL_PATTHA.md.
+La familia confirmó Iron Teeth Against the Gear (creada con Gemini según el adulto). El riff inicial es la identidad musical oficial de Pattha y debe conservarse sin modificaciones. MP3 original intacto en assets/audio/pattha-main-theme-v1.mp3. Triumph in Steel se conserva como respaldo.
 
-## Música oficial · 2026-10-11
+## Identidad visual y colores de los amigos · 2026-10-11
 
-La familia eligió definitivamente Iron Teeth Against the Gear; su riff inicial es la identidad musical oficial de Pattha. Preservar exactamente la grabación, notas, silencios y ritmo. Sustituye Triumph in Steel como principal; esta se conserva como respaldo. Ver MUSICA_OFICIAL_PATTHA.md.
+Decisiones explícitas del adulto en esta conversación:
+
+- Usar **PATTHA**, sin subtítulo, en las propuestas de portada y logo. No confirma por sí solo la grafía definitiva con Dante.
+- Dirección visual: cartoon de **aventura enérgica**, conservando la identidad del concepto B de Pattha como referencia provisional.
+- **Otto:** reemplazar el cuerpo verde por color hueso, con crema suave y sombras cálidas; evitar blanco puro uniforme.
+- **Rural:** reemplazar el cuerpo azul por gris muy oscuro, con detalles en gris cálido más claro; evitar negro puro uniforme.
+- Conservar siluetas, proporciones, ojos, orejas y demás rasgos de ambos amigos. El cambio de colores actualiza las referencias anteriores; los originales se conservan.
+- Comparar **violeta y crema** con **azul y ámbar**, manteniendo verde, grafito, metal y cian de Pattha. Las paletas secundarias se aplican a fondos, luces y gráfica.
+- Primera entrega: **dos láminas comparativas** con portada, menú, logo, ícono, avatares, publicación y muestras de merchandising. Archivos individuales de producción e integración al juego quedan para después de elegir la dirección.
+
+Los HEX concretos, poses, escenarios ilustrados, tipografía y aplicaciones son **PROPUESTAS** de arte conceptual pendientes de revisión con Dante; no se atribuyen a él. La decisión de recolorear a los amigos sí fue tomada por el adulto. Esta entrega no recolorea los sprites ni modifica el juego publicado. Fuentes, prompts y revisión en `assets/interfaz/conceptos/identidad/`.
+
+### Dirección visual elegida por Dante · 2026-10-11
+
+El adulto informó explícitamente: **«Dante eligió ámbar y azul. Vamos por esa propuesta»**. Se adopta **02 · Azul y ámbar** como dirección visual de PATTHA y referencia para desarrollar las siguientes piezas. Lámina seleccionada: `assets/interfaz/conceptos/identidad/pattha-azul-ambar-v1.png`. Violeta y crema queda conservada como alternativa histórica.
+
+La elección confirma la combinación visual azul y ámbar; no implica aprobar por separado cada pose, escenario, tipografía o HEX exacto ni cambiar la historia. Se mantienen las decisiones del adulto sobre Otto hueso y Rural gris muy oscuro y la paleta verde/grafito/metal/cian de Pattha.
+
+## Tileset y campaña completa autorizados · 2026-10-11
+
+El adulto pidió implementar el plan de arte y campaña completa: seis capítulos jugables (sendero, bosque, túneles, fábrica, patios y faro), cartoon ilustrado azul/ámbar y variedad luminosa, objetivo orientativo 45–60 minutos, amigos recoloreados también dentro del juego y mecánicas progresivas de la propuesta narrativa.
+
+Don Candado será un perro distinto y malicioso, con salto que permita a Pattha pasar por debajo, carreras y compuertas. El combate tendrá tres fases, cooperación y victoria por salto encima en descanso vulnerable; se conservarán fases superadas en los reintentos.
+
+Estas ampliaciones fueron elegidas por el adulto; no se atribuyen a Dante. La ejecución está condicionada a **tres validaciones humanas explícitas**: muestras/conceptos, kits completos/pruebas aisladas y campaña integrada. Autorizar implementar el plan no equivale a aprobar muestras todavía no presentadas. La producción completa espera la primera validación; la integración de campaña espera la segunda. Publicación y push que dispare despliegue requieren otra autorización.
+
+Plan operativo y registro de hitos: [17_TILESET_Y_CAMPANA.md](17_TILESET_Y_CAMPANA.md). El juego actual conserva por ahora sus dos capítulos y su arte; la primera entrega de este trabajo es conceptual.
+
+Entrega de Hito 1: seis muestras de ambiente, lámina de módulos ensamblados corregida (v2) y concepto de Don Candado con seis poses de salto/esquema de evasión, generados con Imagegen integrada. Galería y evidencia en `assets/escenarios/tilesets/hito-1/`. Inspección visual y revisión de galería en computadora/celular emulado realizadas; código y fuentes sin cambios. **Aprobación de Hito 1 todavía pendiente**. Estas láminas no son tilesets funcionales ni animaciones ni pruebas de física.
+
+### Hito 1 aprobado · 2026-10-11
+
+El adulto respondió **«Si. Apruebo todo. Avancemos»**. Quedan aprobadas las seis muestras de ambiente, escala conceptual del trío, propuesta modular y apariencia/poses conceptuales de Don Candado. Se autoriza producir el Hito 2: kits completos, derivados de personajes y pruebas aisladas. La aprobación no certifica física ni convierte las láminas en atlas funcionales. La integración de seis capítulos sigue esperando la aprobación del Hito 2.
+
+### Hito 2 · entrega técnica para revisar · 2026-10-11
+
+Se produjeron seis kits, piezas individuales y ocho atlas; estados comunes, fondos exteriores/interiores, derivados de Otto/Rural y 16 frames de Don Candado. Fuente, prompts y manifiesto en `assets/escenarios/tilesets/`; instrucciones en `LEEME.md`. Taller independiente en `game/tilesets.html`, con pruebas de ascensor, plataforma, compuerta, gato, dupla y jefe. Las colisiones se definen explícitamente. La galería es una herramienta local separada del build del juego.
+
+Se conservaron los originales y la música oficial. Los cambios de trazo de los derivados y los valores de mecanismos son PROPUESTAS técnicas, no decisiones nuevas de Dante. Las fases y ayudas de la prueba del jefe tienen un guardado aislado; no migran ni modifican la aventura vigente. La campaña de seis capítulos y su duración siguen pendientes de Hito 3. **La aprobación humana del Hito 2 no se ha recibido.**
+
+### Hito 2 aprobado y publicación autorizada · 2026-10-11
+
+El adulto respondió **«Apruebo todo. Subamos y actualicemos la versión en cloudflare»** después de la entrega técnica del Hito 2. Quedan aprobados los kits y las pruebas aisladas; se autoriza integrar el Hito 3 y actualizar el proyecto existente de Cloudflare Pages, `juego-dante`, servido en `sabad.com.ar/pattha_game/`. Esta respuesta reemplaza el estado pendiente de aprobación del Hito 2 indicado arriba.
+
+La actualización 0.5.1 publica la aventura disponible de sendero y bosque, gateo, guardado, avionetas y música oficial. La campaña integrada de seis capítulos todavía no está implementada ni validada; el taller de mecanismos permanece separado del build de producción. No se cambia el dominio ni se atribuye esta autorización a Dante. El resultado del despliegue se registra en `PUBLICACION_CLOUDFLARE.md` al verificarlo.

@@ -1,8 +1,35 @@
+# Pattha · Aventura 0.5.1
+
+**Dos capítulos jugables:** El sendero de los amigos y Bosque de Antenas. Nueva historia provisional, perro corredor, ayuda automática de Otto, orientación de antena con Rural y guardado local desde banderines. Solo controlás a Pattha.
+
+![Maqueta del Bosque de Antenas](docs/capturas/aventura-bosque-inicio.png)
+
+## Jugar
+
+Abrí `scripts/jugar.command` con doble clic, o ejecutá `./scripts/jugar.command` y abrí **http://localhost:5173**. Mantené abierta la ventana del servidor. Nueva aventura empieza desde el sendero; Continuar recupera el avance del navegador. Para una instalación nueva: Node 24+, pnpm 11.25.0, `pnpm install --frozen-lockfile --ignore-scripts` y `pnpm dev`.
+
+En celular horizontal: misma Wi-Fi y `http://IP-DE-LA-COMPUTADORA:5173`. Flechas/A-D para mover, Espacio/W/↑ para saltar, ↓/S para gatear, E/Enter para Ayudar y Esc para pausar. En celular hay botones multitáctiles. Activá **Avionetas en el cielo** en el inicio o pausa para verlas también si usás reducir movimiento; la elección queda guardada en este navegador. En la [galería](http://localhost:5173/animaciones.html#sky-preview-title), **Ver pasar una avioneta** muestra un vuelo de prueba. En acertijos: tocá las formas o usá 1/2/3.
+
+**Estado:** maqueta jugable con escenarios conceptuales. Voces del adulto todavía pendientes; subtítulos y pistas funcionan. Duración objetivo 15–20 minutos, pendiente de medir con la familia. Actualización 0.5.1 autorizada para Cloudflare; resultado de publicación en docs/PUBLICACION_CLOUDFLARE.md.
+
+[Detalle de la entrega, guardado y controles](docs/15_AVENTURA_05.md) · [Conceptos para revisar](assets/escenarios/conceptos/bosque-antenas-v1.svg) · [Guion para grabar](docs/16_GUION_GRABACION_05.md)
+
+## Verificar y preparar
+
+`pnpm typecheck`, `pnpm test`, `pnpm validate:level`. Con `pnpm dev` activo: `pnpm test:campaign`, `pnpm test:browser` y `pnpm test:scenarios`. Pruebas de animación/gateo disponibles en los comandos existentes; `pnpm test:ambient` verifica las avionetas y su opción de visibilidad. Evidencia nueva en `docs/PRUEBAS_AVENTURA_05.json` y capturas `aventura-*`.
+
+`pnpm build:site` produce `builds/web/` y `builds/site/pattha_game/`; `pnpm preview` sirve el build en http://localhost:4173. Para las voces recibidas: copiar los archivos enumerados en el guion, ejecutar `pnpm prepare:narration` y volver a construir.
+
+Se mantienen Phaser/TypeScript/Vite, personajes, fuentes y derechos previos. Contenido activo en `data/campana.json`, `data/capitulo_sendero.json` y `data/capitulo_bosque.json`; `data/demo_plataformas.json` se conserva como antecedente. Sin datos personales, cuentas o solicitudes externas del juego; localStorage conserva exclusivamente progreso en este dispositivo.
+
+<details>
+<summary>Documentación histórica de la demo 0.4</summary>
+
 # Demo de plataformas de Dante · 0.4
 
 Juego familiar 2D para navegador de computadora y celular **horizontal**. Solo controlás a **Pattha**; **Otto** (verde) y **Rural** (azul) te acompañan. Nombre definitivo del juego y escritura del robot pendientes.
 
-Repositorio dedicado y privado: https://github.com/fueradeciclo/juego-dante
+Repositorio dedicado: https://github.com/fueradeciclo/juego-dante
 
 **Escenarios y puntaje:** las 30 esferas quedan en espacios libres entre plataformas y los cinco checkpoints están separados. Cada esfera suma **100 puntos**; juntarlas todas da **1.000 puntos extra al finalizar** (4.000 en total). Los valores son una propuesta ajustable. Ver [distribución, reglas y pruebas](docs/ESCENARIOS_Y_PUNTAJE_04.md).
 
@@ -133,3 +160,5 @@ Las planchas nuevas de Pattha sí contienen poses distintas; fueron creadas con 
 No hay publicidad, compras, cuentas de jugadores, analíticas, backend ni solicitudes externas del juego. La música de fondo es «Triumph in Steel», elegida y proporcionada por la familia. Arranca al jugar: usá ♫ Silenciar y Volumen en la barra superior. Baja durante diálogos y se suspende al pausar. El MP3 se conserva en assets/audio/triumph-in-steel.mp3 y se repite completo. El juego está publicado en Cloudflare Pages; las exportaciones instalables quedan para otra decisión.
 
 Los dibujos y personajes de Dante conservan sus derechos; este proyecto no les asigna una licencia abierta. Ver [procedencia](docs/13_CREDITOS_Y_PROCEDENCIA.md) y [licencias técnicas](docs/LICENCIAS_TECNICAS.md).
+
+</details>

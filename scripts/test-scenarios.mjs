@@ -18,6 +18,7 @@ else if(!existsSync(chromium.executablePath()))options.channel='chrome';
 const browser=await chromium.launch(options);
 await mkdir('docs/capturas',{recursive:true});
 const monitor=page=>{
+ page.on('dialog',d=>d.accept());
  page.on('pageerror',e=>errors.push(e.message));
  page.on('request',r=>{if(r.url().startsWith('http')&&!/^(localhost|127\.0\.0\.1)$/.test(new URL(r.url()).hostname))external.push(r.url());});
 };
@@ -42,14 +43,14 @@ async function openBridge(page) {
 }
 async function finish(page) {
  await position(page,7150,540);await waitMode(page,'dialogue');
- for(let i=0;i<2;i++)await page.locator('#continue').click();await waitMode(page,'won');
+ for(let i=0;i<4;i++){if((await snapshot(page)).mode==='won')break;if((await snapshot(page)).mode==='dialogue')await page.locator('#continue').click();await page.waitForTimeout(60);}await waitMode(page,'won');
 }
 function number(text) {return Number(text.replace(/[^\d]/g,''));}
 try {
  const page=await browser.newPage({viewport:{width:1280,height:800}});monitor(page);await start(page);
  assert.deepEqual(validateLevelLayout(level),[]);
  await position(page,680,540);await waitGround(page);
- await page.screenshot({path:'docs/capturas/29-esferas-espacios-libres.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-29-esferas-espacios-libres.png'});
  record('30 esferas sin alineación vertical con plataformas ni con el puente');
 
  // A flag cannot be activated from the air; each respawn lies on firm ground.
@@ -59,7 +60,7 @@ try {
   await position(page,x,540);await waitGround(page);
   await page.waitForFunction(x=>window.__PATTHA_TEST__.snapshot().checkpoint===x,x);
  }
- await page.screenshot({path:'docs/capturas/30-checkpoint-separado.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-30-checkpoint-separado.png'});
  await position(page,4800,850);await page.waitForTimeout(200);
  const safe=await snapshot(page);assert.equal(safe.checkpoint,level.puestos_control.at(-1));assert.ok(Math.abs(safe.y-540)<2);
  record('cinco checkpoints separados, activación al pisar suelo y reaparición segura');
@@ -105,13 +106,13 @@ try {
  assert.equal(number(await page.locator('#win-base').innerText()),full.base);
  assert.equal(number(await page.locator('#win-score').innerText()),full.total);
  assert.ok(await page.locator('#win-bonus').isVisible());assert.match(await page.locator('#win-bonus').innerText(),/Todas las esferas/);
- assert.equal(full.total,4000);await page.screenshot({path:'docs/capturas/31-final-bonus-todas.png'});
+ assert.equal(full.total,4000);await page.screenshot({path:'docs/capturas/regresion-05-31-final-bonus-todas.png'});
  record('30 de 30: 3.000 puntos de esferas + 1.000 de bonus = 4.000 al finalizar');
  await page.setViewportSize({width:844,height:390});
  const layout=await page.locator('.win-card').evaluate(card=>({scroll:card.scrollHeight,height:card.clientHeight,rect:card.getBoundingClientRect().toJSON(),stage:document.querySelector('#stage').getBoundingClientRect().toJSON()}));
  assert.ok(layout.scroll<=layout.height+1,'El resumen completo debe caber en horizontal.');
  assert.ok(layout.rect.bottom<=layout.stage.bottom+1);
- await page.screenshot({path:'docs/capturas/32-final-bonus-horizontal.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-32-final-bonus-horizontal.png'});
  record('puntaje, bonus y replay visibles en pantalla horizontal 844×390');
  await page.locator('#replay').click();await waitMode(page,'dialogue');
  assert.equal((await snapshot(page)).coins,0);assert.equal((await snapshot(page)).checkpoint,130);
@@ -125,8 +126,8 @@ try {
  assert.ok(partial.collected>0&&partial.collected<level.monedas.length);
  assert.equal(number(await mobile.locator('#win-score').innerText()),partial.base);
  assert.ok(await mobile.locator('#win-bonus').isHidden());assert.ok(await mobile.locator('#win-tip').isVisible());
- await mobile.screenshot({path:'docs/capturas/33-final-parcial-horizontal.png'});
+ await mobile.screenshot({path:'docs/capturas/regresion-05-33-final-parcial-horizontal.png'});
  record('final parcial en mobile: solo puntos recogidos, sin bonus y con pista para otra partida');
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);record('sin errores JavaScript ni solicitudes externas');
- await writeFile('docs/PRUEBAS_ESCENARIOS_04.json',JSON.stringify({fecha:new Date().toISOString(),entorno:'Chromium aislado; escritorio 1280×800 y horizontal 844×390; emulación táctil para final parcial',metodo:'Se adapta la posición inicial para aislar cada escenario. Las esferas se recogen por física con caminata/saltos de teclado; se superan rivales por colisión desde arriba y el puente se abre jugando. No se modifican esferas, puntos ni progreso. No equivale a una partida familiar continua.',checks,esferas:collectedTrace,puntaje_completo:full,puntaje_parcial:partial,errors,external},null,2)+'\n');
-} finally {await browser.close();}
+ await writeFile('docs/PRUEBAS_ESCENARIOS_REGRESION_05.json',JSON.stringify({fecha:new Date().toISOString(),entorno:'Chromium aislado; escritorio 1280×800 y horizontal 844×390; emulación táctil para final parcial',metodo:'Se adapta la posición inicial para aislar cada escenario. Las esferas se recogen por física con caminata/saltos de teclado; se superan rivales por colisión desde arriba y el puente se abre jugando. No se modifican esferas, puntos ni progreso. No equivale a una partida familiar continua.',checks,esferas:collectedTrace,puntaje_completo:full,puntaje_parcial:partial,errors,external},null,2)+'\n');
+} finally {for(const context of browser.contexts())await context.close();await browser.close();}

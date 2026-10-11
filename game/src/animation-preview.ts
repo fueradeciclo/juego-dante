@@ -3,6 +3,8 @@ import { characterKinds, loadRig } from './character-art.ts';
 import './style.css';
 import { animatePatthaPreview } from './pattha-preview.ts';
 import { loadPatthaArt } from './pattha-art.ts';
+import { animateSkyPreview } from './ambient-preview.ts';
+animateSkyPreview();
 let mode:PreviewMode='auto';
 for(const button of document.querySelectorAll<HTMLButtonElement>('[data-preview]')) {
   button.onclick=()=>{

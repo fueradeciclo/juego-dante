@@ -1,0 +1,366 @@
+{
+  "id": "bosque",
+  "titulo": "Bosque de Antenas",
+  "escenario": "bosque",
+  "version": "0.5",
+  "estado_creativo": "PROPUESTA de maqueta; arte final pendiente de revisión familiar",
+  "aparicion": 130,
+  "personajes": {
+    "pattha": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
+    "otto": "assets/personajes/transparentes/raton_verde_concepto_transparente.png",
+    "rural": "assets/personajes/transparentes/rural_concepto_transparente.png",
+    "gato": "assets/enemigos/gato-v1.png",
+    "perro": "assets/enemigos/perro-v1.png"
+  },
+  "mundo": {
+    "ancho": 6200,
+    "alto": 720,
+    "piso": 540
+  },
+  "suelo": [
+    [
+      0,
+      1900
+    ],
+    [
+      2040,
+      3560
+    ],
+    [
+      3700,
+      4800
+    ],
+    [
+      4940,
+      6200
+    ]
+  ],
+  "plataformas": [
+    [
+      650,
+      440,
+      180
+    ],
+    [
+      1160,
+      365,
+      180
+    ],
+    [
+      2260,
+      445,
+      180
+    ],
+    [
+      2530,
+      365,
+      180
+    ],
+    [
+      3900,
+      440,
+      180
+    ],
+    [
+      4200,
+      350,
+      180
+    ],
+    [
+      5180,
+      445,
+      180
+    ],
+    [
+      5420,
+      365,
+      180
+    ]
+  ],
+  "pasajes_bajos": [
+    [
+      3030,
+      420,
+      160,
+      22
+    ]
+  ],
+  "monedas": [
+    [
+      250,
+      475
+    ],
+    [
+      450,
+      395
+    ],
+    [
+      850,
+      430
+    ],
+    [
+      980,
+      375
+    ],
+    [
+      1320,
+      425
+    ],
+    [
+      1550,
+      400
+    ],
+    [
+      1740,
+      470
+    ],
+    [
+      1970,
+      395
+    ],
+    [
+      2100,
+      470
+    ],
+    [
+      2400,
+      390
+    ],
+    [
+      2710,
+      400
+    ],
+    [
+      2860,
+      475
+    ],
+    [
+      3400,
+      430
+    ],
+    [
+      3630,
+      395
+    ],
+    [
+      4040,
+      390
+    ],
+    [
+      4370,
+      380
+    ],
+    [
+      4620,
+      470
+    ],
+    [
+      4870,
+      395
+    ],
+    [
+      5620,
+      410
+    ],
+    [
+      5800,
+      475
+    ]
+  ],
+  "puntaje": {
+    "puntos_por_esfera": 100,
+    "bonus_todas": 1000
+  },
+  "enemigos": [
+    {
+      "tipo": "perro",
+      "x": 1550,
+      "min": 1400,
+      "max": 1770,
+      "velocidad": 90,
+      "comportamiento": "corredor"
+    },
+    {
+      "tipo": "gato",
+      "x": 2810,
+      "min": 2700,
+      "max": 2900,
+      "velocidad": 60
+    },
+    {
+      "tipo": "perro",
+      "x": 4500,
+      "min": 4370,
+      "max": 4700,
+      "velocidad": 90,
+      "comportamiento": "corredor"
+    },
+    {
+      "tipo": "gato",
+      "x": 5650,
+      "min": 5550,
+      "max": 5760,
+      "velocidad": 62
+    }
+  ],
+  "puestos_control": [
+    480,
+    2100,
+    3330,
+    5000
+  ],
+  "interacciones": [
+    {
+      "kind": "otto",
+      "min": 3120,
+      "max": 3310,
+      "x": 3220
+    },
+    {
+      "kind": "rural",
+      "min": 5900,
+      "max": 6140,
+      "x": 6010
+    }
+  ],
+  "antena": {
+    "x": 6050,
+    "orientacion": 1
+  },
+  "salida": 6100,
+  "carteles": [
+    {
+      "x": 160,
+      "texto": "Bosque de Antenas"
+    },
+    {
+      "x": 1340,
+      "texto": "¡Mirá el aviso!"
+    },
+    {
+      "x": 3190,
+      "texto": "Otto llega al seguro"
+    },
+    {
+      "x": 5860,
+      "texto": "La antena →"
+    }
+  ],
+  "zonas": [
+    {
+      "hasta": 2040,
+      "nombre": "El paso del corredor"
+    },
+    {
+      "hasta": 3700,
+      "nombre": "El interruptor de Otto"
+    },
+    {
+      "hasta": 6200,
+      "nombre": "La señal de Rural"
+    }
+  ],
+  "objetivos": [
+    {
+      "requisito": "switch",
+      "texto": "Llegá al acceso pequeño y pedile ayuda a Otto."
+    },
+    {
+      "requisito": "antenna",
+      "texto": "Buscá a Rural y orientá la antena."
+    },
+    {
+      "requisito": "exit",
+      "texto": "¡La señal volvió! Escuchemos el mensaje."
+    }
+  ],
+  "acertijo": {
+    "tipo": "orientacion",
+    "pista": "La señal del faro tiene una estrella ★. Elegí la antena con esa forma.",
+    "voz_id": "bosque-pista"
+  },
+  "charlas_amigos": {
+    "camino": [
+      {
+        "quien": "otto",
+        "texto": "¡Qué altos son estos árboles!"
+      },
+      {
+        "quien": "rural",
+        "texto": "La antena está más adelante."
+      }
+    ],
+    "cruzado": [
+      {
+        "quien": "rural",
+        "texto": "¡Ya tenemos señal, Otto!"
+      },
+      {
+        "quien": "otto",
+        "texto": "¡Nos ayudamos entre los tres!"
+      }
+    ]
+  },
+  "dialogos": {
+    "intro": [
+      {
+        "quien": "rural",
+        "texto": "Esta antena nos puede mostrar qué pasó con la luz.",
+        "voz_id": "bosque-intro-01"
+      },
+      {
+        "quien": "otto",
+        "texto": "Ese perro avisa antes de correr. Esperá a que descanse o saltá por arriba.",
+        "voz_id": "bosque-intro-02"
+      }
+    ],
+    "otto": [
+      {
+        "quien": "otto",
+        "texto": "Por este huequito llego al interruptor. ¡Dame una mano!",
+        "voz_id": "bosque-otto-01"
+      },
+      {
+        "quien": "otto",
+        "texto": "¡Listo, está encendido! Ahora busquemos el panel de Rural.",
+        "voz_id": "bosque-otto-02"
+      }
+    ],
+    "rural_sin_otto": [
+      {
+        "quien": "rural",
+        "texto": "A la antena le falta energía. Primero pidámosle ayuda a Otto en el acceso pequeño.",
+        "voz_id": "bosque-rural_sin_otto-01"
+      }
+    ],
+    "antena_lista": [
+      {
+        "quien": "rural",
+        "texto": "¡La estrella apunta al faro! La antena ya recibe la señal.",
+        "voz_id": "bosque-antena_lista-01"
+      }
+    ],
+    "final": [
+      {
+        "quien": "candado",
+        "texto": "¡La Gran Chispa está conmigo! ¡Ahora yo decido quién pasa!",
+        "voz_id": "bosque-final-01"
+      },
+      {
+        "quien": "otto",
+        "texto": "¿Y si encontramos otro camino?",
+        "voz_id": "bosque-final-02"
+      },
+      {
+        "quien": "rural",
+        "texto": "Mirá estos símbolos. Llevan al faro.",
+        "voz_id": "bosque-final-03"
+      },
+      {
+        "quien": "pattha",
+        "texto": "¡Hay que devolver la luz! Seguiremos juntos.",
+        "voz_id": "bosque-final-04"
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "titulo": "Pattha y la Gran Chispa · propuesta",
+  "capitulos": [
+    {
+      "id": "sendero",
+      "ruta": "data/capitulo_sendero.json"
+    },
+    {
+      "id": "bosque",
+      "ruta": "data/capitulo_bosque.json"
+    }
+  ]
+}

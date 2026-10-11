@@ -1,6 +1,6 @@
 export type SymbolId = 0 | 1 | 2;
-export type Progress = { gear: boolean; otto: boolean; rural: boolean; bridge: boolean; symbols: SymbolId[]; coins: Set<number>; defeated: number };
-export const createProgress = (): Progress => ({ gear: false, otto: false, rural: false, bridge: false, symbols: [], coins: new Set(), defeated: 0 });
+export type Progress = { gear: boolean; otto: boolean; rural: boolean; bridge: boolean; symbols: SymbolId[]; coins: Set<number>; defeated: number; switch:boolean; antenna:boolean; clue:boolean; enemyIds:Set<number> };
+export const createProgress = (): Progress => ({ gear: false, otto: false, rural: false, bridge: false, symbols: [], coins: new Set(), defeated: 0, switch:false, antenna:false, clue:false, enemyIds:new Set() });
 export function helpOtto(p: Progress): boolean {
  if (!p.gear) return false;
  p.otto = true;

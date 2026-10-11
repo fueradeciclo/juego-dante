@@ -1,0 +1,12 @@
+{
+  "checks": [
+    "build bajo /pattha_game/ carga sin adaptador de pruebas",
+    "antena alcanzable por controles reales; símbolos caben dentro de botones móviles",
+    "final completo y narrativo del bosque en build con 7.000 puntos",
+    "galería disponible desde subcarpeta",
+    "sin errores JS, recursos faltantes o solicitudes externas"
+  ],
+  "errors": [],
+  "failed": [],
+  "external": []
+}

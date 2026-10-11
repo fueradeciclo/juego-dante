@@ -23,6 +23,7 @@ const jump=async(page,rightMs=0)=>{
  await waitGround(page);
 };
 const monitor=page=>{
+ page.on('dialog',d=>d.accept());
  page.on('pageerror',e=>errors.push(e.message));
  page.on('request',r=>{if(r.url().startsWith('http')&&!new URL(r.url()).hostname.match(/^(localhost|127\.0\.0\.1)$/))external.push(r.url());});
 };
@@ -30,7 +31,7 @@ try {
  const page=await browser.newPage({viewport:{width:1280,height:800}});monitor(page);
  await page.goto('http://localhost:5173/?test=1');
  await page.locator('#play:not([disabled])').waitFor();
- await page.screenshot({path:'docs/capturas/01-inicio.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-01-inicio.png'});
  await page.locator('#play').click();
  await waitMode(page,'dialogue');
  for(let i=0;i<3;i++)await page.locator('#continue').click();
@@ -57,15 +58,16 @@ try {
  await page.locator('#continue').click();assert.equal((await snapshot(page)).otto,true);assert.equal((await snapshot(page)).bridge,false);
  await position(page,3020,540);await waitGround(page);await page.keyboard.press('KeyE');await waitMode(page,'puzzle');
  await page.locator('[data-symbol="2"]').click();assert.match(await page.locator('#puzzle-feedback').innerText(),/probá otra vez/);
- await page.screenshot({path:'docs/capturas/02-cooperacion.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-02-cooperacion.png'});
  for(const symbol of [0,1,2])await page.locator('[data-symbol="'+symbol+'"]').click();
  await waitMode(page,'dialogue');await page.locator('#continue').click();
  assert.equal((await snapshot(page)).bridge,true);
  record('Otto y Rural abren el puente; error del puzzle permite reintentar');
  await position(page,3070,540);await waitGround(page);
  await page.keyboard.down('ArrowRight');await page.waitForTimeout(1950);await page.keyboard.up('ArrowRight');
+ if((await snapshot(page)).mode==='dialogue'){for(let i=0;i<2;i++)await page.locator('#continue').click();await page.keyboard.down('ArrowRight');await page.waitForTimeout(500);await page.keyboard.up('ArrowRight');}
  const crossed=await snapshot(page);assert.ok(crossed.x>3560);assert.ok(crossed.checkpoint>=3640);
- await page.screenshot({path:'docs/capturas/03-recorrido.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-03-recorrido.png'});
  const saved=await snapshot(page);await position(page,4800,850);await page.waitForTimeout(250);
  const respawned=await snapshot(page);assert.ok(Math.abs(respawned.x-saved.checkpoint)<5);assert.equal(respawned.bridge,true);assert.equal(respawned.health,3);
  record('puente cruzable y caída con checkpoint y progreso conservado');
@@ -78,8 +80,8 @@ try {
  await page.waitForTimeout(350);assert.ok((await snapshot(page)).health<3);
  record('contacto lateral consume energía sin bloquear la partida');
  await position(page,7150,540);await waitMode(page,'dialogue');
- for(let i=0;i<2;i++)await page.locator('#continue').click();
- await waitMode(page,'won');await page.screenshot({path:'docs/capturas/04-final.png'});
+ for(let i=0;i<4;i++){if((await snapshot(page)).mode==='won')break;if((await snapshot(page)).mode==='dialogue')await page.locator('#continue').click();await page.waitForTimeout(60);}
+ await waitMode(page,'won');await page.screenshot({path:'docs/capturas/regresion-05-04-final.png'});
  await page.locator('#replay').click();await waitMode(page,'dialogue');
  assert.equal((await snapshot(page)).coins,0);assert.equal((await snapshot(page)).bridge,false);
  record('cierre y reinicio limpian la partida');
@@ -96,16 +98,16 @@ try {
  await touch.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:right.x+right.width/2,y:right.y+right.height/2,id:1},{x:up.x+up.width/2,y:up.y+up.height/2,id:2}]});
  await mobile.waitForTimeout(300);const moving=await snapshot(mobile);assert.ok(moving.x>start.x+40);assert.ok(moving.y<start.y-30);
  await touch.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await waitGround(mobile);
- await mobile.screenshot({path:'docs/capturas/05-mobile-horizontal.png'});
+ await mobile.screenshot({path:'docs/capturas/regresion-05-05-mobile-horizontal.png'});
  record('mobile horizontal con movimiento y salto multitáctil');
  await mobile.setViewportSize({width:390,height:844});await mobile.locator('#rotate').waitFor({state:'visible'});
  const portrait=await snapshot(mobile);await mobile.waitForTimeout(250);assert.equal((await snapshot(mobile)).x,portrait.x);assert.equal(await mobile.locator('#touch-controls').isVisible(),false);
- await mobile.screenshot({path:'docs/capturas/06-mobile-vertical-pausa.png'});
+ await mobile.screenshot({path:'docs/capturas/regresion-05-06-mobile-vertical-pausa.png'});
  await mobile.setViewportSize({width:844,height:390});await mobile.locator('#rotate').waitFor({state:'hidden'});
  record('girar a vertical pausa el juego y volver a horizontal lo recupera');
  assert.deepEqual(errors,[]);assert.deepEqual(external,[]);
  record('sin errores JavaScript ni solicitudes externas del juego');
- await save('docs/PRUEBAS_BROWSER.json',JSON.stringify({fecha:new Date().toISOString(),entorno:'Chromium de escritorio; emulación táctil 844×390 y 390×844',metodo:'Escenarios integrados con teclado y multitáctil. El adaptador de posicionamiento existe solo en desarrollo con ?test=1; no equivale a un recorrido familiar completo.',checks,errors,external},null,2)+'\n');
+ await save('docs/PRUEBAS_BROWSER_05.json',JSON.stringify({fecha:new Date().toISOString(),entorno:'Chromium de escritorio; emulación táctil 844×390 y 390×844',metodo:'Escenarios integrados con teclado y multitáctil. El adaptador de posicionamiento existe solo en desarrollo con ?test=1; no equivale a un recorrido familiar completo.',checks,errors,external},null,2)+'\n');
 } catch(error) {
  await save('docs/PRUEBAS_BROWSER_ERROR.txt',String(error));
  throw error;

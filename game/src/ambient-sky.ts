@@ -1,22 +1,22 @@
 import Phaser from 'phaser';
 import { AmbientPass } from './companion-state.ts';
+import { AIRPLANE_WIDTH, AIRPLANE_HEIGHT, paintAirplane } from './ambient-art.ts';
 
-/** Original tiny vector airplane. No textures, audio, interaction, or external assets. */
+/** Original tiny vector airplane, drawn locally and kept behind the forest and game objects. */
 export class AmbientSky {
   private clock=new AmbientPass();
-  private plane:Phaser.GameObjects.Container;
+  private plane:Phaser.GameObjects.Image;
   constructor(scene:Phaser.Scene){
-    const shape=scene.add.graphics();
-    shape.fillStyle(0x718f8b).fillRoundedRect(-22,-3,43,7,3);
-    shape.fillTriangle(-17,-2,-24,-12,-22,1);
-    shape.fillStyle(0x9fae99).fillTriangle(-6,0,6,-14,11,-1).fillTriangle(-4,1,7,13,12,2);
-    shape.fillStyle(0xb4c8b9).fillRoundedRect(5,-6,9,5,2);
-    shape.lineStyle(1.5,0x718f8b).lineBetween(24,-7,24,7);
-    this.plane=scene.add.container(0,0,[shape]).setScrollFactor(0).setDepth(-9).setAlpha(.42).setVisible(false);
+    if(!scene.textures.exists('ambient-airplane')){
+      const canvas=document.createElement('canvas');canvas.width=AIRPLANE_WIDTH;canvas.height=AIRPLANE_HEIGHT;
+      const ctx=canvas.getContext('2d')!;ctx.translate(canvas.width/2,canvas.height/2);paintAirplane(ctx);
+      scene.textures.addCanvas('ambient-airplane',canvas);
+    }
+    this.plane=scene.add.image(0,0,'ambient-airplane').setScrollFactor(0).setDepth(-6.5).setAlpha(.72).setVisible(false);
   }
   update(delta:number,suspended:boolean,reducedMotion:boolean){
     const frame=this.clock.step(delta,suspended,reducedMotion);
-    this.plane.setVisible(frame.visible).setPosition(frame.x,frame.y).setScale(frame.direction,1);
+    this.plane.setVisible(frame.visible).setPosition(frame.x,frame.y).setScale(frame.direction*1.15,1.15);
   }
-  snapshot(){return {...this.clock.snapshot(),visible:this.plane.visible};}
+  snapshot(){return {...this.clock.snapshot(),visible:this.plane.visible,alpha:this.plane.alpha,depth:this.plane.depth};}
 }

@@ -10,4 +10,4 @@ Verificación local: instalación con lockfile, typecheck, pruebas y build:site 
 
 Commit publicado mediante conexión GitHub: `ee118ace66b39c310792554bcbdbb1d7fc3a107e`. Copia de publicación aislada: `/private/tmp/pattha-audio-release`. Regresión de navegador: 12 casos aprobados.
 
-Verificación pública completada el 2026-10-11 en https://sabad.com.ar/pattha_game/?audio=ee118ace : Chrome decodifica y reproduce el MP3 oficial; controles, pausa/reanudación, reinicio y ancho móvil aprobados. SHA-256 público idéntico al original: 445ffbbc8b9c4b1487056f3b765da1ee16913b0dd51ef782ef679e862cdcd2d0. Commit de integración ee118ace66b39c310792554bcbdbb1d7fc3a107e. Sin prueba en Safari/iOS físico, audición humana ni simulación de fallo del respaldo.
+Verificación pública completada: Chrome reproduce el MP3 oficial en https://sabad.com.ar/pattha_game/?audio=ee118ace . Controles de audio y pausa aprobados. Hash del MP3 público idéntico al original. No se probó Safari/iOS real ni fallo de respaldo.

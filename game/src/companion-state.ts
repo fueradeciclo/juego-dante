@@ -101,8 +101,10 @@ export class AmbientPass {
   private elapsed=0;
   step(delta:number,suspended=false,reducedMotion=false){if(!suspended&&!reducedMotion)this.elapsed+=Math.max(0,delta);return this.snapshot(reducedMotion);}
   snapshot(reducedMotion=false){
-    const age=this.elapsed-5000,cycle=Math.max(0,Math.floor(age/64000)),progress=(age%64000)/19000;
+    const age=this.elapsed-1600,cycle=Math.max(0,Math.floor(age/26000)),progress=(age%26000)/16000;
     const direction=cycle%2===0?1:-1;
-    return {elapsed:this.elapsed,visible:!reducedMotion&&age>=0&&progress<1,direction,x:direction>0?-60+1400*progress:1340-1400*progress,y:155+(cycle%2)*28+Math.sin(progress*Math.PI)*8};
+    return {elapsed:this.elapsed,visible:!reducedMotion&&age>=0&&progress<1,direction,x:direction>0?-60+1400*progress:1340-1400*progress,y:76+(cycle%2)*8+Math.sin(progress*Math.PI)*4};
   }
+  /** A manual gallery preview starts just inside the sky; it never affects the game clock. */
+  startPass(){this.elapsed=3100;}
 }

@@ -22,7 +22,7 @@ Salida: `builds/site/`, con el juego compilado en `pattha_game/`. No se publica 
 
 ## Cloudflare Pages con GitHub
 
-- Repositorio: `fueradeciclo/juego-dante`, privado.
+- Repositorio: `fueradeciclo/juego-dante`, actualmente público (verificado en GitHub al guardar la 0.4).
 - Rama de producción: `main`.
 - Framework: ninguno.
 - Comando de build: `pnpm build:site`.
@@ -31,7 +31,7 @@ Salida: `builds/site/`, con el juego compilado en `pattha_game/`. No se publica 
 - Autorizar acceso solo a este repositorio al conectar GitHub.
 - Asociar `sabad.com.ar` como dominio personalizado. Para el dominio raíz, Cloudflare requiere sus servidores DNS; se delegan desde NIC Argentina usando los valores exactos de la cuenta, sin inventarlos.
 
-Los cambios publicados en `main` generan nuevas versiones; las ramas de trabajo permiten seguir iterando y revisar previews antes de integrar. El repositorio sigue siendo privado, aunque los archivos del juego desplegado serán accesibles en internet.
+Los cambios publicados en `main` generan nuevas versiones; las ramas de trabajo permiten seguir iterando y revisar previews antes de integrar. El repositorio dedicado y los archivos del juego desplegado son accesibles públicamente.
 
 La estructura inicial admite agregar una portada y otros proyectos al sitio. Si se quieren mantener en repositorios separados, hará falta definir una composición del sitio o enrutamiento por ruta: DNS por sí solo no separa `/pattha_game/` del resto del dominio.
 
@@ -51,3 +51,9 @@ NIC publicó ambos servidores y Cloudflare activó la zona. Se asoció `sabad.co
 ## Actualización de producción · 2026-10-10
 
 Versión fija aprobada de amigos, avionetas y música: commit `c6a1561e54f9540a8535a83b217da27d2b5754de`, despliegue Pages `cef7326f-70c1-4ef2-96e1-6efae4e11db8` exitoso. Copia aislada: 26 pruebas y build pasaron. Dominio sirve `juego-DHOS-0nK.js`; música responde HTTP 200. Los cambios simultáneos de gateo y puntuación quedan fuera de esta publicación por decisión del adulto.
+
+## Actualización 0.5.1 autorizada · 2026-10-11
+
+El adulto aprobó los kits del Hito 2 y pidió actualizar Cloudflare. Se prepara la aventura disponible de dos capítulos (sendero y bosque), guardado, gateo, avionetas configurables y música oficial intacta. La campaña de seis capítulos permanece pendiente de integración; el taller no se publica como parte del juego. Se preservan `/pattha_game/`, la portada reservada y la configuración DNS.
+
+Pruebas de la copia de publicación: 56 pruebas unitarias, validación de niveles, typecheck y build del sitio aprobados. El build tiene 25 archivos; no incluye dibujos fuente, documentación ni adaptadores de pruebas. Estado del despliegue: pendiente de verificación después del push autorizado.

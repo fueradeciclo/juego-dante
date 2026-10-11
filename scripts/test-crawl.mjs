@@ -27,12 +27,12 @@ try {
  assert.equal(await gallery.locator('#pattha-frame-grid button').count(),40);
  const cells=await gallery.locator('#pattha-frame-grid [data-sheet="gateo"] canvas').evaluateAll(cs=>cs.map(c=>{const d=c.getContext('2d').getImageData(0,0,c.width,c.height).data;return {image:c.toDataURL(),opaque:[...d].filter((a,i)=>i%4===3&&a>80).length};}));
  assert.equal(cells.length,16);assert.ok(cells.every(c=>c.opaque>1000));assert.equal(new Set(cells.map(c=>c.image)).size,16);
- await gallery.locator('#pattha-frame-grid').screenshot({path:'docs/capturas/30-pattha-40-cuadros.png'});
+ await gallery.locator('#pattha-frame-grid').screenshot({path:'docs/capturas/regresion-05-30-pattha-40-cuadros.png'});
  await gallery.locator('[data-pattha-move="crawl"]').click();const galleryTrace=await gallery.evaluate(async()=>{
   const seen=new Set(),poses=new Set();await new Promise(resolve=>{const start=performance.now();function sample(){const c=document.querySelector('#pattha-showcase');poses.add(c.dataset.pose);if(c.dataset.pose==='crawl')seen.add(c.dataset.frame);if(performance.now()-start>3200)resolve();else requestAnimationFrame(sample);}sample();});return {seen:[...seen],poses:[...poses]};
  });assert.equal(galleryTrace.seen.length,8);for(const pose of ['duckDown','crawl','crawlStop','standUp'])assert.ok(galleryTrace.poses.includes(pose),pose);
  await gallery.locator('#pattha-frame-grid [data-sheet="gateo"][data-frame="6"]').click();await gallery.waitForFunction(()=>document.querySelector('#pattha-showcase').dataset.pose==='crawl');
- await gallery.locator('.pattha-showcase').screenshot({path:'docs/capturas/31-pattha-gateo.png'});
+ await gallery.locator('.pattha-showcase').screenshot({path:'docs/capturas/regresion-05-31-pattha-gateo.png'});
  record('16 dibujos nuevos y ciclo completo de bajar, ocho pasos, frenar y levantarse en la galería');
  await gallery.close();
 
@@ -46,7 +46,7 @@ try {
  const inside=await state(page);assert.ok(inside.x>4100&&inside.x<4235);assert.equal(inside.crawl.body.height,80);assert.equal(inside.crawl.headroom,false);assert.ok(crawlTrace.some(f=>f.pose==='crawl'));assert.ok(crawlTrace.every(f=>Math.abs(f.y-540)<1));
  await page.keyboard.up('ArrowDown');await trace(page,220);assert.equal((await state(page)).crawl.posture.phase,'low');
  await page.keyboard.press('Space');const roofTrace=await trace(page,300);assert.ok(roofTrace.every(f=>f.phase==='low'&&Math.abs(f.y-540)<1),'soltar y saltar no permiten atravesar el techo');
- await page.screenshot({path:'docs/capturas/32-pattha-pasaje-bajo.png'});
+ await page.screenshot({path:'docs/capturas/regresion-05-32-pattha-pasaje-bajo.png'});
  record('gatea con pies estables y permanece bajo al soltar o pedir un salto dentro del pasaje');
  await page.keyboard.press('Escape');const frozen=await state(page);await page.waitForTimeout(220);const after=await state(page);assert.deepEqual(after.crawl,frozen.crawl);assert.deepEqual(after.animations,frozen.animations);
  await page.locator('#resume').click();await trace(page,100);assert.equal((await state(page)).crawl.posture.phase,'low');
@@ -68,11 +68,11 @@ try {
  for(const action of ['right','crouch']){const b=await mobile.locator(`[data-action="${action}"]`).boundingBox();assert.ok(b);centers[action]={x:b.x+b.width/2,y:b.y+b.height/2};}
  await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{id:1,...centers.crouch},{id:2,...centers.right}]});
  await mobile.waitForFunction(()=>window.__PATTHA_TEST__.snapshot().x>4140);let m=await state(mobile);assert.equal(m.crawl.posture.phase,'low');assert.equal(m.animations[0].pose,'crawl');
- assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await mobile.screenshot({path:'docs/capturas/33-pattha-gateo-mobile.png'});
+ assert.equal(await mobile.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);await mobile.screenshot({path:'docs/capturas/regresion-05-33-pattha-gateo-mobile.png'});
  await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await trace(mobile,200);assert.equal((await state(mobile)).crawl.posture.phase,'low');
  await mobile.setViewportSize({width:390,height:844});await mobile.waitForFunction(()=>window.__PATTHA_TEST__.snapshot().portrait);const portrait=await state(mobile);await mobile.waitForTimeout(200);assert.deepEqual((await state(mobile)).crawl,portrait.crawl);
  await mobile.setViewportSize({width:844,height:390});await mobile.waitForFunction(()=>!window.__PATTHA_TEST__.snapshot().portrait);if(await mobile.locator('#resume').isVisible())await mobile.locator('#resume').click();await trace(mobile,100);assert.equal((await state(mobile)).crawl.posture.phase,'low');
  record('multitáctil permite Gatear + avanzar, cabe en horizontal y mantiene postura al girar el celular');
  assert.deepEqual(errors,[]);record('sin errores JavaScript');
- await writeFile('docs/PRUEBAS_GATEO.json',JSON.stringify({fecha:new Date().toISOString(),checks,errors,lower,crawlTrace,roofTrace,returnTrace,metodo:'Chrome aislado con controles reales y cuerpo Arcade; móvil emulado multitáctil. Trazas con tiempo activo del juego.'},null,2)+'\n');
+ await writeFile('docs/PRUEBAS_GATEO_05.json',JSON.stringify({fecha:new Date().toISOString(),checks,errors,lower,crawlTrace,roofTrace,returnTrace,metodo:'Chrome aislado con controles reales y cuerpo Arcade; móvil emulado multitáctil. Trazas con tiempo activo del juego.'},null,2)+'\n');
 }finally{await browser.close();}

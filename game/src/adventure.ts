@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto, scoreLevel, type Progress, type ScoreRules } from './rules.ts';
+import { canJump, canStomp, chooseSymbol, collectCoin, createProgress, helpOtto, scoreLevel, type Progress } from './rules.ts';
 import { CHECKPOINT_REACH, validateLevelLayout } from './level-layout.ts';
 import type { Controls } from './input.ts';
 import type { DemoUI, Line } from './ui.ts';
@@ -12,13 +12,20 @@ import { JumpDust } from './jump-dust.ts';
 import { AllyFollower, allyTarget, FriendConversation, RivalPatrol, type FriendChats } from './companion-state.ts';
 import { AmbientSky } from './ambient-sky.ts';
 import { CrawlPosture, hasHeadroom } from './crawl-state.ts';
+import { CampaignStore, captureProgress, restoreProgress, campaignScore, type Chapter, type ChapterId, type CampaignDefinition } from './campaign.ts';
+import { RunnerState } from './runner-state.ts';
+import campaign from '../../data/campana.json';
 
-type Level = { personajes:Record<string,string>;mundo:{ancho:number;alto:number;piso:number};suelo:number[][];plataformas:number[][];pasajes_bajos?:number[][];monedas:number[][];puntaje:ScoreRules;enemigos:{tipo:string;x:number;min:number;max:number;velocidad:number}[];puestos_control:number[];dialogos:Record<string,Line[]>;charlas_amigos:FriendChats };
 type Enemy = Phaser.Physics.Arcade.Sprite;
 export class Adventure extends Phaser.Scene {
  progress: Progress=createProgress();
  player!: Phaser.Physics.Arcade.Sprite;
- private level!: Level;
+ private level!: Chapter;
+ private store!:CampaignStore;
+ private saveSignature='';
+ private storageWarned=false;
+ private ottoHelping=0;
+ private readonly chapterIds=(campaign as CampaignDefinition).capitulos.map(c=>c.id as ChapterId);
  private solids!: Phaser.Physics.Arcade.StaticGroup;
  private rivals!: Phaser.Physics.Arcade.Group;
  private allies:Phaser.GameObjects.Image[]=[];
@@ -53,22 +60,25 @@ export class Adventure extends Phaser.Scene {
   private originalLoadFailed=false;
  constructor(private ui: DemoUI, private controls: Controls) { super('adventure'); }
  preload() {
-  if(this.cache.json.exists('level'))return;
-  this.load.json('level','./data/demo_plataformas.json');
+  if(this.cache.json.exists('sendero'))return;
+  for(const c of (campaign as CampaignDefinition).capitulos)this.load.json(c.id,'./'+c.ruta);
   const paths={pattha:'personajes/transparentes/pattha_concepto_B_transparente.png',otto:'personajes/transparentes/raton_verde_concepto_transparente.png',rural:'personajes/transparentes/rural_concepto_transparente.png',gato:'enemigos/gato-v1.png',perro:'enemigos/perro-v1.png'};
   for(const [key,path]of Object.entries(paths))this.load.image(key,'./assets/'+path);
   for(const [key,sheet]of Object.entries(patthaAtlas.sheets))this.load.image('pattha-'+key,'./'+sheet.path);
   this.load.on('progress',(p:number)=>this.ui.loading(p));
   this.load.on('loaderror',()=>{this.originalLoadFailed=true;this.ui.loadError();});
  }
- create(data:{autostart?:boolean}={}) {
+ create(data:{autostart?:boolean;resume?:boolean;chapter?:ChapterId}={}) {
   if(this.originalLoadFailed)return;
-  this.level=this.cache.json.get('level') as Level;
+  const chapters=this.chapterIds.map(id=>this.cache.json.get(id) as Chapter);
+  if(!this.store)this.store=new CampaignStore(chapters);
+  this.level=chapters.find(c=>c.id===(data.chapter??this.store.state.chapter))!;
+  const saved=this.store.state.chapters[this.level.id];
   if(!this.level || ['pattha','otto','rural','gato','perro',...Object.keys(patthaAtlas.sheets).map(s=>'pattha-'+s)].some(k=>!this.textures.exists(k))){this.ui.loadError();return;}
   const layoutErrors=validateLevelLayout(this.level);
   if(layoutErrors.length){console.error('Distribución del nivel inválida:',layoutErrors);this.ui.loadError();return;}
   this.ui.configureLevel(this.level.monedas.length,this.level.puntaje);
-  this.progress=createProgress();this.health=3;this.ended=false;this.bridgeBuilt=false;this.flags=[];this.allies=[];this.allyLabels=[];this.trail=[];this.visuals=[];this.hurtUntil=0;this.groundedAt=-Infinity;this.jumpUntil=-Infinity;this.lastSample=0;this.checkpoint={x:130,y:this.level.mundo.piso};
+  this.progress=restoreProgress(saved);this.ottoHelping=0;this.saveSignature='';this.health=3;this.ended=false;this.bridgeBuilt=false;this.flags=[];this.allies=[];this.allyLabels=[];this.trail=[];this.visuals=[];this.hurtUntil=0;this.groundedAt=-Infinity;this.jumpUntil=-Infinity;this.lastSample=0;this.checkpoint={x:saved?.checkpoint??this.level.aparicion,y:this.level.mundo.piso};
   this.preparation.cancel();this.posture.reset();this.takeoffMs=0;this.reboundMs=0;this.helpMs=0;
   this.friendConversation=new FriendConversation();
   this.followers=[];this.followDirection=1;
@@ -83,7 +93,7 @@ export class Adventure extends Phaser.Scene {
   for(const [x,top,width,height]of this.level.pasajes_bajos??[])this.lowPassage(x,top,width,height);
   this.paintProps();
   this.makeTokens();
-  this.player=this.physics.add.sprite(130,this.level.mundo.piso,'pattha').setOrigin(.5,1).setDepth(5);
+  this.player=this.physics.add.sprite(this.checkpoint.x,this.level.mundo.piso,'pattha').setOrigin(.5,1).setDepth(5);
   this.player.setDisplaySize(104,132);
   const raw=this.textures.get('pattha').getSourceImage() as HTMLImageElement;
   this.player.body!.setSize(raw.width*.44,raw.height*.78);
@@ -101,15 +111,24 @@ export class Adventure extends Phaser.Scene {
   }
   for(const [key,box]of Object.entries({gato:[25,159,985,1218],perro:[30,187,981,1190]})){const t=this.textures.get(key);if(!t.has('recorte'))t.add('recorte',0,...box as [number,number,number,number]);}
   this.makeEnemies();
+  if(this.progress.bridge)this.buildBridge();
+  this.events.once('shutdown',()=>{this.ui.stopVoice();this.controls.reset();this.ui.bind(undefined);if(import.meta.env.DEV)delete (window as unknown as {__PATTHA_TEST__?:unknown}).__PATTHA_TEST__;});
   this.cameras.main.setBounds(0,0,this.level.mundo.ancho,720);
   this.cameras.main.startFollow(this.player,true,.1,1,0,0);
-  this.ui.bind({restart:autostart=>{this.ui.setMode('menu');this.ui.hint('');this.scene.restart({autostart});},setPaused:paused=>{if(paused)this.physics.world.pause();else this.physics.world.resume();},resetInput:()=>this.controls.reset()});
-  this.ui.ready();
+  this.ui.bind({restart:autostart=>{
+   if(autostart){if(this.store.hasProgress()&&!window.confirm('¿Empezar una nueva aventura? Se reemplaza el avance guardado.'))return;this.store.reset();}
+   this.ui.setMode('menu');this.ui.hint('');this.scene.restart({autostart,chapter:autostart?'sendero':this.store.state.chapter});
+  },continue:()=>{this.ui.setMode('menu');this.scene.restart({autostart:true,resume:true});},next:()=>{
+   if(!this.level.siguiente)return;this.store.state.chapter=this.level.siguiente;this.store.state.chapters[this.level.siguiente]??=captureProgress(createProgress(),this.cache.json.get(this.level.siguiente).aparicion,false);this.store.write();
+   this.ui.setMode('menu');this.scene.restart({autostart:true,chapter:this.level.siguiente});
+  },setPaused:paused=>{if(paused)this.physics.world.pause();else this.physics.world.resume();},resetInput:()=>this.controls.reset()});
+  this.ui.ready(this.store.hasProgress(),this.store.status);
+  this.ui.setChapter(this.level.titulo);
   this.ui.setMode(data.autostart?'playing':'menu');
-  if(data.autostart)this.ui.dialogue(this.level.dialogos.intro);
+  if(data.autostart){this.persist();if(saved?.completed)this.showSummary();else if(!data.resume)this.ui.dialogue(this.level.dialogos.intro);}
   if(import.meta.env.DEV && new URLSearchParams(location.search).has('test')) {
    (window as unknown as {__PATTHA_TEST__:unknown}).__PATTHA_TEST__={
-    snapshot:()=>({x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,collected:[...this.progress.coins],gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo,min:r.getData('patrol').min,max:r.getData('patrol').max,...(r.getData('behavior') as RivalPatrol).snapshot()};}),followers:this.followers.map(f=>f.snapshot()),ambient:this.ambient.snapshot(),conversation:this.friendConversation.snapshot(),friendBubble:this.friendBubble.visible,friendBubbleAlpha:this.friendBubble.alpha,animations:[this.pattha.snapshot(),...this.visuals.filter(v=>v.root.active).map(v=>v.snapshot())],dust:this.dust.snapshot(),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
+    snapshot:()=>({chapter:this.level.id,switch:this.progress.switch,antenna:this.progress.antenna,storage:this.store.status,ottoHelping:this.ottoHelping,x:this.player.x,y:this.player.y,vy:(this.player.body as Phaser.Physics.Arcade.Body).velocity.y,grounded:(this.player.body as Phaser.Physics.Arcade.Body).blocked.down,health:this.health,coins:this.progress.coins.size,collected:[...this.progress.coins],gear:this.progress.gear,otto:this.progress.otto,rural:this.progress.rural,bridge:this.progress.bridge,defeated:this.progress.defeated,enemies:this.rivals.getChildren().filter(e=>e.active).map(e=>{const r=e as Enemy;return {x:r.x,y:r.y,top:(r.body as Phaser.Physics.Arcade.Body).top,kind:r.getData('patrol').tipo,min:r.getData('patrol').min,max:r.getData('patrol').max,...(r.getData('behavior') as RivalPatrol).snapshot()};}),followers:this.followers.map(f=>f.snapshot()),ambient:this.ambient.snapshot(),conversation:this.friendConversation.snapshot(),friendBubble:this.friendBubble.visible,friendBubbleAlpha:this.friendBubble.alpha,animations:[this.pattha.snapshot(),...this.visuals.filter(v=>v.root.active).map(v=>v.snapshot())],dust:this.dust.snapshot(),checkpoint:this.checkpoint.x,mode:this.ui.mode,portrait:this.ui.portrait}),
     position:(x:number,y:number)=>{this.posture.reset();this.setLowBody(false);this.player.body!.reset(x,y);this.player.setVelocity(0,0);this.controls.reset();this.preparation.cancel();this.takeoffMs=0;this.reboundMs=0;this.cameras.main.centerOn(x,360);this.regroupAllies();},
     crawl:()=>({posture:this.posture.snapshot(),headroom:this.canStand(),body:{left:(this.player.body as Phaser.Physics.Arcade.Body).left,top:(this.player.body as Phaser.Physics.Arcade.Body).top,bottom:(this.player.body as Phaser.Physics.Arcade.Body).bottom,height:(this.player.body as Phaser.Physics.Arcade.Body).height},passages:this.level.pasajes_bajos}),
    };
@@ -122,6 +141,10 @@ export class Adventure extends Phaser.Scene {
   sky.fillStyle(0xffedb4).fillCircle(1050,105,47);
   const far=this.add.graphics().setScrollFactor(.12).setDepth(-8);
   for(let x=-100;x<9000;x+=460){far.fillStyle(0xb4d3c2).fillEllipse(x,470,720,490);far.fillStyle(0xc0dccc).fillEllipse(x+230,550,450,470);}
+  if(this.level.escenario==='bosque'){
+   const trees=this.add.graphics().setScrollFactor(.45).setDepth(-5);
+   for(let x=80;x<this.level.mundo.ancho+1300;x+=230){trees.fillStyle(0x729686).fillRoundedRect(x,190,24,350,10);trees.fillStyle(0x80b79a,.9).fillCircle(x+12,190,100).fillCircle(x-30,250,80);trees.fillStyle(0xb4d8a8,.85).fillCircle(x+42,165,65);}
+  }
   const near=this.add.graphics().setScrollFactor(.3).setDepth(-6);
   for(let x=0;x<10000;x+=400){near.fillStyle(0x8ebaa1).fillEllipse(x,615,550,490);near.fillStyle(0xa2cab0).fillEllipse(x+240,600,330,420);}
   const clouds=this.add.graphics().setScrollFactor(.08).setDepth(-7);
@@ -163,7 +186,7 @@ export class Adventure extends Phaser.Scene {
  }
  private paintProps() {
   const props=this.add.graphics().setDepth(1);
-  for(const x of [100,1200,2050,2590,3700,4050,4600,5210,6140,6500,7290]){
+  for(const x of this.level.carteles.map(c=>c.x)){
    props.fillStyle(0x477d57).fillCircle(x,526,25).fillCircle(x+28,525,18);
    props.fillStyle(0x70aa72).fillCircle(x+15,511,22);
    props.fillStyle(0xead797).fillCircle(x+4,506,3).fillCircle(x+22,515,3);
@@ -172,17 +195,29 @@ export class Adventure extends Phaser.Scene {
    props.fillStyle(0x977451).fillRect(x-4,475,8,65);props.fillStyle(0xf5ebbd).fillRoundedRect(x-75,443,150,41,8);props.lineStyle(2,0x49654a).strokeRoundedRect(x-75,443,150,41,8);
    this.add.text(x,463,label,{fontFamily:'system-ui',fontSize:'12px',color:'#405844',fontStyle:'bold'}).setOrigin(.5).setDepth(2);
   };
-  sign(95,'¡Vamos juntos!');sign(1340,'Saltá por arriba ↑');sign(2800,'Un puente entre tres');sign(7070,'¡Falta poquito! →');
+  for(const c of this.level.carteles)sign(c.x,c.texto);
   this.panels=this.add.graphics().setDepth(2);this.paintBridgeStatus();
-  props.fillStyle(0x496956).fillRect(3120,420,9,120).fillRect(3580,420,9,120);props.lineStyle(4,0x6e8960).lineBetween(3124,430,3584,430);
-  for(const x of this.level.puestos_control){const view=this.add.graphics().setDepth(2),top=this.level.mundo.piso-73;view.fillStyle(0x58735a).fillRect(x,top,5,73);view.fillStyle(0xdacb96).fillTriangle(x+5,top,x+45,top+15,x+5,top+30);this.flags.push({x,view,active:false});}
-  props.fillStyle(0x95764f).fillRect(7200,384,8,156);props.fillStyle(0x3b8d6c).fillTriangle(7208,384,7280,409,7208,437);
-  this.add.text(7230,356,'LLEGADA',{fontFamily:'system-ui',fontSize:'13px',fontStyle:'bold',color:'#2d5944',backgroundColor:'#f3f6dc',padding:{x:10,y:5}}).setOrigin(.5);
+  if(this.level.puente){const {x,ancho}=this.level.puente;props.fillStyle(0x496956).fillRect(x-ancho/2-25,420,9,120).fillRect(x+ancho/2+15,420,9,120);props.lineStyle(4,0x6e8960).lineBetween(x-ancho/2-20,430,x+ancho/2+20,430);this.drawLock(x+ancho/2+40,465);}
+  if(this.level.antena){const x=this.level.antena.x;props.fillStyle(0x668c80).fillRoundedRect(x-7,220,14,320,5);props.lineStyle(6,0x506a65).lineBetween(x,245,x-85,175).lineBetween(x,245,x+85,175);props.lineStyle(4,0xa1cab7).strokeCircle(x,200,90);sign(x-90,'●   ★   ▲');const otto=this.level.interacciones.find(i=>i.kind==='otto')!;props.fillStyle(0x56776a).fillRoundedRect(otto.x-65,490,115,50,12);props.fillStyle(0x233f39).fillRoundedRect(otto.x-48,511,40,29,8);this.add.text(otto.x,475,'Otto → ⏻',{fontFamily:'system-ui',fontSize:'16px',color:'#31594b'}).setOrigin(.5);}
+
+  for(const x of this.level.puestos_control){const view=this.add.graphics().setDepth(2),top=this.level.mundo.piso-73;view.fillStyle(0x58735a).fillRect(x,top,5,73);view.fillStyle(0xdacb96).fillTriangle(x+5,top,x+45,top+15,x+5,top+30);const active=x<=this.checkpoint.x;if(active)view.fillStyle(0xb9e68a).fillTriangle(x+5,top,x+45,top+15,x+5,top+30);this.flags.push({x,view,active});}
+  const end=this.level.salida+60;props.fillStyle(0x95764f).fillRect(end,384,8,156);props.fillStyle(0x3b8d6c).fillTriangle(end+8,384,end+80,409,end+8,437);
+  this.add.text(end,356,this.level.siguiente?'AL BOSQUE':'ANTENA',{fontFamily:'system-ui',fontSize:'13px',fontStyle:'bold',color:'#2d5944',backgroundColor:'#f3f6dc',padding:{x:10,y:5}}).setOrigin(.5);
  }
+ private drawLock(x:number,y:number){const g=this.add.graphics().setDepth(2);g.lineStyle(4,0x536b60).strokeRoundedRect(x-10,y-24,20,22,8);g.fillStyle(0xe0bb70).fillRoundedRect(x-17,y-10,34,28,5);g.fillStyle(0x536b60).fillCircle(x,y+2,3);}
  private paintBridgeStatus() {
   this.panels.clear();
-  for(let i=0;i<3;i++){this.panels.fillStyle((i===0?this.progress.gear:i===1?this.progress.otto:this.progress.rural)?0xa5d97d:0x55756c).fillRoundedRect(2910+i*42,432,29,38,7);}
+  const panel=this.level.puente?.panel??this.level.antena!.x-25;
+  const states=this.level.puente?[this.progress.gear,this.progress.otto,this.progress.rural]:[this.progress.switch,this.progress.antenna];
+  states.forEach((on,i)=>this.panels.fillStyle(on?0xa5d97d:0x55756c).fillRoundedRect(panel+i*42,432,29,38,7));
+  const signal=this.level.antena?.x??this.level.puente!.panel;this.panels.fillStyle(this.progress.antenna||this.progress.bridge?0xffdf86:0x55756c).fillCircle(signal,395,12);if(this.progress.antenna)this.panels.lineStyle(3,0xe0bb70,.8).strokeCircle(signal,200,105);
  }
+ private persist(){
+  this.store.state.chapters[this.level.id]=captureProgress(this.progress,this.checkpoint.x,this.ended||Boolean(this.store.state.chapters[this.level.id]?.completed));
+  const signature=JSON.stringify(this.store.state);if(signature===this.saveSignature)return;this.saveSignature=signature;this.store.write();
+  if(this.store.status==='unavailable'&&!this.storageWarned){this.storageWarned=true;this.ui.toast('Este navegador no permite guardar. Tu avance queda en esta sesión.');}
+ }
+ private showSummary(){this.ended=true;this.player.setVelocity(0,0);this.ui.win(scoreLevel(this.progress.coins,this.level.monedas.length,this.level.puntaje),{next:Boolean(this.level.siguiente),title:this.level.siguiente?'¡Sendero completado!':'¡La señal volvió!',total:campaignScore(this.store.state,this.chapterIds.map(id=>this.cache.json.get(id)))});}
  private makeTokens() {
   if(!this.textures.exists('coin')){
    const g=this.make.graphics({x:0,y:0});g.fillStyle(0xffda79).fillCircle(20,20,15);g.lineStyle(3,0xb18138).strokeCircle(20,20,15);g.fillStyle(0xfff6bd).fillTriangle(20,8,24,21,16,21).fillTriangle(20,31,24,18,16,18);g.generateTexture('coin',40,40);g.destroy();
@@ -190,6 +225,7 @@ export class Adventure extends Phaser.Scene {
   }
   const coins=this.physics.add.staticGroup();
   for(const [id,[x,y]]of this.level.monedas.entries()){
+   if(this.progress.coins.has(id))continue;
    const coin=coins.create(x,y,'coin') as Phaser.Physics.Arcade.Image;coin.setData('id',id).setDepth(3);
    this.tweens.add({targets:coin,y:y-5,duration:900,repeat:-1,yoyo:true,delay:id*45});
   }
@@ -198,16 +234,18 @@ export class Adventure extends Phaser.Scene {
    this.physics.add.overlap(this.player,coins,(_p,c)=>{
     const coin=c as Phaser.Physics.Arcade.Image;if(collectCoin(this.progress,coin.getData('id'))){coin.disableBody(true,true);if(this.progress.coins.size===this.level.monedas.length)this.ui.toast('¡Juntaste todas las esferas! El bonus te espera en la llegada.');}
    });
-   const gear=this.physics.add.staticImage(2740,315,'gear').setDepth(3);
+   if(!this.level.tuerca||this.progress.gear)return;
+   const gear=this.physics.add.staticImage(this.level.tuerca.x,this.level.tuerca.y,'gear').setDepth(3);
    this.physics.add.overlap(this.player,gear,()=>{if(this.progress.gear)return;this.progress.gear=true;gear.disableBody(true,true);this.paintBridgeStatus();this.ui.toast('¡Encontraste la tuerca! Llevásela a Otto.');});
   });
  }
  private makeEnemies() {
   this.rivals=this.physics.add.group();
-  for(const info of this.level.enemigos){
+  for(const [id,info] of this.level.enemigos.entries()){
+   if(this.progress.enemyIds.has(id))continue;
    const enemy=this.rivals.create(info.x,this.level.mundo.piso,info.tipo,'recorte') as Enemy;
    enemy.setOrigin(.5,1).setScale(110/enemy.frame.height).setDepth(4).setData('patrol',{...info,dir:-1});
-   enemy.setData('behavior',new RivalPatrol());
+   enemy.setData('enemyId',id).setData('behavior',info.comportamiento==='corredor'?new RunnerState():new RivalPatrol());
    const raw=enemy.frame;
    enemy.body!.setSize(raw.width*.52,raw.height*.87);enemy.body!.setOffset(raw.width*.24,raw.height*.13);
    this.visuals.push(new CharacterRig(this,enemy,info.tipo as CharacterKind,this.visuals.length));
@@ -219,7 +257,7 @@ export class Adventure extends Phaser.Scene {
   if(!enemy.active||this.ended||this.ui.mode!=='playing')return;
   const pb=this.player.body as Phaser.Physics.Arcade.Body,eb=enemy.body as Phaser.Physics.Arcade.Body;
   if(canStomp(pb.velocity.y,pb.bottom,eb.top)){
-   enemy.disableBody(true,false);enemy.setData('defeated',true);this.progress.defeated++;this.player.setVelocityY(-420);
+   enemy.disableBody(true,false);enemy.setData('defeated',true);this.progress.defeated++;this.progress.enemyIds.add(enemy.getData('enemyId'));this.persist();this.player.setVelocityY(-420);
    this.preparation.cancel();this.reboundMs=120;this.takeoffMs=0;
    if(this.progress.defeated===1)this.ui.toast('¡Buen salto! También podés pasar por arriba.');
   }else if(this.time.now>this.hurtUntil){
@@ -245,22 +283,34 @@ export class Adventure extends Phaser.Scene {
  }
  private buildBridge() {
   if(this.bridgeBuilt)return;this.bridgeBuilt=true;
-  this.platform(3355,this.level.mundo.piso,410,30);this.paintBridgeStatus();
+  if(!this.level.puente)return;
+  this.platform(this.level.puente.x,this.level.mundo.piso,this.level.puente.ancho,30);this.paintBridgeStatus();
   this.ui.toast('¡Los tres lo hicieron! El puente está listo.');
  }
  private interaction() {
-  const x=this.player.x;
-  if(x>2760&&x<3150)this.helpMs=550;
-  if(x>2760&&x<2950){
-   if(!this.progress.otto){if(helpOtto(this.progress)){this.paintBridgeStatus();this.ui.dialogue(this.level.dialogos.otto);}else this.ui.dialogue(this.level.dialogos.otto_sin_tuerca);}
+  const point=this.level.interacciones.find(i=>this.player.x>i.min&&this.player.x<i.max);if(!point)return;
+  this.helpMs=550;
+  if(this.level.id==='bosque'){
+   if(point.kind==='otto'){
+    if(this.progress.switch){this.ui.toast('¡Otto ya encendió el interruptor!');return;}
+    if(this.ottoHelping)return;
+    this.ottoHelping=1600;this.ui.dialogue([this.level.dialogos.otto[0]],()=>this.ui.hint('Otto está entrando al acceso…'));
+   }else if(!this.progress.switch)this.ui.dialogue(this.level.dialogos.rural_sin_otto);
+   else if(!this.progress.antenna)this.ui.openPuzzle(symbol=>{
+    if(symbol!==this.level.antena!.orientacion){this.ui.puzzleFeedback('Mirá la estrella de la pista y probá otra vez.',[]);return;}
+    this.progress.antenna=true;this.paintBridgeStatus();this.persist();this.ui.dialogue(this.level.dialogos.antena_lista);
+   },this.level.acertijo);
+   else this.ui.toast('¡La antena recibe la señal! Seguí al banderín.');
+  }else if(point.kind==='otto'){
+   if(!this.progress.otto){if(helpOtto(this.progress)){this.paintBridgeStatus();this.persist();this.ui.dialogue(this.level.dialogos.otto);}else this.ui.dialogue(this.level.dialogos.otto_sin_tuerca);}
    else this.ui.toast('Otto ya ajustó su lado. ¡Buscá la señal de Rural!');
-  }else if(x>=2950&&x<3150){
+  }else {
    if(!this.progress.otto)this.ui.dialogue(this.level.dialogos.rural_sin_otto);
    else if(!this.progress.rural)this.ui.openPuzzle(symbol=>{
     const result=chooseSymbol(this.progress,symbol);
     this.ui.puzzleFeedback(result==='retry'?'Casi. Mirá la pista y probá otra vez.':result==='complete'?'¡Esa es la señal!':'¡Bien! Seguí con la próxima forma.',this.progress.symbols);
-    if(result==='complete'){this.buildBridge();this.ui.dialogue([{quien:'rural',texto:'¡Esa es! Otto ajustó la tuerca y vos encendiste la señal. ¡Ahora podemos cruzar!'}]);}
-   });
+    this.persist();if(result==='complete'){this.buildBridge();this.ui.dialogue(this.level.dialogos.puente_listo);}
+   },this.level.acertijo);
    else this.ui.toast('La señal ya está encendida. ¡A cruzar!');
   }
  }
@@ -277,9 +327,9 @@ export class Adventure extends Phaser.Scene {
   this.pattha.update(dt,{speed:playing?body.velocity.x:0,vy:body.velocity.y,grounded:!playing||(body.blocked.down&&Math.abs(body.velocity.y)<30),crouching:playing&&this.preparation.crouching,posture:this.posture.snapshot(),takingOff:this.takeoffMs>0,rebounding:this.reboundMs>0,helping:this.helpMs>0,celebrating:this.ended,hurt:playing&&this.time.now<this.hurtUntil-1550,suspended,reducedMotion:this.reducedMotion.matches});
   if(!suspended&&oldPose!=='land'&&this.pattha.clock.snapshot().pose==='land'&&!this.reducedMotion.matches)this.dust.emit(this.player.x,body.bottom,true);
   this.dust.update(dt,suspended,this.reducedMotion.matches);
-  this.ambient.update(dt,suspended||!playing||this.ended,this.reducedMotion.matches);
+  this.ambient.update(dt,suspended||!playing||this.ended,!this.ui.airplanesEnabled);
   const chatting=playing&&!this.ended&&!this.ui.portrait;
-  const context=this.progress.bridge?'cruzado':this.player.x>2400&&this.player.x<3560?'puente':'camino';
+  const context=this.progress.bridge?'cruzado':this.level.interacciones.some(i=>this.player.x>i.min-100&&this.player.x<i.max)?'puente':'camino';
   const line=this.friendConversation.step(dt,context,this.level.charlas_amigos,suspended||!chatting);
   this.friendBubble.setVisible(Boolean(line)&&chatting);
   this.friendBubble.setAlpha(this.friendConversation.opacity());this.friendPanel.clear();
@@ -343,11 +393,12 @@ export class Adventure extends Phaser.Scene {
   if(this.player.y>810)this.respawn();
   if(now-this.lastSample>35){this.trail.push({x:this.player.x,y:this.player.y,time:now});this.trail=this.trail.filter(point=>now-point.time<450);this.lastSample=now;}
   if(Math.abs(body.velocity.x)>70){const direction=body.velocity.x>0?1:-1;this.followDirection+=(direction-this.followDirection)*(1-Math.exp(-delta/130));}
-  const atMeeting=this.player.x>2690&&this.player.x<3150;
+  const atMeeting=this.level.interacciones.some(i=>this.player.x>i.min-70&&this.player.x<i.max);
   for(let i=0;i<this.allies.length;i++){
    let point=this.trail[0]??this.player;
    for(let j=this.trail.length-1;j>=0;j--)if(this.trail[j].time<=now-(i+1)*80){point=this.trail[j];break;}
    const target=allyTarget({x:this.player.x,y:point.y},this.followDirection,i,this.level.mundo.ancho);
+   if(i===0&&this.ottoHelping>0){const point=this.level.interacciones.find(p=>p.kind==='otto')!;this.ottoHelping=Math.max(0,this.ottoHelping-delta);const phase=1-this.ottoHelping/1600;target.x=point.x-28;target.y=this.level.mundo.piso;const follow=this.followers[i].step(delta,target);this.allies[i].setPosition(follow.x,follow.y).setAlpha(.35+.65*Math.abs(phase*2-1));if(this.ottoHelping===0){this.allies[i].setAlpha(1);this.progress.switch=true;this.paintBridgeStatus();this.persist();this.ui.dialogue([this.level.dialogos.otto[1]]);}continue;}
    const follow=this.followers[i].step(delta,target);
    this.allies[i].setPosition(follow.x,follow.y).setAlpha(follow.alpha);
    if(Math.abs(follow.vx)>35)this.allies[i].setFlipX(follow.facing>0);
@@ -355,15 +406,19 @@ export class Adventure extends Phaser.Scene {
    this.allyLabels[i].setVisible(atMeeting||this.player.x<420);
   }
   for(const flag of this.flags){if(!flag.active && Math.abs(this.player.x-flag.x)<CHECKPOINT_REACH&&body.blocked.down&&Math.abs(body.bottom-this.level.mundo.piso)<3){flag.active=true;this.checkpoint={x:flag.x,y:this.level.mundo.piso};const top=this.level.mundo.piso-73;flag.view.fillStyle(0xb9e68a).fillTriangle(flag.x+5,top,flag.x+45,top+15,flag.x+5,top+30);this.ui.toast('Banderín activado. Tus avances quedan a salvo.');}}
+  if(this.ui.mode!=='playing')return;
   const x=this.player.x;
   let hint='';
   if((this.level.pasajes_bajos??[]).some(([center,,width])=>x>center-width/2-75&&x<center+width/2+75))hint='Mantené ↓ / S o Gatear y avanzá. Soltá al salir.';
-  if(x>2760&&x<2950)hint=this.progress.otto?'Otto ya ayudó. Seguí hasta Rural →':'E / Ayudar: hablar con Otto';
-  else if(x>=2950&&x<3150)hint=this.progress.rural?'¡El puente está listo! →':'E / Ayudar: escuchar a Rural';
+  const meeting=this.level.interacciones.find(i=>x>i.min&&x<i.max);
+  if(meeting)hint='E / Ayudar: hablar con '+(meeting.kind==='otto'?'Otto':'Rural');
+  if(this.ottoHelping>0)hint='Otto está entrando al acceso…';
   this.ui.hint(hint);
-  const zone=x<2400?'Primeros saltos':x<3560?'El puente entre amigos':'El último tramo';
-  const objective=x<2400?'Saltá sobre los animales o pasá por arriba.':!this.progress.gear?'Buscá la tuerca en la plataforma alta.':!this.progress.otto?'Llevale la tuerca a Otto.':!this.progress.rural?'Rural tiene la pista de la señal.':'Seguí los banderines hasta la llegada.';
+  const zone=this.level.zonas.find(z=>x<z.hasta)?.nombre??this.level.titulo;
+  const objective=this.level.objetivos.find(o=>o.requisito==='exit'||!this.progress[o.requisito])!.texto;
   this.ui.hud(zone,objective,this.progress.coins.size,this.health);
-  if(x>7140&&this.progress.bridge){this.ended=true;this.player.setVelocity(0,0);this.ui.dialogue(this.level.dialogos.final,()=>this.ui.win(scoreLevel(this.progress.coins,this.level.monedas.length,this.level.puntaje)));}
+  this.persist();
+  if(this.level.puente&&x>this.level.puente.x+this.level.puente.ancho/2&&this.progress.bridge&&!this.progress.clue){this.progress.clue=true;this.persist();this.ui.dialogue(this.level.dialogos.marca);return;}
+  if(x>this.level.salida&&(this.level.id==='sendero'?this.progress.bridge:this.progress.antenna)){this.ended=true;this.player.setVelocity(0,0);this.persist();this.ui.dialogue(this.level.dialogos.final,()=>this.showSummary());}
  }
 }

@@ -68,3 +68,26 @@ canvas.hero-art{width:68%;height:88%;left:11%;top:-4%;display:block}
 @media(max-width:900px),(max-height:650px){.win-card{padding:8px 20px}.win-card .win-star{display:none}.win-card h2{font-size:21px;margin:8px 0}.win-scoreboard{padding:8px 12px;margin:8px 0}.win-scoreboard #win-coins{font-size:11px;margin:0 0 6px}.score-row{font-size:10px}.score-total{font-size:12px;margin-top:6px;padding-top:6px}.win-scoreboard .win-bonus{font-size:10px;padding:5px;margin-top:6px}.win-card #win-tip{font-size:9px;margin:5px 0}.win-card>.primary-button{margin-top:8px}.win-card .text-button{padding:7px}.win-card small{margin-top:3px}}
 
 .touch-controls .crawl-button{font-size:21px;background:#e7efd8ed;color:#294b3c}.crawl-button span{font-size:10px}@media(max-width:900px),(max-height:650px){.touch-controls .crawl-button{font-size:18px}.crawl-button span{font-size:9px}}
+
+/* Campaign additions: keep the dialogue controls legible on short touch screens. */
+.candado-icon {font-size:3rem;padding:12px;}
+#campaign-continue {margin-top:8px;}
+#repeat-voice {white-space:nowrap;}
+#campaign-total {font-weight:700;color:#31594b;}
+#voice-toggle {white-space:nowrap;}
+@media(max-height:500px) { .dialogue-panel {gap:8px;padding:10px;} #repeat-voice {padding:8px;font-size:11px;} .win-star {display:none;} .win-card {padding:14px;} .win-card h2 {margin:5px 0;} .win-card p {margin:6px 0;} #next-chapter,#replay {padding:10px;} }
+
+#voice-toggle {width:auto;padding:0 9px;font-size:11px;}
+.dialogue-panel #repeat-voice {width:auto;margin:0;}
+#puzzle-clue {letter-spacing:1px;font-size:clamp(14px,2vw,25px);line-height:1.45;}
+@media(max-height:500px) { .top-note {display:none;} #campaign-continue {display:inline-block;width:auto;padding:8px;margin-top:7px;} .menu-copy h1 {font-size:clamp(21px,3.6vw,34px);margin:8px 0;} .menu-copy p {margin-bottom:8px;} .menu-controls {margin-top:8px;} .menu-meta {margin-top:7px;} .modal-card.puzzle-card {padding:12px 20px;} #repeat-clue {width:auto;display:inline-block;margin-top:8px;} #puzzle-clue {margin:8px 0;font-size:14px;} }
+
+@media(max-height:500px) { .win-card {padding:8px 18px;} .win-card .pill {padding:4px 7px;} .win-card #campaign-total {font-size:10px;margin:4px 0;} .win-card #next-chapter {padding:8px;margin-top:6px;} .win-card #replay {display:inline-block;width:auto;margin:6px 4px 0;padding:8px 12px;} .win-card #win-back {display:inline-block;padding:6px;} .win-card small {display:none;} }
+
+.brand {white-space:nowrap;flex-shrink:0;}
+.orientation .symbol-buttons button {white-space:nowrap;display:flex;align-items:center;justify-content:center;padding:0;font-size:24px;line-height:1;}
+@media(max-height:500px) { .brand small {display:none;} .orientation .symbol-buttons button {font-size:20px;} }
+
+.sky-showcase{display:grid;grid-template-columns:1.3fr 1fr;align-items:center;gap:28px;padding:24px;margin:32px 0;border:1px solid #9ab69b;border-radius:24px;background:#edf5de}.sky-showcase canvas{display:block;width:100%;height:180px;border-radius:16px}.sky-showcase h2{color:#294b3c;font-size:22px;margin:0 0 12px}.sky-showcase p{font-size:13px;color:#536e59;line-height:1.6;margin:0}.sky-showcase button{max-width:270px;margin-top:16px}@media(max-width:680px){.sky-showcase{grid-template-columns:1fr;gap:18px;padding:18px}.sky-showcase canvas{height:130px}.sky-showcase h2{font-size:20px}.sky-showcase button{max-width:none}}
+
+.sky-option{margin-top:8px}.modal-card .sky-option{font-size:12px;margin:12px 0 4px;color:#42644e}

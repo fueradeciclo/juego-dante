@@ -1,0 +1,143 @@
+{
+  "grabaciones": [
+    {
+      "id": "sendero-intro-01",
+      "quien": "pattha",
+      "texto": "¡Las señales se apagaron! Vamos a ver qué pasó.",
+      "archivo": "assets/audio/narracion/sendero-intro-01.mp3"
+    },
+    {
+      "id": "sendero-intro-02",
+      "quien": "otto",
+      "texto": "El puente está trabado. Si encontramos una tuerca, puedo arreglarlo.",
+      "archivo": "assets/audio/narracion/sendero-intro-02.mp3"
+    },
+    {
+      "id": "sendero-intro-03",
+      "quien": "rural",
+      "texto": "¡Vamos juntos! Saltá con Espacio. En el celu tenés botones. Si te caés, volvés al banderín.",
+      "archivo": "assets/audio/narracion/sendero-intro-03.mp3"
+    },
+    {
+      "id": "sendero-otto_sin_tuerca-01",
+      "quien": "otto",
+      "texto": "Al puente le falta una tuerca. Hay una arriba de esa plataforma. ¿La buscás?",
+      "archivo": "assets/audio/narracion/sendero-otto_sin_tuerca-01.mp3"
+    },
+    {
+      "id": "sendero-otto-01",
+      "quien": "otto",
+      "texto": "¡Esa es! Yo ajusto este lado. Rural tiene la pista de la señal.",
+      "archivo": "assets/audio/narracion/sendero-otto-01.mp3"
+    },
+    {
+      "id": "sendero-rural_sin_otto-01",
+      "quien": "rural",
+      "texto": "Primero ayudemos a Otto con la tuerca. Después encendemos la señal entre los tres.",
+      "archivo": "assets/audio/narracion/sendero-rural_sin_otto-01.mp3"
+    },
+    {
+      "id": "sendero-final-01",
+      "quien": "otto",
+      "texto": "¡Cruzamos el sendero entre los tres!",
+      "archivo": "assets/audio/narracion/sendero-final-01.mp3"
+    },
+    {
+      "id": "sendero-final-02",
+      "quien": "rural",
+      "texto": "En el Bosque de Antenas podemos averiguar quién apagó las señales.",
+      "archivo": "assets/audio/narracion/sendero-final-02.mp3"
+    },
+    {
+      "id": "sendero-marca-01",
+      "quien": "otto",
+      "texto": "Mirá, un candado marcado en el puente. Alguien cerró este camino.",
+      "archivo": "assets/audio/narracion/sendero-marca-01.mp3"
+    },
+    {
+      "id": "sendero-marca-02",
+      "quien": "rural",
+      "texto": "Las señales siguen hacia el bosque. ¡Busquemos la antena!",
+      "archivo": "assets/audio/narracion/sendero-marca-02.mp3"
+    },
+    {
+      "id": "sendero-puente_listo-01",
+      "quien": "rural",
+      "texto": "¡Esa es! Otto ajustó la tuerca y vos encendiste la señal. ¡Ahora podemos cruzar!",
+      "archivo": "assets/audio/narracion/sendero-puente_listo-01.mp3"
+    },
+    {
+      "id": "sendero-pista",
+      "quien": "rural",
+      "texto": "● → ★ → ▲",
+      "archivo": "assets/audio/narracion/sendero-pista.mp3"
+    },
+    {
+      "id": "bosque-intro-01",
+      "quien": "rural",
+      "texto": "Esta antena nos puede mostrar qué pasó con la luz.",
+      "archivo": "assets/audio/narracion/bosque-intro-01.mp3"
+    },
+    {
+      "id": "bosque-intro-02",
+      "quien": "otto",
+      "texto": "Ese perro avisa antes de correr. Esperá a que descanse o saltá por arriba.",
+      "archivo": "assets/audio/narracion/bosque-intro-02.mp3"
+    },
+    {
+      "id": "bosque-otto-01",
+      "quien": "otto",
+      "texto": "Por este huequito llego al interruptor. ¡Dame una mano!",
+      "archivo": "assets/audio/narracion/bosque-otto-01.mp3"
+    },
+    {
+      "id": "bosque-otto-02",
+      "quien": "otto",
+      "texto": "¡Listo, está encendido! Ahora busquemos el panel de Rural.",
+      "archivo": "assets/audio/narracion/bosque-otto-02.mp3"
+    },
+    {
+      "id": "bosque-rural_sin_otto-01",
+      "quien": "rural",
+      "texto": "A la antena le falta energía. Primero pidámosle ayuda a Otto en el acceso pequeño.",
+      "archivo": "assets/audio/narracion/bosque-rural_sin_otto-01.mp3"
+    },
+    {
+      "id": "bosque-antena_lista-01",
+      "quien": "rural",
+      "texto": "¡La estrella apunta al faro! La antena ya recibe la señal.",
+      "archivo": "assets/audio/narracion/bosque-antena_lista-01.mp3"
+    },
+    {
+      "id": "bosque-final-01",
+      "quien": "candado",
+      "texto": "¡La Gran Chispa está conmigo! ¡Ahora yo decido quién pasa!",
+      "archivo": "assets/audio/narracion/bosque-final-01.mp3"
+    },
+    {
+      "id": "bosque-final-02",
+      "quien": "otto",
+      "texto": "¿Y si encontramos otro camino?",
+      "archivo": "assets/audio/narracion/bosque-final-02.mp3"
+    },
+    {
+      "id": "bosque-final-03",
+      "quien": "rural",
+      "texto": "Mirá estos símbolos. Llevan al faro.",
+      "archivo": "assets/audio/narracion/bosque-final-03.mp3"
+    },
+    {
+      "id": "bosque-final-04",
+      "quien": "pattha",
+      "texto": "¡Hay que devolver la luz! Seguiremos juntos.",
+      "archivo": "assets/audio/narracion/bosque-final-04.mp3"
+    },
+    {
+      "id": "bosque-pista",
+      "quien": "rural",
+      "texto": "La señal del faro tiene una estrella ★. Elegí la antena con esa forma.",
+      "archivo": "assets/audio/narracion/bosque-pista.mp3"
+    }
+  ],
+  "disponibles": {}
+}

@@ -1,0 +1,510 @@
+{
+  "version": "0.5",
+  "estado_creativo": "PROPUESTA de demo; no historia oficial de Dante",
+  "titulo_provisional": "El sendero de los amigos",
+  "duracion_objetivo_min": [
+    5,
+    10
+  ],
+  "personajes": {
+    "pattha": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
+    "otto": "assets/personajes/transparentes/raton_verde_concepto_transparente.png",
+    "rural": "assets/personajes/transparentes/rural_concepto_transparente.png",
+    "gato": "assets/enemigos/gato-v1.png",
+    "perro": "assets/enemigos/perro-v1.png"
+  },
+  "mundo": {
+    "ancho": 7440,
+    "alto": 720,
+    "piso": 540
+  },
+  "suelo": [
+    [
+      0,
+      900
+    ],
+    [
+      1050,
+      2350
+    ],
+    [
+      2490,
+      3150
+    ],
+    [
+      3560,
+      4740
+    ],
+    [
+      4900,
+      6200
+    ],
+    [
+      6340,
+      7440
+    ]
+  ],
+  "plataformas": [
+    [
+      340,
+      460,
+      190
+    ],
+    [
+      660,
+      370,
+      190
+    ],
+    [
+      1610,
+      450,
+      190
+    ],
+    [
+      1850,
+      355,
+      170
+    ],
+    [
+      2560,
+      455,
+      170
+    ],
+    [
+      2740,
+      365,
+      180
+    ],
+    [
+      3890,
+      455,
+      180
+    ],
+    [
+      4150,
+      360,
+      180
+    ],
+    [
+      4530,
+      440,
+      170
+    ],
+    [
+      5130,
+      455,
+      190
+    ],
+    [
+      5410,
+      365,
+      180
+    ],
+    [
+      5730,
+      280,
+      170
+    ],
+    [
+      5940,
+      435,
+      200
+    ],
+    [
+      6600,
+      445,
+      170
+    ],
+    [
+      6850,
+      350,
+      200
+    ]
+  ],
+  "monedas": [
+    [
+      200,
+      475
+    ],
+    [
+      500,
+      390
+    ],
+    [
+      810,
+      425
+    ],
+    [
+      975,
+      395
+    ],
+    [
+      1120,
+      475
+    ],
+    [
+      1450,
+      365
+    ],
+    [
+      1995,
+      390
+    ],
+    [
+      2110,
+      345
+    ],
+    [
+      2260,
+      420
+    ],
+    [
+      2420,
+      390
+    ],
+    [
+      2880,
+      365
+    ],
+    [
+      2990,
+      475
+    ],
+    [
+      3100,
+      390
+    ],
+    [
+      3600,
+      390
+    ],
+    [
+      3725,
+      365
+    ],
+    [
+      4020,
+      375
+    ],
+    [
+      4340,
+      360
+    ],
+    [
+      4680,
+      450
+    ],
+    [
+      4820,
+      390
+    ],
+    [
+      5275,
+      370
+    ],
+    [
+      5550,
+      350
+    ],
+    [
+      5595,
+      390
+    ],
+    [
+      6100,
+      380
+    ],
+    [
+      6170,
+      475
+    ],
+    [
+      6260,
+      390
+    ],
+    [
+      6380,
+      375
+    ],
+    [
+      6460,
+      390
+    ],
+    [
+      7000,
+      350
+    ],
+    [
+      7055,
+      405
+    ],
+    [
+      7100,
+      370
+    ]
+  ],
+  "enemigos": [
+    {
+      "tipo": "gato",
+      "x": 1280,
+      "min": 1160,
+      "max": 1380,
+      "velocidad": 65
+    },
+    {
+      "tipo": "perro",
+      "x": 2150,
+      "min": 2010,
+      "max": 2270,
+      "velocidad": 58
+    },
+    {
+      "tipo": "gato",
+      "x": 3730,
+      "min": 3650,
+      "max": 3860,
+      "velocidad": 74
+    },
+    {
+      "tipo": "perro",
+      "x": 4390,
+      "min": 4270,
+      "max": 4460,
+      "velocidad": 65
+    },
+    {
+      "tipo": "gato",
+      "x": 5180,
+      "min": 5000,
+      "max": 5340,
+      "velocidad": 76
+    },
+    {
+      "tipo": "perro",
+      "x": 5600,
+      "min": 5480,
+      "max": 5680,
+      "velocidad": 67
+    },
+    {
+      "tipo": "gato",
+      "x": 6070,
+      "min": 6000,
+      "max": 6150,
+      "velocidad": 72
+    },
+    {
+      "tipo": "perro",
+      "x": 7000,
+      "min": 6930,
+      "max": 7080,
+      "velocidad": 65
+    }
+  ],
+  "puestos_control": [
+    1440,
+    2890,
+    3640,
+    4955,
+    6410
+  ],
+  "charlas_amigos": {
+    "camino": [
+      {
+        "quien": "otto",
+        "texto": "Rural, ¿vamos con Pattha?"
+      },
+      {
+        "quien": "rural",
+        "texto": "¡Sí! Entre amigos nos ayudamos."
+      }
+    ],
+    "puente": [
+      {
+        "quien": "otto",
+        "texto": "Rural, yo me ocupo de la tuerca."
+      },
+      {
+        "quien": "rural",
+        "texto": "¡Dale! Yo miro la señal con Pattha."
+      }
+    ],
+    "cruzado": [
+      {
+        "quien": "rural",
+        "texto": "¡Otto, el puente quedó buenísimo!"
+      },
+      {
+        "quien": "otto",
+        "texto": "¡Lo hicimos entre los tres! Vamos con Pattha."
+      }
+    ]
+  },
+  "dialogos": {
+    "intro": [
+      {
+        "quien": "pattha",
+        "texto": "¡Las señales se apagaron! Vamos a ver qué pasó.",
+        "voz_id": "sendero-intro-01"
+      },
+      {
+        "quien": "otto",
+        "texto": "El puente está trabado. Si encontramos una tuerca, puedo arreglarlo.",
+        "voz_id": "sendero-intro-02"
+      },
+      {
+        "quien": "rural",
+        "texto": "¡Vamos juntos! Saltá con Espacio. En el celu tenés botones. Si te caés, volvés al banderín.",
+        "voz_id": "sendero-intro-03"
+      }
+    ],
+    "otto_sin_tuerca": [
+      {
+        "quien": "otto",
+        "texto": "Al puente le falta una tuerca. Hay una arriba de esa plataforma. ¿La buscás?",
+        "voz_id": "sendero-otto_sin_tuerca-01"
+      }
+    ],
+    "otto": [
+      {
+        "quien": "otto",
+        "texto": "¡Esa es! Yo ajusto este lado. Rural tiene la pista de la señal.",
+        "voz_id": "sendero-otto-01"
+      }
+    ],
+    "rural_sin_otto": [
+      {
+        "quien": "rural",
+        "texto": "Primero ayudemos a Otto con la tuerca. Después encendemos la señal entre los tres.",
+        "voz_id": "sendero-rural_sin_otto-01"
+      }
+    ],
+    "final": [
+      {
+        "quien": "otto",
+        "texto": "¡Cruzamos el sendero entre los tres!",
+        "voz_id": "sendero-final-01"
+      },
+      {
+        "quien": "rural",
+        "texto": "En el Bosque de Antenas podemos averiguar quién apagó las señales.",
+        "voz_id": "sendero-final-02"
+      }
+    ],
+    "marca": [
+      {
+        "quien": "otto",
+        "texto": "Mirá, un candado marcado en el puente. Alguien cerró este camino.",
+        "voz_id": "sendero-marca-01"
+      },
+      {
+        "quien": "rural",
+        "texto": "Las señales siguen hacia el bosque. ¡Busquemos la antena!",
+        "voz_id": "sendero-marca-02"
+      }
+    ],
+    "puente_listo": [
+      {
+        "quien": "rural",
+        "texto": "¡Esa es! Otto ajustó la tuerca y vos encendiste la señal. ¡Ahora podemos cruzar!",
+        "voz_id": "sendero-puente_listo-01"
+      }
+    ]
+  },
+  "puntaje": {
+    "puntos_por_esfera": 100,
+    "bonus_todas": 1000
+  },
+  "pasajes_bajos": [
+    [
+      4160,
+      420,
+      160,
+      22
+    ]
+  ],
+  "id": "sendero",
+  "titulo": "El sendero de los amigos",
+  "escenario": "sendero",
+  "aparicion": 130,
+  "interacciones": [
+    {
+      "kind": "otto",
+      "min": 2760,
+      "max": 2950,
+      "x": 2860
+    },
+    {
+      "kind": "rural",
+      "min": 2950,
+      "max": 3150,
+      "x": 3020
+    }
+  ],
+  "carteles": [
+    {
+      "x": 95,
+      "texto": "¡Vamos juntos!"
+    },
+    {
+      "x": 1340,
+      "texto": "Saltá por arriba ↑"
+    },
+    {
+      "x": 2800,
+      "texto": "Un puente entre tres"
+    },
+    {
+      "x": 7070,
+      "texto": "Al bosque →"
+    }
+  ],
+  "zonas": [
+    {
+      "hasta": 2400,
+      "nombre": "Primeros saltos"
+    },
+    {
+      "hasta": 3560,
+      "nombre": "El puente entre amigos"
+    },
+    {
+      "hasta": 7440,
+      "nombre": "Camino al bosque"
+    }
+  ],
+  "objetivos": [
+    {
+      "requisito": "gear",
+      "texto": "Buscá la tuerca en la plataforma alta."
+    },
+    {
+      "requisito": "otto",
+      "texto": "Llevale la tuerca a Otto."
+    },
+    {
+      "requisito": "rural",
+      "texto": "Rural tiene la pista de la señal."
+    },
+    {
+      "requisito": "exit",
+      "texto": "Seguí los banderines hacia el bosque."
+    }
+  ],
+  "tuerca": {
+    "x": 2740,
+    "y": 315
+  },
+  "puente": {
+    "x": 3355,
+    "ancho": 410,
+    "panel": 2910
+  },
+  "salida": 7140,
+  "siguiente": "bosque",
+  "acertijo": {
+    "tipo": "secuencia",
+    "pista": "● → ★ → ▲",
+    "voz_id": "sendero-pista"
+  }
+}

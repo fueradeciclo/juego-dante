@@ -3,7 +3,7 @@ import type { Mode } from './ui.ts';
 /** Family-selected recording, served locally with the game. */
 export class AdventureMusic {
  private audio=new Audio(`${import.meta.env.BASE_URL}assets/audio/pattha-main-theme-v1.mp3`);
- private fallbackUsed=false;
+ private fallback=false;
  private volume=.22;
  private muted=false;
  private mode: Mode='menu';
@@ -11,12 +11,9 @@ export class AdventureMusic {
  private unlocked=false;
  constructor() {
   this.audio.addEventListener('error',()=>{
-   if(this.fallbackUsed)return;
-   this.fallbackUsed=true;
-   console.warn('[PATTHA audio] Falló la música oficial; usando Triumph in Steel.');
-   this.audio.src=`${import.meta.env.BASE_URL}assets/audio/triumph-in-steel.mp3`;
-   this.audio.load();
-   this.sync();
+   if(this.fallback){console.warn('[PATTHA audio] Tampoco pudo cargarse el respaldo.');return;}
+   this.fallback=true;console.warn('[PATTHA audio] Falló la música oficial; usando Triumph in Steel.');
+   this.audio.src=`${import.meta.env.BASE_URL}assets/audio/triumph-in-steel.mp3`;this.audio.load();this.sync();
   });
   this.audio.loop=true;
   this.audio.preload='metadata';

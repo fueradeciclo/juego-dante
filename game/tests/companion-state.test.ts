@@ -69,13 +69,20 @@ test('el destino de los ratones no salta al cruzar el antiguo corte o el puente'
   assert.ok(follower.step(100,{x:250,y:540}).alpha>0);
 });
 test('las avionetas pasan espaciadas; la pausa y movimiento reducido congelan el vuelo',()=>{
-  const flight=new AmbientPass();assert.equal(flight.step(4999).visible,false);
+  const flight=new AmbientPass();assert.equal(flight.step(1599).visible,false);
   const start=flight.step(1);assert.equal(start.visible,true);
   const moving=flight.step(1000);assert.ok(moving.x>start.x);
   assert.deepEqual(flight.step(30000,true),moving);
   assert.equal(flight.step(30000,false,true).visible,false);assert.equal(flight.snapshot().elapsed,moving.elapsed);
-  assert.equal(flight.step(19000).visible,false);
-  const next=flight.step(44000);assert.equal(next.visible,true);assert.equal(next.direction,-1);
+  assert.equal(flight.step(15000).visible,false);
+  assert.equal(flight.step(9999).visible,false);
+  const next=flight.step(1);assert.equal(next.visible,true);assert.equal(next.direction,-1);
+  assert.ok(next.y<100,'el vuelo pasa por encima de las copas del bosque');
+});
+test('la vista previa muestra una avioneta de inmediato sin cambiar el reloj de la partida',()=>{
+  const game=new AmbientPass(),preview=new AmbientPass();preview.startPass();
+  assert.equal(preview.snapshot().visible,true);assert.ok(preview.snapshot().x>0&&preview.snapshot().x<1280);
+  assert.equal(game.snapshot().elapsed,0);assert.equal(game.snapshot().visible,false);
 });
 test('la desaparición dura 900 ms activos y congela su pose al pausar',()=>{
   const clock=new AnimationClock();
