@@ -1,4 +1,4 @@
-import { mkdir, copyFile, readFile, rm } from 'node:fs/promises';
+import { mkdir, copyFile, readFile, rm, access } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { dirname } from 'node:path';
 
@@ -19,6 +19,13 @@ const assets = [
  'assets/enemigos/perro-v1.png',
  'data/demo_plataformas.json',
 ];
+// Optional official music: keep the earlier soundtrack available until the approved master is copied in.
+try {
+ await access('assets/audio/pattha-main-theme-v1.mp3');
+ assets.push('assets/audio/pattha-main-theme-v1.mp3');
+} catch {
+ console.warn('La canción oficial de Pattha todavía no está en assets/audio; se usará la música anterior.');
+}
 const pattha=JSON.parse(await readFile('assets/animaciones/pattha/MANIFEST.json','utf8'));
 for(const entry of pattha.proceso??[])await rm('game/public/'+entry.ruta,{force:true});
 for(const entry of pattha.imagenes) {
