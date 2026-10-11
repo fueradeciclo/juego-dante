@@ -13,6 +13,7 @@ export class AdventureMusic {
   this.audio.addEventListener('error',()=>{
    if(this.fallbackUsed)return;
    this.fallbackUsed=true;
+   console.warn('[PATTHA audio] Falló la música oficial; usando Triumph in Steel.');
    this.audio.src=`${import.meta.env.BASE_URL}assets/audio/triumph-in-steel.mp3`;
    this.audio.load();
    this.sync();
@@ -26,6 +27,7 @@ export class AdventureMusic {
   document.addEventListener('pointerdown',()=>this.unlock());
   document.addEventListener('keydown',()=>this.unlock());
  }
+ restart(){this.audio.pause();this.audio.currentTime=0;}
  private unlock(){this.unlocked=true;this.sync();}
  setState(mode: Mode, blocked: boolean) {
   if(mode==='menu'&&this.mode!=='menu')this.audio.currentTime=0;

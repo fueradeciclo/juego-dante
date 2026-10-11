@@ -20,9 +20,9 @@ export class DemoUI {
  private sphereTotal=0;
  private scoreRules!: ScoreRules;
  constructor() {
-  get('play').onclick=()=>this.actions?.restart(true);
-  get('restart').onclick=()=>this.actions?.restart(true);
-  get('replay').onclick=()=>this.actions?.restart(true);
+  get('play').onclick=()=>{this.music.restart();this.actions?.restart(true);};
+  get('restart').onclick=()=>{this.music.restart();this.actions?.restart(true);};
+  get('replay').onclick=()=>{this.music.restart();this.actions?.restart(true);};
   get('back').onclick=()=>this.actions?.restart(false);
   get('win-back').onclick=()=>this.actions?.restart(false);
   get('pause').onclick=()=>this.pause();

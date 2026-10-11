@@ -117,3 +117,11 @@ PROPUESTA de puntaje implementada: 100 por esfera y +1.000 al recoger todas (4.0
 ### Gateo de Pattha · 2026-10-10
 
 Se implementa la habilidad pedida por el adulto: ↓ / S o botón Gatear, pasos en ambas direcciones, bajada y subida reversibles, postura baja al soltar bajo techo y colisión reducida sin desplazar los pies. Imagegen integrada produjo 16 dibujos nuevos derivados de B; el atlas contiene 40 cuadros. Las poses concretas, la velocidad de 125 px/s y el pasaje opcional después del puente son PROPUESTAS de demo para revisar con Dante. Ver [set, controles y procedencia](ANIMACIONES_GATEO.md). Los originales se conservan.
+
+## Música oficial · 2026-10-11
+
+La familia eligió definitivamente Iron Teeth Against the Gear; su riff inicial es la identidad musical oficial de Pattha. Preservar exactamente la grabación, notas, silencios y ritmo. Sustituye Triumph in Steel como principal; esta se conserva como respaldo. Ver MUSICA_OFICIAL_PATTHA.md.
+
+## Música oficial · 2026-10-11
+
+La familia eligió definitivamente Iron Teeth Against the Gear; su riff inicial es la identidad musical oficial de Pattha. Preservar exactamente la grabación, notas, silencios y ritmo. Sustituye Triumph in Steel como principal; esta se conserva como respaldo. Ver MUSICA_OFICIAL_PATTHA.md.
