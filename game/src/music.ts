@@ -2,13 +2,21 @@ import type { Mode } from './ui.ts';
 
 /** Family-selected recording, served locally with the game. */
 export class AdventureMusic {
- private audio=new Audio(`${import.meta.env.BASE_URL}assets/audio/triumph-in-steel.mp3`);
+ private audio=new Audio(`${import.meta.env.BASE_URL}assets/audio/pattha-main-theme-v1.mp3`);
+ private fallbackUsed=false;
  private volume=.22;
  private muted=false;
  private mode: Mode='menu';
  private blocked=false;
  private unlocked=false;
  constructor() {
+  this.audio.addEventListener('error',()=>{
+   if(this.fallbackUsed)return;
+   this.fallbackUsed=true;
+   this.audio.src=`${import.meta.env.BASE_URL}assets/audio/triumph-in-steel.mp3`;
+   this.audio.load();
+   this.sync();
+  });
   this.audio.loop=true;
   this.audio.preload='metadata';
   const button=document.getElementById('music-toggle') as HTMLButtonElement;
