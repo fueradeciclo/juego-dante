@@ -1,0 +1,4465 @@
+{
+  "version": 1,
+  "hito": 2,
+  "estado": "validado_tecnicamente_hito2_aprobado",
+  "logicalTile": 64,
+  "sourceScale": 2,
+  "padding": 4,
+  "extrusion": 2,
+  "pages": [
+    {
+      "key": "sendero-0",
+      "path": "assets/escenarios/tilesets/sendero/atlas-0.png",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "aa2307b29863cac9428c414b6eec60ea54faf2401b8b2e9f47b1fc31badf38b2"
+    },
+    {
+      "key": "bosque-0",
+      "path": "assets/escenarios/tilesets/bosque/atlas-0.png",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "cbefb677b3cedb05ebb6529d1e3e64d8ea40997b255e909a13a75a0e96906433"
+    },
+    {
+      "key": "common-0",
+      "path": "assets/escenarios/tilesets/comunes/atlas-0.png",
+      "width": 2048,
+      "height": 2048,
+      "sha256": "3b1a190da07247b87f2ab3b4ca7ff078ab8f71e3004b09458af22407fdbaac8f"
+    }
+  ],
+  "frames": [
+    {
+      "id": "sendero.top-v1",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "joinGroup": "top",
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/top-v1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.fill-v1",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "joinGroup": "fill",
+      "page": "sendero-0",
+      "rect": {
+        "x": 140,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/fill-v1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.top-v2",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "joinGroup": "top",
+      "page": "sendero-0",
+      "rect": {
+        "x": 276,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/top-v2.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.fill-v2",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "joinGroup": "fill",
+      "page": "sendero-0",
+      "rect": {
+        "x": 412,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/fill-v2.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.top-v3",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "joinGroup": "top",
+      "page": "sendero-0",
+      "rect": {
+        "x": 548,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/top-v3.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.fill-v3",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "joinGroup": "fill",
+      "page": "sendero-0",
+      "rect": {
+        "x": 684,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/fill-v3.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.top-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 820,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/top-left.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.top-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 956,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/top-right.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.side-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1092,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/side-left.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.side-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1228,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/side-right.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.bottom",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1364,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/bottom.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.outer-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1500,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/outer-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.inner-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1636,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/inner-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.outer-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1772,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/outer-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.inner-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1908,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/inner-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.outer-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/outer-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.inner-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 140,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/inner-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.outer-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 276,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/outer-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.inner-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 412,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/inner-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-fill",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "page": "sendero-0",
+      "rect": {
+        "x": 548,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-fill.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-top",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 684,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-top.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 820,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-left.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 956,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-right.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-bottom",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1092,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-bottom.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-outer-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1228,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-outer-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-inner-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1364,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-inner-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-outer-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1500,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-outer-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-inner-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1636,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-inner-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-outer-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1772,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-outer-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-inner-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1908,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-inner-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-outer-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-outer-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.wall-inner-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 140,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/wall-inner-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.platform-center",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "page": "sendero-0",
+      "rect": {
+        "x": 276,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/platform-center.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.platform-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 412,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/platform-left.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.platform-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 548,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/platform-right.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.roof-center",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "page": "sendero-0",
+      "rect": {
+        "x": 684,
+        "y": 276,
+        "width": 128,
+        "height": 44
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/roof-center.png",
+      "logicalSize": [
+        64,
+        22
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.roof-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 820,
+        "y": 276,
+        "width": 128,
+        "height": 44
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/roof-left.png",
+      "logicalSize": [
+        64,
+        22
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.roof-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 956,
+        "y": 276,
+        "width": 128,
+        "height": 44
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/roof-right.png",
+      "logicalSize": [
+        64,
+        22
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.stone-platform-center",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "page": "sendero-0",
+      "rect": {
+        "x": 1092,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/stone-platform-center.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.stone-platform-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1228,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/stone-platform-left.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.stone-platform-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1364,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/stone-platform-right.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.transition-soil-stone",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1500,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/transition-soil-stone.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.transition-stone-soil",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1636,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/transition-stone-soil.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.sky",
+      "category": "background",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "anchor": [
+        0,
+        1
+      ],
+      "parallax": 0,
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 412,
+        "width": 1024,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/sky.png",
+      "logicalSize": [
+        512,
+        128
+      ]
+    },
+    {
+      "id": "sendero.distance",
+      "category": "background",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "anchor": [
+        0,
+        1
+      ],
+      "parallax": 0.12,
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 676,
+        "width": 1024,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/distance.png",
+      "logicalSize": [
+        512,
+        128
+      ]
+    },
+    {
+      "id": "sendero.middle",
+      "category": "background",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "anchor": [
+        0,
+        1
+      ],
+      "parallax": 0.3,
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 940,
+        "width": 1024,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/middle.png",
+      "logicalSize": [
+        512,
+        128
+      ]
+    },
+    {
+      "id": "sendero.foreground",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1036,
+        "y": 940,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/foreground.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.pillar",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1172,
+        "y": 940,
+        "width": 256,
+        "height": 384
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/pillar.png",
+      "logicalSize": [
+        128,
+        192
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.arch",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1436,
+        "y": 940,
+        "width": 256,
+        "height": 384
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/arch.png",
+      "logicalSize": [
+        128,
+        192
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.bush",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1700,
+        "y": 940,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/bush.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.lamp",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 1836,
+        "y": 940,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/lamp.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.pipe",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 4,
+        "y": 1332,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/pipe.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "sendero.door",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "sendero-0",
+      "rect": {
+        "x": 140,
+        "y": 1332,
+        "width": 256,
+        "height": 384
+      },
+      "file": "assets/escenarios/tilesets/sendero/piezas/door.png",
+      "logicalSize": [
+        128,
+        192
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.top-v1",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "joinGroup": "top",
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/top-v1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.fill-v1",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "joinGroup": "fill",
+      "page": "bosque-0",
+      "rect": {
+        "x": 140,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/fill-v1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.top-v2",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "joinGroup": "top",
+      "page": "bosque-0",
+      "rect": {
+        "x": 276,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/top-v2.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.fill-v2",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "joinGroup": "fill",
+      "page": "bosque-0",
+      "rect": {
+        "x": 412,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/fill-v2.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.top-v3",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "joinGroup": "top",
+      "page": "bosque-0",
+      "rect": {
+        "x": 548,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/top-v3.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.fill-v3",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "joinGroup": "fill",
+      "page": "bosque-0",
+      "rect": {
+        "x": 684,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/fill-v3.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.top-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 820,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/top-left.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.top-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 956,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/top-right.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.side-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1092,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/side-left.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.side-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1228,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/side-right.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.bottom",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1364,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/bottom.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.outer-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1500,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/outer-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.inner-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1636,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/inner-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.outer-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1772,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/outer-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.inner-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1908,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/inner-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.outer-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/outer-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.inner-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 140,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/inner-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.outer-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 276,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/outer-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.inner-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 412,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/inner-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-fill",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "seamlessY": true,
+      "page": "bosque-0",
+      "rect": {
+        "x": 548,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-fill.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-top",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 684,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-top.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 820,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-left.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 956,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-right.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-bottom",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1092,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-bottom.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-outer-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1228,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-outer-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-inner-tl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1364,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-inner-tl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-outer-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1500,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-outer-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-inner-tr",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1636,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-inner-tr.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-outer-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1772,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-outer-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-inner-bl",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1908,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-inner-bl.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-outer-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-outer-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.wall-inner-br",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 140,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/wall-inner-br.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.platform-center",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "page": "bosque-0",
+      "rect": {
+        "x": 276,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/platform-center.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.platform-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 412,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/platform-left.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.platform-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 548,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/platform-right.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.roof-center",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "page": "bosque-0",
+      "rect": {
+        "x": 684,
+        "y": 276,
+        "width": 128,
+        "height": 44
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/roof-center.png",
+      "logicalSize": [
+        64,
+        22
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.roof-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 820,
+        "y": 276,
+        "width": 128,
+        "height": 44
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/roof-left.png",
+      "logicalSize": [
+        64,
+        22
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.roof-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 956,
+        "y": 276,
+        "width": 128,
+        "height": 44
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/roof-right.png",
+      "logicalSize": [
+        64,
+        22
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.stone-platform-center",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "page": "bosque-0",
+      "rect": {
+        "x": 1092,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/stone-platform-center.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.stone-platform-left",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1228,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/stone-platform-left.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.stone-platform-right",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1364,
+        "y": 276,
+        "width": 128,
+        "height": 52
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/stone-platform-right.png",
+      "logicalSize": [
+        64,
+        26
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.transition-soil-stone",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1500,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/transition-soil-stone.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.transition-stone-soil",
+      "category": "terrain",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1636,
+        "y": 276,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/transition-stone-soil.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.sky",
+      "category": "background",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "anchor": [
+        0,
+        1
+      ],
+      "parallax": 0,
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 412,
+        "width": 1024,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/sky.png",
+      "logicalSize": [
+        512,
+        128
+      ]
+    },
+    {
+      "id": "bosque.distance",
+      "category": "background",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "anchor": [
+        0,
+        1
+      ],
+      "parallax": 0.12,
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 676,
+        "width": 1024,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/distance.png",
+      "logicalSize": [
+        512,
+        128
+      ]
+    },
+    {
+      "id": "bosque.middle",
+      "category": "background",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "seamlessX": true,
+      "anchor": [
+        0,
+        1
+      ],
+      "parallax": 0.3,
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 940,
+        "width": 1024,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/middle.png",
+      "logicalSize": [
+        512,
+        128
+      ]
+    },
+    {
+      "id": "bosque.foreground",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1036,
+        "y": 940,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/foreground.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.pillar",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1172,
+        "y": 940,
+        "width": 256,
+        "height": 384
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/pillar.png",
+      "logicalSize": [
+        128,
+        192
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.arch",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1436,
+        "y": 940,
+        "width": 256,
+        "height": 384
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/arch.png",
+      "logicalSize": [
+        128,
+        192
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.bush",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1700,
+        "y": 940,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/bush.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.lamp",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 1836,
+        "y": 940,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/lamp.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.pipe",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 4,
+        "y": 1332,
+        "width": 128,
+        "height": 192
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/pipe.png",
+      "logicalSize": [
+        64,
+        96
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "bosque.door",
+      "category": "decoration",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "bosque-0",
+      "rect": {
+        "x": 140,
+        "y": 1332,
+        "width": 256,
+        "height": 384
+      },
+      "file": "assets/escenarios/tilesets/bosque/piezas/door.png",
+      "logicalSize": [
+        128,
+        192
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.panel",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/panel.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.panel-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 140,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/panel-off.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.panel-on",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 276,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/panel-on.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.gate",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 412,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/gate.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.gate-0",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "closed",
+      "page": "common-0",
+      "rect": {
+        "x": 548,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/gate-0.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.gate-1",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "moving",
+      "page": "common-0",
+      "rect": {
+        "x": 684,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/gate-1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.gate-2",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "moving",
+      "page": "common-0",
+      "rect": {
+        "x": 820,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/gate-2.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.gate-3",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "moving",
+      "page": "common-0",
+      "rect": {
+        "x": 956,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/gate-3.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.gate-4",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "open",
+      "page": "common-0",
+      "rect": {
+        "x": 1092,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/gate-4.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.bridge",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1228,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/bridge.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.bridge-0",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "locked",
+      "page": "common-0",
+      "rect": {
+        "x": 1364,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/bridge-0.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.bridge-1",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "moving",
+      "page": "common-0",
+      "rect": {
+        "x": 1500,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/bridge-1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.bridge-2",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "moving",
+      "page": "common-0",
+      "rect": {
+        "x": 1636,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/bridge-2.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.bridge-3",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "moving",
+      "page": "common-0",
+      "rect": {
+        "x": 1772,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/bridge-3.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.bridge-4",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "repaired",
+      "page": "common-0",
+      "rect": {
+        "x": 1908,
+        "y": 4,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/bridge-4.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.antenna",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 4,
+        "y": 140,
+        "width": 320,
+        "height": 320
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/antenna.png",
+      "logicalSize": [
+        160,
+        160
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.antenna-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "unpowered",
+      "page": "common-0",
+      "rect": {
+        "x": 332,
+        "y": 140,
+        "width": 320,
+        "height": 320
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/antenna-off.png",
+      "logicalSize": [
+        160,
+        160
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.antenna-0",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "orientation-0",
+      "page": "common-0",
+      "rect": {
+        "x": 660,
+        "y": 140,
+        "width": 320,
+        "height": 320
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/antenna-0.png",
+      "logicalSize": [
+        160,
+        160
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.antenna-1",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "orientation-1",
+      "page": "common-0",
+      "rect": {
+        "x": 988,
+        "y": 140,
+        "width": 320,
+        "height": 320
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/antenna-1.png",
+      "logicalSize": [
+        160,
+        160
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.antenna-2",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "orientation-2",
+      "page": "common-0",
+      "rect": {
+        "x": 1316,
+        "y": 140,
+        "width": 320,
+        "height": 320
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/antenna-2.png",
+      "logicalSize": [
+        160,
+        160
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.nut",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1644,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/nut.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.checkpoint",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1780,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/checkpoint.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.checkpoint-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 1916,
+        "y": 140,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/checkpoint-off.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.checkpoint-on",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 4,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/checkpoint-on.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.service",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 140,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/service.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.service-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 276,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/service-off.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.service-on",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 412,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/service-on.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.spark",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 548,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/spark.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.spark-installed",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "installed",
+      "page": "common-0",
+      "rect": {
+        "x": 684,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/spark-installed.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.spark-removed",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "removed",
+      "allowEmpty": true,
+      "page": "common-0",
+      "rect": {
+        "x": 820,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/spark-removed.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.lever",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 956,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/lever.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.lever-0",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 1092,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/lever-0.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.lever-1",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 1228,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/lever-1.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.elevator",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1364,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/elevator.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.elevator-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 1500,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/elevator-off.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.elevator-on",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 1636,
+        "y": 468,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/elevator-on.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.machine",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1772,
+        "y": 468,
+        "width": 256,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/machine.png",
+      "logicalSize": [
+        128,
+        128
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.machine-protected",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "protected",
+      "page": "common-0",
+      "rect": {
+        "x": 4,
+        "y": 732,
+        "width": 256,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/machine-protected.png",
+      "logicalSize": [
+        128,
+        128
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.machine-vulnerable",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "vulnerable",
+      "page": "common-0",
+      "rect": {
+        "x": 268,
+        "y": 732,
+        "width": 256,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/machine-vulnerable.png",
+      "logicalSize": [
+        128,
+        128
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.machine-disabled",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "disabled",
+      "page": "common-0",
+      "rect": {
+        "x": 532,
+        "y": 732,
+        "width": 256,
+        "height": 256
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/machine-disabled.png",
+      "logicalSize": [
+        128,
+        128
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.signal",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 796,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/signal.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.signal-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 932,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/signal-off.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.signal-on",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 1068,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/signal-on.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.rail",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1204,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/rail.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.pipe",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1340,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/pipe.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.sign",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1476,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/sign.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.lock",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "base",
+      "page": "common-0",
+      "rect": {
+        "x": 1612,
+        "y": 732,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/lock.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.landing",
+      "category": "effect",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "common-0",
+      "rect": {
+        "x": 1748,
+        "y": 732,
+        "width": 256,
+        "height": 64
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/landing.png",
+      "logicalSize": [
+        128,
+        32
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.sphere",
+      "category": "effect",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "common-0",
+      "rect": {
+        "x": 4,
+        "y": 996,
+        "width": 64,
+        "height": 64
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/sphere.png",
+      "logicalSize": [
+        32,
+        32
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.puff",
+      "category": "effect",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "page": "common-0",
+      "rect": {
+        "x": 76,
+        "y": 996,
+        "width": 128,
+        "height": 64
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/puff.png",
+      "logicalSize": [
+        64,
+        32
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.switch-off",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "off",
+      "page": "common-0",
+      "rect": {
+        "x": 212,
+        "y": 996,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/switch-off.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    },
+    {
+      "id": "common.switch-on",
+      "category": "mechanism",
+      "provenance": {
+        "source": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+        "processor": "scripts/build-tilesets.mjs"
+      },
+      "state": "on",
+      "page": "common-0",
+      "rect": {
+        "x": 348,
+        "y": 996,
+        "width": 128,
+        "height": 128
+      },
+      "file": "assets/escenarios/tilesets/comunes/piezas/switch-on.png",
+      "logicalSize": [
+        64,
+        64
+      ],
+      "anchor": [
+        0.5,
+        1
+      ]
+    }
+  ],
+  "biomes": [
+    {
+      "id": "sendero",
+      "title": "El sendero de los amigos",
+      "terrain": {
+        "top": "sendero.top-v1",
+        "fill": "sendero.fill-v1",
+        "platform": "sendero.platform-center",
+        "roof": "sendero.roof-center"
+      },
+      "layers": [
+        "sendero.sky",
+        "sendero.distance",
+        "sendero.middle"
+      ],
+      "decorations": [
+        "sendero.foreground",
+        "sendero.pillar",
+        "sendero.arch",
+        "sendero.bush",
+        "sendero.lamp",
+        "sendero.pipe",
+        "sendero.door"
+      ]
+    },
+    {
+      "id": "bosque",
+      "title": "Bosque de Antenas",
+      "terrain": {
+        "top": "bosque.top-v1",
+        "fill": "bosque.fill-v1",
+        "platform": "bosque.platform-center",
+        "roof": "bosque.roof-center"
+      },
+      "layers": [
+        "bosque.sky",
+        "bosque.distance",
+        "bosque.middle"
+      ],
+      "decorations": [
+        "bosque.foreground",
+        "bosque.pillar",
+        "bosque.arch",
+        "bosque.bush",
+        "bosque.lamp",
+        "bosque.pipe",
+        "bosque.door"
+      ]
+    },
+    {
+      "id": "tuneles",
+      "title": "Túneles de Tornillos",
+      "terrain": {
+        "top": "tuneles.top-v1",
+        "fill": "tuneles.fill-v1",
+        "platform": "tuneles.platform-center",
+        "roof": "tuneles.roof-center"
+      },
+      "layers": [
+        "tuneles.sky",
+        "tuneles.distance",
+        "tuneles.middle"
+      ],
+      "decorations": [
+        "tuneles.foreground",
+        "tuneles.pillar",
+        "tuneles.arch",
+        "tuneles.bush",
+        "tuneles.lamp",
+        "tuneles.pipe",
+        "tuneles.door"
+      ]
+    },
+    {
+      "id": "fabrica",
+      "title": "Fábrica de Señales",
+      "terrain": {
+        "top": "fabrica.top-v1",
+        "fill": "fabrica.fill-v1",
+        "platform": "fabrica.platform-center",
+        "roof": "fabrica.roof-center"
+      },
+      "layers": [
+        "fabrica.sky",
+        "fabrica.distance",
+        "fabrica.middle"
+      ],
+      "decorations": [
+        "fabrica.foreground",
+        "fabrica.pillar",
+        "fabrica.arch",
+        "fabrica.bush",
+        "fabrica.lamp",
+        "fabrica.pipe",
+        "fabrica.door"
+      ]
+    },
+    {
+      "id": "patios",
+      "title": "Patios de las Compuertas",
+      "terrain": {
+        "top": "patios.top-v1",
+        "fill": "patios.fill-v1",
+        "platform": "patios.platform-center",
+        "roof": "patios.roof-center"
+      },
+      "layers": [
+        "patios.sky",
+        "patios.distance",
+        "patios.middle"
+      ],
+      "decorations": [
+        "patios.foreground",
+        "patios.pillar",
+        "patios.arch",
+        "patios.bush",
+        "patios.lamp",
+        "patios.pipe",
+        "patios.door"
+      ]
+    },
+    {
+      "id": "faro",
+      "title": "El Faro de las Chispas",
+      "terrain": {
+        "top": "faro.top-v1",
+        "fill": "faro.fill-v1",
+        "platform": "faro.platform-center",
+        "roof": "faro.roof-center"
+      },
+      "layers": [
+        "faro.sky",
+        "faro.distance",
+        "faro.middle"
+      ],
+      "decorations": [
+        "faro.foreground",
+        "faro.pillar",
+        "faro.arch",
+        "faro.bush",
+        "faro.lamp",
+        "faro.pipe",
+        "faro.door"
+      ]
+    }
+  ],
+  "animations": {
+    "gate": {
+      "frames": [
+        "common.gate-0",
+        "common.gate-1",
+        "common.gate-2",
+        "common.gate-3",
+        "common.gate-4"
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "bridge": {
+      "frames": [
+        "common.bridge-0",
+        "common.bridge-1",
+        "common.bridge-2",
+        "common.bridge-3",
+        "common.bridge-4"
+      ],
+      "fps": 10,
+      "loop": false
+    },
+    "boss": {
+      "idle": [
+        "boss.idle"
+      ],
+      "warn": [
+        "boss.warn",
+        "boss.crouch"
+      ],
+      "rush": [
+        "boss.run-1",
+        "boss.run-2",
+        "boss.run-3",
+        "boss.run-4"
+      ],
+      "jump": [
+        "boss.takeoff",
+        "boss.rise",
+        "boss.air",
+        "boss.fall",
+        "boss.land"
+      ],
+      "recover": [
+        "boss.recover"
+      ],
+      "impact": [
+        "boss.impact"
+      ],
+      "defeated": [
+        "boss.defeated"
+      ],
+      "fps": 8
+    }
+  },
+  "sources": [
+    {
+      "path": "assets/escenarios/tilesets/fuentes/sendero-v1.png",
+      "sha256": "84f56eee5062fdc3f055cfb8a5322a3ea450369f81cc1e62a1a5e7d303d01a6d",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/bosque-v1.png",
+      "sha256": "f6c92a71acafd7246c3d784aff1247468a2cc9e1236dbcb64961f2098f066699",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/tuneles-v1.png",
+      "sha256": "c3aa15251d2b1ddc258e1b3fc9f613ae0b3af4d64761ea3c8524161453f3f99d",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/interiores-v1.png",
+      "sha256": "6eead42b68047ac7353886a441098c66a002b78cb4749b8c063a0027ef4349c7",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/fabrica-v1.png",
+      "sha256": "c94203a973d704e4a3406a3609b7cac7304a534ca17942a6dc4486efc6d39a63",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/patios-v1.png",
+      "sha256": "cb6886b2d5f244ce00b726bd7f40f35b047756a89d337b6689e753ef22c06ddb",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/faro-v1.png",
+      "sha256": "1326de3b1730c5c22273181a7a17d065e6ee8f5221f60058c78c80a5c71a0771",
+      "width": 1254,
+      "height": 1254
+    },
+    {
+      "path": "assets/escenarios/tilesets/fuentes/mecanismos-v1.png",
+      "sha256": "89721a8a2f1cf97ebe6f5ad6ca6147d5eb678a4f69fa6ab77944f92a51d0930e",
+      "width": 1254,
+      "height": 1254,
+      "regions": [
+        [
+          25,
+          100,
+          255,
+          215
+        ],
+        [
+          340,
+          10,
+          270,
+          310
+        ],
+        [
+          630,
+          185,
+          380,
+          135
+        ],
+        [
+          1015,
+          25,
+          239,
+          300
+        ],
+        [
+          15,
+          385,
+          275,
+          240
+        ],
+        [
+          375,
+          330,
+          205,
+          300
+        ],
+        [
+          620,
+          490,
+          325,
+          140
+        ],
+        [
+          947,
+          325,
+          307,
+          305
+        ],
+        [
+          35,
+          680,
+          230,
+          280
+        ],
+        [
+          265,
+          735,
+          395,
+          225
+        ],
+        [
+          660,
+          630,
+          365,
+          325
+        ],
+        [
+          1040,
+          695,
+          200,
+          265
+        ],
+        [
+          5,
+          1080,
+          425,
+          130
+        ],
+        [
+          430,
+          980,
+          205,
+          270
+        ],
+        [
+          675,
+          960,
+          270,
+          294
+        ],
+        [
+          1010,
+          960,
+          235,
+          290
+        ]
+      ]
+    },
+    {
+      "path": "assets/animaciones/don-candado/fuente-v1.png",
+      "sha256": "6801c6e3fe5e45e3c88d8fd5b80b67e72d4e0656f48475c2ec83d90090602e6e",
+      "width": 1254,
+      "height": 1254,
+      "regions": [
+        [
+          15,
+          5,
+          280,
+          335
+        ],
+        [
+          315,
+          30,
+          300,
+          310
+        ],
+        [
+          625,
+          100,
+          335,
+          215
+        ],
+        [
+          965,
+          100,
+          285,
+          215
+        ],
+        [
+          5,
+          395,
+          345,
+          220
+        ],
+        [
+          330,
+          395,
+          340,
+          225
+        ],
+        [
+          665,
+          445,
+          310,
+          180
+        ],
+        [
+          970,
+          335,
+          280,
+          295
+        ],
+        [
+          10,
+          650,
+          255,
+          270
+        ],
+        [
+          295,
+          710,
+          375,
+          210
+        ],
+        [
+          665,
+          690,
+          315,
+          220
+        ],
+        [
+          975,
+          745,
+          279,
+          185
+        ],
+        [
+          15,
+          1000,
+          315,
+          240
+        ],
+        [
+          350,
+          935,
+          285,
+          305
+        ],
+        [
+          680,
+          985,
+          255,
+          250
+        ],
+        [
+          965,
+          935,
+          285,
+          315
+        ]
+      ]
+    },
+    {
+      "path": "assets/animaciones/don-candado/correccion-salto-v1.png",
+      "sha256": "a5aa5df37bc91544670db6e0d47a9ac403b8df708273d468cf46005179ed09c3",
+      "width": 1536,
+      "height": 1024
+    }
+  ],
+  "characters": [
+    {
+      "id": "otto",
+      "path": "assets/personajes/derivados/otto-v1.png",
+      "portrait": "assets/personajes/derivados/otto-retrato-v1.png",
+      "portraitSha256": "ff2f3de7e502c41515dfa1a450199370717852c2e6ab0c4954596fa6d18a3c13",
+      "width": 880,
+      "height": 1180,
+      "sha256": "7e5b4771c524d97fded4f3836d884c98f20a27bb7c2c28d4de5213fdcf8ac04a",
+      "estado": "derivado_para_validacion_Hito_2"
+    },
+    {
+      "id": "rural",
+      "path": "assets/personajes/derivados/rural-v1.png",
+      "portrait": "assets/personajes/derivados/rural-retrato-v1.png",
+      "portraitSha256": "a6d6d9e499244c7ec49b9060fb5e2ad70fd596568b26cecd505783fffeacfd0a",
+      "width": 849,
+      "height": 1118,
+      "sha256": "9332b5d1365b22d39efa03ad7cb9f4c332ecdc9a53f51f0388a773b1b9933c5e",
+      "estado": "derivado_para_validacion_Hito_2"
+    }
+  ],
+  "mechanismStates": {
+    "bridge": {
+      "locked": "common.bridge-0",
+      "repaired": "common.bridge-4"
+    },
+    "panel": {
+      "incomplete": "common.panel-off",
+      "resolved": "common.panel-on"
+    },
+    "signal": {
+      "off": "common.signal-off",
+      "on": "common.signal-on"
+    },
+    "switch": {
+      "off": "common.switch-off",
+      "on": "common.switch-on"
+    },
+    "antenna": {
+      "unpowered": "common.antenna-off",
+      "orientation0": "common.antenna-0",
+      "orientation1": "common.antenna-1",
+      "orientation2": "common.antenna-2"
+    },
+    "lever": {
+      "off": "common.lever-0",
+      "on": "common.lever-1"
+    },
+    "elevator": {
+      "stopped": "common.elevator-off",
+      "active": "common.elevator-on"
+    },
+    "gate": {
+      "closed": "common.gate-0",
+      "moving": "common.gate-2",
+      "open": "common.gate-4"
+    },
+    "checkpoint": {
+      "inactive": "common.checkpoint-off",
+      "active": "common.checkpoint-on"
+    },
+    "machine": {
+      "protected": "common.machine-protected",
+      "vulnerable": "common.machine-vulnerable",
+      "disabled": "common.machine-disabled"
+    },
+    "spark": {
+      "installed": "common.spark-installed",
+      "removed": "common.spark-removed"
+    }
+  },
+  "aprobacion_humana": {
+    "fecha": "2026-10-11",
+    "autor": "adulto",
+    "respuesta": "Apruebo todo. Subamos y actualicemos la versión en cloudflare"
+  }
+}

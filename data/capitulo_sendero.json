@@ -1,6 +1,6 @@
 {
-  "version": "0.5",
-  "estado_creativo": "PROPUESTA de demo; no historia oficial de Dante",
+  "version": "0.6.0",
+  "estado_creativo": "Tilesets y colores aprobados en Hito 2; integración visual de dos capítulos",
   "titulo_provisional": "El sendero de los amigos",
   "duracion_objetivo_min": [
     5,
@@ -8,8 +8,8 @@
   ],
   "personajes": {
     "pattha": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
-    "otto": "assets/personajes/transparentes/raton_verde_concepto_transparente.png",
-    "rural": "assets/personajes/transparentes/rural_concepto_transparente.png",
+    "otto": "assets/personajes/derivados/otto-v1.png",
+    "rural": "assets/personajes/derivados/rural-v1.png",
     "gato": "assets/enemigos/gato-v1.png",
     "perro": "assets/enemigos/perro-v1.png"
   },

@@ -57,3 +57,7 @@ Versión fija aprobada de amigos, avionetas y música: commit `c6a1561e54f9540a8
 El adulto aprobó los kits del Hito 2 y pidió actualizar Cloudflare. Se prepara la aventura disponible de dos capítulos (sendero y bosque), guardado, gateo, avionetas configurables y música oficial intacta. La campaña de seis capítulos permanece pendiente de integración; el taller no se publica como parte del juego. Se preservan `/pattha_game/`, la portada reservada y la configuración DNS.
 
 Pruebas de la copia de publicación: 56 pruebas unitarias, validación de niveles, typecheck y build del sitio aprobados. El build tiene 25 archivos; no incluye dibujos fuente, documentación ni adaptadores de pruebas. Estado del despliegue: pendiente de verificación después del push autorizado.
+
+## Corrección visual 0.6.0 · 2026-10-11
+
+La 0.5.1 no integró los kits en el render del juego. La 0.6.0 reemplaza escenarios y mecanismos de sendero/bosque por los atlas aprobados; actualiza colores de amigos en juego y retratos y aplica azul/ámbar al menú/interfaz. El renderer carga solo el ambiente activo y recursos comunes, liberando el ambiente anterior. HTML utiliza Cache-Control: no-cache; `version.json` identifica versión, capítulos y dirección visual. Campaña de seis capítulos pendiente. Estado de despliegue: pendiente de comprobación.

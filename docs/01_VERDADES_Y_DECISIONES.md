@@ -193,3 +193,9 @@ Se conservaron los originales y la música oficial. Los cambios de trazo de los 
 El adulto respondió **«Apruebo todo. Subamos y actualicemos la versión en cloudflare»** después de la entrega técnica del Hito 2. Quedan aprobados los kits y las pruebas aisladas; se autoriza integrar el Hito 3 y actualizar el proyecto existente de Cloudflare Pages, `juego-dante`, servido en `sabad.com.ar/pattha_game/`. Esta respuesta reemplaza el estado pendiente de aprobación del Hito 2 indicado arriba.
 
 La actualización 0.5.1 publica la aventura disponible de sendero y bosque, gateo, guardado, avionetas y música oficial. La campaña integrada de seis capítulos todavía no está implementada ni validada; el taller de mecanismos permanece separado del build de producción. No se cambia el dominio ni se atribuye esta autorización a Dante. El resultado del despliegue se registra en `PUBLICACION_CLOUDFLARE.md` al verificarlo.
+
+### Corrección de integración visual · 2026-10-11
+
+El adulto señaló que no cambiaron escenarios ni diseño después del despliegue. La 0.5.1 había publicado el render anterior; subir el build no integró los kits aprobados. Se corrige en 0.6.0: terreno y fondos de Sendero/Bosque desde atlas, mecanismos con estados, Otto hueso y Rural gris oscuro en juego/retratos/galería y menú/interfaz azul y ámbar. Se mantienen coordenadas, colisiones, IDs y guardado actual.
+
+La autorización anterior de publicación sigue vigente para esta corrección. Esta entrega visual de los dos capítulos no representa la campaña completa de seis: los cuatro capítulos y jefe finales continúan pendientes de integración y revisión del Hito 3. No se atribuyen decisiones adicionales a Dante.

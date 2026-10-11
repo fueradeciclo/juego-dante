@@ -1,0 +1,27 @@
+{
+  "fecha": "2026-10-11T20:23:17.452Z",
+  "checks": [
+    "movimiento y pausa conservados",
+    "puente, marca narrativa y recarga en banderín",
+    "transición de capítulo sin heredar mecanismos del sendero",
+    "corredor avisa, corre y descansa; pausa congela su ciclo",
+    "cuatro rivales superables y veinte esferas alcanzables con física y saltos; caída conserva avances",
+    "Otto actúa automáticamente; su ayuda pausa y habilita el panel",
+    "guardado del bosque y orientación con pista permanente y reintentos",
+    "mensaje sin retrato inventado y final recuperable sin duplicar puntaje",
+    "nueva aventura confirma y limpia el progreso",
+    "soporte de voz: repetir, detener y silenciar con Audio simulado; sin archivos faltantes",
+    "guardado dañado permite comenzar nuevamente",
+    "almacenamiento bloqueado no impide jugar",
+    "multitáctil y pausa vertical conservados",
+    "panel, mensaje y resumen de 7.000 puntos legibles en celular horizontal",
+    "sin errores JavaScript ni solicitudes externas"
+  ],
+  "errors": [],
+  "external": [],
+  "limitaciones": [
+    "Posicionamiento de pruebas para aislar escenarios; no reemplaza recorrido familiar",
+    "Voces del adulto todavía no entregadas",
+    "Celular emulado; pendiente dispositivo físico"
+  ]
+}

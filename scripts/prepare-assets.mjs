@@ -54,5 +54,5 @@ if(tilesets){
  const files=['assets/escenarios/tilesets/MANIFEST.json',...tilesets.pages.map(p=>p.path),...tilesets.characters.flatMap(c=>[c.path,...(c.portrait?[c.portrait]:[])])];
  for(const page of tilesets.pages){const bytes=await readFile(page.path);if(createHash('sha256').update(bytes).digest('hex')!==page.sha256)throw Error('Atlas modificado: '+page.path);}
  for(const source of files){const target='game/public/'+source;await mkdir(dirname(target),{recursive:true});await copyFile(source,target);}
- console.log('Atlas exportados y personajes derivados preparados para el taller aislado.');
+ console.log('Atlas exportados y personajes derivados preparados para el juego y el taller aislado.');
 }

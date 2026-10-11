@@ -102,7 +102,7 @@ export function loadRig(kind:CharacterKind):Promise<PreparedRig> {
   if(loads.has(kind))return loads.get(kind)!;
   const request=new Promise<PreparedRig>((resolve,reject)=>{
     const image=new Image(); image.onload=()=>resolve(prepareRig(kind,image));
-    image.onerror=()=>reject(new Error('No se pudo cargar '+rigs[kind].nombre)); image.src='./assets/'+rigs[kind].source;
+    image.onerror=()=>reject(new Error('No se pudo cargar '+rigs[kind].nombre)); image.src=kind==='otto'||kind==='rural'?'./assets/personajes/derivados/'+kind+'-v1.png':'./assets/'+rigs[kind].source;
   });loads.set(kind,request);return request;
 }
 

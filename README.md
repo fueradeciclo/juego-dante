@@ -1,4 +1,4 @@
-# Pattha · Aventura 0.5.1
+# Pattha · Aventura 0.6.0
 
 **Dos capítulos jugables:** El sendero de los amigos y Bosque de Antenas. Nueva historia provisional, perro corredor, ayuda automática de Otto, orientación de antena con Rural y guardado local desde banderines. Solo controlás a Pattha.
 
@@ -10,7 +10,7 @@ Abrí `scripts/jugar.command` con doble clic, o ejecutá `./scripts/jugar.comman
 
 En celular horizontal: misma Wi-Fi y `http://IP-DE-LA-COMPUTADORA:5173`. Flechas/A-D para mover, Espacio/W/↑ para saltar, ↓/S para gatear, E/Enter para Ayudar y Esc para pausar. En celular hay botones multitáctiles. Activá **Avionetas en el cielo** en el inicio o pausa para verlas también si usás reducir movimiento; la elección queda guardada en este navegador. En la [galería](http://localhost:5173/animaciones.html#sky-preview-title), **Ver pasar una avioneta** muestra un vuelo de prueba. En acertijos: tocá las formas o usá 1/2/3.
 
-**Estado:** maqueta jugable con escenarios conceptuales. Voces del adulto todavía pendientes; subtítulos y pistas funcionan. Duración objetivo 15–20 minutos, pendiente de medir con la familia. Actualización 0.5.1 autorizada para Cloudflare; resultado de publicación en docs/PUBLICACION_CLOUDFLARE.md.
+**Estado:** dos capítulos con tilesets ilustrados, interfaz azul/ámbar, Otto hueso y Rural gris oscuro. Voces del adulto todavía pendientes; subtítulos y pistas funcionan. Duración objetivo 15–20 minutos, pendiente de medir con la familia. Actualización 0.5.1 autorizada para Cloudflare; resultado de publicación en docs/PUBLICACION_CLOUDFLARE.md.
 
 [Detalle de la entrega, guardado y controles](docs/15_AVENTURA_05.md) · [Conceptos para revisar](assets/escenarios/conceptos/bosque-antenas-v1.svg) · [Guion para grabar](docs/16_GUION_GRABACION_05.md)
 

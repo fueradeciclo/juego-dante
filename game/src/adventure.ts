@@ -15,6 +15,7 @@ import { CrawlPosture, hasHeadroom } from './crawl-state.ts';
 import { CampaignStore, captureProgress, restoreProgress, campaignScore, type Chapter, type ChapterId, type CampaignDefinition } from './campaign.ts';
 import { RunnerState } from './runner-state.ts';
 import campaign from '../../data/campana.json';
+import {WorldArt,loadWorldArt} from './world-art.ts';
 
 type Enemy = Phaser.Physics.Arcade.Sprite;
 export class Adventure extends Phaser.Scene {
@@ -38,7 +39,7 @@ export class Adventure extends Phaser.Scene {
  private ambient!:AmbientSky;
  private trail:{x:number;y:number;time:number}[]=[];
  private checkpoint={x:130,y:540};
- private flags:{x:number;view:Phaser.GameObjects.Graphics;active:boolean}[]=[];
+ private flags:{x:number;view:Phaser.GameObjects.Image;active:boolean}[]=[];
  private health=3;
  private groundedAt=-Infinity;
  private jumpUntil=-Infinity;
@@ -58,11 +59,16 @@ export class Adventure extends Phaser.Scene {
  private helpMs=0;
  private reducedMotion=matchMedia('(prefers-reduced-motion: reduce)');
   private originalLoadFailed=false;
+ private art!:WorldArt;
+ private artChapter:ChapterId='sendero';
+ private artProps:Record<string,Phaser.GameObjects.Image>={};
+ init(data:{chapter?:ChapterId}={}){this.artChapter=data.chapter??this.store?.state.chapter??'sendero';if(!data.chapter&&!this.store){try{const saved=JSON.parse(localStorage.getItem('pattha-aventura-v1')??'null');if(this.chapterIds.includes(saved?.chapter))this.artChapter=saved.chapter;}catch{}}}
  constructor(private ui: DemoUI, private controls: Controls) { super('adventure'); }
  preload() {
+  loadWorldArt(this,this.artChapter);
   if(this.cache.json.exists('sendero'))return;
   for(const c of (campaign as CampaignDefinition).capitulos)this.load.json(c.id,'./'+c.ruta);
-  const paths={pattha:'personajes/transparentes/pattha_concepto_B_transparente.png',otto:'personajes/transparentes/raton_verde_concepto_transparente.png',rural:'personajes/transparentes/rural_concepto_transparente.png',gato:'enemigos/gato-v1.png',perro:'enemigos/perro-v1.png'};
+  const paths={pattha:'personajes/transparentes/pattha_concepto_B_transparente.png',otto:'personajes/derivados/otto-v1.png',rural:'personajes/derivados/rural-v1.png',gato:'enemigos/gato-v1.png',perro:'enemigos/perro-v1.png'};
   for(const [key,path]of Object.entries(paths))this.load.image(key,'./assets/'+path);
   for(const [key,sheet]of Object.entries(patthaAtlas.sheets))this.load.image('pattha-'+key,'./'+sheet.path);
   this.load.on('progress',(p:number)=>this.ui.loading(p));
@@ -85,6 +91,7 @@ export class Adventure extends Phaser.Scene {
   this.friendPanel=this.add.graphics().setDepth(8);
   this.friendBubble=this.add.text(0,0,'',{fontFamily:'system-ui',fontSize:'15px',color:'#355548',padding:{x:8,y:6},wordWrap:{width:230}}).setOrigin(.5,1).setDepth(9).setVisible(false);
   this.physics.world.setBounds(0,-100,this.level.mundo.ancho,1000);
+  this.art=new WorldArt(this,this.level.escenario);this.artProps={};
   this.paintBackground();
   this.ambient=new AmbientSky(this);
   this.solids=this.physics.add.staticGroup();
@@ -134,40 +141,16 @@ export class Adventure extends Phaser.Scene {
    };
   }
  }
- private paintBackground() {
-  const sky=this.add.graphics().setScrollFactor(0).setDepth(-10);
-  sky.fillStyle(0xe4f2dc).fillRect(0,0,1280,720);
-  sky.fillStyle(0xd1e9dd).fillRect(0,0,1280,190);
-  sky.fillStyle(0xffedb4).fillCircle(1050,105,47);
-  const far=this.add.graphics().setScrollFactor(.12).setDepth(-8);
-  for(let x=-100;x<9000;x+=460){far.fillStyle(0xb4d3c2).fillEllipse(x,470,720,490);far.fillStyle(0xc0dccc).fillEllipse(x+230,550,450,470);}
-  if(this.level.escenario==='bosque'){
-   const trees=this.add.graphics().setScrollFactor(.45).setDepth(-5);
-   for(let x=80;x<this.level.mundo.ancho+1300;x+=230){trees.fillStyle(0x729686).fillRoundedRect(x,190,24,350,10);trees.fillStyle(0x80b79a,.9).fillCircle(x+12,190,100).fillCircle(x-30,250,80);trees.fillStyle(0xb4d8a8,.85).fillCircle(x+42,165,65);}
-  }
-  const near=this.add.graphics().setScrollFactor(.3).setDepth(-6);
-  for(let x=0;x<10000;x+=400){near.fillStyle(0x8ebaa1).fillEllipse(x,615,550,490);near.fillStyle(0xa2cab0).fillEllipse(x+240,600,330,420);}
-  const clouds=this.add.graphics().setScrollFactor(.08).setDepth(-7);
-  clouds.fillStyle(0xfaffef,.85);
-  for(const x of [130,570,1150,1780,2270]){clouds.fillRoundedRect(x,95+(x%3)*18,120,28,14).fillCircle(x+35,95+(x%3)*18,23).fillCircle(x+70,88+(x%3)*18,29);}
- }
+ private paintBackground() { this.art.background(); }
  private platform(x:number,top:number,width:number,height:number) {
   const collision=this.add.rectangle(x,top+height/2,width,height,0x000000,0);
   this.solids.add(collision);
-  const g=this.add.graphics().setDepth(0);
-  g.fillStyle(0xb98660).fillRoundedRect(x-width/2,top,width,height,10);
-  g.lineStyle(3,0x2f5042).strokeRoundedRect(x-width/2,top,width,height,10);
-  g.fillStyle(0x4c9a66).fillRoundedRect(x-width/2,top,width,16,8);
-  g.fillStyle(0xb5e68e).fillRoundedRect(x-width/2+4,top+2,width-8,5,3);
-  for(let dx=25;dx<width-15;dx+=51){g.fillStyle(0x98704f,.6).fillCircle(x-width/2+dx,top+40+(dx%3)*20,3);}
+  if(height>=64)this.art.ground(x,top,width,height);else this.art.strip(x,top,width,height);
+
  }
  private lowPassage(x:number,top:number,width:number,height:number) {
   const collision=this.add.rectangle(x,top+height/2,width,height,0,0);this.solids.add(collision);
-  const g=this.add.graphics().setDepth(2);
-  g.fillStyle(0xdbc79d).fillRoundedRect(x-width/2,top,width,height,7);
-  g.lineStyle(2,0x68816a).strokeRoundedRect(x-width/2,top,width,height,7);
-  g.fillStyle(0xa8c582).fillRoundedRect(x-width/2+2,top+2,width-4,5,3);
-  for(let dx=22;dx<width-10;dx+=30)g.lineStyle(1,0x947f61,.4).lineBetween(x-width/2+dx,top+9,x-width/2+dx-5,top+height-3);
+  this.art.strip(x,top,width,height,'roof');
   this.add.text(x,top-14,'↓ / S · Gateá',{fontFamily:'system-ui',fontSize:'14px',color:'#42644e',backgroundColor:'#edf5dc',padding:{x:9,y:5}}).setOrigin(.5,1).setDepth(3);
  }
  private canStand() {
@@ -185,32 +168,30 @@ export class Adventure extends Phaser.Scene {
   b.position.y+=shift;b.prev.y+=shift;b.prevFrame.y+=shift;b.updateCenter();
  }
  private paintProps() {
-  const props=this.add.graphics().setDepth(1);
-  for(const x of this.level.carteles.map(c=>c.x)){
-   props.fillStyle(0x477d57).fillCircle(x,526,25).fillCircle(x+28,525,18);
-   props.fillStyle(0x70aa72).fillCircle(x+15,511,22);
-   props.fillStyle(0xead797).fillCircle(x+4,506,3).fillCircle(x+22,515,3);
+  const floor=this.level.mundo.piso;
+  for(const [i,c]of this.level.carteles.entries()){
+   this.art.piece('common.sign',c.x,floor,170,122,1);
+   this.add.text(c.x,floor-82,c.texto,{fontFamily:'system-ui',fontSize:'13px',fontStyle:'bold',color:'#fff4d4',backgroundColor:'#142c49',padding:{x:10,y:7},wordWrap:{width:150},align:'center'}).setOrigin(.5).setDepth(3);
+   const bx=c.x+110;if(!this.level.plataformas.some(([x,,w])=>Math.abs(x-bx)<w/2+75))this.art.piece(this.level.escenario+'.'+(i%2?'lamp':'bush'),bx,floor,85,86,-1);
   }
-  const sign=(x:number,label:string)=>{
-   props.fillStyle(0x977451).fillRect(x-4,475,8,65);props.fillStyle(0xf5ebbd).fillRoundedRect(x-75,443,150,41,8);props.lineStyle(2,0x49654a).strokeRoundedRect(x-75,443,150,41,8);
-   this.add.text(x,463,label,{fontFamily:'system-ui',fontSize:'12px',color:'#405844',fontStyle:'bold'}).setOrigin(.5).setDepth(2);
-  };
-  for(const c of this.level.carteles)sign(c.x,c.texto);
+  if(this.level.puente){const {x,ancho,panel}=this.level.puente;this.artProps.bridge=this.art.piece('common.bridge-0',x,floor,ancho,30,1).setOrigin(.5,0);this.artProps.panel=this.art.piece('common.panel-off',panel+40,floor,132,115,1);this.art.piece('common.lock',x+ancho/2+45,floor-55,38,48,2);}
+  if(this.level.antena){const x=this.level.antena.x;this.artProps.antenna=this.art.piece('common.antenna-off',x,floor,285,285,1);const otto=this.level.interacciones.find(i=>i.kind==='otto')!;this.artProps.service=this.art.piece('common.service-off',otto.x,floor,126,85,1);this.artProps.switch=this.art.piece('common.switch-off',otto.x+60,floor-70,50,60,2);this.add.text(x,floor-235,'●   ★   ▲',{fontFamily:'system-ui',fontSize:'24px',color:'#fff3ce',backgroundColor:'#152e4b',padding:{x:10,y:5}}).setOrigin(.5).setDepth(3);}
+  const signal=this.level.antena?.x??this.level.puente!.panel;this.artProps.signal=this.art.piece('common.signal-off',signal-60,floor-130,68,90,2);
   this.panels=this.add.graphics().setDepth(2);this.paintBridgeStatus();
-  if(this.level.puente){const {x,ancho}=this.level.puente;props.fillStyle(0x496956).fillRect(x-ancho/2-25,420,9,120).fillRect(x+ancho/2+15,420,9,120);props.lineStyle(4,0x6e8960).lineBetween(x-ancho/2-20,430,x+ancho/2+20,430);this.drawLock(x+ancho/2+40,465);}
-  if(this.level.antena){const x=this.level.antena.x;props.fillStyle(0x668c80).fillRoundedRect(x-7,220,14,320,5);props.lineStyle(6,0x506a65).lineBetween(x,245,x-85,175).lineBetween(x,245,x+85,175);props.lineStyle(4,0xa1cab7).strokeCircle(x,200,90);sign(x-90,'●   ★   ▲');const otto=this.level.interacciones.find(i=>i.kind==='otto')!;props.fillStyle(0x56776a).fillRoundedRect(otto.x-65,490,115,50,12);props.fillStyle(0x233f39).fillRoundedRect(otto.x-48,511,40,29,8);this.add.text(otto.x,475,'Otto → ⏻',{fontFamily:'system-ui',fontSize:'16px',color:'#31594b'}).setOrigin(.5);}
-
-  for(const x of this.level.puestos_control){const view=this.add.graphics().setDepth(2),top=this.level.mundo.piso-73;view.fillStyle(0x58735a).fillRect(x,top,5,73);view.fillStyle(0xdacb96).fillTriangle(x+5,top,x+45,top+15,x+5,top+30);const active=x<=this.checkpoint.x;if(active)view.fillStyle(0xb9e68a).fillTriangle(x+5,top,x+45,top+15,x+5,top+30);this.flags.push({x,view,active});}
-  const end=this.level.salida+60;props.fillStyle(0x95764f).fillRect(end,384,8,156);props.fillStyle(0x3b8d6c).fillTriangle(end+8,384,end+80,409,end+8,437);
-  this.add.text(end,356,this.level.siguiente?'AL BOSQUE':'ANTENA',{fontFamily:'system-ui',fontSize:'13px',fontStyle:'bold',color:'#2d5944',backgroundColor:'#f3f6dc',padding:{x:10,y:5}}).setOrigin(.5);
+  for(const x of this.level.puestos_control){const active=x<=this.checkpoint.x;const view=this.art.piece(active?'common.checkpoint-on':'common.checkpoint-off',x,floor,60,90,2);this.flags.push({x,view,active});}
+  this.art.piece('common.sign',this.level.salida+55,floor,145,145,1);this.add.text(this.level.salida+55,floor-105,this.level.siguiente?'SEGUIR →':'SEÑAL ★',{fontFamily:'system-ui',fontSize:'14px',color:'#fff0c3',backgroundColor:'#123253',padding:{x:10,y:6}}).setOrigin(.5).setDepth(3);
  }
- private drawLock(x:number,y:number){const g=this.add.graphics().setDepth(2);g.lineStyle(4,0x536b60).strokeRoundedRect(x-10,y-24,20,22,8);g.fillStyle(0xe0bb70).fillRoundedRect(x-17,y-10,34,28,5);g.fillStyle(0x536b60).fillCircle(x,y+2,3);}
  private paintBridgeStatus() {
   this.panels.clear();
+  if(this.artProps.bridge){const {x,ancho}=this.level.puente!;this.art.state(this.artProps.bridge,'common.bridge-'+(this.progress.bridge?4:0));this.artProps.bridge.setPosition(this.progress.bridge?x:x+ancho/2,this.level.mundo.piso).setDisplaySize(this.progress.bridge?ancho:38,this.progress.bridge?30:190);}
+  if(this.artProps.panel)this.art.state(this.artProps.panel,'common.panel-'+(this.progress.rural?'on':'off'));
+  if(this.artProps.switch)this.art.state(this.artProps.switch,'common.switch-'+(this.progress.switch?'on':'off'));
+  if(this.artProps.service)this.art.state(this.artProps.service,'common.service-'+(this.progress.switch?'on':'off'));
+  if(this.artProps.antenna)this.art.state(this.artProps.antenna,'common.antenna-'+(this.progress.antenna?this.level.antena!.orientacion:'off'));
+  this.art.state(this.artProps.signal,'common.signal-'+(this.progress.antenna||this.progress.bridge?'on':'off'));
   const panel=this.level.puente?.panel??this.level.antena!.x-25;
   const states=this.level.puente?[this.progress.gear,this.progress.otto,this.progress.rural]:[this.progress.switch,this.progress.antenna];
-  states.forEach((on,i)=>this.panels.fillStyle(on?0xa5d97d:0x55756c).fillRoundedRect(panel+i*42,432,29,38,7));
-  const signal=this.level.antena?.x??this.level.puente!.panel;this.panels.fillStyle(this.progress.antenna||this.progress.bridge?0xffdf86:0x55756c).fillCircle(signal,395,12);if(this.progress.antenna)this.panels.lineStyle(3,0xe0bb70,.8).strokeCircle(signal,200,105);
+  states.forEach((on,i)=>this.panels.fillStyle(on?0xffc766:0x294562).fillCircle(panel+i*25,430,7));
  }
  private persist(){
   this.store.state.chapters[this.level.id]=captureProgress(this.progress,this.checkpoint.x,this.ended||Boolean(this.store.state.chapters[this.level.id]?.completed));
@@ -317,7 +298,7 @@ export class Adventure extends Phaser.Scene {
  update(now:number,delta:number) {
   if(!this.player)return;
   if(this.ui.mode==='playing'&&!this.ui.portrait&&!this.ended)this.updateGameplay(now,Math.min(delta,50));
-  this.updateVisuals(delta);
+  this.updateVisuals(delta);this.art.scroll(this.cameras.main.scrollX);
  }
  private updateVisuals(delta:number) {
   const suspended=this.ui.mode==='paused'||this.ui.portrait||document.hidden;
@@ -405,7 +386,7 @@ export class Adventure extends Phaser.Scene {
    this.allyLabels[i].setPosition(this.allies[i].x,this.allies[i].y-95);
    this.allyLabels[i].setVisible(atMeeting||this.player.x<420);
   }
-  for(const flag of this.flags){if(!flag.active && Math.abs(this.player.x-flag.x)<CHECKPOINT_REACH&&body.blocked.down&&Math.abs(body.bottom-this.level.mundo.piso)<3){flag.active=true;this.checkpoint={x:flag.x,y:this.level.mundo.piso};const top=this.level.mundo.piso-73;flag.view.fillStyle(0xb9e68a).fillTriangle(flag.x+5,top,flag.x+45,top+15,flag.x+5,top+30);this.ui.toast('Banderín activado. Tus avances quedan a salvo.');}}
+  for(const flag of this.flags){if(!flag.active && Math.abs(this.player.x-flag.x)<CHECKPOINT_REACH&&body.blocked.down&&Math.abs(body.bottom-this.level.mundo.piso)<3){flag.active=true;this.checkpoint={x:flag.x,y:this.level.mundo.piso};this.art.state(flag.view,'common.checkpoint-on');this.ui.toast('Banderín activado. Tus avances quedan a salvo.');}}
   if(this.ui.mode!=='playing')return;
   const x=this.player.x;
   let hint='';

@@ -1,6 +1,6 @@
 {
   "name": "juego-dante-demo",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.25.0",
@@ -27,7 +27,8 @@
     "prepare:narration": "node scripts/prepare-narration.mjs",
     "test:campaign:build": "node scripts/test-campaign-build.mjs",
     "test:ambient": "node scripts/test-ambient.mjs",
-    "test:mechanisms": "node --test game/tests/mechanism-state.test.ts"
+    "test:mechanisms": "node --test game/tests/mechanism-state.test.ts",
+    "test:visual": "node scripts/test-visual-direction.mjs"
   },
   "dependencies": {
     "phaser": "3.90.0"

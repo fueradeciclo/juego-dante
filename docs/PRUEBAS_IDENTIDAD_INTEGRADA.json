@@ -1,0 +1,10 @@
+{
+  "checks": [
+    "Menú azul/ámbar y derivados Otto/Rural cargados",
+    "Sendero renderiza atlas con las colisiones actuales",
+    "Recarga de guardado en bosque carga el atlas correcto",
+    "Galería usa amigos derivados y celular horizontal mantiene HUD legible"
+  ],
+  "errors": [],
+  "failed": []
+}

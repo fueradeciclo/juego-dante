@@ -10,7 +10,7 @@ const record=name=>{checks.push(name);console.log('✓ '+name);};
 const monitor=p=>p.on('pageerror',e=>errors.push(e.message));
 const snap=p=>p.evaluate(()=>window.__PATTHA_TEST__.snapshot());
 const playing=p=>p.waitForFunction(()=>window.__PATTHA_TEST__?.snapshot().mode==='playing');
-async function intro(p){for(let i=0;i<10;i++){if((await snap(p)).mode!=='dialogue')break;await p.locator('#continue').click();}await playing(p);}
+async function intro(p){await p.waitForFunction(()=>window.__PATTHA_TEST__&&['playing','dialogue'].includes(window.__PATTHA_TEST__.snapshot().mode));for(let i=0;i<10;i++){if((await snap(p)).mode!=='dialogue')break;await p.locator('#continue').click();}await playing(p);}
 await mkdir('docs/capturas',{recursive:true});
 try{
  const gallery=await browser.newPage({viewport:{width:1280,height:800}});monitor(gallery);await gallery.emulateMedia({reducedMotion:'reduce'});

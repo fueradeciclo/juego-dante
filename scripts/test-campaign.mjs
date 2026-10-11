@@ -9,7 +9,7 @@ const browser=await chromium.launch(options);
 const results=[],errors=[],external=[];
 const record=name=>{results.push(name);console.log('✓ '+name);};
 const shot=async(page,name)=>page.screenshot({path:`docs/capturas/aventura-${name}.png`});
-const snap=page=>page.evaluate(()=>window.__PATTHA_TEST__.snapshot());
+const snap=async page=>{await page.waitForFunction(()=>Boolean(window.__PATTHA_TEST__));return page.evaluate(()=>window.__PATTHA_TEST__.snapshot());};
 const pos=(page,x,y=540)=>page.evaluate(([x,y])=>window.__PATTHA_TEST__.position(x,y),[x,y]);
 const mode=(page,m)=>page.waitForFunction(m=>window.__PATTHA_TEST__?.snapshot().mode===m,m);
 const ground=page=>page.waitForFunction(()=>window.__PATTHA_TEST__?.snapshot().grounded);
