@@ -135,7 +135,7 @@
     {
       "id": "bosque-pista",
       "quien": "rural",
-      "texto": "La señal del faro tiene una estrella ★. Elegí la antena con esa forma.",
+      "texto": "La señal del faro tiene una estrella ★. Girá la antena hasta la estrella y fijala.",
       "archivo": "assets/audio/narracion/bosque-pista.mp3"
     }
   ],

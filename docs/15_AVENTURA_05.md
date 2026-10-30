@@ -1,5 +1,7 @@
 # Aventura 0.5 · Sendero + Bosque de Antenas
 
+> Actualizado en la 0.7: Otto entra visiblemente al acceso (2,6 s), Rural usa una antena giratoria y hay sonidos, modo tranqui y festejo. Ver [17_MEJORAS_07.md](17_MEJORAS_07.md).
+
 ## Estado de entrega
 
 Dos capítulos implementados como maqueta jugable. Historia, títulos y diseños nuevos continúan como PROPUESTA; el adulto eligió esta base para el desarrollo, sin convertirla en decisiones de Dante. Las grabaciones del adulto y el arte final aprobado todavía no están disponibles.

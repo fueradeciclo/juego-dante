@@ -118,3 +118,11 @@ Tareas completadas: distribución y validación automática; puntaje final/bonus
 Siete pruebas unitarias nuevas (cuatro del mapa y tres del puntaje), ocho escenarios nuevos de integración y doce del recorrido anterior correctos. Las 30 esferas se alcanzaron por colisión física con caminata o salto desde posiciones iniciales adaptadas, sin asignar progreso. Resumen completo y parcial revisados en horizontal; se compactó la tarjeta para evitar scroll en 844×390. Capturas 29–33 y PRUEBAS_ESCENARIOS_04.json. Se preservan la música, amigos/rivales, fondo y trabajo de gateo de la familia en el mismo repositorio.
 
 Próximas tres tareas: recorrido completo con Dante; elegir valor del bonus; prueba en un celular real horizontal. Canon visual, grafía y título siguen sujetos a la familia.
+
+## 2026-10-30 · Aventura 0.7: correcciones de la revisión
+
+Pedido del adulto: revisar la última versión y después «corregí todos los puntos y subilos». Se corrigió lo visual (pozos, separación de aliados, botones táctiles, textos en celular, duración), se agregaron PROPUESTAS de diseño (antena giratoria, Otto visible, sonidos, modo tranqui, festejo) y se reorganizó el código (mecanismos por capítulo, guardado por eventos, HUD sin escrituras repetidas, favicon). Detalle en [17_MEJORAS_07.md](17_MEJORAS_07.md).
+
+Verificación: typecheck, 60 pruebas unitarias y validación de niveles correctas. Chromium del entorno sin GPU (~11 fps): las pruebas de navegador con tiempos fijos fallan igual que con la 0.6.0 sin tocar. Una verificación por estados recorrió ambos capítulos: aliados separados, caída y choque normales, modo tranqui (choque sin daño, caída al borde x=840), puente completo, recarga con guardado, festejo y textos desde datos, Otto entrando y saliendo del acceso, antena con error suave y giro por teclado/botones, final del bosque, botón de sonidos, celular con textos más grandes y botones al 60 %, sin errores ni 404 en consola.
+
+Próximos pasos: probar con Dante, medir duración, correr las pruebas de navegador en una Mac y decidir si se publica la 0.7.

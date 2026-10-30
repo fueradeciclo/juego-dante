@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {BossState,GateState,MovingPlatformState,JumpingCatState,DuoState,overlaps} from '../src/mechanism-state.ts';
+import {AntennaDial,BossState,GateState,MovingPlatformState,JumpingCatState,DuoState,overlaps} from '../src/mechanism-state.ts';
 const advance=(boss:BossState,ms:number,x=550)=>{for(let t=0;t<ms;t+=10)boss.step(Math.min(10,ms-t),x);return boss.snapshot();};
 test('moving platform roundtrip and exact rider displacement; pause freezes it',()=>{
  const p=new MovingPlatformState({x:100,y:540,toX:400,toY:340,duration:2000,width:180,height:26},false);
@@ -42,4 +42,10 @@ test('cat announces fixed target, pauses, lands and rests',()=>{
 });
 test('duo has announced separate turns and pass windows, frozen on pause',()=>{
  const d=new DuoState();for(let i=0;i<60;i++){const s=d.step(100);assert.ok(!(s.cat==='rush'&&s.dog==='rush'));}d.step(2200);assert.ok(d.snapshot().safe);const s=d.snapshot();d.step(5000,true);assert.deepEqual(d.snapshot(),s);
+});
+test('antena de Rural: gira en ambos sentidos, nunca empieza resuelta y solo fija la forma de la pista',()=>{
+ const dial=new AntennaDial(1);assert.notEqual(dial.orientation,1);assert.equal(dial.lock(),false);
+ assert.equal(dial.rotate(1),1);assert.equal(dial.lock(),true);
+ assert.equal(dial.rotate(1),2);assert.equal(dial.rotate(1),0);assert.equal(dial.rotate(-1),2);
+ assert.notEqual(new AntennaDial(0,0).orientation,0);
 });

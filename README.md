@@ -1,6 +1,6 @@
-# Pattha · Aventura 0.6.0
+# Pattha · Aventura 0.7.0
 
-**Dos capítulos jugables:** El sendero de los amigos y Bosque de Antenas. Nueva historia provisional, perro corredor, ayuda automática de Otto, orientación de antena con Rural y guardado local desde banderines. Solo controlás a Pattha.
+**Dos capítulos jugables:** El sendero de los amigos y Bosque de Antenas. Historia provisional, perro corredor, ayuda de Otto a la vista, antena giratoria de Rural y guardado local desde banderines. Solo controlás a Pattha.
 
 ![Maqueta del Bosque de Antenas](docs/capturas/aventura-bosque-inicio.png)
 
@@ -8,26 +8,28 @@
 
 Abrí `scripts/jugar.command` con doble clic, o ejecutá `./scripts/jugar.command` y abrí **http://localhost:5173**. Mantené abierta la ventana del servidor. Nueva aventura empieza desde el sendero; Continuar recupera el avance del navegador. Para una instalación nueva: Node 24+, pnpm 11.25.0, `pnpm install --frozen-lockfile --ignore-scripts` y `pnpm dev`.
 
-En celular horizontal: misma Wi-Fi y `http://IP-DE-LA-COMPUTADORA:5173`. Flechas/A-D para mover, Espacio/W/↑ para saltar, ↓/S para gatear, E/Enter para Ayudar y Esc para pausar. En celular hay botones multitáctiles. Activá **Avionetas en el cielo** en el inicio o pausa para verlas también si usás reducir movimiento; la elección queda guardada en este navegador. En la [galería](http://localhost:5173/animaciones.html#sky-preview-title), **Ver pasar una avioneta** muestra un vuelo de prueba. En acertijos: tocá las formas o usá 1/2/3.
+En celular horizontal: misma Wi-Fi y `http://IP-DE-LA-COMPUTADORA:5173`. Flechas/A-D para mover, Espacio/W/↑ para saltar, ↓/S para gatear, E/Enter para Ayudar y Esc para pausar. En celular hay botones multitáctiles semitransparentes. En el acertijo del sendero: tocá las formas o usá 1/2/3. En la antena del bosque: ↺/↻ o ←/→ para girar y **Fijar antena** o Enter para confirmar.
 
-**Estado:** dos capítulos con tilesets ilustrados, interfaz azul/ámbar, Otto hueso y Rural gris oscuro. Voces del adulto todavía pendientes; subtítulos y pistas funcionan. Duración objetivo 15–20 minutos, pendiente de medir con la familia. Actualización 0.5.1 autorizada para Cloudflare; resultado de publicación en docs/PUBLICACION_CLOUDFLARE.md.
+**Opciones** (se recuerdan en este navegador, aparte del guardado): **Sonidos** sí/no en la barra superior; **Modo tranqui** en el inicio o la pausa, donde los choques no gastan energía y al caer volvés al borde; **Avionetas en el cielo**. En la [galería](http://localhost:5173/animaciones.html#sky-preview-title), **Ver pasar una avioneta** muestra un vuelo de prueba.
 
-[Detalle de la entrega, guardado y controles](docs/15_AVENTURA_05.md) · [Conceptos para revisar](assets/escenarios/conceptos/bosque-antenas-v1.svg) · [Guion para grabar](docs/16_GUION_GRABACION_05.md)
+**Estado:** dos capítulos con tilesets ilustrados, interfaz azul/ámbar, Otto hueso y Rural gris oscuro. Voces del adulto todavía pendientes; subtítulos y pistas funcionan. Duración objetivo 10–20 minutos (5–10 por capítulo), **sin medir todavía con la familia**. La última publicación registrada en Cloudflare es la 0.5.1 (ver docs/PUBLICACION_CLOUDFLARE.md); la 0.7.0 queda en la rama de trabajo hasta que el adulto autorice publicarla.
+
+[Novedades 0.7 y lo que falta validar con Dante](docs/17_MEJORAS_07.md) · [Detalle de los dos capítulos, guardado y controles](docs/15_AVENTURA_05.md) · [Conceptos para revisar](assets/escenarios/conceptos/bosque-antenas-v1.svg) · [Guion para grabar](docs/16_GUION_GRABACION_05.md)
 
 ## Verificar y preparar
 
-`pnpm typecheck`, `pnpm test`, `pnpm validate:level`. Con `pnpm dev` activo: `pnpm test:campaign`, `pnpm test:browser` y `pnpm test:scenarios`. Pruebas de animación/gateo disponibles en los comandos existentes; `pnpm test:ambient` verifica las avionetas y su opción de visibilidad. Evidencia nueva en `docs/PRUEBAS_AVENTURA_05.json` y capturas `aventura-*`.
+`pnpm typecheck`, `pnpm test`, `pnpm validate:level`. Con `pnpm dev` activo: `pnpm test:campaign`, `pnpm test:browser` y `pnpm test:scenarios`. Pruebas de animación/gateo disponibles en los comandos existentes; `pnpm test:ambient` verifica las avionetas y su opción de visibilidad. Si Chromium no está en la ruta de Playwright, definí `PATTHA_CHROMIUM_PATH`. Las pruebas de navegador usan esperas fijas: necesitan un navegador con aceleración gráfica (con WebGL por software el juego corre a ~11 cuadros por segundo y fallan por tiempo).
 
-`pnpm build:site` produce `builds/web/` y `builds/site/pattha_game/`; `pnpm preview` sirve el build en http://localhost:4173. Para las voces recibidas: copiar los archivos enumerados en el guion, ejecutar `pnpm prepare:narration` y volver a construir.
+`pnpm build:site` produce `builds/web/` y `builds/site/pattha_game/`; `pnpm preview` sirve el build en http://localhost:4173. `builds/web/` se versiona por pedido familiar. Para las voces recibidas: copiar los archivos enumerados en el guion, ejecutar `pnpm prepare:narration` y volver a construir.
 
-Se mantienen Phaser/TypeScript/Vite, personajes, fuentes y derechos previos. Contenido activo en `data/campana.json`, `data/capitulo_sendero.json` y `data/capitulo_bosque.json`; `data/demo_plataformas.json` se conserva como antecedente. Sin datos personales, cuentas o solicitudes externas del juego; localStorage conserva exclusivamente progreso en este dispositivo.
+Se mantienen Phaser/TypeScript/Vite, personajes, fuentes y derechos previos. Contenido activo en `data/campana.json`, `data/capitulo_sendero.json` y `data/capitulo_bosque.json`; cada capítulo trae su mecanismo (`puente` o `antena`) y sus textos de victoria, así que sumar un capítulo con un mecanismo existente no requiere tocar código. `data/demo_plataformas.json` se conserva como antecedente. Sin datos personales, cuentas o solicitudes externas del juego; localStorage conserva solo el progreso y las opciones en este dispositivo.
 
 <details>
 <summary>Documentación histórica de la demo 0.4</summary>
 
 # Demo de plataformas de Dante · 0.4
 
-Juego familiar 2D para navegador de computadora y celular **horizontal**. Solo controlás a **Pattha**; **Otto** (verde) y **Rural** (azul) te acompañan. Nombre definitivo del juego y escritura del robot pendientes.
+Juego familiar 2D para navegador de computadora y celular **horizontal**. Solo controlás a **Pattha**; **Otto** (verde) y **Rural** (azul) te acompañan *(colores de la 0.4; desde 2026-10-11 Otto es hueso y Rural gris oscuro)*. Nombre definitivo del juego y escritura del robot pendientes.
 
 Repositorio dedicado: https://github.com/fueradeciclo/juego-dante
 

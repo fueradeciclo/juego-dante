@@ -2,11 +2,12 @@ import type { Line } from './ui.ts';
 import type { FriendChats } from './companion-state.ts';
 import { createProgress, scoreLevel, type Progress, type ScoreRules } from './rules.ts';
 
-export type ChapterId = 'sendero' | 'bosque';
+/** Chapter ids come from data/campana.json; adding a chapter does not require new code paths. */
+export type ChapterId = string;
 export type CampaignDefinition={version:1;titulo:string;capitulos:{id:ChapterId;ruta:string}[]};
 export type Interaction = { kind:'otto'|'rural'; min:number; max:number; x:number };
 export type Chapter = {
- id:ChapterId; titulo:string; escenario:'sendero'|'bosque'; aparicion:number;
+ id:ChapterId; titulo:string; escenario:string; aparicion:number; duracion_objetivo_min?:number[];
  personajes:Record<string,string>; mundo:{ancho:number;alto:number;piso:number};
  suelo:number[][]; plataformas:number[][]; pasajes_bajos?:number[][]; monedas:number[][]; puntaje:ScoreRules;
  enemigos:{tipo:'gato'|'perro';x:number;min:number;max:number;velocidad:number;comportamiento?:'corredor'}[];
@@ -16,6 +17,7 @@ export type Chapter = {
  tuerca?:{x:number;y:number}; puente?:{x:number;ancho:number;panel:number};
  antena?:{x:number;orientacion:0|1|2}; salida:number; siguiente?:ChapterId;
  acertijo:{tipo:'secuencia'|'orientacion';pista:string;voz_id?:string};
+ victoria:{titulo:string;descripcion:string;boton_siguiente?:string};
 };
 export type ChapterSave = { checkpoint:number; gear:boolean;otto:boolean;rural:boolean;bridge:boolean;switch:boolean;antenna:boolean;clue:boolean;symbols:number[];coins:number[];enemies:number[];completed:boolean };
 export type CampaignSave = { version:1; chapter:ChapterId; chapters:Partial<Record<ChapterId,ChapterSave>> };
@@ -37,10 +39,12 @@ export function decodeSave(raw:string,levels:Chapter[]):CampaignSave {
   for(const k of ['gear','otto','rural','bridge','switch','antenna','clue','completed'] as const)if(typeof v[k]!=='boolean')throw Error('Estado inválido');
   const validIds=(values:unknown,max:number)=>Array.isArray(values)&&values.every(i=>Number.isInteger(i)&&i>=0&&i<max)&&new Set(values).size===values.length;
   if(!validIds(v.coins,level.monedas.length)||!validIds(v.enemies,level.enemigos.length)||!Array.isArray(v.symbols)||v.symbols.length>3||!v.symbols.every(i=>[0,1,2].includes(i)))throw Error('Colección inválida');
-  if(level.id==='sendero'&&(v.switch||v.antenna||v.otto&&!v.gear||v.rural&&!v.otto||v.bridge!==v.rural||v.completed&&!v.bridge))throw Error('Puente inválido');
-  if(level.id==='bosque'&&(v.gear||v.otto||v.rural||v.bridge||v.antenna&&!v.switch||v.completed&&!v.antenna))throw Error('Antena inválida');
+  if(level.puente&&(v.switch||v.antenna||v.otto&&!v.gear||v.rural&&!v.otto||v.bridge!==v.rural||v.completed&&!v.bridge))throw Error('Puente inválido');
+  if(level.antena&&(v.gear||v.otto||v.rural||v.bridge||v.antenna&&!v.switch||v.completed&&!v.antenna))throw Error('Antena inválida');
  }
- if(s.chapter==='bosque'&&!s.chapters.sendero?.completed)throw Error('Capítulo bloqueado');
+ // A chapter is only reachable after finishing the one before it in campaign order.
+ const index=levels.findIndex(l=>l.id===s.chapter);
+ if(index>0&&!s.chapters[levels[index-1].id]?.completed)throw Error('Capítulo bloqueado');
  return s;
 }
 export function campaignScore(save:CampaignSave,levels:Chapter[]):number {

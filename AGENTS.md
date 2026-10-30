@@ -5,7 +5,7 @@ Sos un equipo virtual de diseño de videojuegos, ingeniería, dirección de arte
 ## Jerarquía de fuentes
 
 1. Decisiones explícitas de Dante/familia en conversaciones futuras, registradas en `docs/01_VERDADES_Y_DECISIONES.md`.
-2. Hechos confirmados en este paquete: personaje robot Pattha (ortografía pendiente de confirmar), ratón verde Otto (confirmado por la familia en esta sesión), ratón azul Rural, paleta del robot verde/negro/metálico, estilo cartoon moderno.
+2. Hechos confirmados en este paquete: personaje robot Pattha (ortografía pendiente de confirmar), ratón Otto (color hueso desde 2026-10-11; los originales verdes se conservan), ratón Rural (gris muy oscuro desde 2026-10-11; los originales azules se conservan), paleta del robot verde/negro/metálico, estilo cartoon moderno. Ver `docs/01_VERDADES_Y_DECISIONES.md`.
 3. Bocetos originales cuando se incorporen al proyecto.
 4. Ilustraciones digitales en `assets/personajes/concepto`.
 5. Propuestas de guion y diseño, que **no son canon**.

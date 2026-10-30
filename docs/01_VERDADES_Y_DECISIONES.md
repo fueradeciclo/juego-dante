@@ -50,7 +50,7 @@ Resolución de referencia 1280×720; cámara lateral; escalado FIT; pausa en cel
 
 ## Ideas del kit que siguen sin aprobar
 
-Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha reparando circuitos, Otto entrando por túneles, Rural interpretando mapas; personalidades de los tres. No son historia oficial y esta demo no implementa los pulsos eléctricos.
+Bosque de Antenas y Gran Chispa ya se usan en la aventura 0.5–0.7 como PROPUESTA elegida por el adulto como base de desarrollo (no son canon de Dante). Siguen sin aprobar: Faro de las Chispas, niveles de historia; Pattha reparando circuitos, Otto entrando por túneles, Rural interpretando mapas; personalidades de los tres. No son historia oficial y esta demo no implementa los pulsos eléctricos.
 
 ## Pendientes creativos y de validación
 
@@ -58,7 +58,8 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 - Variante A/B y conformidad de Dante con los rivales generados.
 - Historia y habilidades oficiales, anotando las palabras de Dante.
 - Dispositivos reales de prueba, edad/ayuda de lectura si la familia desea contarlo.
-- Duración 5–10 min y diversión: objetivo, todavía no medición familiar.
+- Duración 10–20 min (5–10 por capítulo) y diversión: objetivo, todavía no medición familiar.
+- Propuestas 0.7 a validar con Dante: antena giratoria de Rural, Otto entrando al acceso, efectos de sonido, modo tranqui, festejo con confeti y arte de los pozos. Ver [17_MEJORAS_07.md](17_MEJORAS_07.md).
 - Revisar las 40 poses de Pattha, incluido el nuevo gateo; pulido adicional, escenarios y audio según evaluación familiar.
 - Hosting compartido o exportaciones instalables: decisión posterior.
 
@@ -77,6 +78,9 @@ Faro de las Chispas, Bosque de Antenas, Gran Chispa, niveles de historia; Pattha
 | 2026-10-10 | Mejorar amigos y rivales sin modificar los movimientos de Pattha | Adulto, pedido actual | Animaciones por partes más expresivas, acecho con aviso, desaparición infantil y charlas entre Otto/Rural; misma tecnología y fuentes |
 | 2026-10-10 | Construir la historia antes de desarrollar niveles; progresión de enemigos y desafíos apoyada en Otto y Rural | Adulto, pedido de historia | Borrador separado en 14_HISTORIA_Y_PROGRESION.md; ningún argumento, villano o poder nuevo se registra como aprobado |
 | 2026-10-10 | Suavizar el seguimiento, espaciar charlas y animar el fondo | Adulto, ajuste posterior | Aceleración/frenado de aliados sin cortes en zonas, descanso de 60 s, globos tenues y pequeñas avionetas; mismos controles y movimiento de Pattha |
+| 2026-10-11 | Otto pasa de verde a hueso y Rural de azul a gris muy oscuro | Adulto | Derivados nuevos en `assets/personajes/derivados/`; originales verdes/azules conservados. AGENTS.md actualizado el 2026-10-30 |
+| 2026-10-11 | Aprobar los kits del Hito 2 (tilesets ilustrados, interfaz azul/ámbar) y publicar la aventura 0.5.1 de dos capítulos | Adulto | Sendero y Bosque de Antenas con guardado; ver PUBLICACION_CLOUDFLARE.md. Historia del bosque sigue como PROPUESTA |
+| 2026-10-30 | Corregir todos los puntos de la revisión de la 0.6.0 | Adulto, pedido explícito | Versión 0.7.0: pozos ilustrados, aliados separados, celular más legible, sonidos, modo tranqui, antena giratoria, Otto visible, festejo, mecanismos por capítulo y guardado por eventos. Las mecánicas y opciones nuevas son PROPUESTAS para Dante. `builds/web/` sigue versionado por el pedido familiar previo |
 
 Actualizar este registro al cambiar una decisión, conservando la anterior y el motivo. No usar los diálogos escritos por Codex como palabras originales de Dante.
 

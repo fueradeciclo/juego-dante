@@ -35,3 +35,8 @@ test('corredor avisa, no gira durante carrera, descansa y congela su reloj',()=>
  assert.equal(r.step(900,i).mode,'rush');assert.equal(r.step(16,{...i,playerX:1400}).direction,1);
  const end=r.step(16,{...i,x:1770});assert.equal(end.mode,'recover');assert.equal(end.velocity,0);assert.equal(r.step(1500,i).mode,'recover');assert.equal(r.step(800,{...i,playerX:2000}).mode,'patrol');
 });
+test('capítulos definidos por datos: textos de victoria y mecanismo propio en cada uno',()=>{
+ for(const l of levels){assert.ok(l.victoria.titulo&&l.victoria.descripcion);assert.ok(Boolean(l.puente)!==Boolean(l.antena),l.id);}
+ assert.ok(levels[0].victoria.boton_siguiente);assert.equal(levels[1].siguiente,undefined);
+ assert.match(levels[1].acertijo.pista,/estrella/);
+});

@@ -2,6 +2,9 @@ import { Narration } from './narration.ts';
 import recordings from '../../assets/audio/narracion/MANIFEST.json';
 import { AdventureMusic } from './music.ts';
 import { readAirplaneChoice, saveAirplaneChoice } from './ambient-preference.ts';
+import { SoundEffects } from './sfx.ts';
+import { CALM_KEY, readFlag, saveFlag } from './preferences.ts';
+import type { AntennaDial } from './mechanism-state.ts';
 import type { SymbolId, LevelScore, ScoreRules } from './rules.ts';
 export type Mode = 'menu'|'playing'|'dialogue'|'puzzle'|'paused'|'won';
 export type Line = { quien: string; texto: string; voz_id?:string };
@@ -9,6 +12,11 @@ type Actions = { continue:()=>void;next:()=>void; restart: (autostart: boolean) 
 const get = <T extends HTMLElement=HTMLElement>(id: string) => document.getElementById(id) as T;
 export class DemoUI {
  private music=new AdventureMusic();
+ readonly sfx=new SoundEffects(document.getElementById('sfx-toggle') as HTMLButtonElement|null);
+ /** Calm mode: bumps never cost energy and falls return to the edge. PROPUESTA for Dante. */
+ calm=readFlag(CALM_KEY)??false;
+ private dial?:{state:AntennaDial;locked:()=>void};
+ private shown={hud:'',hint:''};
  private voice=new Narration(message=>this.toast(message));
  private clueVoice?:string;
  private recording(id?:string):string|undefined {return id?(recordings.disponibles as Record<string,string>)[id]:undefined;}
@@ -18,6 +26,7 @@ export class DemoUI {
  private skyReduced=matchMedia('(prefers-reduced-motion: reduce)');
  private airplaneChoice=readAirplaneChoice();
  get airplanesEnabled(){return this.airplaneChoice??!this.skyReduced.matches;}
+ private syncCalm(){document.querySelectorAll<HTMLInputElement>('[data-calm-toggle]').forEach(input=>input.checked=this.calm);}
  private syncAirplanes(){document.querySelectorAll<HTMLInputElement>('[data-airplanes-toggle]').forEach(input=>input.checked=this.airplanesEnabled);}
  private pausedFrom: Mode = 'playing';
  private actions?: Actions;
@@ -30,7 +39,12 @@ export class DemoUI {
  private sphereTotal=0;
  private scoreRules!: ScoreRules;
  constructor() {
-  this.syncAirplanes();
+  this.syncAirplanes();this.syncCalm();
+  document.querySelectorAll<HTMLInputElement>('[data-calm-toggle]').forEach(input=>input.onchange=()=>{
+   this.calm=input.checked;saveFlag(CALM_KEY,input.checked);this.syncCalm();
+  });
+  document.querySelectorAll<HTMLButtonElement>('[data-rotate]').forEach(b=>b.onclick=()=>this.rotateDial(Number(b.dataset.rotate) as -1|1));
+  get('antenna-lock').onclick=()=>this.lockDial();
   this.skyReduced.addEventListener('change',()=>this.syncAirplanes());
   document.querySelectorAll<HTMLInputElement>('[data-airplanes-toggle]').forEach(input=>input.onchange=()=>{
    this.airplaneChoice=input.checked;saveAirplaneChoice(input.checked);this.syncAirplanes();
@@ -71,7 +85,7 @@ export class DemoUI {
   this.orientation();
  }
  bind(actions: Actions|undefined) { this.actions=actions;this.render(); }
- ready(hasSave=false,status='ok') { if(this.toastTimer)clearTimeout(this.toastTimer);get('toast').hidden=true;this.hint(''); get<HTMLButtonElement>('play').disabled=false;get('play').textContent='Nueva aventura →';get('campaign-continue').hidden=!hasSave;get('loading-status').textContent=status==='invalid'?'El guardado no es compatible. Podés comenzar una nueva aventura.':status==='unavailable'?'Guardado no disponible: tu avance queda en esta sesión.':'Dos capítulos · Objetivo 15–20 min · Reintentos libres'; }
+ ready(hasSave=false,status='ok') { if(this.toastTimer)clearTimeout(this.toastTimer);get('toast').hidden=true;this.hint(''); get<HTMLButtonElement>('play').disabled=false;get('play').textContent='Nueva aventura →';get('campaign-continue').hidden=!hasSave;get('loading-status').textContent=status==='invalid'?'El guardado no es compatible. Podés comenzar una nueva aventura.':status==='unavailable'?'Guardado no disponible: tu avance queda en esta sesión.':'Dos capítulos · Objetivo 10–20 min, por medir · Reintentos libres'; }
  setChapter(title:string){get('chapter-name').textContent=title;}
  stopVoice(){this.voice.stop();}
  loading(progress: number) { get('loading-status').textContent='Preparando personajes · '+Math.round(progress*100)+'%'; }
@@ -86,7 +100,7 @@ export class DemoUI {
   get('pause').hidden=this.mode==='menu'||this.mode==='won';
   get('touch-controls').hidden=!this.touch||this.mode!=='playing'||this.portrait;
   get('rotate').hidden=!this.portrait;
-  if(this.mode!=='playing')get('interaction-hint').hidden=true;
+  if(this.mode!=='playing'){get('interaction-hint').hidden=true;this.shown.hint='';}
   this.actions?.setPaused(this.mode!=='playing'||this.portrait||document.hidden);
  }
  pause() { if(['paused','menu','won'].includes(this.mode))return;this.previousFocus=document.activeElement as HTMLElement;this.pausedFrom=this.mode;this.setMode('paused');get('resume').focus(); }
@@ -94,6 +108,12 @@ export class DemoUI {
  shortcut(e: KeyboardEvent): boolean {
   if(e.code==='Escape') { e.preventDefault();if(this.mode==='paused')this.resume();else this.pause();return true; }
   if(this.mode==='dialogue' && ['Space','Enter'].includes(e.code)) {e.preventDefault();if(!e.repeat)this.nextLine();return true;}
+  if(this.mode==='puzzle' && this.dial){
+   const step={ArrowLeft:-1,KeyA:-1,Digit1:-1,ArrowRight:1,KeyD:1,Digit3:1}[e.code] as -1|1|undefined;
+   if(step){e.preventDefault();this.rotateDial(step);return true;}
+   if(['Enter','Space','Digit2'].includes(e.code)&&document.activeElement?.tagName!=='BUTTON'){e.preventDefault();if(!e.repeat)this.lockDial();return true;}
+   return false;
+  }
   if(this.mode==='puzzle' && ['Digit1','Digit2','Digit3'].includes(e.code)){e.preventDefault();if(!e.repeat)this.symbolHandler?.((Number(e.code.slice(-1))-1) as SymbolId);return true;}
   return false;
  }
@@ -110,22 +130,45 @@ export class DemoUI {
   get('continue').textContent=this.lineIndex===this.lines.length-1?'¡Vamos! →':'Seguir →';
  }
  nextLine() { if(this.mode!=='dialogue')return;if(++this.lineIndex<this.lines.length)this.drawLine();else {this.setMode('playing');this.afterDialogue();if((this.mode as Mode)==='playing')get('game').focus();} }
- openPuzzle(handler: (s:SymbolId)=>void,config:{tipo:'secuencia'|'orientacion';pista:string;voz_id?:string}={tipo:'secuencia',pista:'● → ★ → ▲'}) {
-  const orientation=config.tipo==='orientacion';get('puzzle').classList.toggle('orientation',orientation);get('puzzle-title').textContent=orientation?'Orientemos la antena':'Una señal entre amigos';get('puzzle-instructions').textContent=orientation?'Tocá la orientación que coincide con la señal del faro.':'Tocá las formas en el orden de la pista.';get('puzzle-clue').textContent=config.pista;get('puzzle-clue').setAttribute('aria-label',config.pista);
-  document.querySelectorAll<HTMLButtonElement>('[data-symbol]').forEach((b,i)=>{b.textContent=orientation?['↖ ●','↑ ★','↗ ▲'][i]:['●','★','▲'][i];b.setAttribute('aria-label',orientation?['Antena izquierda, círculo','Antena arriba, estrella','Antena derecha, triángulo'][i]:['Círculo','Estrella','Triángulo'][i]);});
-  this.clueVoice=this.recording(config.voz_id);get<HTMLButtonElement>('repeat-clue').disabled=!this.clueVoice; this.symbolHandler=handler;this.puzzleFeedback('Podés probar todas las veces que quieras.',[]);this.setMode('puzzle');this.voice.play(this.clueVoice);get('puzzle').querySelector<HTMLButtonElement>('button')?.focus(); }
+ openPuzzle(handler: (s:SymbolId)=>void,config:{pista:string;voz_id?:string}={pista:'● → ★ → ▲'}) {
+  this.dial=undefined;this.preparePuzzle(false,'Una señal entre amigos','Tocá las formas en el orden de la pista.',config);
+  this.symbolHandler=handler;this.puzzleFeedback('Podés probar todas las veces que quieras.',[]);this.setMode('puzzle');this.voice.play(this.clueVoice);get('puzzle').querySelector<HTMLButtonElement>('[data-symbol]')?.focus();
+ }
+ /** Rural's antenna: turn it with ↺/↻ (or ←/→) and lock it when it points at the clue's shape. */
+ openDial(state:AntennaDial,locked:()=>void,config:{pista:string;voz_id?:string}) {
+  this.symbolHandler=undefined;this.dial={state,locked};this.preparePuzzle(true,'Orientemos la antena','Girá la antena y fijala cuando apunte a la forma de la pista.',config);
+  this.drawDial();get('puzzle-feedback').textContent='Podés girarla todas las veces que quieras.';this.setMode('puzzle');this.voice.play(this.clueVoice);get('antenna-lock').focus();
+ }
+ private preparePuzzle(dial:boolean,title:string,instructions:string,config:{pista:string;voz_id?:string}) {
+  get('puzzle').classList.toggle('orientation',dial);get('antenna-dial').hidden=!dial;get('symbol-buttons').hidden=dial;
+  get('puzzle-title').textContent=title;get('puzzle-instructions').textContent=instructions;get('puzzle-clue').textContent=config.pista;get('puzzle-clue').setAttribute('aria-label',config.pista);
+  this.clueVoice=this.recording(config.voz_id);get<HTMLButtonElement>('repeat-clue').disabled=!this.clueVoice;
+ }
+ private drawDial() {
+  if(!this.dial)return;const value=this.dial.state.orientation;
+  get('antenna-needle').style.transform=`rotate(${[-45,0,45][value]}deg)`;
+  get('antenna-needle').textContent=['●','★','▲'][value];
+  get('antenna-needle').setAttribute('aria-label','La antena apunta a '+['el círculo','la estrella','el triángulo'][value]);
+ }
+ private rotateDial(step:-1|1) { if(this.mode!=='puzzle'||!this.dial)return;this.dial.state.rotate(step);this.sfx.play('rotate');this.drawDial(); }
+ private lockDial() {
+  if(this.mode!=='puzzle'||!this.dial)return;
+  if(!this.dial.state.lock()){this.sfx.play('retry');get('puzzle-feedback').textContent='Esa forma no es la de la pista. Girá y probá otra vez.';return;}
+  const {locked}=this.dial;this.dial=undefined;get('puzzle-feedback').textContent='¡Esa es la señal!';locked();
+ }
  puzzleFeedback(message: string, sequence: SymbolId[]) { get('puzzle-feedback').textContent=message;document.querySelectorAll<HTMLButtonElement>('[data-symbol]').forEach(b=>{b.classList.toggle('selected',sequence.includes(Number(b.dataset.symbol) as SymbolId));b.disabled=sequence.length===3;}); }
  toast(message: string) { clearTimeout(this.toastTimer);get('toast').textContent=message;get('toast').hidden=false;this.toastTimer=setTimeout(()=>{get('toast').hidden=true;},3300); }
- hint(message: string) { get('interaction-hint').hidden=!message;get('interaction-hint').textContent=message; }
+ hint(message: string) { if(message===this.shown.hint)return;this.shown.hint=message;get('interaction-hint').hidden=!message;get('interaction-hint').textContent=message; }
  configureLevel(total: number, rules: ScoreRules) {
-  this.sphereTotal=total;this.scoreRules=rules;
+  this.sphereTotal=total;this.scoreRules=rules;this.shown={hud:'',hint:''};
   get('coins').textContent='0';get('coins-total').textContent=String(total);
   get('coin-counter').title=`${rules.puntos_por_esfera} puntos por esfera. Juntá todas para recibir ${rules.bonus_todas.toLocaleString('es-AR')} puntos extra al finalizar.`;
   get('win-bonus').hidden=true;
  }
- hud(zone: string, objective: string, coins: number, energy: number) { get('zone').textContent=zone;get('objective').textContent=objective;get('coins').textContent=String(coins);get('coin-counter').setAttribute('aria-label',`${coins} de ${this.sphereTotal} esferas`);get('energy').textContent='● '.repeat(energy)+'○ '.repeat(3-energy);get('energy').setAttribute('aria-label','Energía: '+energy+' de 3'); }
- win(score: LevelScore,chapter:{next:boolean;title:string;total:number}={next:false,title:'Llegaron los tres.',total:score.total}) {
-  get('win-title').textContent=chapter.title;get('next-chapter').hidden=!chapter.next;get('campaign-total').textContent='Total de la aventura: '+chapter.total.toLocaleString('es-AR')+' puntos';get('win-description').textContent=chapter.next?'Encontramos una marca de candado. La pista sigue hacia el bosque.':'Don Candado tiene la Gran Chispa. La próxima aventura seguirá hacia el faro.';
+ /** Called every frame; the DOM is only touched when something changed. */
+ hud(zone: string, objective: string, coins: number, energy: number) { const key=[zone,objective,coins,energy].join('|');if(key===this.shown.hud)return;this.shown.hud=key; get('zone').textContent=zone;get('objective').textContent=objective;get('coins').textContent=String(coins);get('coin-counter').setAttribute('aria-label',`${coins} de ${this.sphereTotal} esferas`);get('energy').textContent='● '.repeat(energy)+'○ '.repeat(3-energy);get('energy').setAttribute('aria-label','Energía: '+energy+' de 3'); }
+ win(score: LevelScore,chapter:{next?:string;title:string;description:string;total:number}) {
+  get('win-title').textContent=chapter.title;get('next-chapter').hidden=!chapter.next;get('next-chapter').textContent=chapter.next??'';get('campaign-total').textContent='Total de la aventura: '+chapter.total.toLocaleString('es-AR')+' puntos';get('win-description').textContent=chapter.description;
   const points=(value:number)=>value.toLocaleString('es-AR')+' puntos';
   get('win-coins').textContent=`Juntaste ${score.collected} de ${score.available} esferas ✦`;
   get('win-base').textContent=points(score.base);

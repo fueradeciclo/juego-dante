@@ -1,8 +1,8 @@
-> Plan original del kit, conservado como propuesta. Para el estado real de la demo web 0.1, leer DIARIO_DE_AVANCES.md y PRUEBAS_Y_ENTREGA.md. Destino, género, Otto y motor ya definidos en esta sesión.
+> Plan original del kit, actualizado el 2026-10-30 con el estado de la aventura 0.7.0. El historial completo está en DIARIO_DE_AVANCES.md y las decisiones en 01_VERDADES_Y_DECISIONES.md.
 
 # 10 · Roadmap y backlog por valor
 
-> El motor **no** está elegido y el guion es una propuesta. Este plan prioriza decisiones reversibles y avances que Dante pueda probar.
+> Motor elegido: Phaser 3.90 + TypeScript + Vite, para navegador de computadora y celular horizontal. El guion sigue siendo una propuesta. Este plan prioriza decisiones reversibles y avances que Dante pueda probar.
 
 ## Fase 0 · Consolidación creativa (ahora)
 
@@ -15,38 +15,38 @@
 
 ## Fase 1 · Selección técnica
 
-- [ ] Definir plataforma de estreno y dispositivos a probar.
-- [ ] Comparar al menos tres stacks y verificar licencias/exportación vigente.
-- [ ] Registrar decisión y versión en `docs/01_VERDADES_Y_DECISIONES.md`.
-- [ ] Definir vista/cámara, dimensiones de referencia y controles.
-- [ ] Crear repositorio, `.gitignore` adecuado y scripts de ejecución.
+- [x] Definir plataforma de estreno: navegador (computadora y celular horizontal). Falta probar en un celular físico.
+- [x] Comparar al menos tres stacks (Godot, Phaser, GDevelop) y verificar licencias/exportación vigente.
+- [x] Registrar decisión y versión en `docs/01_VERDADES_Y_DECISIONES.md`.
+- [x] Definir vista/cámara, dimensiones de referencia y controles.
+- [x] Crear repositorio, `.gitignore` adecuado y scripts de ejecución.
 
 ## Fase 2 · Vertical slice (primer juego corto)
 
-- [ ] Menú funcional y escena inicial.
-- [ ] Mostrar tres personajes con escala consistente.
-- [ ] Movimiento y controles probados en dispositivo objetivo.
-- [ ] Diálogo visible y avance sin bloqueos.
-- [ ] Interacción con mecanismo; acertijo con aportes de aliados.
-- [ ] Reintentos sin castigo, celebración y fin de demo.
-- [ ] Archivo README con instrucciones `ejecutar` y `compilar`.
+- [x] Menú funcional y escena inicial.
+- [x] Mostrar tres personajes con escala consistente.
+- [ ] Movimiento y controles probados en dispositivo objetivo (hecho en computadora y celular emulado; falta un celular físico).
+- [x] Diálogo visible y avance sin bloqueos.
+- [x] Interacción con mecanismo; acertijo con aportes de aliados.
+- [x] Reintentos sin castigo (más modo tranqui), celebración y fin de demo.
+- [x] Archivo README con instrucciones `ejecutar` y `compilar`.
 - [ ] Prueba en familia con Dante; registrar 3 mejoras prioritarias.
 
 ## Fase 3 · Producción artística
 
 - [ ] Confirmar diseños definitivos según bocetos originales.
 - [ ] Hacer hojas de referencia con vista frontal/perfil/espalda si hace falta.
-- [ ] Producir frames de idle/caminar/interactuar/festejar, con control de coherencia visual.
-- [ ] Producir spritesheet/atlas + metadatos y validar importación en el motor elegido.
-- [ ] Crear fondo de demo, puerta/panel/palanca y UI finales.
-- [ ] Música y FX originales/con licencia.
+- [ ] Producir frames de idle/caminar/interactuar/festejar, con control de coherencia visual (Pattha: 40 cuadros hechos; amigos y rivales con rig por partes).
+- [x] Producir spritesheet/atlas + metadatos y validar importación en el motor elegido.
+- [x] Crear fondo de demo, puerta/panel/palanca y UI (tilesets del Hito 2, interfaz azul/ámbar).
+- [ ] Música y FX originales/con licencia (música elegida por el adulto; FX sintetizados originales en la 0.7; licencia de la pista de respaldo sin verificar).
 
 ## Fase 4 · Primer capítulo (solo si la demo es divertida)
 
 - [ ] Ajustar historia aprobada por Dante.
-- [ ] Diseñar una segunda pantalla y una mecánica nueva como máximo.
-- [ ] Guardado simple; pausa; opciones de audio; tutorial reforzado.
-- [ ] Pruebas de rendimiento y exportación al destino.
+- [x] Diseñar una segunda pantalla y una mecánica nueva como máximo (Bosque de Antenas: corredor, Otto en el acceso, antena giratoria).
+- [ ] Guardado simple; pausa; opciones de audio; tutorial reforzado (falta el tutorial reforzado).
+- [ ] Pruebas de rendimiento y exportación al destino (exportación web publicada; falta medir rendimiento en celular real).
 
 ## Lista de prioridad para Codex
 
