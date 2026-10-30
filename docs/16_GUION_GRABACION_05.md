@@ -150,7 +150,7 @@ Personaje: **pattha** · Archivo: `bosque-final-04.mp3`
 
 Personaje: **rural** · Archivo: `bosque-pista.mp3`
 
-La señal del faro tiene una estrella ★. Elegí la antena con esa forma.
+La señal del faro tiene una estrella ★. Girá la antena hasta la estrella y fijala.
 
 ## Integración
 

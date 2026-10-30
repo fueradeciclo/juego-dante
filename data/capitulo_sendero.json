@@ -1,5 +1,5 @@
 {
-  "version": "0.6.0",
+  "version": "0.7.0",
   "estado_creativo": "Tilesets y colores aprobados en Hito 2; integración visual de dos capítulos",
   "titulo_provisional": "El sendero de los amigos",
   "duracion_objetivo_min": [
@@ -506,5 +506,10 @@
     "tipo": "secuencia",
     "pista": "● → ★ → ▲",
     "voz_id": "sendero-pista"
+  },
+  "victoria": {
+    "titulo": "¡Sendero completado!",
+    "descripcion": "Encontramos una marca de candado. La pista sigue hacia el bosque.",
+    "boton_siguiente": "Seguir al bosque →"
   }
 }

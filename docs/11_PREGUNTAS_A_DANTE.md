@@ -31,3 +31,14 @@ Archivos a actualizar:
 ```
 
 Nunca usar una idea divertida de una IA como si fuera una decisión de Dante.
+
+## Para probar con la aventura 0.7 (2026-10-30)
+
+Preguntas cortas para después de jugar. Anotar las palabras de Dante tal cual.
+
+- ¿Te gustan los sonidos cuando juntás esferas o saltás sobre un gato? ¿Querés otros?
+- ¿Jugaste con el **modo tranqui**? ¿Preferís que los choques no hagan nada o que te saquen energía?
+- En el bosque, ¿fue fácil **girar la antena** hasta la estrella? ¿Te gustaba más elegirla directamente?
+- ¿Se entiende que Otto **se mete en el hueco** y vuelve a salir?
+- ¿Qué te pareció la **fiesta con papelitos** al llegar?
+- Los pozos ahora tienen niebla: ¿parecen un barranco? ¿Preferís agua u otra cosa?

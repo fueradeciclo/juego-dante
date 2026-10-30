@@ -105,3 +105,17 @@ body{background:radial-gradient(ellipse at 65% 0%,#254c72,transparent 68%),#0c1d
 .modal-card,.dialogue-panel{background:#fff3d9;color:#193551;border-color:#e3b873}.modal-card h2{color:#173758}.symbol-buttons button{background:#f5dbab;color:#143756}.symbol-buttons button:hover{background:#ffbf55}.animation-gallery{color:#fff0d1}.gallery-back{color:#ffd38a}.gesture-controls button[aria-pressed=true]{background:#ffbf55;color:#142e4c}
 
 .hud-right{background:transparent}.hud-right>span{background:#fff5dbf2;color:#173452;border:1px solid #e7b565}
+/* 0.7 · Antena giratoria de Rural, modo tranqui, botones táctiles que dejan ver el escenario y textos legibles en celular. */
+.calm-option{margin-top:8px}.modal-card .calm-option{font-size:12px;margin:4px 0;color:#42644e}
+.antenna-dial{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}.antenna-dial[hidden]{display:none}.antenna-dial>button[data-rotate]{width:58px;height:58px;border-radius:16px;background:#e0ebcd;color:#294739;border:2px solid #a9c291;font-size:28px}.antenna-face{position:relative;width:96px;height:96px;border-radius:50%;background:#152e4b;border:3px solid #e7b565;display:grid;place-items:center}.antenna-needle{display:grid;place-items:end center;width:24px;height:78px;padding-top:0;font-size:24px;line-height:1;color:#ffd46b;transform-origin:50% 100%;transition:transform .18s ease-out;background:linear-gradient(#fff3ce,#fff3ce) center 26px/4px 52px no-repeat;align-content:start;margin-top:-30px}.antenna-base{position:absolute;bottom:14px;width:26px;height:10px;border-radius:6px;background:#e7b565}#antenna-lock{flex-basis:100%;max-width:220px}
+@media(prefers-reduced-motion:reduce){.antenna-needle{transition:none}}
+.touch-controls button{opacity:.6}.touch-controls button.pressed{opacity:1}
+@media(max-width:900px),(max-height:650px){
+ .eyebrow{font-size:9px}.hud-left strong{font-size:14px}.hud-left>span:last-child{font-size:11px}.hud-right>span{font-size:13px}#energy{font-size:12px}
+ .interaction-hint{font-size:12px}.toast{font-size:12px}.dialogue-copy strong{font-size:11px}.dialogue-copy p{font-size:13px}
+ .touch-controls button{width:50px;height:44px}.touch-controls .jump-button{width:70px}.touch-controls .help-button{width:56px;font-size:11px}
+ .antenna-dial>button[data-rotate]{width:46px;height:46px;font-size:22px}.antenna-face{width:74px;height:74px}.antenna-needle{height:60px;font-size:19px;background-size:4px 38px;background-position:center 20px;margin-top:-22px}
+}
+@media(max-height:500px){.antenna-dial{gap:8px}.modal-card .calm-option,.modal-card .sky-option{font-size:10px;margin:2px 0}}
+#sfx-toggle{width:auto;padding:0 9px;font-size:11px;white-space:nowrap}
+@media(max-height:500px){#sfx-toggle{font-size:10px;padding:0 6px}}

@@ -89,7 +89,8 @@ export class AllyFollower {
 
 /** Formation changes gradually on reversal; there is no threshold that swaps front/back. */
 export function allyTarget(player:FollowPoint,direction:number,index:number,width:number):FollowPoint {
-  const spacing=72+index*62;
+  // Wide enough that Otto and Rural never hide behind Pattha (104 px wide) or each other (61 px).
+  const spacing=92+index*70;
   const smooth=(t:number)=>{const v=Math.max(0,Math.min(1,t));return v*v*(3-2*v);};
   let offset=-direction*spacing;
   offset+=Math.max(0,direction)*spacing*2*(1-smooth((player.x-130)/220));

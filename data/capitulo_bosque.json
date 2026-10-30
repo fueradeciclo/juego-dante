@@ -2,9 +2,13 @@
   "id": "bosque",
   "titulo": "Bosque de Antenas",
   "escenario": "bosque",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "estado_creativo": "Tilesets y colores aprobados en Hito 2; integración visual de dos capítulos",
   "aparicion": 130,
+  "duracion_objetivo_min": [
+    5,
+    10
+  ],
   "personajes": {
     "pattha": "assets/personajes/transparentes/pattha_concepto_B_transparente.png",
     "otto": "assets/personajes/derivados/otto-v1.png",
@@ -276,7 +280,7 @@
   ],
   "acertijo": {
     "tipo": "orientacion",
-    "pista": "La señal del faro tiene una estrella ★. Elegí la antena con esa forma.",
+    "pista": "La señal del faro tiene una estrella ★. Girá la antena hasta la estrella y fijala.",
     "voz_id": "bosque-pista"
   },
   "charlas_amigos": {
@@ -362,5 +366,9 @@
         "voz_id": "bosque-final-04"
       }
     ]
+  },
+  "victoria": {
+    "titulo": "¡La señal volvió!",
+    "descripcion": "Don Candado tiene la Gran Chispa. La próxima aventura seguirá hacia el faro."
   }
 }

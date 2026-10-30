@@ -109,3 +109,13 @@ export class DuoState {
  step(delta:number,suspended=false){if(!suspended)this.elapsed+=Math.max(0,delta);return this.snapshot();}
  snapshot(){const t=this.elapsed%6000;return {elapsed:this.elapsed,cat:t<1000?'warn':t<2000?'rush':'recover',dog:t>=3000&&t<4000?'warn':t>=4000&&t<5000?'rush':'recover',safe:t>=2000&&t<3000||t>=5000};}
 }
+
+/** Rural's antenna dial: rotate between three orientations, then lock. Wrong locks only give a hint. */
+export class AntennaDial {
+ private value:0|1|2;
+ readonly target:0|1|2;
+ constructor(target:0|1|2,start:0|1|2=0){this.target=target;this.value=start===target?((start+1)%3) as 0|1|2:start;}
+ get orientation(){return this.value;}
+ rotate(step:-1|1){this.value=((this.value+step+3)%3) as 0|1|2;return this.value;}
+ lock(){return this.value===this.target;}
+}

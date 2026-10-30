@@ -30,6 +30,17 @@ export class WorldArt {
   for(let dx=cap;dx<width-cap;dx+=64){const tail=Math.min(64,width-cap-dx);this.piece(this.biome+'.'+kind+'-center',left+dx,top,64,height,0).setOrigin(0).setCrop(0,0,tail*2,height*2);}
   this.piece(this.biome+'.'+kind+'-right',left+width-64,top,64,height,0).setOrigin(0).setCrop((64-cap)*2,0,cap*2,height*2);
  }
+ /** Gap between floor segments: a misty ravine with shaded walls instead of the bare sky color. */
+ pit(left:number,right:number,top:number){
+  const g=this.scene.add.graphics().setDepth(-2),width=right-left,height=720-top;
+  const [upper,lower]=this.biome==='bosque'?[0x2f5a5c,0x0b1d2b]:[0x4f7f9c,0x10243a];
+  g.fillGradientStyle(upper,upper,lower,lower,1).fillRect(left,top,width,height);
+  for(let i=0;i<6;i++){const a=.32-i*.05;g.fillStyle(0x071422,a).fillRect(left+i*4,top,4,height).fillRect(right-(i+1)*4,top,4,height);}
+  // Soft overlapping mist bands, wider than the gap so they read as fog rather than discs.
+  for(let i=0;i<8;i++)g.fillStyle(0xe8f3ff,.05).fillEllipse(left+width/2+(i%2?12:-12),top+60+i*14,width*1.4,40);
+  g.fillStyle(0x071422,.45).fillRect(left,top,width,6);
+  return g;
+ }
  ground(x:number,top:number,width:number,height:number){
   for(let dy=0;dy<height;dy+=64)for(let dx=0;dx<width;dx+=64){const variant=(Math.floor(dx/64)%3)+1;const id=this.biome+'.'+(dy===0?'top':'fill')+'-v'+variant;this.piece(id,x-width/2+dx,top+dy,64,64,0).setOrigin(0).setCrop(0,0,Math.min(64,width-dx)*2,Math.min(64,height-dy)*2);}
  }
